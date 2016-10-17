@@ -25,7 +25,8 @@
     "sinon-chai": "^2.8.0",
     "talib": "^1.0.2",
     "tslint": "^3.15.1",
-    "typescript": "^2.0.3"
+    "typescript": "^2.0.3",
+    "yamljs": "^0.2.8"
   },
   "dependencies": {
     "bluebird": "^3.4.6"

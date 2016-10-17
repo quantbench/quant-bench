@@ -1,0 +1,5 @@
+---
+- name: "SMA"
+  optInTimePeriod: 20
+- name: "EMA"
+  optInTimePeriod: 20

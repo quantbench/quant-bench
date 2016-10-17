@@ -11,6 +11,9 @@
     "target": "es6"
   },
   "files": [
+    "src/types.ts",
+    "test/utils/convertleantota.ts",
+    "test/utils/runtalib.ts",
     "typings/index.d.ts"
   ]
 }
