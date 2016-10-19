@@ -6,7 +6,7 @@ import * as fs from "fs";
 let marketContents = fs.readFileSync("./test/sourcedata/xom.json", "utf8");
 let marketData = JSON.parse(marketContents);
 
-let config = yaml.load("./test/talibconfig.yml");
+let config = yaml.load("./test/genconfig.yml");
 
 console.log("TALib Version: " + talib.version);
 
