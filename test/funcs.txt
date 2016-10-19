@@ -1,0 +1,2379 @@
+{ name: 'ADD',
+  group: 'Math Operators',
+  hint: 'Vector Arithmetic Add',
+  inputs: 
+   [ { name: 'inReal0', type: 'real' },
+     { name: 'inReal1', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'DIV',
+  group: 'Math Operators',
+  hint: 'Vector Arithmetic Div',
+  inputs: 
+   [ { name: 'inReal0', type: 'real' },
+     { name: 'inReal1', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MAX',
+  group: 'Math Operators',
+  hint: 'Highest value over a specified period',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MAXINDEX',
+  group: 'Math Operators',
+  hint: 'Index of highest value over a specified period',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'MIN',
+  group: 'Math Operators',
+  hint: 'Lowest value over a specified period',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MININDEX',
+  group: 'Math Operators',
+  hint: 'Index of lowest value over a specified period',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'MINMAX',
+  group: 'Math Operators',
+  hint: 'Lowest and highest values over a specified period',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: 
+   [ { '0': 'line', name: 'outMin', type: 'real', flags: {} },
+     { '0': 'line', name: 'outMax', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MINMAXINDEX',
+  group: 'Math Operators',
+  hint: 'Indexes of lowest and highest values over a specified period',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: 
+   [ { '0': 'line', name: 'outMinIdx', type: 'integer', flags: {} },
+     { '0': 'line', name: 'outMaxIdx', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'MULT',
+  group: 'Math Operators',
+  hint: 'Vector Arithmetic Mult',
+  inputs: 
+   [ { name: 'inReal0', type: 'real' },
+     { name: 'inReal1', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'SUB',
+  group: 'Math Operators',
+  hint: 'Vector Arithmetic Substraction',
+  inputs: 
+   [ { name: 'inReal0', type: 'real' },
+     { name: 'inReal1', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'SUM',
+  group: 'Math Operators',
+  hint: 'Summation',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ACOS',
+  group: 'Math Transform',
+  hint: 'Vector Trigonometric ACos',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ASIN',
+  group: 'Math Transform',
+  hint: 'Vector Trigonometric ASin',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ATAN',
+  group: 'Math Transform',
+  hint: 'Vector Trigonometric ATan',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'CEIL',
+  group: 'Math Transform',
+  hint: 'Vector Ceil',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'COS',
+  group: 'Math Transform',
+  hint: 'Vector Trigonometric Cos',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'COSH',
+  group: 'Math Transform',
+  hint: 'Vector Trigonometric Cosh',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'EXP',
+  group: 'Math Transform',
+  hint: 'Vector Arithmetic Exp',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'FLOOR',
+  group: 'Math Transform',
+  hint: 'Vector Floor',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'LN',
+  group: 'Math Transform',
+  hint: 'Vector Log Natural',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'LOG10',
+  group: 'Math Transform',
+  hint: 'Vector Log10',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'SIN',
+  group: 'Math Transform',
+  hint: 'Vector Trigonometric Sin',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'SINH',
+  group: 'Math Transform',
+  hint: 'Vector Trigonometric Sinh',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'SQRT',
+  group: 'Math Transform',
+  hint: 'Vector Square Root',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'TAN',
+  group: 'Math Transform',
+  hint: 'Vector Trigonometric Tan',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'TANH',
+  group: 'Math Transform',
+  hint: 'Vector Trigonometric Tanh',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ACCBANDS',
+  group: 'Overlap Studies',
+  hint: 'Acceleration Bands',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 20,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: 
+   [ { '0': 'limit_upper',
+       name: 'outRealUpperBand',
+       type: 'real',
+       flags: {} },
+     { '0': 'line',
+       name: 'outRealMiddleBand',
+       type: 'real',
+       flags: {} },
+     { '0': 'limit_lower',
+       name: 'outRealLowerBand',
+       type: 'real',
+       flags: {} } ] }
+
+**************************
+
+{ name: 'BBANDS',
+  group: 'Overlap Studies',
+  hint: 'Bollinger Bands',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 5,
+       hint: 'Number of period',
+       type: 'integer_range' },
+     { name: 'optInNbDevUp',
+       displayName: 'Deviations up',
+       defaultValue: 2,
+       hint: 'Deviation multiplier for upper band',
+       type: 'real_range' },
+     { name: 'optInNbDevDn',
+       displayName: 'Deviations down',
+       defaultValue: 2,
+       hint: 'Deviation multiplier for lower band',
+       type: 'real_range' },
+     { name: 'optInMAType',
+       displayName: 'MA Type',
+       defaultValue: 0,
+       hint: 'Type of Moving Average',
+       type: 'integer_list' } ],
+  outputs: 
+   [ { '0': 'limit_upper',
+       name: 'outRealUpperBand',
+       type: 'real',
+       flags: {} },
+     { '0': 'line',
+       name: 'outRealMiddleBand',
+       type: 'real',
+       flags: {} },
+     { '0': 'limit_lower',
+       name: 'outRealLowerBand',
+       type: 'real',
+       flags: {} } ] }
+
+**************************
+
+{ name: 'DEMA',
+  group: 'Overlap Studies',
+  hint: 'Double Exponential Moving Average',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'EMA',
+  group: 'Overlap Studies',
+  hint: 'Exponential Moving Average',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'HT_TRENDLINE',
+  group: 'Overlap Studies',
+  hint: 'Hilbert Transform - Instantaneous Trendline',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'KAMA',
+  group: 'Overlap Studies',
+  hint: 'Kaufman Adaptive Moving Average',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MA',
+  group: 'Overlap Studies',
+  hint: 'Moving average',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' },
+     { name: 'optInMAType',
+       displayName: 'MA Type',
+       defaultValue: 0,
+       hint: 'Type of Moving Average',
+       type: 'integer_list' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MAMA',
+  group: 'Overlap Studies',
+  hint: 'MESA Adaptive Moving Average',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInFastLimit',
+       displayName: 'Fast Limit',
+       defaultValue: 0.5,
+       hint: 'Upper limit use in the adaptive algorithm',
+       type: 'real_range' },
+     { name: 'optInSlowLimit',
+       displayName: 'Slow Limit',
+       defaultValue: 0.05,
+       hint: 'Lower limit use in the adaptive algorithm',
+       type: 'real_range' } ],
+  outputs: 
+   [ { '0': 'line', name: 'outMAMA', type: 'real', flags: {} },
+     { '0': 'line_dash', name: 'outFAMA', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MAVP',
+  group: 'Overlap Studies',
+  hint: 'Moving average with variable period',
+  inputs: 
+   [ { name: 'inReal', type: 'real' },
+     { name: 'inPeriods', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInMinPeriod',
+       displayName: 'Minimum Period',
+       defaultValue: 2,
+       hint: 'Value less than minimum will be changed to Minimum period',
+       type: 'integer_range' },
+     { name: 'optInMaxPeriod',
+       displayName: 'Maximum Period',
+       defaultValue: 30,
+       hint: 'Value higher than maximum will be changed to Maximum period',
+       type: 'integer_range' },
+     { name: 'optInMAType',
+       displayName: 'MA Type',
+       defaultValue: 0,
+       hint: 'Type of Moving Average',
+       type: 'integer_list' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MIDPOINT',
+  group: 'Overlap Studies',
+  hint: 'MidPoint over period',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MIDPRICE',
+  group: 'Overlap Studies',
+  hint: 'Midpoint Price over period',
+  inputs: 
+   [ { name: 'inPriceHL',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'SAR',
+  group: 'Overlap Studies',
+  hint: 'Parabolic SAR',
+  inputs: 
+   [ { name: 'inPriceHL',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low' } } ],
+  optInputs: 
+   [ { name: 'optInAcceleration',
+       displayName: 'Acceleration Factor',
+       defaultValue: 0.02,
+       hint: 'Acceleration Factor used up to the Maximum value',
+       type: 'real_range' },
+     { name: 'optInMaximum',
+       displayName: 'AF Maximum',
+       defaultValue: 0.2,
+       hint: 'Acceleration Factor Maximum value',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'SAREXT',
+  group: 'Overlap Studies',
+  hint: 'Parabolic SAR - Extended',
+  inputs: 
+   [ { name: 'inPriceHL',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low' } } ],
+  optInputs: 
+   [ { name: 'optInStartValue',
+       displayName: 'Start Value',
+       defaultValue: 0,
+       hint: 'Start value and direction. 0 for Auto, >0 for Long, <0 for Short',
+       type: 'real_range' },
+     { name: 'optInOffsetOnReverse',
+       displayName: 'Offset on Reverse',
+       defaultValue: 0,
+       hint: 'Percent offset added/removed to initial stop on short/long reversal',
+       type: 'real_range' },
+     { name: 'optInAccelerationInitLong',
+       displayName: 'AF Init Long',
+       defaultValue: 0.02,
+       hint: 'Acceleration Factor initial value for the Long direction',
+       type: 'real_range' },
+     { name: 'optInAccelerationLong',
+       displayName: 'AF Long',
+       defaultValue: 0.02,
+       hint: 'Acceleration Factor for the Long direction',
+       type: 'real_range' },
+     { name: 'optInAccelerationMaxLong',
+       displayName: 'AF Max Long',
+       defaultValue: 0.2,
+       hint: 'Acceleration Factor maximum value for the Long direction',
+       type: 'real_range' },
+     { name: 'optInAccelerationInitShort',
+       displayName: 'AF Init Short',
+       defaultValue: 0.02,
+       hint: 'Acceleration Factor initial value for the Short direction',
+       type: 'real_range' },
+     { name: 'optInAccelerationShort',
+       displayName: 'AF Short',
+       defaultValue: 0.02,
+       hint: 'Acceleration Factor for the Short direction',
+       type: 'real_range' },
+     { name: 'optInAccelerationMaxShort',
+       displayName: 'AF Max Short',
+       defaultValue: 0.2,
+       hint: 'Acceleration Factor maximum value for the Short direction',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'SMA',
+  group: 'Overlap Studies',
+  hint: 'Simple Moving Average',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'T3',
+  group: 'Overlap Studies',
+  hint: 'Triple Exponential Moving Average (T3)',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 5,
+       hint: 'Number of period',
+       type: 'integer_range' },
+     { name: 'optInVFactor',
+       displayName: 'Volume Factor',
+       defaultValue: 0.7,
+       hint: 'Volume Factor',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'TEMA',
+  group: 'Overlap Studies',
+  hint: 'Triple Exponential Moving Average',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'TRIMA',
+  group: 'Overlap Studies',
+  hint: 'Triangular Moving Average',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'WMA',
+  group: 'Overlap Studies',
+  hint: 'Weighted Moving Average',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ATR',
+  group: 'Volatility Indicators',
+  hint: 'Average True Range',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'NATR',
+  group: 'Volatility Indicators',
+  hint: 'Normalized Average True Range',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'TRANGE',
+  group: 'Volatility Indicators',
+  hint: 'True Range',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ADX',
+  group: 'Momentum Indicators',
+  hint: 'Average Directional Movement Index',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ADXR',
+  group: 'Momentum Indicators',
+  hint: 'Average Directional Movement Index Rating',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'APO',
+  group: 'Momentum Indicators',
+  hint: 'Absolute Price Oscillator',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInFastPeriod',
+       displayName: 'Fast Period',
+       defaultValue: 12,
+       hint: 'Number of period for the fast MA',
+       type: 'integer_range' },
+     { name: 'optInSlowPeriod',
+       displayName: 'Slow Period',
+       defaultValue: 26,
+       hint: 'Number of period for the slow MA',
+       type: 'integer_range' },
+     { name: 'optInMAType',
+       displayName: 'MA Type',
+       defaultValue: 0,
+       hint: 'Type of Moving Average',
+       type: 'integer_list' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'AROON',
+  group: 'Momentum Indicators',
+  hint: 'Aroon',
+  inputs: 
+   [ { name: 'inPriceHL',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: 
+   [ { '0': 'line_dash',
+       name: 'outAroonDown',
+       type: 'real',
+       flags: {} },
+     { '0': 'line', name: 'outAroonUp', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'AROONOSC',
+  group: 'Momentum Indicators',
+  hint: 'Aroon Oscillator',
+  inputs: 
+   [ { name: 'inPriceHL',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'BOP',
+  group: 'Momentum Indicators',
+  hint: 'Balance Of Power',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'CCI',
+  group: 'Momentum Indicators',
+  hint: 'Commodity Channel Index',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'CMO',
+  group: 'Momentum Indicators',
+  hint: 'Chande Momentum Oscillator',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'DX',
+  group: 'Momentum Indicators',
+  hint: 'Directional Movement Index',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'IMI',
+  group: 'Momentum Indicators',
+  hint: 'Intraday Momentum Index',
+  inputs: 
+   [ { name: 'inPriceOC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MACD',
+  group: 'Momentum Indicators',
+  hint: 'Moving Average Convergence/Divergence',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInFastPeriod',
+       displayName: 'Fast Period',
+       defaultValue: 12,
+       hint: 'Number of period for the fast MA',
+       type: 'integer_range' },
+     { name: 'optInSlowPeriod',
+       displayName: 'Slow Period',
+       defaultValue: 26,
+       hint: 'Number of period for the slow MA',
+       type: 'integer_range' },
+     { name: 'optInSignalPeriod',
+       displayName: 'Signal Period',
+       defaultValue: 9,
+       hint: 'Smoothing for the signal line (nb of period)',
+       type: 'integer_range' } ],
+  outputs: 
+   [ { '0': 'line', name: 'outMACD', type: 'real', flags: {} },
+     { '0': 'line_dash',
+       name: 'outMACDSignal',
+       type: 'real',
+       flags: {} },
+     { '0': 'histogram', name: 'outMACDHist', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MACDEXT',
+  group: 'Momentum Indicators',
+  hint: 'MACD with controllable MA type',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInFastPeriod',
+       displayName: 'Fast Period',
+       defaultValue: 12,
+       hint: 'Number of period for the fast MA',
+       type: 'integer_range' },
+     { name: 'optInFastMAType',
+       displayName: 'Fast MA',
+       defaultValue: 0,
+       hint: 'Type of Moving Average for fast MA',
+       type: 'integer_list' },
+     { name: 'optInSlowPeriod',
+       displayName: 'Slow Period',
+       defaultValue: 26,
+       hint: 'Number of period for the slow MA',
+       type: 'integer_range' },
+     { name: 'optInSlowMAType',
+       displayName: 'Slow MA',
+       defaultValue: 0,
+       hint: 'Type of Moving Average for slow MA',
+       type: 'integer_list' },
+     { name: 'optInSignalPeriod',
+       displayName: 'Signal Period',
+       defaultValue: 9,
+       hint: 'Smoothing for the signal line (nb of period)',
+       type: 'integer_range' },
+     { name: 'optInSignalMAType',
+       displayName: 'Signal MA',
+       defaultValue: 0,
+       hint: 'Type of Moving Average for signal line',
+       type: 'integer_list' } ],
+  outputs: 
+   [ { '0': 'line', name: 'outMACD', type: 'real', flags: {} },
+     { '0': 'line_dash',
+       name: 'outMACDSignal',
+       type: 'real',
+       flags: {} },
+     { '0': 'histogram', name: 'outMACDHist', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MACDFIX',
+  group: 'Momentum Indicators',
+  hint: 'Moving Average Convergence/Divergence Fix 12/26',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInSignalPeriod',
+       displayName: 'Signal Period',
+       defaultValue: 9,
+       hint: 'Smoothing for the signal line (nb of period)',
+       type: 'integer_range' } ],
+  outputs: 
+   [ { '0': 'line', name: 'outMACD', type: 'real', flags: {} },
+     { '0': 'line_dash',
+       name: 'outMACDSignal',
+       type: 'real',
+       flags: {} },
+     { '0': 'histogram', name: 'outMACDHist', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MFI',
+  group: 'Momentum Indicators',
+  hint: 'Money Flow Index',
+  inputs: 
+   [ { name: 'inPriceHLCV',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close', '3': 'volume' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MINUS_DI',
+  group: 'Momentum Indicators',
+  hint: 'Minus Directional Indicator',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MINUS_DM',
+  group: 'Momentum Indicators',
+  hint: 'Minus Directional Movement',
+  inputs: 
+   [ { name: 'inPriceHL',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MOM',
+  group: 'Momentum Indicators',
+  hint: 'Momentum',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 10,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'PLUS_DI',
+  group: 'Momentum Indicators',
+  hint: 'Plus Directional Indicator',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'PLUS_DM',
+  group: 'Momentum Indicators',
+  hint: 'Plus Directional Movement',
+  inputs: 
+   [ { name: 'inPriceHL',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'PPO',
+  group: 'Momentum Indicators',
+  hint: 'Percentage Price Oscillator',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInFastPeriod',
+       displayName: 'Fast Period',
+       defaultValue: 12,
+       hint: 'Number of period for the fast MA',
+       type: 'integer_range' },
+     { name: 'optInSlowPeriod',
+       displayName: 'Slow Period',
+       defaultValue: 26,
+       hint: 'Number of period for the slow MA',
+       type: 'integer_range' },
+     { name: 'optInMAType',
+       displayName: 'MA Type',
+       defaultValue: 0,
+       hint: 'Type of Moving Average',
+       type: 'integer_list' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ROC',
+  group: 'Momentum Indicators',
+  hint: 'Rate of change : ((price/prevPrice)-1)*100',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 10,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ROCP',
+  group: 'Momentum Indicators',
+  hint: 'Rate of change Percentage: (price-prevPrice)/prevPrice',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 10,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ROCR',
+  group: 'Momentum Indicators',
+  hint: 'Rate of change ratio: (price/prevPrice)',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 10,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ROCR100',
+  group: 'Momentum Indicators',
+  hint: 'Rate of change ratio 100 scale: (price/prevPrice)*100',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 10,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'RSI',
+  group: 'Momentum Indicators',
+  hint: 'Relative Strength Index',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'STOCH',
+  group: 'Momentum Indicators',
+  hint: 'Stochastic',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInFastK_Period',
+       displayName: 'Fast-K Period',
+       defaultValue: 5,
+       hint: 'Time period for building the Fast-K line',
+       type: 'integer_range' },
+     { name: 'optInSlowK_Period',
+       displayName: 'Slow-K Period',
+       defaultValue: 3,
+       hint: 'Smoothing for making the Slow-K line. Usually set to 3',
+       type: 'integer_range' },
+     { name: 'optInSlowK_MAType',
+       displayName: 'Slow-K MA',
+       defaultValue: 0,
+       hint: 'Type of Moving Average for Slow-K',
+       type: 'integer_list' },
+     { name: 'optInSlowD_Period',
+       displayName: 'Slow-D Period',
+       defaultValue: 3,
+       hint: 'Smoothing for making the Slow-D line',
+       type: 'integer_range' },
+     { name: 'optInSlowD_MAType',
+       displayName: 'Slow-D MA',
+       defaultValue: 0,
+       hint: 'Type of Moving Average for Slow-D',
+       type: 'integer_list' } ],
+  outputs: 
+   [ { '0': 'line_dash', name: 'outSlowK', type: 'real', flags: {} },
+     { '0': 'line_dash', name: 'outSlowD', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'STOCHF',
+  group: 'Momentum Indicators',
+  hint: 'Stochastic Fast',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInFastK_Period',
+       displayName: 'Fast-K Period',
+       defaultValue: 5,
+       hint: 'Time period for building the Fast-K line',
+       type: 'integer_range' },
+     { name: 'optInFastD_Period',
+       displayName: 'Fast-D Period',
+       defaultValue: 3,
+       hint: 'Smoothing for making the Fast-D line. Usually set to 3',
+       type: 'integer_range' },
+     { name: 'optInFastD_MAType',
+       displayName: 'Fast-D MA',
+       defaultValue: 0,
+       hint: 'Type of Moving Average for Fast-D',
+       type: 'integer_list' } ],
+  outputs: 
+   [ { '0': 'line', name: 'outFastK', type: 'real', flags: {} },
+     { '0': 'line', name: 'outFastD', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'STOCHRSI',
+  group: 'Momentum Indicators',
+  hint: 'Stochastic Relative Strength Index',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' },
+     { name: 'optInFastK_Period',
+       displayName: 'Fast-K Period',
+       defaultValue: 5,
+       hint: 'Time period for building the Fast-K line',
+       type: 'integer_range' },
+     { name: 'optInFastD_Period',
+       displayName: 'Fast-D Period',
+       defaultValue: 3,
+       hint: 'Smoothing for making the Fast-D line. Usually set to 3',
+       type: 'integer_range' },
+     { name: 'optInFastD_MAType',
+       displayName: 'Fast-D MA',
+       defaultValue: 0,
+       hint: 'Type of Moving Average for Fast-D',
+       type: 'integer_list' } ],
+  outputs: 
+   [ { '0': 'line', name: 'outFastK', type: 'real', flags: {} },
+     { '0': 'line', name: 'outFastD', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'TRIX',
+  group: 'Momentum Indicators',
+  hint: '1-day Rate-Of-Change (ROC) of a Triple Smooth EMA',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ULTOSC',
+  group: 'Momentum Indicators',
+  hint: 'Ultimate Oscillator',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod1',
+       displayName: 'First Period',
+       defaultValue: 7,
+       hint: 'Number of bars for 1st period.',
+       type: 'integer_range' },
+     { name: 'optInTimePeriod2',
+       displayName: 'Second Period',
+       defaultValue: 14,
+       hint: 'Number of bars fro 2nd period',
+       type: 'integer_range' },
+     { name: 'optInTimePeriod3',
+       displayName: 'Third Period',
+       defaultValue: 28,
+       hint: 'Number of bars for 3rd period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'WILLR',
+  group: 'Momentum Indicators',
+  hint: 'Williams\' %R',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'HT_DCPERIOD',
+  group: 'Cycle Indicators',
+  hint: 'Hilbert Transform - Dominant Cycle Period',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'HT_DCPHASE',
+  group: 'Cycle Indicators',
+  hint: 'Hilbert Transform - Dominant Cycle Phase',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'HT_PHASOR',
+  group: 'Cycle Indicators',
+  hint: 'Hilbert Transform - Phasor Components',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: 
+   [ { '0': 'line', name: 'outInPhase', type: 'real', flags: {} },
+     { '0': 'line_dash',
+       name: 'outQuadrature',
+       type: 'real',
+       flags: {} } ] }
+
+**************************
+
+{ name: 'HT_SINE',
+  group: 'Cycle Indicators',
+  hint: 'Hilbert Transform - SineWave',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: 
+   [ { '0': 'line', name: 'outSine', type: 'real', flags: {} },
+     { '0': 'line_dash', name: 'outLeadSine', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'HT_TRENDMODE',
+  group: 'Cycle Indicators',
+  hint: 'Hilbert Transform - Trend vs Cycle Mode',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'AD',
+  group: 'Volume Indicators',
+  hint: 'Chaikin A/D Line',
+  inputs: 
+   [ { name: 'inPriceHLCV',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close', '3': 'volume' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'ADOSC',
+  group: 'Volume Indicators',
+  hint: 'Chaikin A/D Oscillator',
+  inputs: 
+   [ { name: 'inPriceHLCV',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close', '3': 'volume' } } ],
+  optInputs: 
+   [ { name: 'optInFastPeriod',
+       displayName: 'Fast Period',
+       defaultValue: 3,
+       hint: 'Number of period for the fast MA',
+       type: 'integer_range' },
+     { name: 'optInSlowPeriod',
+       displayName: 'Slow Period',
+       defaultValue: 10,
+       hint: 'Number of period for the slow MA',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'OBV',
+  group: 'Volume Indicators',
+  hint: 'On Balance Volume',
+  inputs: 
+   [ { name: 'inReal', type: 'real' },
+     { name: 'inPriceV', type: 'price', flags: { '0': 'volume' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'CDL2CROWS',
+  group: 'Pattern Recognition',
+  hint: 'Two Crows',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDL3BLACKCROWS',
+  group: 'Pattern Recognition',
+  hint: 'Three Black Crows',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDL3INSIDE',
+  group: 'Pattern Recognition',
+  hint: 'Three Inside Up/Down',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDL3LINESTRIKE',
+  group: 'Pattern Recognition',
+  hint: 'Three-Line Strike ',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDL3OUTSIDE',
+  group: 'Pattern Recognition',
+  hint: 'Three Outside Up/Down',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDL3STARSINSOUTH',
+  group: 'Pattern Recognition',
+  hint: 'Three Stars In The South',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDL3WHITESOLDIERS',
+  group: 'Pattern Recognition',
+  hint: 'Three Advancing White Soldiers',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLABANDONEDBABY',
+  group: 'Pattern Recognition',
+  hint: 'Abandoned Baby',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInPenetration',
+       displayName: 'Penetration',
+       defaultValue: 0.3,
+       hint: 'Percentage of penetration of a candle within another candle',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLADVANCEBLOCK',
+  group: 'Pattern Recognition',
+  hint: 'Advance Block',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLBELTHOLD',
+  group: 'Pattern Recognition',
+  hint: 'Belt-hold',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLBREAKAWAY',
+  group: 'Pattern Recognition',
+  hint: 'Breakaway',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLCLOSINGMARUBOZU',
+  group: 'Pattern Recognition',
+  hint: 'Closing Marubozu',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLCONCEALBABYSWALL',
+  group: 'Pattern Recognition',
+  hint: 'Concealing Baby Swallow',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLCOUNTERATTACK',
+  group: 'Pattern Recognition',
+  hint: 'Counterattack',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLDARKCLOUDCOVER',
+  group: 'Pattern Recognition',
+  hint: 'Dark Cloud Cover',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInPenetration',
+       displayName: 'Penetration',
+       defaultValue: 0.5,
+       hint: 'Percentage of penetration of a candle within another candle',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLDOJI',
+  group: 'Pattern Recognition',
+  hint: 'Doji',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLDOJISTAR',
+  group: 'Pattern Recognition',
+  hint: 'Doji Star',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLDRAGONFLYDOJI',
+  group: 'Pattern Recognition',
+  hint: 'Dragonfly Doji',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLENGULFING',
+  group: 'Pattern Recognition',
+  hint: 'Engulfing Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLEVENINGDOJISTAR',
+  group: 'Pattern Recognition',
+  hint: 'Evening Doji Star',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInPenetration',
+       displayName: 'Penetration',
+       defaultValue: 0.3,
+       hint: 'Percentage of penetration of a candle within another candle',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLEVENINGSTAR',
+  group: 'Pattern Recognition',
+  hint: 'Evening Star',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInPenetration',
+       displayName: 'Penetration',
+       defaultValue: 0.3,
+       hint: 'Percentage of penetration of a candle within another candle',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLGAPSIDESIDEWHITE',
+  group: 'Pattern Recognition',
+  hint: 'Up/Down-gap side-by-side white lines',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLGRAVESTONEDOJI',
+  group: 'Pattern Recognition',
+  hint: 'Gravestone Doji',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLHAMMER',
+  group: 'Pattern Recognition',
+  hint: 'Hammer',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLHANGINGMAN',
+  group: 'Pattern Recognition',
+  hint: 'Hanging Man',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLHARAMI',
+  group: 'Pattern Recognition',
+  hint: 'Harami Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLHARAMICROSS',
+  group: 'Pattern Recognition',
+  hint: 'Harami Cross Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLHIGHWAVE',
+  group: 'Pattern Recognition',
+  hint: 'High-Wave Candle',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLHIKKAKE',
+  group: 'Pattern Recognition',
+  hint: 'Hikkake Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLHIKKAKEMOD',
+  group: 'Pattern Recognition',
+  hint: 'Modified Hikkake Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLHOMINGPIGEON',
+  group: 'Pattern Recognition',
+  hint: 'Homing Pigeon',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLIDENTICAL3CROWS',
+  group: 'Pattern Recognition',
+  hint: 'Identical Three Crows',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLINNECK',
+  group: 'Pattern Recognition',
+  hint: 'In-Neck Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLINVERTEDHAMMER',
+  group: 'Pattern Recognition',
+  hint: 'Inverted Hammer',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLKICKING',
+  group: 'Pattern Recognition',
+  hint: 'Kicking',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLKICKINGBYLENGTH',
+  group: 'Pattern Recognition',
+  hint: 'Kicking - bull/bear determined by the longer marubozu',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLLADDERBOTTOM',
+  group: 'Pattern Recognition',
+  hint: 'Ladder Bottom',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLLONGLEGGEDDOJI',
+  group: 'Pattern Recognition',
+  hint: 'Long Legged Doji',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLLONGLINE',
+  group: 'Pattern Recognition',
+  hint: 'Long Line Candle',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLMARUBOZU',
+  group: 'Pattern Recognition',
+  hint: 'Marubozu',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLMATCHINGLOW',
+  group: 'Pattern Recognition',
+  hint: 'Matching Low',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLMATHOLD',
+  group: 'Pattern Recognition',
+  hint: 'Mat Hold',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInPenetration',
+       displayName: 'Penetration',
+       defaultValue: 0.5,
+       hint: 'Percentage of penetration of a candle within another candle',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLMORNINGDOJISTAR',
+  group: 'Pattern Recognition',
+  hint: 'Morning Doji Star',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInPenetration',
+       displayName: 'Penetration',
+       defaultValue: 0.3,
+       hint: 'Percentage of penetration of a candle within another candle',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLMORNINGSTAR',
+  group: 'Pattern Recognition',
+  hint: 'Morning Star',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: 
+   [ { name: 'optInPenetration',
+       displayName: 'Penetration',
+       defaultValue: 0.3,
+       hint: 'Percentage of penetration of a candle within another candle',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLONNECK',
+  group: 'Pattern Recognition',
+  hint: 'On-Neck Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLPIERCING',
+  group: 'Pattern Recognition',
+  hint: 'Piercing Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLRICKSHAWMAN',
+  group: 'Pattern Recognition',
+  hint: 'Rickshaw Man',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLRISEFALL3METHODS',
+  group: 'Pattern Recognition',
+  hint: 'Rising/Falling Three Methods',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLSEPARATINGLINES',
+  group: 'Pattern Recognition',
+  hint: 'Separating Lines',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLSHOOTINGSTAR',
+  group: 'Pattern Recognition',
+  hint: 'Shooting Star',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLSHORTLINE',
+  group: 'Pattern Recognition',
+  hint: 'Short Line Candle',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLSPINNINGTOP',
+  group: 'Pattern Recognition',
+  hint: 'Spinning Top',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLSTALLEDPATTERN',
+  group: 'Pattern Recognition',
+  hint: 'Stalled Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLSTICKSANDWICH',
+  group: 'Pattern Recognition',
+  hint: 'Stick Sandwich',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLTAKURI',
+  group: 'Pattern Recognition',
+  hint: 'Takuri (Dragonfly Doji with very long lower shadow)',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLTASUKIGAP',
+  group: 'Pattern Recognition',
+  hint: 'Tasuki Gap',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLTHRUSTING',
+  group: 'Pattern Recognition',
+  hint: 'Thrusting Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLTRISTAR',
+  group: 'Pattern Recognition',
+  hint: 'Tristar Pattern',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLUNIQUE3RIVER',
+  group: 'Pattern Recognition',
+  hint: 'Unique 3 River',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLUPSIDEGAP2CROWS',
+  group: 'Pattern Recognition',
+  hint: 'Upside Gap Two Crows',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'CDLXSIDEGAP3METHODS',
+  group: 'Pattern Recognition',
+  hint: 'Upside/Downside Gap Three Methods',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outInteger', type: 'integer', flags: {} } ] }
+
+**************************
+
+{ name: 'BETA',
+  group: 'Statistic Functions',
+  hint: 'Beta',
+  inputs: 
+   [ { name: 'inReal0', type: 'real' },
+     { name: 'inReal1', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 5,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'CORREL',
+  group: 'Statistic Functions',
+  hint: 'Pearson\'s Correlation Coefficient (r)',
+  inputs: 
+   [ { name: 'inReal0', type: 'real' },
+     { name: 'inReal1', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 30,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'LINEARREG',
+  group: 'Statistic Functions',
+  hint: 'Linear Regression',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'LINEARREG_ANGLE',
+  group: 'Statistic Functions',
+  hint: 'Linear Regression Angle',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'LINEARREG_INTERCEPT',
+  group: 'Statistic Functions',
+  hint: 'Linear Regression Intercept',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'LINEARREG_SLOPE',
+  group: 'Statistic Functions',
+  hint: 'Linear Regression Slope',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'STDDEV',
+  group: 'Statistic Functions',
+  hint: 'Standard Deviation',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 5,
+       hint: 'Number of period',
+       type: 'integer_range' },
+     { name: 'optInNbDev',
+       displayName: 'Deviations',
+       defaultValue: 1,
+       hint: 'Nb of deviations',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'TSF',
+  group: 'Statistic Functions',
+  hint: 'Time Series Forecast',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'VAR',
+  group: 'Statistic Functions',
+  hint: 'Variance',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 5,
+       hint: 'Number of period',
+       type: 'integer_range' },
+     { name: 'optInNbDev',
+       displayName: 'Deviations',
+       defaultValue: 1,
+       hint: 'Nb of deviations',
+       type: 'real_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'AVGPRICE',
+  group: 'Price Transform',
+  hint: 'Average Price',
+  inputs: 
+   [ { name: 'inPriceOHLC',
+       type: 'price',
+       flags: { '0': 'open', '1': 'high', '2': 'low', '3': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'AVGDEV',
+  group: 'Price Transform',
+  hint: 'Average Deviation',
+  inputs: [ { name: 'inReal', type: 'real' } ],
+  optInputs: 
+   [ { name: 'optInTimePeriod',
+       displayName: 'Time Period',
+       defaultValue: 14,
+       hint: 'Number of period',
+       type: 'integer_range' } ],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'MEDPRICE',
+  group: 'Price Transform',
+  hint: 'Median Price',
+  inputs: 
+   [ { name: 'inPriceHL',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'TYPPRICE',
+  group: 'Price Transform',
+  hint: 'Typical Price',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+
+{ name: 'WCLPRICE',
+  group: 'Price Transform',
+  hint: 'Weighted Close Price',
+  inputs: 
+   [ { name: 'inPriceHLC',
+       type: 'price',
+       flags: { '0': 'high', '1': 'low', '2': 'close' } } ],
+  optInputs: [],
+  outputs: [ { '0': 'line', name: 'outReal', type: 'real', flags: {} } ] }
+
+**************************
+

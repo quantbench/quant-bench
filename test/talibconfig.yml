@@ -1,5 +1,67 @@
 ---
-- name: "SMA"
-  optInTimePeriod: 20
+- name: "ACCBANDS"
+  data_inputs:
+  - high
+  - low
+  - close
+  inputs:
+    optInTimePeriod: 20
+- name: "BBANDS"
+  data_inputs:
+  - inReal
+  inputs:
+    optInTimePeriod: 20
+    optInNbDevUp: 2
+    optInNbDevDn: 2
+    optInMAType: 0
+- name: "DEMA"
+  data_inputs:
+  - inReal
+  inputs:
+    optInTimePeriod: 20  
 - name: "EMA"
+  data_inputs:
+  - inReal
+  inputs:
+    optInTimePeriod: 20
+- name: "HT_TRENDLINE"
+  data_inputs:
+  - inReal
+  inputs:
+- name: "KAMA"
+  data_inputs:
+  - inReal
+  inputs:
+    optInTimePeriod: 30
+- name: "MAMA"
+  data_inputs:
+  - inReal
+  inputs:
+    optInFastLimit: 0.5
+    optInSlowLimit: 0.05
+- name: "MIDPOINT"
+  data_inputs:
+  - inReal
+  inputs:
+    optInTimePeriod: 14
+- name: "MIDPRICE"
+  data_inputs:
+  - high
+  - low
+  inputs:
+    optInTimePeriod: 14
+- name: "SAR"
+  optInAcceleration: 0.02
+  optInMaximum: 0.2
+- name: "SAREXT"
+  optInStartValue: 0
+  optInOffsetOnReverse: 0
+  optInAccelerationInitLong: 0.02
+  optInAccelerationLong: 0.02
+  optInAccelerationMaxLong: 0.2
+  optInAccelerationInitShort: 0.02
+  optInAccelerationShort: 0.02
+  optInAccelerationMaxShort: 0.2
+
+- name: "SMA"
   optInTimePeriod: 20
