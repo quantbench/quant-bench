@@ -5,72 +5,60 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 20
+        optInTimePeriod: 20
     group: overlap-studies
 -
     name: BBANDS
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 5
-        -
-            optInNbDevUp: 2
-        -
-            optInNbDevDn: 2
-        -
-            optInMAType: 0
+        optInTimePeriod: 5
+        optInNbDevUp: 2
+        optInNbDevDn: 2
+        optInMAType: 0
     group: overlap-studies
 -
     name: DEMA
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 30
+        optInTimePeriod: 30
     group: overlap-studies
 -
     name: EMA
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 30
+        optInTimePeriod: 30
     group: overlap-studies
 -
     name: HT_TRENDLINE
     data_inputs:
         - inReal
-    inputs: []
+    inputs:
     group: overlap-studies
 -
     name: KAMA
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 30
+        optInTimePeriod: 30
     group: overlap-studies
 -
     name: MA
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 30
-        -
-            optInMAType: 0
+        optInTimePeriod: 30
+        optInMAType: 0
     group: overlap-studies
 -
     name: MAMA
     data_inputs:
         - inReal
     inputs:
-        -
-            optInFastLimit: 0.5
-        -
-            optInSlowLimit: 0.05
+        optInFastLimit: 0.5
+        optInSlowLimit: 0.05
     group: overlap-studies
 -
     name: MAVP
@@ -78,20 +66,16 @@
         - inReal
         - inPeriods
     inputs:
-        -
-            optInMinPeriod: 2
-        -
-            optInMaxPeriod: 30
-        -
-            optInMAType: 0
+        optInMinPeriod: 2
+        optInMaxPeriod: 30
+        optInMAType: 0
     group: overlap-studies
 -
     name: MIDPOINT
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: overlap-studies
 -
     name: MIDPRICE
@@ -99,8 +83,7 @@
         - high
         - low
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: overlap-studies
 -
     name: SAR
@@ -108,10 +91,8 @@
         - high
         - low
     inputs:
-        -
-            optInAcceleration: 0.02
-        -
-            optInMaximum: 0.2
+        optInAcceleration: 0.02
+        optInMaximum: 0.2
     group: overlap-studies
 -
     name: SAREXT
@@ -119,64 +100,50 @@
         - high
         - low
     inputs:
-        -
-            optInStartValue: 0
-        -
-            optInOffsetOnReverse: 0
-        -
-            optInAccelerationInitLong: 0.02
-        -
-            optInAccelerationLong: 0.02
-        -
-            optInAccelerationMaxLong: 0.2
-        -
-            optInAccelerationInitShort: 0.02
-        -
-            optInAccelerationShort: 0.02
-        -
-            optInAccelerationMaxShort: 0.2
+        optInStartValue: 0
+        optInOffsetOnReverse: 0
+        optInAccelerationInitLong: 0.02
+        optInAccelerationLong: 0.02
+        optInAccelerationMaxLong: 0.2
+        optInAccelerationInitShort: 0.02
+        optInAccelerationShort: 0.02
+        optInAccelerationMaxShort: 0.2
     group: overlap-studies
 -
     name: SMA
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 30
+        optInTimePeriod: 30
     group: overlap-studies
 -
     name: T3
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 5
-        -
-            optInVFactor: 0.7
+        optInTimePeriod: 5
+        optInVFactor: 0.7
     group: overlap-studies
 -
     name: TEMA
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 30
+        optInTimePeriod: 30
     group: overlap-studies
 -
     name: TRIMA
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 30
+        optInTimePeriod: 30
     group: overlap-studies
 -
     name: WMA
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 30
+        optInTimePeriod: 30
     group: overlap-studies
 -
     name: ATR
@@ -185,8 +152,7 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: volatility-indicators
 -
     name: NATR
@@ -195,8 +161,7 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: volatility-indicators
 -
     name: TRANGE
@@ -204,7 +169,7 @@
         - high
         - low
         - close
-    inputs: []
+    inputs:
     group: volatility-indicators
 -
     name: ADX
@@ -213,8 +178,7 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: ADXR
@@ -223,20 +187,16 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: APO
     data_inputs:
         - inReal
     inputs:
-        -
-            optInFastPeriod: 12
-        -
-            optInSlowPeriod: 26
-        -
-            optInMAType: 0
+        optInFastPeriod: 12
+        optInSlowPeriod: 26
+        optInMAType: 0
     group: momentum-indicators
 -
     name: AROON
@@ -244,8 +204,7 @@
         - high
         - low
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: AROONOSC
@@ -253,8 +212,7 @@
         - high
         - low
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: BOP
@@ -263,7 +221,7 @@
         - high
         - low
         - close
-    inputs: []
+    inputs:
     group: momentum-indicators
 -
     name: CCI
@@ -272,16 +230,14 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: CMO
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: DX
@@ -290,55 +246,35 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 14
-    group: momentum-indicators
--
-    name: IMI
-    data_inputs:
-        - open
-        - close
-    inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: MACD
     data_inputs:
         - inReal
     inputs:
-        -
-            optInFastPeriod: 12
-        -
-            optInSlowPeriod: 26
-        -
-            optInSignalPeriod: 9
+        optInFastPeriod: 12
+        optInSlowPeriod: 26
+        optInSignalPeriod: 9
     group: momentum-indicators
 -
     name: MACDEXT
     data_inputs:
         - inReal
     inputs:
-        -
-            optInFastPeriod: 12
-        -
-            optInFastMAType: 0
-        -
-            optInSlowPeriod: 26
-        -
-            optInSlowMAType: 0
-        -
-            optInSignalPeriod: 9
-        -
-            optInSignalMAType: 0
+        optInFastPeriod: 12
+        optInFastMAType: 0
+        optInSlowPeriod: 26
+        optInSlowMAType: 0
+        optInSignalPeriod: 9
+        optInSignalMAType: 0
     group: momentum-indicators
 -
     name: MACDFIX
     data_inputs:
         - inReal
     inputs:
-        -
-            optInSignalPeriod: 9
+        optInSignalPeriod: 9
     group: momentum-indicators
 -
     name: MFI
@@ -348,8 +284,7 @@
         - close
         - volume
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: MINUS_DI
@@ -358,8 +293,7 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: MINUS_DM
@@ -367,16 +301,14 @@
         - high
         - low
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: MOM
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 10
+        optInTimePeriod: 10
     group: momentum-indicators
 -
     name: PLUS_DI
@@ -385,8 +317,7 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: PLUS_DM
@@ -394,60 +325,51 @@
         - high
         - low
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: PPO
     data_inputs:
         - inReal
     inputs:
-        -
-            optInFastPeriod: 12
-        -
-            optInSlowPeriod: 26
-        -
-            optInMAType: 0
+        optInFastPeriod: 12
+        optInSlowPeriod: 26
+        optInMAType: 0
     group: momentum-indicators
 -
     name: ROC
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 10
+        optInTimePeriod: 10
     group: momentum-indicators
 -
     name: ROCP
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 10
+        optInTimePeriod: 10
     group: momentum-indicators
 -
     name: ROCR
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 10
+        optInTimePeriod: 10
     group: momentum-indicators
 -
     name: ROCR100
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 10
+        optInTimePeriod: 10
     group: momentum-indicators
 -
     name: RSI
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: STOCH
@@ -456,16 +378,11 @@
         - low
         - close
     inputs:
-        -
-            optInFastK_Period: 5
-        -
-            optInSlowK_Period: 3
-        -
-            optInSlowK_MAType: 0
-        -
-            optInSlowD_Period: 3
-        -
-            optInSlowD_MAType: 0
+        optInFastK_Period: 5
+        optInSlowK_Period: 3
+        optInSlowK_MAType: 0
+        optInSlowD_Period: 3
+        optInSlowD_MAType: 0
     group: momentum-indicators
 -
     name: STOCHF
@@ -474,34 +391,26 @@
         - low
         - close
     inputs:
-        -
-            optInFastK_Period: 5
-        -
-            optInFastD_Period: 3
-        -
-            optInFastD_MAType: 0
+        optInFastK_Period: 5
+        optInFastD_Period: 3
+        optInFastD_MAType: 0
     group: momentum-indicators
 -
     name: STOCHRSI
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 14
-        -
-            optInFastK_Period: 5
-        -
-            optInFastD_Period: 3
-        -
-            optInFastD_MAType: 0
+        optInTimePeriod: 14
+        optInFastK_Period: 5
+        optInFastD_Period: 3
+        optInFastD_MAType: 0
     group: momentum-indicators
 -
     name: TRIX
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 30
+        optInTimePeriod: 30
     group: momentum-indicators
 -
     name: ULTOSC
@@ -510,12 +419,9 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod1: 7
-        -
-            optInTimePeriod2: 14
-        -
-            optInTimePeriod3: 28
+        optInTimePeriod1: 7
+        optInTimePeriod2: 14
+        optInTimePeriod3: 28
     group: momentum-indicators
 -
     name: WILLR
@@ -524,38 +430,37 @@
         - low
         - close
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: momentum-indicators
 -
     name: HT_DCPERIOD
     data_inputs:
         - inReal
-    inputs: []
+    inputs:
     group: cycle-indicators
 -
     name: HT_DCPHASE
     data_inputs:
         - inReal
-    inputs: []
+    inputs:
     group: cycle-indicators
 -
     name: HT_PHASOR
     data_inputs:
         - inReal
-    inputs: []
+    inputs:
     group: cycle-indicators
 -
     name: HT_SINE
     data_inputs:
         - inReal
-    inputs: []
+    inputs:
     group: cycle-indicators
 -
     name: HT_TRENDMODE
     data_inputs:
         - inReal
-    inputs: []
+    inputs:
     group: cycle-indicators
 -
     name: AD
@@ -564,7 +469,7 @@
         - low
         - close
         - volume
-    inputs: []
+    inputs:
     group: volume-indicators
 -
     name: ADOSC
@@ -574,17 +479,15 @@
         - close
         - volume
     inputs:
-        -
-            optInFastPeriod: 3
-        -
-            optInSlowPeriod: 10
+        optInFastPeriod: 3
+        optInSlowPeriod: 10
     group: volume-indicators
 -
     name: OBV
     data_inputs:
         - inReal
         - volume
-    inputs: []
+    inputs:
     group: volume-indicators
 -
     name: BETA
@@ -592,8 +495,7 @@
         - inReal0
         - inReal1
     inputs:
-        -
-            optInTimePeriod: 5
+        optInTimePeriod: 5
     group: statistic-functions
 -
     name: CORREL
@@ -601,68 +503,58 @@
         - inReal0
         - inReal1
     inputs:
-        -
-            optInTimePeriod: 30
+        optInTimePeriod: 30
     group: statistic-functions
 -
     name: LINEARREG
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: statistic-functions
 -
     name: LINEARREG_ANGLE
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: statistic-functions
 -
     name: LINEARREG_INTERCEPT
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: statistic-functions
 -
     name: LINEARREG_SLOPE
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: statistic-functions
 -
     name: STDDEV
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 5
-        -
-            optInNbDev: 1
+        optInTimePeriod: 5
+        optInNbDev: 1
     group: statistic-functions
 -
     name: TSF
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 14
+        optInTimePeriod: 14
     group: statistic-functions
 -
     name: VAR
     data_inputs:
         - inReal
     inputs:
-        -
-            optInTimePeriod: 5
-        -
-            optInNbDev: 1
+        optInTimePeriod: 5
+        optInNbDev: 1
     group: statistic-functions
 -
     name: AVGPRICE
@@ -671,22 +563,14 @@
         - high
         - low
         - close
-    inputs: []
-    group: price-transform
--
-    name: AVGDEV
-    data_inputs:
-        - inReal
     inputs:
-        -
-            optInTimePeriod: 14
     group: price-transform
 -
     name: MEDPRICE
     data_inputs:
         - high
         - low
-    inputs: []
+    inputs:
     group: price-transform
 -
     name: TYPPRICE
@@ -694,7 +578,7 @@
         - high
         - low
         - close
-    inputs: []
+    inputs:
     group: price-transform
 -
     name: WCLPRICE
@@ -702,5 +586,5 @@
         - high
         - low
         - close
-    inputs: []
+    inputs:
     group: price-transform

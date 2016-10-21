@@ -8,6 +8,7 @@ let functions = talib.functions;
 let functionKeys = Object.keys(functions);
 
 let configs: any[] = [];
+let excludes: string[] = ["IMI", "TA_AVGDEV"];
 functionKeys.forEach((func: any) => {
     let funcExplain = talib.explain(functions[func].name);
 
@@ -15,7 +16,7 @@ functionKeys.forEach((func: any) => {
         let config = {
             "name": funcExplain.name,
             "data_inputs": new Array<string>(),
-            "inputs": new Array<string>(),
+            "inputs": new Object(),
             "group": functions[func].group.toLowerCase().replace(" ", "-"),
         };
         funcExplain.inputs.forEach((input: any) => {
@@ -33,20 +34,22 @@ functionKeys.forEach((func: any) => {
 
         funcExplain.optInputs.forEach((input: any) => {
             if (input.type === "price") {
-                for (let i in input.flags) {
-                    if (input.flags[i]) {
-                        let flag = input.flags[i];
-                        config.inputs.push(flag);
-                    }
-                }
+                // for (let i in input.flags) {
+                //     if (input.flags[i]) {
+                //         let flag = input.flags[i];
+                //         config.inputs.push(flag);
+                //     }
+                // }
             } else {
-                let newInput: any = {};
-                newInput[input.name] = input.defaultValue;
-                config.inputs.push(newInput);
+                let val: any = input.defaultValue;
+                let name: string = input.name;
+                (<any> config.inputs)[name] = val;
             }
         });
 
-        configs.push(config);
+        if (!excludes.indexOf(config.name)) {
+            configs.push(config);
+        }
     }
 });
 
