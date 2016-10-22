@@ -1,0 +1,1 @@
+// MESA Adaptive Moving Average

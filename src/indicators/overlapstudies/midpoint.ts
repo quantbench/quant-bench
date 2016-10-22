@@ -1,0 +1,1 @@
+// MidPoint over period

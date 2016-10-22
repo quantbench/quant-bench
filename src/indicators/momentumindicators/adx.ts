@@ -1,0 +1,1 @@
+// Average Directional Movement Index

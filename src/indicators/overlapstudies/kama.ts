@@ -1,0 +1,1 @@
+// Kaufman Adaptive Moving Average

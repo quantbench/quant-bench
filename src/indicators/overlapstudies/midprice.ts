@@ -1,0 +1,1 @@
+// Midpoint Price over period
