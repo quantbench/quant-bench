@@ -21,12 +21,12 @@
     "gulp-tslint": "^6.1.2",
     "jasmine": "^2.5.2",
     "jasmine-console-reporter": "^1.2.7",
+    "nunjucks": "^2.5.2",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "talib": "^1.0.2",
     "tslint": "^3.15.1",
-    "typescript": "^2.0.3",
-    "yamljs": "^0.2.8"
+    "typescript": "^2.0.3"
   },
   "dependencies": {
     "bluebird": "^3.4.6",

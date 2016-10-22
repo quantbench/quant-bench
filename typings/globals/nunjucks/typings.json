@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/dbfe1f60e469cdb0294733b276b67e34f9a50688/nunjucks/nunjucks.d.ts",
+    "raw": "registry:dt/nunjucks#0.0.0+20160802155009",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/dbfe1f60e469cdb0294733b276b67e34f9a50688/nunjucks/nunjucks.d.ts"
+  }
+}
