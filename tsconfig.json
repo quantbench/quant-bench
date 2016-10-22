@@ -11,6 +11,14 @@
     "target": "es6"
   },
   "files": [
+    "src/data/market/priceBar.ts",
+    "src/data/market/tradeBar.ts",
+    "src/indicators/abstractIndicator.ts",
+    "src/indicators/globals.ts",
+    "src/indicators/indicator.ts",
+    "src/indicators/overlapstudies/sma.ts",
+    "src/indicators/queue.ts",
+    "src/indicators/slidingWindow..ts",
     "src/types.ts",
     "test/utils/convertleantota.ts",
     "test/utils/generateConfig.ts",
