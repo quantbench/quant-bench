@@ -3,6 +3,7 @@ import * as globals from "../globals";
 import { IIndicator } from "../indicator";
 
 export const EMA_INDICATOR_NAME: string = "EMA";
+export const EMA_INDICATOR_DESCR: string = "Exponential Moving Average";
 export const EMA_TIMEPERIOD_DEFAULT: number = 30;
 export const EMA_TIMEPERIOD_MIN: number = 2;
 
@@ -17,7 +18,7 @@ export class EMA
     periodTotal: number;
 
     constructor(timePeriod: number) {
-        super(EMA_INDICATOR_NAME);
+        super(EMA_INDICATOR_NAME, EMA_INDICATOR_DESCR);
         if (timePeriod === undefined) {
             this.timePeriod = EMA_TIMEPERIOD_DEFAULT;
         } else {
