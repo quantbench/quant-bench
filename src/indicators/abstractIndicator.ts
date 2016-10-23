@@ -2,11 +2,13 @@ import {IIndicator} from "./indicator";
 
 export abstract class AbstractIndicator<TInputType, TOutputType> implements IIndicator<TInputType, TOutputType> {
     public readonly name: string;
-    protected currentValueInternal: TOutputType;
-    protected isReadyInternal: boolean;
+    private currentValueInternal: TOutputType;
+    private isReadyInternal: boolean;
+    private lookbackInternal: number;
 
     constructor(name: string) {
         this.name = name;
+        this.lookbackInternal = 0;
     }
 
     get currentValue(): TOutputType {
@@ -17,5 +19,21 @@ export abstract class AbstractIndicator<TInputType, TOutputType> implements IInd
         return this.isReadyInternal;
     }
 
+    get lookback(): number {
+        return this.lookbackInternal;
+    }
+
     abstract receiveData(inputData: TInputType): boolean;
+
+    protected setIsReady() {
+        this.isReadyInternal = true;
+    }
+
+    protected setCurrentValue(newValue: TOutputType) {
+        this.currentValueInternal = newValue;
+    }
+
+    protected setLookBack(lookback: number) {
+        this.lookbackInternal = lookback;
+    }
 }

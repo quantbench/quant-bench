@@ -19,15 +19,20 @@ functionKeys.forEach((func: any) => {
         groupName = "pricetransforms";
     }
     let fileName = funcExplain.name.toLowerCase() + ".ts";
-    if (excludes.indexOf(funcExplain.name) === -1) {
+    if ((excludes.indexOf(funcExplain.name) === -1) && funcExplain.inputs.length === 1) {
         let filePath = path.join("./src/indicators/", groupName, fileName);
-        fs.writeFile(filePath, "// " + funcExplain.hint + "\n" , (err) => {
-            if (err) {
-                console.log(err);
-            }
-        });
+
+        let templateData: any = {
+            "IND_CAPS_NAME": funcExplain.name.replace("_", ""),
+            "IND_INPUT_DATATYPE": funcExplain.inputs[0].name === "price" ? "IPriceBar" : "number",
+            "IND_OUTPUT_DATATYPE": "number",
+        };
+
+        fs.writeFileSync(filePath, nunjucks.render("indicator.njk", templateData));
     }
 });
+
+process.exit(0);
 
 function fixGroupName(groupName: string): string {
     return groupName.replace(" ", "").toLowerCase();

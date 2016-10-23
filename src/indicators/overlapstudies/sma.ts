@@ -22,8 +22,11 @@ export class SMA
             if (timePeriod < SMA_TIMEPERIOD_MIN) {
                 throw (new Error(globals.generateMinTimePeriodError(this.name, SMA_TIMEPERIOD_MIN, timePeriod)));
             }
-            this.timePeriod = timePeriod;
         }
+
+        this.timePeriod = timePeriod;
+        this.periodTotal = 0;
+        this.setLookBack(this.timePeriod - 1);
 
         this.periodHistory = new Queue<number>();
     }
@@ -38,8 +41,8 @@ export class SMA
             this.periodHistory.enqueue(inputData);
         }
         if (this.periodHistory.count >= this.timePeriod) {
-            this.currentValueInternal = this.periodTotal / this.timePeriod;
-            this.isReadyInternal = true;
+            this.setCurrentValue(this.periodTotal / this.timePeriod);
+            this.setIsReady();
         }
         return this.isReady;
     }
