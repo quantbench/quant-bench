@@ -6,7 +6,7 @@
   },
   "globalDependencies": {
     "jasmine": "registry:dt/jasmine#2.5.0+20161003201800",
-    "node": "registry:env/node#6.0.0+20161015001438",
+    "node": "registry:dt/node#6.0.0+20161019125345",
     "nunjucks": "registry:dt/nunjucks#0.0.0+20160802155009"
   }
 }
