@@ -1,17 +1,19 @@
+import * as indicators from "../";
+import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const ADOSC_INDICATOR_NAME: string = "ADOSC";
+export const ADOSC_INDICATOR_DESCR: string = "Chaikin A/D Oscillator";
 
 export class ADOSC
-    extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    extends AbstractIndicator<marketData.IPriceBar, number>
+    implements indicators.IIndicator<marketData.IPriceBar, number> {
 
     constructor() {
-        super(ADOSC_INDICATOR_NAME);
+        super(ADOSC_INDICATOR_NAME, ADOSC_INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData: marketData.IPriceBar): boolean {
         return this.isReady;
     }
 }

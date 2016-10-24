@@ -4,6 +4,7 @@ import { IIndicator } from "../indicator";
 import { Queue } from "../queue";
 
 export const SMA_INDICATOR_NAME: string = "SMA";
+export const SMA_INDICATOR_DESCR: string = "Simple Moving Average";
 export const SMA_TIMEPERIOD_DEFAULT: number = 30;
 export const SMA_TIMEPERIOD_MIN: number = 2;
 
@@ -15,7 +16,7 @@ export class SMA
     periodHistory: Queue<number>;
     periodTotal: number;
     constructor(timePeriod?: number) {
-        super(SMA_INDICATOR_NAME);
+        super(SMA_INDICATOR_NAME, SMA_INDICATOR_DESCR);
         if (timePeriod === undefined) {
             this.timePeriod = SMA_TIMEPERIOD_DEFAULT;
         } else {

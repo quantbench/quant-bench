@@ -1,14 +1,16 @@
+import * as indicators from "../";
+
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const RSI_INDICATOR_NAME: string = "RSI";
+export const RSI_INDICATOR_DESCR: string = "Relative Strength Index";
 
 export class RSI
     extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    implements indicators.IIndicator<number, number> {
 
     constructor() {
-        super(RSI_INDICATOR_NAME);
+        super(RSI_INDICATOR_NAME, RSI_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

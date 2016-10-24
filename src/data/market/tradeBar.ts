@@ -1,4 +1,6 @@
-export interface ITradeBar {
+import { IPriceBar } from "./priceBar";
+
+export interface ITradeBar extends IPriceBar {
     readonly symbol: string;
     readonly time: Date;
     readonly open: number;

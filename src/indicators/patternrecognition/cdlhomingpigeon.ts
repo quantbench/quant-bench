@@ -1,17 +1,19 @@
+import * as indicators from "../";
+import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const CDLHOMINGPIGEON_INDICATOR_NAME: string = "CDLHOMINGPIGEON";
+export const CDLHOMINGPIGEON_INDICATOR_DESCR: string = "Homing Pigeon";
 
 export class CDLHOMINGPIGEON
-    extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    extends AbstractIndicator<marketData.IPriceBar, number>
+    implements indicators.IIndicator<marketData.IPriceBar, number> {
 
     constructor() {
-        super(CDLHOMINGPIGEON_INDICATOR_NAME);
+        super(CDLHOMINGPIGEON_INDICATOR_NAME, CDLHOMINGPIGEON_INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData: marketData.IPriceBar): boolean {
         return this.isReady;
     }
 }

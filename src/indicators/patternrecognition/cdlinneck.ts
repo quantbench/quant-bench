@@ -1,17 +1,19 @@
+import * as indicators from "../";
+import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const CDLINNECK_INDICATOR_NAME: string = "CDLINNECK";
+export const CDLINNECK_INDICATOR_DESCR: string = "In-Neck Pattern";
 
 export class CDLINNECK
-    extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    extends AbstractIndicator<marketData.IPriceBar, number>
+    implements indicators.IIndicator<marketData.IPriceBar, number> {
 
     constructor() {
-        super(CDLINNECK_INDICATOR_NAME);
+        super(CDLINNECK_INDICATOR_NAME, CDLINNECK_INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData: marketData.IPriceBar): boolean {
         return this.isReady;
     }
 }

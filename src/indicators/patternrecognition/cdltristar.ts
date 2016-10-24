@@ -1,17 +1,19 @@
+import * as indicators from "../";
+import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const CDLTRISTAR_INDICATOR_NAME: string = "CDLTRISTAR";
+export const CDLTRISTAR_INDICATOR_DESCR: string = "Tristar Pattern";
 
 export class CDLTRISTAR
-    extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    extends AbstractIndicator<marketData.IPriceBar, number>
+    implements indicators.IIndicator<marketData.IPriceBar, number> {
 
     constructor() {
-        super(CDLTRISTAR_INDICATOR_NAME);
+        super(CDLTRISTAR_INDICATOR_NAME, CDLTRISTAR_INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData: marketData.IPriceBar): boolean {
         return this.isReady;
     }
 }

@@ -1,17 +1,19 @@
+import * as indicators from "../";
+import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const CDL2CROWS_INDICATOR_NAME: string = "CDL2CROWS";
+export const CDL2CROWS_INDICATOR_DESCR: string = "Two Crows";
 
 export class CDL2CROWS
-    extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    extends AbstractIndicator<marketData.IPriceBar, number>
+    implements indicators.IIndicator<marketData.IPriceBar, number> {
 
     constructor() {
-        super(CDL2CROWS_INDICATOR_NAME);
+        super(CDL2CROWS_INDICATOR_NAME, CDL2CROWS_INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData: marketData.IPriceBar): boolean {
         return this.isReady;
     }
 }

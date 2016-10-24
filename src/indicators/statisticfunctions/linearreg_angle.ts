@@ -1,14 +1,16 @@
+import * as indicators from "../";
+
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const LINEARREGANGLE_INDICATOR_NAME: string = "LINEARREGANGLE";
+export const LINEARREGANGLE_INDICATOR_DESCR: string = "Linear Regression Angle";
 
 export class LINEARREGANGLE
     extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    implements indicators.IIndicator<number, number> {
 
     constructor() {
-        super(LINEARREGANGLE_INDICATOR_NAME);
+        super(LINEARREGANGLE_INDICATOR_NAME, LINEARREGANGLE_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

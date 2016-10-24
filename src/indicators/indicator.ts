@@ -1,5 +1,6 @@
 export interface IIndicator<TInputType, TOutputType> {
     name: string;
+    description: string;
     isReady: boolean;
 
     readonly currentValue: TOutputType;

@@ -2,12 +2,14 @@ import {IIndicator} from "./indicator";
 
 export abstract class AbstractIndicator<TInputType, TOutputType> implements IIndicator<TInputType, TOutputType> {
     public readonly name: string;
+    public readonly description: string;
     private currentValueInternal: TOutputType;
     private isReadyInternal: boolean;
     private lookbackInternal: number;
 
-    constructor(name: string) {
+    constructor(name: string, description: string) {
         this.name = name;
+        this.description = description;
         this.lookbackInternal = 0;
     }
 

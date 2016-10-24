@@ -1,14 +1,16 @@
+import * as indicators from "../";
+
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const LINEARREGINTERCEPT_INDICATOR_NAME: string = "LINEARREGINTERCEPT";
+export const LINEARREGINTERCEPT_INDICATOR_DESCR: string = "Linear Regression Intercept";
 
 export class LINEARREGINTERCEPT
     extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    implements indicators.IIndicator<number, number> {
 
     constructor() {
-        super(LINEARREGINTERCEPT_INDICATOR_NAME);
+        super(LINEARREGINTERCEPT_INDICATOR_NAME, LINEARREGINTERCEPT_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

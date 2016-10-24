@@ -1,6 +1,5 @@
+import * as indicators from "../";
 import { AbstractIndicator } from "../abstractIndicator";
-import * as globals from "../globals";
-import { IIndicator } from "../indicator";
 
 export const EMA_INDICATOR_NAME: string = "EMA";
 export const EMA_INDICATOR_DESCR: string = "Exponential Moving Average";
@@ -9,7 +8,7 @@ export const EMA_TIMEPERIOD_MIN: number = 2;
 
 export class EMA
     extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    implements indicators.IIndicator<number, number> {
 
     timePeriod: number;
     multiplier: number;
@@ -23,7 +22,7 @@ export class EMA
             this.timePeriod = EMA_TIMEPERIOD_DEFAULT;
         } else {
             if (timePeriod < EMA_TIMEPERIOD_MIN) {
-                throw (new Error(globals.generateMinTimePeriodError(this.name, EMA_TIMEPERIOD_MIN, timePeriod)));
+                throw (new Error(indicators.generateMinTimePeriodError(this.name, EMA_TIMEPERIOD_MIN, timePeriod)));
             }
         }
 

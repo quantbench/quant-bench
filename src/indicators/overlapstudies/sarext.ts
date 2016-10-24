@@ -1,17 +1,19 @@
+import * as indicators from "../";
+import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const SAREXT_INDICATOR_NAME: string = "SAREXT";
+export const SAREXT_INDICATOR_DESCR: string = "Parabolic SAR - Extended";
 
 export class SAREXT
-    extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    extends AbstractIndicator<marketData.IPriceBar, number>
+    implements indicators.IIndicator<marketData.IPriceBar, number> {
 
     constructor() {
-        super(SAREXT_INDICATOR_NAME);
+        super(SAREXT_INDICATOR_NAME, SAREXT_INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData: marketData.IPriceBar): boolean {
         return this.isReady;
     }
 }

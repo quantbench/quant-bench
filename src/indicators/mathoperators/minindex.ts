@@ -1,14 +1,16 @@
+import * as indicators from "../";
+
 import { AbstractIndicator } from "../abstractIndicator";
-import { IIndicator } from "../indicator";
 
 export const MININDEX_INDICATOR_NAME: string = "MININDEX";
+export const MININDEX_INDICATOR_DESCR: string = "Index of lowest value over a specified period";
 
 export class MININDEX
     extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    implements indicators.IIndicator<number, number> {
 
     constructor() {
-        super(MININDEX_INDICATOR_NAME);
+        super(MININDEX_INDICATOR_NAME, MININDEX_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {
