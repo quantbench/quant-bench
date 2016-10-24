@@ -32,9 +32,6 @@ export class STDDEV
         if (this.variance.receiveData(inputData)) {
             let variance = this.variance.currentValue;
             let result: number = Math.sqrt(variance);
-            if (variance < 0) {
-                // 
-            }
             this.setCurrentValue(result);
             this.setIsReady();
         }

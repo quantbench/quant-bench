@@ -13,11 +13,21 @@ export class Queue<TInputType> {
         this.data.push(valueToEnqueue);
     }
 
-    dequeue() {
+    dequeue(): TInputType {
+        let dequeued = this.data[0];
         this.data.splice(0, 1);
+        return dequeued;
     }
 
     peek(): TInputType {
         return this.data[0];
+    }
+
+    toArray(): TInputType[] {
+        return this.data;
+    }
+
+    clear() {
+        this.data.length = 0;
     }
 }

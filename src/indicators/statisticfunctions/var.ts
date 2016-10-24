@@ -12,10 +12,10 @@ export class VAR
     implements indicators.IIndicator<number, number> {
 
     timePeriod: number;
-    periodCounter: number;
-    mean: number;
-    variance: number;
     periodHistory: Queue<number>;
+    periodCounter: number;
+    rollingSum: number;
+    rollingSumOfSquares: number;
 
     constructor(timePeriod: number) {
         super(VAR_INDICATOR_NAME, VAR_INDICATOR_DESCR);
@@ -28,9 +28,9 @@ export class VAR
         }
 
         this.timePeriod = timePeriod;
+        this.rollingSum = 0;
+        this.rollingSumOfSquares = 0;
         this.periodCounter = 0;
-        this.mean = 0;
-        this.variance = 0;
         this.periodHistory = new Queue<number>();
         this.setLookBack(this.timePeriod - 1);
     }
@@ -38,35 +38,22 @@ export class VAR
     receiveData(inputData: number): boolean {
         this.periodHistory.enqueue(inputData);
 
-        let delta: number = 0;
         if (this.periodCounter < this.timePeriod) {
             this.periodCounter += 1;
-            delta = inputData - this.mean;
-            this.mean = this.mean + delta / this.periodCounter;
-
-            this.variance = this.variance + delta * (inputData - this.mean);
-        } else {
-            let dOld: number = 0;
-            let dNew: number = 0;
-            let firstValue: number = this.periodHistory.peek();
-            delta = inputData - firstValue;
-            dOld = firstValue - this.mean;
-            this.mean = this.mean + delta / this.periodCounter;
-            dNew = inputData - this.mean;
-            this.variance = this.variance + (dOld + dNew) * delta;
         }
 
-        if (this.periodHistory.count > this.timePeriod) {
-            this.periodHistory.dequeue();
-        }
+        this.rollingSum += inputData;
+        this.rollingSumOfSquares += inputData * inputData;
 
-        if (this.periodCounter >= this.timePeriod) {
-            let result = this.variance / this.timePeriod;
-            if (result < 0) {
-                //
-                console.log("error");
-            }
-            this.setCurrentValue(result);
+        if (this.periodCounter === this.timePeriod) {
+
+            let mean1 = this.rollingSum / this.timePeriod;
+            let mean2 = this.rollingSumOfSquares / this.timePeriod;
+            let removed = this.periodHistory.dequeue();
+            this.rollingSum -= removed;
+            this.rollingSumOfSquares -= removed * removed;
+
+            this.setCurrentValue(mean2 - mean1 * mean1);
             this.setIsReady();
         }
 
