@@ -182,6 +182,7 @@
     "src/types.ts",
     "test/go.1.ts",
     "test/go.ts",
+    "test/indicators/momentumindicators/macd.spec.ts",
     "test/indicators/overlapstudies/accbands.spec.ts",
     "test/indicators/overlapstudies/bbands.spec.ts",
     "test/indicators/overlapstudies/dema.spec.ts",
