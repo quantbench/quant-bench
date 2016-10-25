@@ -2,15 +2,15 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const ULTOSC_INDICATOR_NAME: string = "ULTOSC";
-export const ULTOSC_INDICATOR_DESCR: string = "Ultimate Oscillator";
-
 export class ULTOSC
     extends AbstractIndicator<marketData.IPriceBar, number>
     implements indicators.IIndicator<marketData.IPriceBar, number> {
 
+    static ULTOSC_INDICATOR_NAME: string = "ULTOSC";
+    static ULTOSC_INDICATOR_DESCR: string = "Ultimate Oscillator";
+
     constructor() {
-        super(ULTOSC_INDICATOR_NAME, ULTOSC_INDICATOR_DESCR);
+        super(ULTOSC.ULTOSC_INDICATOR_NAME, ULTOSC.ULTOSC_INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

@@ -2,15 +2,15 @@ import * as indicators from "../";
 
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const TAN_INDICATOR_NAME: string = "TAN";
-export const TAN_INDICATOR_DESCR: string = "Vector Trigonometric Tan";
-
 export class TAN
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
+    static TAN_INDICATOR_NAME: string = "TAN";
+    static TAN_INDICATOR_DESCR: string = "Vector Trigonometric Tan";
+
     constructor() {
-        super(TAN_INDICATOR_NAME, TAN_INDICATOR_DESCR);
+        super(TAN.TAN_INDICATOR_NAME, TAN.TAN_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

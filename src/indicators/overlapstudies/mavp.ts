@@ -2,15 +2,15 @@ import * as indicators from "../";
 
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const MAVP_INDICATOR_NAME: string = "MAVP";
-export const MAVP_INDICATOR_DESCR: string = "Moving average with variable period";
-
 export class MAVP
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
+    static MAVP_INDICATOR_NAME: string = "MAVP";
+    static MAVP_INDICATOR_DESCR: string = "Moving average with variable period";
+
     constructor() {
-        super(MAVP_INDICATOR_NAME, MAVP_INDICATOR_DESCR);
+        super(MAVP.MAVP_INDICATOR_NAME, MAVP.MAVP_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

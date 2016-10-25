@@ -2,15 +2,15 @@ import * as indicators from "../";
 
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const CMO_INDICATOR_NAME: string = "CMO";
-export const CMO_INDICATOR_DESCR: string = "Chande Momentum Oscillator";
-
 export class CMO
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
+    static CMO_INDICATOR_NAME: string = "CMO";
+    static CMO_INDICATOR_DESCR: string = "Chande Momentum Oscillator";
+
     constructor() {
-        super(CMO_INDICATOR_NAME, CMO_INDICATOR_DESCR);
+        super(CMO.CMO_INDICATOR_NAME, CMO.CMO_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

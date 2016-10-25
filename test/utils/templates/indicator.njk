@@ -2,15 +2,15 @@ import * as indicators from "../";
 {% if INCLUDE_MARKET_DATA === true %}import * as marketData from "../../data/market/";{% endif %}
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const {{IND_CAPS_NAME}}_INDICATOR_NAME: string = "{{IND_CAPS_NAME}}";
-export const {{IND_CAPS_NAME}}_INDICATOR_DESCR: string = "{{IND_DESCR}}";
-
 export class {{IND_CAPS_NAME}}
     extends AbstractIndicator<{{IND_INPUT_DATATYPE}}, {{IND_OUTPUT_DATATYPE}}>
     implements indicators.IIndicator<{{IND_INPUT_DATATYPE}}, {{IND_OUTPUT_DATATYPE}}> {
 
+    static {{IND_CAPS_NAME}}_INDICATOR_NAME: string = "{{IND_CAPS_NAME}}";
+    static {{IND_CAPS_NAME}}_INDICATOR_DESCR: string = "{{IND_DESCR}}";
+
     constructor() {
-        super({{IND_CAPS_NAME}}_INDICATOR_NAME, {{IND_CAPS_NAME}}_INDICATOR_DESCR);
+        super({{IND_CAPS_NAME}}.{{IND_CAPS_NAME}}_INDICATOR_NAME, {{IND_CAPS_NAME}}.{{IND_CAPS_NAME}}_INDICATOR_DESCR);
     }
 
     receiveData(inputData: {{IND_INPUT_DATATYPE}}): boolean {

@@ -2,15 +2,15 @@ import * as indicators from "../";
 
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const DIV_INDICATOR_NAME: string = "DIV";
-export const DIV_INDICATOR_DESCR: string = "Vector Arithmetic Div";
-
 export class DIV
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
+    static DIV_INDICATOR_NAME: string = "DIV";
+    static DIV_INDICATOR_DESCR: string = "Vector Arithmetic Div";
+
     constructor() {
-        super(DIV_INDICATOR_NAME, DIV_INDICATOR_DESCR);
+        super(DIV.DIV_INDICATOR_NAME, DIV.DIV_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

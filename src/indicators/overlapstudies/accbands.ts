@@ -2,14 +2,14 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const ACCBANDS_INDICATOR_NAME: string = "ACCBANDS";
-export const ACCBANDS_INDICATOR_DESCR: string = "Acceleration Bands";
-export const ACCBANDS_TIMEPERIOD_DEFAULT: number = 20;
-export const ACCBANDS_TIMEPERIOD_MIN: number = 2;
-
 export class ACCBANDS
     extends AbstractIndicator<marketData.IPriceBar, indicators.TradingBand>
     implements indicators.IIndicator<marketData.IPriceBar, indicators.TradingBand> {
+
+    static ACCBANDS_INDICATOR_NAME: string = "ACCBANDS";
+    static ACCBANDS_INDICATOR_DESCR: string = "Acceleration Bands";
+    static ACCBANDS_TIMEPERIOD_DEFAULT: number = 20;
+    static ACCBANDS_TIMEPERIOD_MIN: number = 2;
 
     timePeriod: number;
     upperSMA: indicators.SMA;
@@ -17,12 +17,12 @@ export class ACCBANDS
     lowerSMA: indicators.SMA;
 
     constructor(timePeriod: number) {
-        super(ACCBANDS_INDICATOR_NAME, ACCBANDS_INDICATOR_DESCR);
+        super(ACCBANDS.ACCBANDS_INDICATOR_NAME, ACCBANDS.ACCBANDS_INDICATOR_DESCR);
         if (timePeriod === undefined) {
-            this.timePeriod = ACCBANDS_TIMEPERIOD_DEFAULT;
+            this.timePeriod = ACCBANDS.ACCBANDS_TIMEPERIOD_DEFAULT;
         } else {
-            if (timePeriod < ACCBANDS_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, ACCBANDS_TIMEPERIOD_MIN, timePeriod)));
+            if (timePeriod < ACCBANDS.ACCBANDS_TIMEPERIOD_MIN) {
+                throw (new Error(indicators.generateMinTimePeriodError(this.name, ACCBANDS.ACCBANDS_TIMEPERIOD_MIN, timePeriod)));
             }
         }
 

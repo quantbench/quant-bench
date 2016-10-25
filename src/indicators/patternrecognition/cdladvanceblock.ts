@@ -2,15 +2,15 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const CDLADVANCEBLOCK_INDICATOR_NAME: string = "CDLADVANCEBLOCK";
-export const CDLADVANCEBLOCK_INDICATOR_DESCR: string = "Advance Block";
-
 export class CDLADVANCEBLOCK
     extends AbstractIndicator<marketData.IPriceBar, number>
     implements indicators.IIndicator<marketData.IPriceBar, number> {
 
+    static CDLADVANCEBLOCK_INDICATOR_NAME: string = "CDLADVANCEBLOCK";
+    static CDLADVANCEBLOCK_INDICATOR_DESCR: string = "Advance Block";
+
     constructor() {
-        super(CDLADVANCEBLOCK_INDICATOR_NAME, CDLADVANCEBLOCK_INDICATOR_DESCR);
+        super(CDLADVANCEBLOCK.CDLADVANCEBLOCK_INDICATOR_NAME, CDLADVANCEBLOCK.CDLADVANCEBLOCK_INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

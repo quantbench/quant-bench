@@ -35,9 +35,6 @@ describe("VAR Indicator", () => {
 
         it("should match the talib results", () => {
             for (let i = 0; i < taResultData.result.outReal.length; i++) {
-                if (indicatorResults[i] < 0) {
-                    console.log("error " + indicatorResults[i]);
-                }
                 isNaN(indicatorResults[i]).should.be.false;
                 taResultData.result.outReal[i].should.be.closeTo(indicatorResults[i], 0.001);
             }

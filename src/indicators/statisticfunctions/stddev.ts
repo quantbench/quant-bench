@@ -1,25 +1,25 @@
 import * as indicators from "../";
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const STDDEV_INDICATOR_NAME: string = "STDDEV";
-export const STDDEV_INDICATOR_DESCR: string = "Standard Deviation";
-export const STDDEV_TIMEPERIOD_DEFAULT: number = 5;
-export const STDDEV_TIMEPERIOD_MIN: number = 2;
-
 export class STDDEV
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
+
+    static STDDEV_INDICATOR_NAME: string = "STDDEV";
+    static STDDEV_INDICATOR_DESCR: string = "Standard Deviation";
+    static STDDEV_TIMEPERIOD_DEFAULT: number = 5;
+    static STDDEV_TIMEPERIOD_MIN: number = 2;
 
     timePeriod: number;
     variance: indicators.VAR;
 
     constructor(timePeriod: number) {
-        super(STDDEV_INDICATOR_NAME, STDDEV_INDICATOR_DESCR);
+        super(STDDEV.STDDEV_INDICATOR_NAME, STDDEV.STDDEV_INDICATOR_DESCR);
         if (timePeriod === undefined) {
-            this.timePeriod = STDDEV_TIMEPERIOD_DEFAULT;
+            this.timePeriod = STDDEV.STDDEV_TIMEPERIOD_DEFAULT;
         } else {
-            if (timePeriod < STDDEV_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, STDDEV_TIMEPERIOD_MIN, timePeriod)));
+            if (timePeriod < STDDEV.STDDEV_TIMEPERIOD_MIN) {
+                throw (new Error(indicators.generateMinTimePeriodError(this.name, STDDEV.STDDEV_TIMEPERIOD_MIN, timePeriod)));
             }
         }
 

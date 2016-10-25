@@ -183,6 +183,7 @@
     "test/go.1.ts",
     "test/go.ts",
     "test/indicators/overlapstudies/accbands.spec.ts",
+    "test/indicators/overlapstudies/bbands.spec.ts",
     "test/indicators/overlapstudies/dema.spec.ts",
     "test/indicators/overlapstudies/ema.spec.ts",
     "test/indicators/overlapstudies/sma.spec.ts",

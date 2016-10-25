@@ -2,15 +2,15 @@ import * as indicators from "../";
 
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const CEIL_INDICATOR_NAME: string = "CEIL";
-export const CEIL_INDICATOR_DESCR: string = "Vector Ceil";
-
 export class CEIL
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
+    static CEIL_INDICATOR_NAME: string = "CEIL";
+    static CEIL_INDICATOR_DESCR: string = "Vector Ceil";
+
     constructor() {
-        super(CEIL_INDICATOR_NAME, CEIL_INDICATOR_DESCR);
+        super(CEIL.CEIL_INDICATOR_NAME, CEIL.CEIL_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

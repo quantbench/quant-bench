@@ -2,15 +2,15 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const ADOSC_INDICATOR_NAME: string = "ADOSC";
-export const ADOSC_INDICATOR_DESCR: string = "Chaikin A/D Oscillator";
-
 export class ADOSC
     extends AbstractIndicator<marketData.IPriceBar, number>
     implements indicators.IIndicator<marketData.IPriceBar, number> {
 
+    static ADOSC_INDICATOR_NAME: string = "ADOSC";
+    static ADOSC_INDICATOR_DESCR: string = "Chaikin A/D Oscillator";
+
     constructor() {
-        super(ADOSC_INDICATOR_NAME, ADOSC_INDICATOR_DESCR);
+        super(ADOSC.ADOSC_INDICATOR_NAME, ADOSC.ADOSC_INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

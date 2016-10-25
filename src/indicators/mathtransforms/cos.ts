@@ -2,15 +2,15 @@ import * as indicators from "../";
 
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const COS_INDICATOR_NAME: string = "COS";
-export const COS_INDICATOR_DESCR: string = "Vector Trigonometric Cos";
-
 export class COS
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
+    static COS_INDICATOR_NAME: string = "COS";
+    static COS_INDICATOR_DESCR: string = "Vector Trigonometric Cos";
+
     constructor() {
-        super(COS_INDICATOR_NAME, COS_INDICATOR_DESCR);
+        super(COS.COS_INDICATOR_NAME, COS.COS_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

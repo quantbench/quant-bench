@@ -2,15 +2,15 @@ import * as indicators from "../";
 
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const MA_INDICATOR_NAME: string = "MA";
-export const MA_INDICATOR_DESCR: string = "Moving average";
-
 export class MA
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
+    static MA_INDICATOR_NAME: string = "MA";
+    static MA_INDICATOR_DESCR: string = "Moving average";
+
     constructor() {
-        super(MA_INDICATOR_NAME, MA_INDICATOR_DESCR);
+        super(MA.MA_INDICATOR_NAME, MA.MA_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

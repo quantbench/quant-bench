@@ -8,7 +8,7 @@ nunjucks.configure("./test/utils/templates", { "autoescape": false });
 let functions = talib.functions;
 let functionKeys = Object.keys(functions);
 
-let excludes: string[] = ["IMI", "TA_AVGDEV", "SMA", "EMA", "DEMA", "ACCBANDS"];
+let excludes: string[] = ["IMI", "TA_AVGDEV", "SMA", "EMA", "DEMA", "ACCBANDS", "STDDEV", "VAR"];
 functionKeys.forEach((func: any) => {
     let funcExplain = talib.explain(functions[func].name);
     let groupName = fixGroupName(functions[func].group);

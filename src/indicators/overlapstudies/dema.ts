@@ -1,14 +1,14 @@
 import * as indicators from "../";
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const DEMA_INDICATOR_NAME: string = "DEMA";
-export const DEMA_INDICATOR_DESCR: string = "Double Exponential Moving Average";
-export const DEMA_TIMEPERIOD_DEFAULT: number = 30;
-export const DEMA_TIMEPERIOD_MIN: number = 2;
-
 export class DEMA
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
+
+    static DEMA_INDICATOR_NAME: string = "DEMA";
+    static DEMA_INDICATOR_DESCR: string = "Double Exponential Moving Average";
+    static DEMA_TIMEPERIOD_DEFAULT: number = 30;
+    static DEMA_TIMEPERIOD_MIN: number = 2;
 
     timePeriod: number;
     currentEMA: number;
@@ -16,12 +16,12 @@ export class DEMA
     ema2: indicators.EMA;
 
     constructor(timePeriod: number) {
-        super(DEMA_INDICATOR_NAME, DEMA_INDICATOR_DESCR);
+        super(DEMA.DEMA_INDICATOR_NAME, DEMA.DEMA_INDICATOR_DESCR);
         if (timePeriod === undefined) {
-            this.timePeriod = DEMA_TIMEPERIOD_DEFAULT;
+            this.timePeriod = DEMA.DEMA_TIMEPERIOD_DEFAULT;
         } else {
-            if (timePeriod < DEMA_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, DEMA_TIMEPERIOD_MIN, timePeriod)));
+            if (timePeriod < DEMA.DEMA_TIMEPERIOD_MIN) {
+                throw (new Error(indicators.generateMinTimePeriodError(this.name, DEMA.DEMA_TIMEPERIOD_MIN, timePeriod)));
             }
         }
 

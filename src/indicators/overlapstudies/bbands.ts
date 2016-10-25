@@ -1,33 +1,48 @@
 import * as indicators from "../";
-import * as marketData from "../../data/market/";
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const BBANDS_INDICATOR_NAME: string = "BBANDS";
-export const BBANDS_INDICATOR_DESCR: string = "Bollinger Bands";
-export const BBANDS_TIMEPERIOD_DEFAULT: number = 20;
-export const BBANDS_TIMEPERIOD_MIN: number = 2;
-
 export class BBANDS
-    extends AbstractIndicator<marketData.IPriceBar, indicators.TradingBand>
-    implements indicators.IIndicator<marketData.IPriceBar, indicators.TradingBand> {
+    extends AbstractIndicator<number, indicators.TradingBand>
+    implements indicators.IIndicator<number, indicators.TradingBand> {
 
+    static BBANDS_INDICATOR_NAME: string = "BBANDS";
+    static BBANDS_INDICATOR_DESCR: string = "Bollinger Bands";
+    static BBANDS_TIMEPERIOD_DEFAULT: number = 5;
+    static BBANDS_TIMEPERIOD_MIN: number = 2;
+
+    sma: indicators.SMA;
+    stdDev: indicators.STDDEV;
+    currentSma: number;
     timePeriod: number;
 
     constructor(timePeriod: number) {
-        super(BBANDS_INDICATOR_NAME, BBANDS_INDICATOR_DESCR);
+        super(BBANDS.BBANDS_INDICATOR_NAME, BBANDS.BBANDS_INDICATOR_DESCR);
         if (timePeriod === undefined) {
-            this.timePeriod = BBANDS_TIMEPERIOD_DEFAULT;
+            this.timePeriod = BBANDS.BBANDS_TIMEPERIOD_DEFAULT;
         } else {
-            if (timePeriod < BBANDS_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, BBANDS_TIMEPERIOD_MIN, timePeriod)));
+            if (timePeriod < BBANDS.BBANDS_TIMEPERIOD_MIN) {
+                throw (new Error(indicators.generateMinTimePeriodError(this.name, BBANDS.BBANDS_TIMEPERIOD_MIN, timePeriod)));
             }
         }
 
         this.timePeriod = timePeriod;
+        this.currentSma = 0;
+        this.sma = new indicators.SMA(this.timePeriod);
+        this.stdDev = new indicators.STDDEV(timePeriod);
         this.setLookBack(this.timePeriod - 1);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: number): boolean {
+        if (this.sma.receiveData(inputData)) {
+            this.currentSma = this.sma.currentValue;
+        }
+
+        if (this.stdDev.receiveData(inputData)) {
+            let upperBand = this.currentSma + 2 * this.stdDev.currentValue;
+            let lowerBand = this.currentSma - 2 * this.stdDev.currentValue;
+            this.setCurrentValue(new indicators.TradingBand(upperBand, this.sma.currentValue, lowerBand));
+            this.setIsReady();
+        }
         return this.isReady;
     }
 }

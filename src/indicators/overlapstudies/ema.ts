@@ -1,14 +1,14 @@
 import * as indicators from "../";
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const EMA_INDICATOR_NAME: string = "EMA";
-export const EMA_INDICATOR_DESCR: string = "Exponential Moving Average";
-export const EMA_TIMEPERIOD_DEFAULT: number = 30;
-export const EMA_TIMEPERIOD_MIN: number = 2;
-
 export class EMA
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
+
+    static EMA_INDICATOR_NAME: string = "EMA";
+    static EMA_INDICATOR_DESCR: string = "Exponential Moving Average";
+    static EMA_TIMEPERIOD_DEFAULT: number = 30;
+    static EMA_TIMEPERIOD_MIN: number = 2;
 
     timePeriod: number;
     multiplier: number;
@@ -17,12 +17,12 @@ export class EMA
     periodTotal: number;
 
     constructor(timePeriod: number) {
-        super(EMA_INDICATOR_NAME, EMA_INDICATOR_DESCR);
+        super(EMA.EMA_INDICATOR_NAME, EMA.EMA_INDICATOR_DESCR);
         if (timePeriod === undefined) {
-            this.timePeriod = EMA_TIMEPERIOD_DEFAULT;
+            this.timePeriod = EMA.EMA_TIMEPERIOD_DEFAULT;
         } else {
-            if (timePeriod < EMA_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, EMA_TIMEPERIOD_MIN, timePeriod)));
+            if (timePeriod < EMA.EMA_TIMEPERIOD_MIN) {
+                throw (new Error(indicators.generateMinTimePeriodError(this.name, EMA.EMA_TIMEPERIOD_MIN, timePeriod)));
             }
         }
 

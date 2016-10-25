@@ -2,15 +2,15 @@ import * as indicators from "../";
 
 import { AbstractIndicator } from "../abstractIndicator";
 
-export const TSF_INDICATOR_NAME: string = "TSF";
-export const TSF_INDICATOR_DESCR: string = "Time Series Forecast";
-
 export class TSF
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
+    static TSF_INDICATOR_NAME: string = "TSF";
+    static TSF_INDICATOR_DESCR: string = "Time Series Forecast";
+
     constructor() {
-        super(TSF_INDICATOR_NAME, TSF_INDICATOR_DESCR);
+        super(TSF.TSF_INDICATOR_NAME, TSF.TSF_INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

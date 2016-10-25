@@ -3,25 +3,25 @@ import * as globals from "../globals";
 import { IIndicator } from "../indicator";
 import { Queue } from "../queue";
 
-export const SMA_INDICATOR_NAME: string = "SMA";
-export const SMA_INDICATOR_DESCR: string = "Simple Moving Average";
-export const SMA_TIMEPERIOD_DEFAULT: number = 30;
-export const SMA_TIMEPERIOD_MIN: number = 2;
-
 export class SMA
     extends AbstractIndicator<number, number>
     implements IIndicator<number, number> {
+
+    static SMA_INDICATOR_NAME: string = "SMA";
+    static SMA_INDICATOR_DESCR: string = "Simple Moving Average";
+    static SMA_TIMEPERIOD_DEFAULT: number = 30;
+    static SMA_TIMEPERIOD_MIN: number = 2;
 
     timePeriod: number;
     periodHistory: Queue<number>;
     periodTotal: number;
     constructor(timePeriod?: number) {
-        super(SMA_INDICATOR_NAME, SMA_INDICATOR_DESCR);
+        super(SMA.SMA_INDICATOR_NAME, SMA.SMA_INDICATOR_DESCR);
         if (timePeriod === undefined) {
-            this.timePeriod = SMA_TIMEPERIOD_DEFAULT;
+            this.timePeriod = SMA.SMA_TIMEPERIOD_DEFAULT;
         } else {
-            if (timePeriod < SMA_TIMEPERIOD_MIN) {
-                throw (new Error(globals.generateMinTimePeriodError(this.name, SMA_TIMEPERIOD_MIN, timePeriod)));
+            if (timePeriod < SMA.SMA_TIMEPERIOD_MIN) {
+                throw (new Error(globals.generateMinTimePeriodError(this.name, SMA.SMA_TIMEPERIOD_MIN, timePeriod)));
             }
         }
 

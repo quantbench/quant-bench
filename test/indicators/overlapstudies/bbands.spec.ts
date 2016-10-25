@@ -1,38 +1,33 @@
 import * as indicators from "../../../src/indicators/";
-import * as accIndicator from "../../../src/indicators/overlapstudies/accbands";
+import * as bbandsIndicator from "../../../src/indicators/overlapstudies/bbands";
 import * as chai from "chai";
 import * as path from "path";
 let jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("ACCBANDS Indicator", () => {
+describe("BBANDS Indicator", () => {
     let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: accIndicator.ACCBANDS;
+    let indicator: bbandsIndicator.BBANDS;
     let indicatorResults: indicators.TradingBand[];
 
     beforeEach(() => {
         sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
-        taResultFile = path.resolve("./test/talib-results/accbands.json");
+        taResultFile = path.resolve("./test/talib-results/bbands.json");
         sourceData = jsonfile.readFileSync(sourceFile);
         taResultData = jsonfile.readFileSync(taResultFile);
-        indicator = new accIndicator.ACCBANDS(20);
+        indicator = new bbandsIndicator.BBANDS(5);
         indicatorResults = new Array<indicators.TradingBand>(sourceData.close.length - indicator.lookback);
     });
 
     describe("when receiving tick data", () => {
         beforeEach(() => {
             let idx = 0;
-            sourceData.close.forEach((value: number, index: number) => {
-                if (indicator.receiveData({
-                    "high": sourceData.high[index],
-                    "low": sourceData.low[index],
-                    "open": sourceData.open[index],
-                    "close": sourceData.close[index],
-                })) {
+            sourceData.close.forEach((value: number) => {
+                if (indicator.receiveData(value)) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }
