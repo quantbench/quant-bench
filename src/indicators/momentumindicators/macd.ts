@@ -56,17 +56,17 @@ export class MACD
         return this.isReady;
     }
 
-    receiveEmaSlowData(data: number) {
+    private receiveEmaSlowData(data: number) {
         this.currentSlowEma = data;
         this.currentMacd = this.currentFastEma - this.currentSlowEma;
         this.emaSignal.receiveData(this.currentMacd);
     }
 
-    receiveEmaFastData(data: number) {
+    private receiveEmaFastData(data: number) {
         this.currentFastEma = data;
     }
 
-    receiveEmaSignalData(data: number) {
+    private receiveEmaSignalData(data: number) {
         // Macd Line: (12-day EmaWithoutStorage - 26-day EmaWithoutStorage)
         // Signal Line: 9-day EmaWithoutStorage of Macd Line
         // Macd Histogram: Macd Line - Signal Line

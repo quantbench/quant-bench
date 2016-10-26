@@ -31,6 +31,7 @@ export class SMA
 
         this.periodHistory = new Queue<number>();
     }
+
     receiveData(inputData: number): boolean {
         if (this.periodHistory.count < this.timePeriod) {
             this.periodHistory.enqueue(inputData);

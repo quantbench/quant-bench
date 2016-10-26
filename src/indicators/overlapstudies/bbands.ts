@@ -41,11 +41,11 @@ export class BBANDS
         return this.isReady;
     }
 
-    receiveSmaData(data: number) {
+    private receiveSmaData(data: number) {
         this.currentSma = data;
     }
 
-    receiveStdDevData(data: number) {
+    private receiveStdDevData(data: number) {
         let upperBand = this.currentSma + 2 * data;
         let lowerBand = this.currentSma - 2 * data;
         this.setCurrentValue(new indicators.TradingBand(upperBand, this.sma.currentValue, lowerBand));
