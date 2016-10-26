@@ -28,21 +28,27 @@ export class BBANDS
         this.timePeriod = timePeriod;
         this.currentSma = 0;
         this.sma = new indicators.SMA(this.timePeriod);
+        this.sma.on("data", (data: number) => this.receiveSmaData(data));
         this.stdDev = new indicators.STDDEV(timePeriod);
+        this.stdDev.on("data", (data: number) => this.receiveStdDevData(data));
         this.setLookBack(this.timePeriod - 1);
     }
 
     receiveData(inputData: number): boolean {
-        if (this.sma.receiveData(inputData)) {
-            this.currentSma = this.sma.currentValue;
-        }
+        this.sma.receiveData(inputData);
 
-        if (this.stdDev.receiveData(inputData)) {
-            let upperBand = this.currentSma + 2 * this.stdDev.currentValue;
-            let lowerBand = this.currentSma - 2 * this.stdDev.currentValue;
-            this.setCurrentValue(new indicators.TradingBand(upperBand, this.sma.currentValue, lowerBand));
-            this.setIsReady();
-        }
+        this.stdDev.receiveData(inputData);
         return this.isReady;
+    }
+
+    receiveSmaData(data: number) {
+        this.currentSma = data;
+    }
+
+    receiveStdDevData(data: number) {
+        let upperBand = this.currentSma + 2 * data;
+        let lowerBand = this.currentSma - 2 * data;
+        this.setCurrentValue(new indicators.TradingBand(upperBand, this.sma.currentValue, lowerBand));
+        this.setIsReady();
     }
 }

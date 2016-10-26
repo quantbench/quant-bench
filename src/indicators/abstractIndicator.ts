@@ -1,6 +1,9 @@
-import {IIndicator} from "./indicator";
+import { IIndicator } from "./indicator";
+import { EventEmitter } from "events";
 
-export abstract class AbstractIndicator<TInputType, TOutputType> implements IIndicator<TInputType, TOutputType> {
+export abstract class AbstractIndicator<TInputType, TOutputType>
+    extends EventEmitter
+    implements IIndicator<TInputType, TOutputType> {
     public readonly name: string;
     public readonly description: string;
     private currentValueInternal: TOutputType;
@@ -8,6 +11,7 @@ export abstract class AbstractIndicator<TInputType, TOutputType> implements IInd
     private lookbackInternal: number;
 
     constructor(name: string, description: string) {
+        super();
         this.name = name;
         this.description = description;
         this.lookbackInternal = 0;
@@ -33,6 +37,7 @@ export abstract class AbstractIndicator<TInputType, TOutputType> implements IInd
 
     protected setCurrentValue(newValue: TOutputType) {
         this.currentValueInternal = newValue;
+        this.emit("data", this.currentValue);
     }
 
     protected setLookBack(lookback: number) {
