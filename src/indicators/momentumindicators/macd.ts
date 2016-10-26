@@ -35,8 +35,11 @@ export class MACD
 
         this.emaSlowSkip = slowTimePeriod - fastTimePeriod;
         this.emaFast = new indicators.EMA(fastTimePeriod);
+        this.emaFast.on("data", (data: number) => this.receiveEmaFastData(data));
         this.emaSlow = new indicators.EMA(slowTimePeriod);
+        this.emaSlow.on("data", (data: number) => this.receiveEmaSlowData(data));
         this.emaSignal = new indicators.EMA(signalTimePeriod);
+        this.emaSignal.on("data", (data: number) => this.receiveEmaSignalData(data));
         this.periodCounter = 0;
         this.setLookBack(slowTimePeriod + signalTimePeriod - 2);
     }
@@ -45,27 +48,31 @@ export class MACD
 
         this.periodCounter++;
         if (this.periodCounter > this.emaSlowSkip) {
-            if (this.emaFast.receiveData(inputData)) {
-                this.currentFastEma = this.emaFast.currentValue;
-            }
+            this.emaFast.receiveData(inputData);
         }
 
-        if (this.emaSlow.receiveData(inputData)) {
-            this.currentSlowEma = this.emaSlow.currentValue;
-            this.currentMacd = this.currentFastEma - this.currentSlowEma;
-
-            if (this.emaSignal.receiveData(this.currentMacd)) {
-                // Macd Line: (12-day EmaWithoutStorage - 26-day EmaWithoutStorage)
-                // Signal Line: 9-day EmaWithoutStorage of Macd Line
-                // Macd Histogram: Macd Line - Signal Line
-                let macd: number = this.currentFastEma - this.currentSlowEma;
-                let signal: number = this.emaSignal.currentValue;
-                let histogram: number = macd - signal;
-                this.setCurrentValue(new MACDResult(macd, signal, histogram));
-                this.setIsReady();
-            }
-        }
+        this.emaSlow.receiveData(inputData);
 
         return this.isReady;
+    }
+
+    receiveEmaSlowData(data: number) {
+        this.currentSlowEma = data;
+        this.currentMacd = this.currentFastEma - this.currentSlowEma;
+        this.emaSignal.receiveData(this.currentMacd);
+    }
+
+    receiveEmaFastData(data: number) {
+        this.currentFastEma = data;
+    }
+
+    receiveEmaSignalData(data: number) {
+        // Macd Line: (12-day EmaWithoutStorage - 26-day EmaWithoutStorage)
+        // Signal Line: 9-day EmaWithoutStorage of Macd Line
+        // Macd Histogram: Macd Line - Signal Line
+        let macd: number = this.currentFastEma - this.currentSlowEma;
+        let signal: number = data;
+        let histogram: number = macd - signal;
+        this.setCurrentValue(new MACDResult(macd, signal, histogram));
     }
 }

@@ -49,6 +49,5 @@ export class BBANDS
         let upperBand = this.currentSma + 2 * data;
         let lowerBand = this.currentSma - 2 * data;
         this.setCurrentValue(new indicators.TradingBand(upperBand, this.sma.currentValue, lowerBand));
-        this.setIsReady();
     }
 }

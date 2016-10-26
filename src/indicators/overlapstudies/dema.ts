@@ -27,26 +27,23 @@ export class DEMA
 
         this.timePeriod = timePeriod;
         this.ema1 = new indicators.EMA(timePeriod);
+        this.ema1.on("data", (data: number) => this.receiveEMA1Data(data));
         this.ema2 = new indicators.EMA(timePeriod);
+        this.ema2.on("data", (data: number) => this.receiveEMA2Data(data));
         this.setLookBack(2 * (this.timePeriod - 1));
     }
 
     receiveData(inputData: number): boolean {
-        if (this.ema1.receiveData(inputData)) {
-            this.receiveEMA1Data(this.ema1.currentValue);
-        }
+        this.ema1.receiveData(inputData);
         return this.isReady;
     }
 
-    private receiveEMA1Data(inputData: number) {
-        this.currentEMA = inputData;
-        if (this.ema2.receiveData(inputData)) {
-            this.receiveEMA2Data(this.ema2.currentValue);
-        }
+    private receiveEMA1Data(data: number) {
+        this.currentEMA = data;
+        this.ema2.receiveData(data);
     }
 
     private receiveEMA2Data(inputData: number) {
         this.setCurrentValue((2 * this.currentEMA) - inputData);
-        this.setIsReady();
     }
 }

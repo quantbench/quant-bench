@@ -38,6 +38,7 @@ export abstract class AbstractIndicator<TInputType, TOutputType>
     protected setCurrentValue(newValue: TOutputType) {
         this.currentValueInternal = newValue;
         this.emit("data", this.currentValue);
+        this.setIsReady();
     }
 
     protected setLookBack(lookback: number) {

@@ -43,7 +43,6 @@ export class SMA
         }
         if (this.periodHistory.count >= this.timePeriod) {
             this.setCurrentValue(this.periodTotal / this.timePeriod);
-            this.setIsReady();
         }
         return this.isReady;
     }

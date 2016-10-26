@@ -25,16 +25,18 @@ export class STDDEV
 
         this.timePeriod = timePeriod;
         this.variance = new indicators.VAR(this.timePeriod);
+        this.variance.on("data", (data: number) => this.receiveVarianceData(data));
         this.setLookBack(this.timePeriod - 1);
     }
 
     receiveData(inputData: number): boolean {
-        if (this.variance.receiveData(inputData)) {
-            let variance = this.variance.currentValue;
-            let result: number = Math.sqrt(variance);
-            this.setCurrentValue(result);
-            this.setIsReady();
-        }
+        this.variance.receiveData(inputData);
         return this.isReady;
+    }
+
+    receiveVarianceData(data: number) {
+        let variance = this.variance.currentValue;
+        let result: number = Math.sqrt(variance);
+        this.setCurrentValue(result);
     }
 }

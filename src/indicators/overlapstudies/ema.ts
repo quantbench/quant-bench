@@ -42,7 +42,6 @@ export class EMA
         } else if (this.periodCounter === 0) {
             this.periodTotal += inputData;
             this.setCurrentValue(this.periodTotal / this.timePeriod);
-            this.setIsReady();
         } else if (this.periodCounter > 0) {
             this.setCurrentValue((inputData - this.previousEma) * this.multiplier + this.previousEma);
         }

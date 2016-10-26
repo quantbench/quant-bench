@@ -188,6 +188,7 @@
     "test/indicators/overlapstudies/dema.spec.ts",
     "test/indicators/overlapstudies/ema.spec.ts",
     "test/indicators/overlapstudies/sma.spec.ts",
+    "test/indicators/overlapstudies/tema.spec.ts",
     "test/indicators/statisticfunctions/stddev.spec.ts",
     "test/indicators/statisticfunctions/var.spec.ts",
     "test/queue.spec.ts",

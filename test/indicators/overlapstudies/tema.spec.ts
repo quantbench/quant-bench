@@ -1,24 +1,24 @@
-import * as demaIndicator from "../../../src/indicators/overlapstudies/dema";
+import * as temaIndicator from "../../../src/indicators/overlapstudies/tema";
 import * as chai from "chai";
 import * as path from "path";
 let jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("DEMA Indicator", () => {
+describe("TEMA Indicator", () => {
     let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: demaIndicator.DEMA;
+    let indicator: temaIndicator.TEMA;
     let indicatorResults: number[];
 
     beforeEach(() => {
         sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
-        taResultFile = path.resolve("./test/talib-results/dema.json");
+        taResultFile = path.resolve("./test/talib-results/tema.json");
         sourceData = jsonfile.readFileSync(sourceFile);
         taResultData = jsonfile.readFileSync(taResultFile);
-        indicator = new demaIndicator.DEMA(30);
+        indicator = new temaIndicator.TEMA(30);
         indicatorResults = new Array<number>(sourceData.close.length - indicator.lookback);
     });
 

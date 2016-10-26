@@ -52,7 +52,6 @@ export class ACCBANDS
                 this.upperSMA.currentValue,
                 this.middleSMA.currentValue,
                 this.lowerSMA.currentValue));
-            this.setIsReady();
         }
 
         return this.isReady;
