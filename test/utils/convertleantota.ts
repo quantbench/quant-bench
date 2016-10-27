@@ -6,6 +6,7 @@ let data = {
     "high": new Array<number>(),
     "low": new Array<number>(),
     "close": new Array<number>(),
+    "volume": new Array<number>(),
 };
 
 let lineReader = readline.createInterface({
@@ -18,6 +19,7 @@ lineReader.on("line", (line: string) => {
     data.high.push(parseFloat(parts[2]) / 10000.0);
     data.low.push(parseFloat(parts[3]) / 10000.0);
     data.close.push(parseFloat(parts[4]) / 10000.0);
+    data.volume.push(parseFloat(parts[5]));
 });
 
 lineReader.on("close", () => {

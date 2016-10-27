@@ -192,6 +192,7 @@
     "test/indicators/overlapstudies/wma.spec.ts",
     "test/indicators/statisticfunctions/stddev.spec.ts",
     "test/indicators/statisticfunctions/var.spec.ts",
+    "test/indicators/volumeindicators/ad.spec.ts",
     "test/queue.spec.ts",
     "test/utils/convertleantota.ts",
     "test/utils/generateConfig.ts",

@@ -4,7 +4,7 @@ import * as Promise from "bluebird";
 import * as fs from "fs";
 
 // Load market data
-let marketContents = fs.readFileSync("./test/sourcedata/xom.json", "utf8");
+let marketContents = fs.readFileSync("./test/sourcedata/sourcedata.json", "utf8");
 let marketData = JSON.parse(marketContents);
 
 let config = yaml.load("./test/genconfig.yml");
@@ -38,6 +38,10 @@ config.forEach((item: any) => {
         if (dataInput === "open") {
             parameters.open = marketData.open;
         }
+
+        if (dataInput === "volume") {
+            parameters.volume = marketData.volume;
+        }
     });
 
     if (item.inputs) {
@@ -60,7 +64,7 @@ Promise.each(indicators, (indicator) => {
                 // write the results to a file
                 let resultString = JSON.stringify(result);
 
-                fs.writeFile("./test/sourcedata/talib-results/" + indicator.name.toLowerCase() + ".json", resultString, (err) => {
+                fs.writeFile("./test/talib-results/" + indicator.name.toLowerCase() + ".json", resultString, (err) => {
                     if (err) {
                         console.log(err);
                     }
