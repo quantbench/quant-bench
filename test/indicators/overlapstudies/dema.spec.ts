@@ -56,7 +56,7 @@ describe("DEMA Indicator", () => {
             indicator = new indicators.DEMA();
         });
 
-        it("should set the fastTimePeriod", () => {
+        it("should set the timePeriod", () => {
             indicator.timePeriod.should.equal(indicators.DEMA.TIMEPERIOD_DEFAULT);
         });
     });

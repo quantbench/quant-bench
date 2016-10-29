@@ -56,7 +56,7 @@ describe("TEMA Indicator", () => {
             indicator = new indicators.TEMA();
         });
 
-        it("should set the fastTimePeriod", () => {
+        it("should set the timePeriod", () => {
             indicator.timePeriod.should.equal(indicators.TEMA.TIMEPERIOD_DEFAULT);
         });
     });

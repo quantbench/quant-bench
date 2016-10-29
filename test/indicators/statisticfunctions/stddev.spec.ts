@@ -56,7 +56,7 @@ describe("STDDEV Indicator", () => {
             indicator = new indicators.STDDEV();
         });
 
-        it("should set the fastTimePeriod", () => {
+        it("should set the timePeriod", () => {
             indicator.timePeriod.should.equal(indicators.STDDEV.TIMEPERIOD_DEFAULT);
         });
     });

@@ -56,7 +56,7 @@ describe("WMA Indicator", () => {
             indicator = new indicators.WMA();
         });
 
-        it("should set the fastTimePeriod", () => {
+        it("should set the timePeriod", () => {
             indicator.timePeriod.should.equal(indicators.WMA.TIMEPERIOD_DEFAULT);
         });
     });

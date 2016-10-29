@@ -56,7 +56,7 @@ describe("EMA Indicator", () => {
             indicator = new indicators.EMA();
         });
 
-        it("should set the fastTimePeriod", () => {
+        it("should set the timePeriod", () => {
             indicator.timePeriod.should.equal(indicators.EMA.TIMEPERIOD_DEFAULT);
         });
     });

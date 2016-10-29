@@ -5,19 +5,19 @@ let jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("SMA Indicator", () => {
+describe("MINUSDI Indicator", () => {
     let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.SMA;
+    let indicator: indicators.MINUSDI;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 30;
+    let timePeriod = 14;
 
     beforeEach(() => {
         sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
-        taResultFile = path.resolve("./test/talib-results/sma.json");
+        taResultFile = path.resolve("./test/talib-results/minus_di.json");
         sourceData = jsonfile.readFileSync(sourceFile);
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
@@ -25,15 +25,15 @@ describe("SMA Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.SMA(timePeriod);
+            indicator = new indicators.MINUSDI(timePeriod);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.SMA.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.MINUSDI.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.SMA.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.MINUSDI.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -43,7 +43,7 @@ describe("SMA Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.SMA(timePeriod + 1);
+            indicator = new indicators.MINUSDI(timePeriod + 1);
         });
 
         it("should set the timePeriod", () => {
@@ -53,11 +53,11 @@ describe("SMA Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.SMA();
+            indicator = new indicators.MINUSDI();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.SMA.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.MINUSDI.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -66,24 +66,29 @@ describe("SMA Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.SMA(1);
+                indicator = new indicators.MINUSDI(0);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.SMA.TIMEPERIOD_MIN, 1);
+            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.MINUSDI.TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.SMA(timePeriod);
+            indicator = new indicators.MINUSDI(timePeriod);
             let idx = 0;
-            sourceData.close.forEach((value: number) => {
-                if (indicator.receiveData(value)) {
+            sourceData.close.forEach((value: number, index: number) => {
+                if (indicator.receiveData({
+                    "high": sourceData.high[index],
+                    "low": sourceData.low[index],
+                    "open": sourceData.open[index],
+                    "close": sourceData.close[index],
+                })) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }
@@ -104,7 +109,7 @@ describe("SMA Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.SMA(timePeriod);
+            indicator = new indicators.MINUSDI(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -112,7 +117,12 @@ describe("SMA Indicator", () => {
             });
 
             for (let index = 0; index < indicator.lookback; index++) {
-                if (indicator.receiveData(sourceData.close[index])) {
+                if (indicator.receiveData({
+                    "high": sourceData.high[index],
+                    "low": sourceData.low[index],
+                    "open": sourceData.open[index],
+                    "close": sourceData.close[index],
+                })) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }
@@ -130,7 +140,7 @@ describe("SMA Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.SMA(timePeriod);
+            indicator = new indicators.MINUSDI(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -138,7 +148,12 @@ describe("SMA Indicator", () => {
             });
 
             for (let index = 0; index <= indicator.lookback; index++) {
-                if (indicator.receiveData(sourceData.close[index])) {
+                if (indicator.receiveData({
+                    "high": sourceData.high[index],
+                    "low": sourceData.low[index],
+                    "open": sourceData.open[index],
+                    "close": sourceData.close[index],
+                })) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }
