@@ -1,11 +1,10 @@
+import * as indicators from "../";
 import { AbstractIndicator } from "../abstractIndicator";
-import * as globals from "../globals";
-import { IIndicator } from "../indicator";
 import { Queue } from "../queue";
 
 export class SMA
     extends AbstractIndicator<number, number>
-    implements IIndicator<number, number> {
+    implements indicators.IIndicator<number, number> {
 
     static SMA_INDICATOR_NAME: string = "SMA";
     static SMA_INDICATOR_DESCR: string = "Simple Moving Average";
@@ -21,7 +20,7 @@ export class SMA
             this.timePeriod = SMA.SMA_TIMEPERIOD_DEFAULT;
         } else {
             if (timePeriod < SMA.SMA_TIMEPERIOD_MIN) {
-                throw (new Error(globals.generateMinTimePeriodError(this.name, SMA.SMA_TIMEPERIOD_MIN, timePeriod)));
+                throw (new Error(indicators.generateMinTimePeriodError(this.name, SMA.SMA_TIMEPERIOD_MIN, timePeriod)));
             }
         }
 
