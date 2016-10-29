@@ -17,13 +17,11 @@ taResultFile = path.resolve("./test/talib-results/ad.json");
 sourceData = jsonfile.readFileSync(sourceFile);
 taResultData = jsonfile.readFileSync(taResultFile);
 indicator = new adIndicator.AD();
-indicatorResults = new Array<number>(sourceData.close.length - indicator.lookback);
+indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
 
 let idx = 0;
 sourceData.close.forEach((value: number, index: number) => {
     if (indicator.receiveData({
-        "symbol": "",
-        "time": new Date(),
         "high": sourceData.high[index],
         "low": sourceData.low[index],
         "open": sourceData.open[index],

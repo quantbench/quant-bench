@@ -1,19 +1,18 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class TRANGE
-    extends AbstractIndicator<marketData.IPriceBar, number>
+    extends indicators.AbstractIndicator<marketData.IPriceBar, number>
     implements indicators.IIndicator<marketData.IPriceBar, number> {
 
-    static TRANGE_INDICATOR_NAME: string = "TRANGE";
-    static TRANGE_INDICATOR_DESCR: string = "True Range";
+    static INDICATOR_NAME: string = "TRANGE";
+    static INDICATOR_DESCR: string = "True Range";
 
     previousClose: number;
     periodCounter: number;
 
     constructor() {
-        super(TRANGE.TRANGE_INDICATOR_NAME, TRANGE.TRANGE_INDICATOR_DESCR);
+        super(TRANGE.INDICATOR_NAME, TRANGE.INDICATOR_DESCR);
 
         this.previousClose = 0;
         this.periodCounter = -1;

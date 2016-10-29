@@ -1,31 +1,27 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class TEMA
-    extends AbstractIndicator<number, number>
+    extends indicators.AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
-    static TEMA_INDICATOR_NAME: string = "TEMA";
-    static TEMA_INDICATOR_DESCR: string = "Triple Exponential Moving Average";
-    static TEMA_TIMEPERIOD_DEFAULT: number = 30;
-    static TEMA_TIMEPERIOD_MIN: number = 2;
+    static INDICATOR_NAME: string = "TEMA";
+    static INDICATOR_DESCR: string = "Triple Exponential Moving Average";
+    static TIMEPERIOD_DEFAULT: number = 30;
+    static TIMEPERIOD_MIN: number = 2;
 
-    timePeriod: number;
-    currentEMA: number;
-    currentEMA2: number;
-    ema1: indicators.EMA;
-    ema2: indicators.EMA;
-    ema3: indicators.EMA;
+    public timePeriod: number;
 
-    constructor(timePeriod: number) {
-        super(TEMA.TEMA_INDICATOR_NAME, TEMA.TEMA_INDICATOR_DESCR);
-        if (timePeriod === undefined) {
-            this.timePeriod = TEMA.TEMA_TIMEPERIOD_DEFAULT;
-        } else {
-            if (timePeriod < TEMA.TEMA_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, TEMA.TEMA_TIMEPERIOD_MIN, timePeriod)));
-            }
+    private currentEMA: number;
+    private currentEMA2: number;
+    private ema1: indicators.EMA;
+    private ema2: indicators.EMA;
+    private ema3: indicators.EMA;
+
+    constructor(timePeriod: number = TEMA.TIMEPERIOD_DEFAULT) {
+        super(TEMA.INDICATOR_NAME, TEMA.INDICATOR_DESCR);
+
+        if (timePeriod < TEMA.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, TEMA.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;

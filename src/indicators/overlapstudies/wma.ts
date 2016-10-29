@@ -1,29 +1,26 @@
 import * as indicators from "../";
-import { AbstractIndicator } from "../abstractIndicator";
 import { Queue } from "../queue";
 
 export class WMA
-    extends AbstractIndicator<number, number>
+    extends indicators.AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
-    static WMA_INDICATOR_NAME: string = "WMA";
-    static WMA_INDICATOR_DESCR: string = "Weighted Moving Average";
-    static WMA_TIMEPERIOD_DEFAULT: number = 30;
-    static WMA_TIMEPERIOD_MIN: number = 2;
+    static INDICATOR_NAME: string = "WMA";
+    static INDICATOR_DESCR: string = "Weighted Moving Average";
+    static TIMEPERIOD_DEFAULT: number = 30;
+    static TIMEPERIOD_MIN: number = 2;
 
-    timePeriod: number;
-    periodHistory: Queue<number>;
-    periodCounter: number;
-    periodWeightTotal: number;
+    public timePeriod: number;
 
-    constructor(timePeriod: number) {
-        super(WMA.WMA_INDICATOR_NAME, WMA.WMA_INDICATOR_DESCR);
-        if (timePeriod === undefined) {
-            this.timePeriod = WMA.WMA_TIMEPERIOD_DEFAULT;
-        } else {
-            if (timePeriod < WMA.WMA_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, WMA.WMA_TIMEPERIOD_MIN, timePeriod)));
-            }
+    private periodHistory: Queue<number>;
+    private periodCounter: number;
+    private periodWeightTotal: number;
+
+    constructor(timePeriod: number = WMA.TIMEPERIOD_DEFAULT) {
+        super(WMA.INDICATOR_NAME, WMA.INDICATOR_DESCR);
+
+        if (timePeriod < WMA.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, WMA.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;

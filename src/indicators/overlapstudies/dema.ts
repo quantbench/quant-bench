@@ -1,28 +1,25 @@
 import * as indicators from "../";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class DEMA
-    extends AbstractIndicator<number, number>
+    extends indicators.AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
-    static DEMA_INDICATOR_NAME: string = "DEMA";
-    static DEMA_INDICATOR_DESCR: string = "Double Exponential Moving Average";
-    static DEMA_TIMEPERIOD_DEFAULT: number = 30;
-    static DEMA_TIMEPERIOD_MIN: number = 2;
+    static INDICATOR_NAME: string = "DEMA";
+    static INDICATOR_DESCR: string = "Double Exponential Moving Average";
+    static TIMEPERIOD_DEFAULT: number = 30;
+    static TIMEPERIOD_MIN: number = 2;
 
-    timePeriod: number;
-    currentEMA: number;
-    ema1: indicators.EMA;
-    ema2: indicators.EMA;
+    public timePeriod: number;
 
-    constructor(timePeriod: number) {
-        super(DEMA.DEMA_INDICATOR_NAME, DEMA.DEMA_INDICATOR_DESCR);
-        if (timePeriod === undefined) {
-            this.timePeriod = DEMA.DEMA_TIMEPERIOD_DEFAULT;
-        } else {
-            if (timePeriod < DEMA.DEMA_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, DEMA.DEMA_TIMEPERIOD_MIN, timePeriod)));
-            }
+    private currentEMA: number;
+    private ema1: indicators.EMA;
+    private ema2: indicators.EMA;
+
+    constructor(timePeriod: number = DEMA.TIMEPERIOD_DEFAULT) {
+        super(DEMA.INDICATOR_NAME, DEMA.INDICATOR_DESCR);
+
+        if (timePeriod < DEMA.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, DEMA.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;

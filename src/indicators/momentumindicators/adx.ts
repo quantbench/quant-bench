@@ -6,10 +6,10 @@ export class ADX
     extends AbstractIndicator<marketData.IPriceBar, number>
     implements indicators.IIndicator<marketData.IPriceBar, number> {
 
-    static ADX_INDICATOR_NAME: string = "ADX";
-    static ADX_INDICATOR_DESCR: string = "Average Directional Movement Index";
-    static ADX_TIMEPERIOD_DEFAULT: number = 14;
-    static ADX_TIMEPERIOD_MIN: number = 2;
+    static INDICATOR_NAME: string = "ADX";
+    static INDICATOR_DESCR: string = "Average Directional Movement Index";
+    static TIMEPERIOD_DEFAULT: number = 14;
+    static TIMEPERIOD_MIN: number = 2;
 
     timePeriod: number;
     periodCounter: number;
@@ -19,12 +19,12 @@ export class ADX
     previousAdx: number;
 
     constructor(timePeriod: number) {
-        super(ADX.ADX_INDICATOR_NAME, ADX.ADX_INDICATOR_DESCR);
+        super(ADX.INDICATOR_NAME, ADX.INDICATOR_DESCR);
         if (timePeriod === undefined) {
-            this.timePeriod = ADX.ADX_TIMEPERIOD_DEFAULT;
+            this.timePeriod = ADX.TIMEPERIOD_DEFAULT;
         } else {
-            if (timePeriod < ADX.ADX_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, ADX.ADX_TIMEPERIOD_MIN, timePeriod)));
+            if (timePeriod < ADX.TIMEPERIOD_MIN) {
+                throw (new Error(indicators.generateMinTimePeriodError(this.name, ADX.TIMEPERIOD_MIN, timePeriod)));
             }
         }
 

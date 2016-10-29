@@ -1,4 +1,4 @@
-import * as smaIndicator from "../../../src/indicators/overlapstudies/sma";
+import * as indicators from "../../../src/indicators/";
 import * as chai from "chai";
 import * as path from "path";
 let jsonfile = require("jsonfile");
@@ -10,20 +10,77 @@ describe("SMA Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: smaIndicator.SMA;
+    let indicator: indicators.SMA;
     let indicatorResults: number[];
+    let indicatorOnDataRasied: boolean = false;
+    let timePeriod = 30;
 
     beforeEach(() => {
         sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/sma.json");
         sourceData = jsonfile.readFileSync(sourceFile);
         taResultData = jsonfile.readFileSync(taResultFile);
-        indicator = new smaIndicator.SMA(30);
-        indicatorResults = new Array<number>(sourceData.close.length - indicator.lookback);
+        indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
     });
 
-    describe("when receiving tick data", () => {
+    describe("when constructing", () => {
         beforeEach(() => {
+            indicator = new indicators.SMA(timePeriod);
+        });
+
+        it("should set the indicator name", () => {
+            indicator.name.should.equal(indicators.SMA.INDICATOR_NAME);
+        });
+
+        it("should set the indicator description", () => {
+            indicator.description.should.equal(indicators.SMA.INDICATOR_DESCR);
+        });
+
+        it("should match the talib lookback", () => {
+            taResultData.begIndex.should.equal(indicator.lookback);
+        });
+    });
+
+    describe("when constructing with explicit non default arguments", () => {
+        beforeEach(() => {
+            indicator = new indicators.SMA(timePeriod + 1);
+        });
+
+        it("should set the timePeriod", () => {
+            indicator.timePeriod.should.equal(timePeriod + 1);
+        });
+    });
+
+    describe("when constructing with default arguments", () => {
+        beforeEach(() => {
+            indicator = new indicators.SMA();
+        });
+
+        it("should set the fastTimePeriod", () => {
+            indicator.timePeriod.should.equal(indicators.SMA.TIMEPERIOD_DEFAULT);
+        });
+    });
+
+    describe("when constructing with timePeriod less than the minimum", () => {
+        let exception: Error;
+
+        beforeEach(() => {
+            try {
+                indicator = new indicators.SMA(1);
+            } catch (error) {
+                exception = error;
+            }
+        });
+
+        it("should return a correctly formatted error", () => {
+            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.SMA.TIMEPERIOD_MIN, 1);
+            exception.message.should.equal(message);
+        });
+    });
+
+    describe("when receiving all tick data", () => {
+        beforeEach(() => {
+            indicator = new indicators.SMA(timePeriod);
             let idx = 0;
             sourceData.close.forEach((value: number) => {
                 if (indicator.receiveData(value)) {
@@ -42,6 +99,58 @@ describe("SMA Indicator", () => {
 
         it("should match the talib lookback", () => {
             taResultData.begIndex.should.equal(indicator.lookback);
+        });
+    });
+
+    describe("when receiving less tick data than the lookback period", () => {
+        beforeEach(() => {
+            indicator = new indicators.SMA(timePeriod);
+            let idx = 0;
+            indicatorOnDataRasied = false;
+            indicator.on("data", () => {
+                indicatorOnDataRasied = true;
+            });
+
+            for (let index = 0; index < indicator.lookback; index++) {
+                if (indicator.receiveData(sourceData.close[index])) {
+                    indicatorResults[idx] = indicator.currentValue;
+                    idx++;
+                }
+            }
+        });
+
+        it("the indicator should not indicate that it is ready to be consumed", () => {
+            indicator.isReady.should.equal(false);
+        });
+
+        it("should not have raised the ondata event", () => {
+            indicatorOnDataRasied.should.equal(false);
+        });
+    });
+
+    describe("when receiving tick data equal to the lookback period", () => {
+        beforeEach(() => {
+            indicator = new indicators.SMA(timePeriod);
+            let idx = 0;
+            indicatorOnDataRasied = false;
+            indicator.on("data", () => {
+                indicatorOnDataRasied = true;
+            });
+
+            for (let index = 0; index <= indicator.lookback; index++) {
+                if (indicator.receiveData(sourceData.close[index])) {
+                    indicatorResults[idx] = indicator.currentValue;
+                    idx++;
+                }
+            }
+        });
+
+        it("the indicator should not indicate that it is ready to be consumed", () => {
+            indicator.isReady.should.equal(true);
+        });
+
+        it("should not have raised the ondata event", () => {
+            indicatorOnDataRasied.should.equal(true);
         });
     });
 });

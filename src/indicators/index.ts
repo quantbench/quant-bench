@@ -2,7 +2,7 @@ export * from "./globals";
 export * from "./indicator";
 export * from "./queue";
 export * from "./tradingBand"
-
+export * from "./abstractIndicator";
 export * from "./cycleindicators/";
 export * from "./mathoperators/";
 export * from "./momentumindicators/";

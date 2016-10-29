@@ -1,24 +1,23 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class AD
-    extends AbstractIndicator<marketData.ITradeBar, number>
-    implements indicators.IIndicator<marketData.ITradeBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceVolumeBar, number>
+    implements indicators.IIndicator<marketData.IPriceVolumeBar, number> {
 
-    static AD_INDICATOR_NAME: string = "AD";
-    static AD_INDICATOR_DESCR: string = "Chaikin A/D Line";
+    static INDICATOR_NAME: string = "AD";
+    static INDICATOR_DESCR: string = "Chaikin A/D Line";
 
-    currentADL: number;
+    private currentADL: number;
 
     constructor() {
-        super(AD.AD_INDICATOR_NAME, AD.AD_INDICATOR_DESCR);
+        super(AD.INDICATOR_NAME, AD.INDICATOR_DESCR);
 
         this.currentADL = 0;
         this.setLookBack(0);
     }
 
-    receiveData(inputData: marketData.ITradeBar): boolean {
+    receiveData(inputData: marketData.IPriceVolumeBar): boolean {
         let highLow = inputData.high - inputData.low;
 
         if (highLow > 0) {

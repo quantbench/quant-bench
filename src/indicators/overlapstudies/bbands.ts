@@ -1,28 +1,25 @@
 import * as indicators from "../";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class BBANDS
-    extends AbstractIndicator<number, indicators.TradingBand>
+    extends indicators.AbstractIndicator<number, indicators.TradingBand>
     implements indicators.IIndicator<number, indicators.TradingBand> {
 
-    static BBANDS_INDICATOR_NAME: string = "BBANDS";
-    static BBANDS_INDICATOR_DESCR: string = "Bollinger Bands";
-    static BBANDS_TIMEPERIOD_DEFAULT: number = 5;
-    static BBANDS_TIMEPERIOD_MIN: number = 2;
+    static INDICATOR_NAME: string = "BBANDS";
+    static INDICATOR_DESCR: string = "Bollinger Bands";
+    static TIMEPERIOD_DEFAULT: number = 5;
+    static TIMEPERIOD_MIN: number = 2;
 
-    sma: indicators.SMA;
-    stdDev: indicators.STDDEV;
-    currentSma: number;
-    timePeriod: number;
+    public timePeriod: number;
 
-    constructor(timePeriod: number) {
-        super(BBANDS.BBANDS_INDICATOR_NAME, BBANDS.BBANDS_INDICATOR_DESCR);
-        if (timePeriod === undefined) {
-            this.timePeriod = BBANDS.BBANDS_TIMEPERIOD_DEFAULT;
-        } else {
-            if (timePeriod < BBANDS.BBANDS_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, BBANDS.BBANDS_TIMEPERIOD_MIN, timePeriod)));
-            }
+    private sma: indicators.SMA;
+    private stdDev: indicators.STDDEV;
+    private currentSma: number;
+
+    constructor(timePeriod: number = BBANDS.TIMEPERIOD_DEFAULT) {
+        super(BBANDS.INDICATOR_NAME, BBANDS.INDICATOR_DESCR);
+
+        if (timePeriod < BBANDS.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, BBANDS.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;

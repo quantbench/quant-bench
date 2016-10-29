@@ -1,7 +1,5 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class MACDResult {
     macd: number;
     signal: number;
@@ -15,23 +13,47 @@ export class MACDResult {
 }
 
 export class MACD
-    extends AbstractIndicator<number, MACDResult>
+    extends indicators.AbstractIndicator<number, MACDResult>
     implements indicators.IIndicator<number, MACDResult> {
 
-    static MACD_INDICATOR_NAME: string = "MACD";
-    static MACD_INDICATOR_DESCR: string = "Moving Average Convergence/Divergence";
+    static INDICATOR_NAME: string = "MACD";
+    static INDICATOR_DESCR: string = "Moving Average Convergence/Divergence";
+    static FAST_TIMEPERIOD_DEFAULT = 12;
+    static FAST_TIMEPERIOD_MIN = 2;
+    static SLOW_TIMEPERIOD_DEFAULT = 26;
+    static SLOW_TIMEPERIOD_MIN = 2;
+    static SIGNAL_TIMEPERIOD_DEFAULT = 9;
+    static SIGNAL_TIMEPERIOD_MIN = 1;
 
-    emaSlow: indicators.EMA;
-    emaFast: indicators.EMA;
-    emaSignal: indicators.EMA;
-    currentFastEma: number;
-    currentSlowEma: number;
-    currentMacd: number;
-    emaSlowSkip: number;
-    periodCounter: number;
+    public fastTimePeriod: number;
+    public slowTimePeriod: number;
+    public signalTimePeriod: number;
 
-    constructor(slowTimePeriod: number, fastTimePeriod: number, signalTimePeriod: number) {
-        super(MACD.MACD_INDICATOR_NAME, MACD.MACD_INDICATOR_DESCR);
+    private emaSlow: indicators.EMA;
+    private emaFast: indicators.EMA;
+    private emaSignal: indicators.EMA;
+    private currentFastEma: number;
+    private currentSlowEma: number;
+    private currentMacd: number;
+    private emaSlowSkip: number;
+    private periodCounter: number;
+
+    constructor(fastTimePeriod: number = MACD.FAST_TIMEPERIOD_DEFAULT,
+        slowTimePeriod: number = MACD.SLOW_TIMEPERIOD_DEFAULT,
+        signalTimePeriod: number = MACD.SIGNAL_TIMEPERIOD_DEFAULT) {
+        super(MACD.INDICATOR_NAME, MACD.INDICATOR_DESCR);
+
+        if (fastTimePeriod < MACD.FAST_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, MACD.FAST_TIMEPERIOD_MIN, fastTimePeriod)));
+        }
+
+        if (slowTimePeriod < MACD.SLOW_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, MACD.SLOW_TIMEPERIOD_MIN, slowTimePeriod)));
+        }
+
+        if (signalTimePeriod < MACD.SIGNAL_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, MACD.SIGNAL_TIMEPERIOD_MIN, signalTimePeriod)));
+        }
 
         this.emaSlowSkip = slowTimePeriod - fastTimePeriod;
         this.emaFast = new indicators.EMA(fastTimePeriod);
@@ -42,6 +64,9 @@ export class MACD
         this.emaSignal.on("data", (data: number) => this.receiveEmaSignalData(data));
         this.periodCounter = 0;
         this.setLookBack(slowTimePeriod + signalTimePeriod - 2);
+        this.fastTimePeriod = fastTimePeriod;
+        this.slowTimePeriod = slowTimePeriod;
+        this.signalTimePeriod = signalTimePeriod;
     }
 
     receiveData(inputData: number): boolean {

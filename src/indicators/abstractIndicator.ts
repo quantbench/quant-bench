@@ -15,6 +15,7 @@ export abstract class AbstractIndicator<TInputType, TOutputType>
         this.name = name;
         this.description = description;
         this.lookbackInternal = 0;
+        this.isReadyInternal = false;
     }
 
     get currentValue(): TOutputType {

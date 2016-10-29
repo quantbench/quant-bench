@@ -5,22 +5,20 @@ export class STDDEV
     extends AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
-    static STDDEV_INDICATOR_NAME: string = "STDDEV";
-    static STDDEV_INDICATOR_DESCR: string = "Standard Deviation";
-    static STDDEV_TIMEPERIOD_DEFAULT: number = 5;
-    static STDDEV_TIMEPERIOD_MIN: number = 2;
+    static INDICATOR_NAME: string = "STDDEV";
+    static INDICATOR_DESCR: string = "Standard Deviation";
+    static TIMEPERIOD_DEFAULT: number = 5;
+    static TIMEPERIOD_MIN: number = 2;
 
-    timePeriod: number;
-    variance: indicators.VAR;
+    public timePeriod: number;
 
-    constructor(timePeriod: number) {
-        super(STDDEV.STDDEV_INDICATOR_NAME, STDDEV.STDDEV_INDICATOR_DESCR);
-        if (timePeriod === undefined) {
-            this.timePeriod = STDDEV.STDDEV_TIMEPERIOD_DEFAULT;
-        } else {
-            if (timePeriod < STDDEV.STDDEV_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, STDDEV.STDDEV_TIMEPERIOD_MIN, timePeriod)));
-            }
+    private variance: indicators.VAR;
+
+    constructor(timePeriod: number = STDDEV.TIMEPERIOD_DEFAULT) {
+        super(STDDEV.INDICATOR_NAME, STDDEV.INDICATOR_DESCR);
+
+        if (timePeriod < STDDEV.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, STDDEV.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;

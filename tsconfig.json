@@ -12,6 +12,7 @@
   },
   "files": [
     "src/data/market/priceBar.ts",
+    "src/data/market/priceVolumeBar.ts",
     "src/data/market/tradeBar.ts",
     "src/indicators/abstractIndicator.ts",
     "src/indicators/cycleindicators/ht_dcperiod.ts",

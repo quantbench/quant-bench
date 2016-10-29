@@ -1,29 +1,26 @@
 import * as indicators from "../";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class EMA
-    extends AbstractIndicator<number, number>
+    extends indicators.AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
-    static EMA_INDICATOR_NAME: string = "EMA";
-    static EMA_INDICATOR_DESCR: string = "Exponential Moving Average";
-    static EMA_TIMEPERIOD_DEFAULT: number = 30;
-    static EMA_TIMEPERIOD_MIN: number = 2;
+    static INDICATOR_NAME: string = "EMA";
+    static INDICATOR_DESCR: string = "Exponential Moving Average";
+    static TIMEPERIOD_DEFAULT: number = 30;
+    static TIMEPERIOD_MIN: number = 2;
 
-    timePeriod: number;
-    multiplier: number;
-    periodCounter: number;
-    previousEma: number;
-    periodTotal: number;
+    public timePeriod: number;
 
-    constructor(timePeriod: number) {
-        super(EMA.EMA_INDICATOR_NAME, EMA.EMA_INDICATOR_DESCR);
-        if (timePeriod === undefined) {
-            this.timePeriod = EMA.EMA_TIMEPERIOD_DEFAULT;
-        } else {
-            if (timePeriod < EMA.EMA_TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, EMA.EMA_TIMEPERIOD_MIN, timePeriod)));
-            }
+    private multiplier: number;
+    private periodCounter: number;
+    private previousEma: number;
+    private periodTotal: number;
+
+    constructor(timePeriod: number = EMA.TIMEPERIOD_DEFAULT) {
+        super(EMA.INDICATOR_NAME, EMA.INDICATOR_DESCR);
+
+        if (timePeriod < EMA.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, EMA.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
