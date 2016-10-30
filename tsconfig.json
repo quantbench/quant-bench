@@ -185,6 +185,7 @@
     "test/go.ts",
     "test/indicators/momentumindicators/adx.spec.ts",
     "test/indicators/momentumindicators/adxr.spec.ts",
+    "test/indicators/momentumindicators/aroon.spec.ts",
     "test/indicators/momentumindicators/dx.spec.ts",
     "test/indicators/momentumindicators/macd.spec.ts",
     "test/indicators/momentumindicators/minus_di.spec.ts",

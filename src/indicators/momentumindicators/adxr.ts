@@ -25,6 +25,7 @@ export class ADXR
 
         this.timePeriod = timePeriod;
         this.periodCounter = 0;
+        this.periodHistory = new indicators.Queue<number>();
         this.adx = new indicators.ADX(timePeriod);
         this.adx.on("data", (data: number) => this.receiveADXData(data));
         this.setLookBack(this.timePeriod - 1 + this.adx.lookback);
