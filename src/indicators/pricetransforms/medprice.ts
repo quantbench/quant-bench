@@ -1,19 +1,20 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class MEDPRICE
-    extends AbstractIndicator<marketData.IPriceBar, number>
+    extends indicators.AbstractIndicator<marketData.IPriceBar, number>
     implements indicators.IIndicator<marketData.IPriceBar, number> {
 
-    static MEDPRICE_INDICATOR_NAME: string = "MEDPRICE";
-    static MEDPRICE_INDICATOR_DESCR: string = "Median Price";
+    static INDICATOR_NAME: string = "MEDPRICE";
+    static INDICATOR_DESCR: string = "Median Price";
 
     constructor() {
-        super(MEDPRICE.MEDPRICE_INDICATOR_NAME, MEDPRICE.MEDPRICE_INDICATOR_DESCR);
+        super(MEDPRICE.INDICATOR_NAME, MEDPRICE.INDICATOR_DESCR);
+        this.setLookBack(0);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {
+        this.setCurrentValue((inputData.high + inputData.low) / 2.0);
         return this.isReady;
     }
 }
