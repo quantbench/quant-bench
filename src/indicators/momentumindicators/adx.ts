@@ -42,7 +42,7 @@ export class ADX
         return this.isReady;
     }
 
-    receiveDXData(data: number) {
+    private receiveDXData(data: number) {
         this.currentDX = data;
         this.periodCounter += 1;
 
