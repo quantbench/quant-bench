@@ -56,7 +56,7 @@ export class CCI
         return this.isReady;
     }
 
-    receiveSMAData(data: number) {
+    private receiveSMAData(data: number) {
         let meanDeviation = 0;
         // calculate the mean deviation
         this.typicalPriceHistory.toArray().forEach((typicalPrice) => {

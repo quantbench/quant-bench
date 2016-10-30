@@ -34,7 +34,7 @@ export class AROONOSC
         return this.isReady;
     }
 
-    receiveAROONData(data: indicators.AROONResult) {
+    private receiveAROONData(data: indicators.AROONResult) {
         this.setCurrentValue(data.aroonUp - data.aroonDown);
     }
 }
