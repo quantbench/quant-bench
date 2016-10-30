@@ -37,7 +37,7 @@ export class ADXR
         return this.isReady;
     }
 
-    receiveADXData(data: number) {
+    private receiveADXData(data: number) {
         this.periodHistory.enqueue(data);
 
         if (this.periodCounter > this.lookback) {
