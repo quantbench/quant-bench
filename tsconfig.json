@@ -192,6 +192,7 @@
     "test/indicators/momentumindicators/macd.spec.ts",
     "test/indicators/momentumindicators/mfi.spec.ts",
     "test/indicators/momentumindicators/minus_di.spec.ts",
+    "test/indicators/momentumindicators/minus_dm.spec.ts",
     "test/indicators/momentumindicators/plus_di.spec.ts",
     "test/indicators/overlapstudies/accbands.spec.ts",
     "test/indicators/overlapstudies/bbands.spec.ts",
