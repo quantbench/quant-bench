@@ -14,8 +14,8 @@ export class DX
 
     private minusDI: indicators.MINUSDI;
     private plusDI: indicators.PLUSDI;
-    private currentPlusDi: number;
-    private currentMinusDi: number;
+    private currentPlusDI: number;
+    private currentMinusDI: number;
 
     constructor(timePeriod: number = DX.TIMEPERIOD_DEFAULT) {
         super(DX.INDICATOR_NAME, DX.INDICATOR_DESCR);
@@ -27,10 +27,10 @@ export class DX
         this.timePeriod = timePeriod;
         this.minusDI = new indicators.MINUSDI(timePeriod);
         this.minusDI.on("data", (data: number) => this.receiveMinusDIData(data));
-        this.currentPlusDi = 0;
+        this.currentPlusDI = 0;
         this.plusDI = new indicators.PLUSDI(timePeriod);
         this.plusDI.on("data", (data: number) => this.receivePlusDIData(data));
-        this.currentPlusDi = 0;
+        this.currentPlusDI = 0;
 
         this.setLookBack(timePeriod);
     }
@@ -42,16 +42,16 @@ export class DX
     }
 
     private receiveMinusDIData(data: number) {
-        this.currentMinusDi = data;
+        this.currentMinusDI = data;
     }
 
     private receivePlusDIData(data: number) {
-        this.currentPlusDi = data;
+        this.currentPlusDI = data;
 
         let result = 0;
-        let tmp = this.currentMinusDi + this.currentPlusDi;
+        let tmp = this.currentMinusDI + this.currentPlusDI;
         if (tmp !== 0) {
-            result = 100 * (Math.abs(this.currentMinusDi - this.currentPlusDi) / tmp);
+            result = 100 * (Math.abs(this.currentMinusDI - this.currentPlusDI) / tmp);
         } else {
             result = 0;
         }
