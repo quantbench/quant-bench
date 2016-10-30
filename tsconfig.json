@@ -183,6 +183,7 @@
     "src/types.ts",
     "test/go.1.ts",
     "test/go.ts",
+    "test/indicators/momentumindicators/adx.spec.ts",
     "test/indicators/momentumindicators/dx.spec.ts",
     "test/indicators/momentumindicators/macd.spec.ts",
     "test/indicators/momentumindicators/minus_di.spec.ts",

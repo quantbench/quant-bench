@@ -1,9 +1,8 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class ADX
-    extends AbstractIndicator<marketData.IPriceBar, number>
+    extends indicators.AbstractIndicator<marketData.IPriceBar, number>
     implements indicators.IIndicator<marketData.IPriceBar, number> {
 
     static INDICATOR_NAME: string = "ADX";
@@ -11,32 +10,58 @@ export class ADX
     static TIMEPERIOD_DEFAULT: number = 14;
     static TIMEPERIOD_MIN: number = 2;
 
-    timePeriod: number;
-    periodCounter: number;
-    // Dx dx;
-    currentDX: number;
-    sumDX: number;
-    previousAdx: number;
+    public timePeriod: number;
 
-    constructor(timePeriod: number) {
+    private periodCounter: number;
+    private dx: indicators.DX;
+    private currentDX: number;
+    private sumDX: number;
+    private previousAdx: number;
+
+    constructor(timePeriod: number = ADX.TIMEPERIOD_DEFAULT) {
         super(ADX.INDICATOR_NAME, ADX.INDICATOR_DESCR);
-        if (timePeriod === undefined) {
-            this.timePeriod = ADX.TIMEPERIOD_DEFAULT;
-        } else {
-            if (timePeriod < ADX.TIMEPERIOD_MIN) {
-                throw (new Error(indicators.generateMinTimePeriodError(this.name, ADX.TIMEPERIOD_MIN, timePeriod)));
-            }
+
+        if (timePeriod < ADX.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, ADX.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
         this.periodCounter = this.timePeriod * -1;
 
+        this.dx = new indicators.DX(timePeriod);
+        this.dx.on("data", (data: number) => this.receiveDXData(data));
         this.currentDX = 0;
         this.sumDX = 0;
         this.previousAdx = 0;
+
+        this.setLookBack(2 * this.timePeriod - 1);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {
+        this.dx.receiveData(inputData);
         return this.isReady;
+    }
+
+    receiveDXData(data: number) {
+        this.currentDX = data;
+        this.periodCounter += 1;
+
+        if (this.periodCounter < 0) {
+            this.sumDX += this.currentDX;
+        } else if (this.periodCounter === 0) {
+            this.sumDX += this.currentDX;
+
+            let result = this.sumDX / this.timePeriod;
+
+            this.setCurrentValue(result);
+
+            this.previousAdx = result;
+        } else {
+            let result = (this.previousAdx * (this.timePeriod - 1) + this.currentDX) / this.timePeriod;
+
+            this.setCurrentValue(result);
+
+            this.previousAdx = result;
+        }
     }
 }
