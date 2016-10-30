@@ -1,19 +1,51 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class AVGDEV
-    extends AbstractIndicator<number, number>
+    extends indicators.AbstractIndicator<number, number>
     implements indicators.IIndicator<number, number> {
 
-    static AVGDEV_INDICATOR_NAME: string = "AVGDEV";
-    static AVGDEV_INDICATOR_DESCR: string = "Average Deviation";
+    static INDICATOR_NAME: string = "AVGDEV";
+    static INDICATOR_DESCR: string = "Average Deviation";
+    static TIMEPERIOD_DEFAULT: number = 14;
+    static TIMEPERIOD_MIN: number = 2;
 
-    constructor() {
-        super(AVGDEV.AVGDEV_INDICATOR_NAME, AVGDEV.AVGDEV_INDICATOR_DESCR);
+    public timePeriod: number;
+
+    private periodHistory: indicators.Queue<number>;
+
+    constructor(timePeriod: number = AVGDEV.TIMEPERIOD_DEFAULT) {
+        super(AVGDEV.INDICATOR_NAME, AVGDEV.INDICATOR_DESCR);
+
+        if (timePeriod < AVGDEV.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AVGDEV.TIMEPERIOD_MIN, timePeriod)));
+        }
+
+        this.timePeriod = timePeriod;
+        this.periodHistory = new indicators.Queue<number>();
+        this.setLookBack(this.timePeriod - 1);
     }
 
     receiveData(inputData: number): boolean {
+        this.periodHistory.enqueue(inputData);
+
+        if (this.periodHistory.count >= this.timePeriod) {
+            if (this.periodHistory.count > this.timePeriod) {
+                this.periodHistory.dequeue();
+            }
+            let sum = 0;
+            this.periodHistory.toArray().forEach((value) => {
+                sum += value;
+            });
+            let deviation = 0;
+            this.periodHistory.toArray().forEach((value) => {
+                deviation += Math.abs(value - sum / this.timePeriod);
+            });
+
+            this.setCurrentValue(deviation / this.timePeriod);
+
+            this.periodHistory.dequeue();
+        }
+
         return this.isReady;
     }
 }
