@@ -1,19 +1,20 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class AVGPRICE
-    extends AbstractIndicator<marketData.IPriceBar, number>
+    extends indicators.AbstractIndicator<marketData.IPriceBar, number>
     implements indicators.IIndicator<marketData.IPriceBar, number> {
 
-    static AVGPRICE_INDICATOR_NAME: string = "AVGPRICE";
-    static AVGPRICE_INDICATOR_DESCR: string = "Average Price";
+    static INDICATOR_NAME: string = "AVGPRICE";
+    static INDICATOR_DESCR: string = "Average Price";
 
     constructor() {
-        super(AVGPRICE.AVGPRICE_INDICATOR_NAME, AVGPRICE.AVGPRICE_INDICATOR_DESCR);
+        super(AVGPRICE.INDICATOR_NAME, AVGPRICE.INDICATOR_DESCR);
+        this.setLookBack(0);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {
+        this.setCurrentValue((inputData.open + inputData.high + inputData.low + inputData.close) / 4.0);
         return this.isReady;
     }
 }
