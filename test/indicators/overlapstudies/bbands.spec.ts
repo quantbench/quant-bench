@@ -158,11 +158,11 @@ describe("BBANDS Indicator", () => {
                 }
             }
         });
-        it("the indicator should not indicate that it is ready to be consumed", () => {
+        it("the indicator should indicate that it is ready to be consumed", () => {
             indicator.isReady.should.equal(true);
         });
 
-        it("should not have raised the ondata event", () => {
+        it("should have raised the ondata event", () => {
             indicatorOnDataRasied.should.equal(true);
         });
 

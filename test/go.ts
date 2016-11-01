@@ -1,4 +1,4 @@
-import * as adIndicator from "../src/indicators/volumeindicators/ad";
+import * as indicators from "../src/indicators/";
 import * as chai from "chai";
 import * as path from "path";
 let jsonfile = require("jsonfile");
@@ -9,33 +9,31 @@ let sourceFile: string;
 let taResultFile: string;
 let sourceData: any;
 let taResultData: any;
-let indicator: adIndicator.AD;
+let indicator: indicators.LINEARREG;
 let indicatorResults: number[];
+let indicatorOnDataRasied: boolean = false;
+let timePeriod = 14;
 
 sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
-taResultFile = path.resolve("./test/talib-results/ad.json");
+taResultFile = path.resolve("./test/talib-results/linearreg.json");
 sourceData = jsonfile.readFileSync(sourceFile);
 taResultData = jsonfile.readFileSync(taResultFile);
-indicator = new adIndicator.AD();
 indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
 
+indicator = new indicators.LINEARREG(timePeriod);
 let idx = 0;
-sourceData.close.forEach((value: number, index: number) => {
-    if (indicator.receiveData({
-        "high": sourceData.high[index],
-        "low": sourceData.low[index],
-        "open": sourceData.open[index],
-        "close": sourceData.close[index],
-        "volume": sourceData.volume[index],
-    })) {
+indicatorOnDataRasied = false;
+indicator.on("data", () => {
+    indicatorOnDataRasied = true;
+});
+
+for (let index = 0; index <= indicator.lookback; index++) {
+    if (indicator.receiveData(sourceData.close[index])) {
         indicatorResults[idx] = indicator.currentValue;
         idx++;
     }
-});
-
-for (let i = 0; i < taResultData.result.outReal.length; i++) {
-    isNaN(indicatorResults[i]).should.be.false;
-    taResultData.result.outReal[i].should.be.closeTo(indicatorResults[i], 0.001);
 }
 
-taResultData.begIndex.should.equal(indicator.lookback);
+indicator.isReady.should.equal(true);
+
+indicatorOnDataRasied.should.equal(true);

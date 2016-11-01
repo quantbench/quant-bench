@@ -5,19 +5,19 @@ let jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("PLUSDI Indicator", () => {
+describe("LINEARREG Indicator", () => {
     let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.PLUSDI;
+    let indicator: indicators.LINEARREG;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
     let timePeriod = 14;
 
     beforeEach(() => {
         sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
-        taResultFile = path.resolve("./test/talib-results/plus_di.json");
+        taResultFile = path.resolve("./test/talib-results/linearreg.json");
         sourceData = jsonfile.readFileSync(sourceFile);
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
@@ -25,15 +25,15 @@ describe("PLUSDI Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.PLUSDI(timePeriod);
+            indicator = new indicators.LINEARREG(timePeriod);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.PLUSDI.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.LINEARREG.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.PLUSDI.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.LINEARREG.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -43,7 +43,7 @@ describe("PLUSDI Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.PLUSDI(timePeriod + 1);
+            indicator = new indicators.LINEARREG(timePeriod + 1);
         });
 
         it("should set the timePeriod", () => {
@@ -53,11 +53,11 @@ describe("PLUSDI Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.PLUSDI();
+            indicator = new indicators.LINEARREG();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.PLUSDI.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.LINEARREG.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -66,29 +66,24 @@ describe("PLUSDI Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.PLUSDI(0);
+                indicator = new indicators.LINEARREG(1);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.PLUSDI.TIMEPERIOD_MIN, 0);
+            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.LINEARREG.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.PLUSDI(timePeriod);
+            indicator = new indicators.LINEARREG(timePeriod);
             let idx = 0;
-            sourceData.close.forEach((value: number, index: number) => {
-                if (indicator.receiveData({
-                    "high": sourceData.high[index],
-                    "low": sourceData.low[index],
-                    "open": sourceData.open[index],
-                    "close": sourceData.close[index],
-                })) {
+            sourceData.close.forEach((value: number) => {
+                if (indicator.receiveData(value)) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }
@@ -109,7 +104,7 @@ describe("PLUSDI Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.PLUSDI(timePeriod);
+            indicator = new indicators.LINEARREG(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -117,12 +112,7 @@ describe("PLUSDI Indicator", () => {
             });
 
             for (let index = 0; index < indicator.lookback; index++) {
-                if (indicator.receiveData({
-                    "high": sourceData.high[index],
-                    "low": sourceData.low[index],
-                    "open": sourceData.open[index],
-                    "close": sourceData.close[index],
-                })) {
+                if (indicator.receiveData(sourceData.close[index])) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }
@@ -140,7 +130,7 @@ describe("PLUSDI Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.PLUSDI(timePeriod);
+            indicator = new indicators.LINEARREG(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -148,12 +138,7 @@ describe("PLUSDI Indicator", () => {
             });
 
             for (let index = 0; index <= indicator.lookback; index++) {
-                if (indicator.receiveData({
-                    "high": sourceData.high[index],
-                    "low": sourceData.low[index],
-                    "open": sourceData.open[index],
-                    "close": sourceData.close[index],
-                })) {
+                if (indicator.receiveData(sourceData.close[index])) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }

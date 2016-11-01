@@ -1,5 +1,6 @@
 export * from "./beta";
 export * from "./correl";
+export * from "./linearreg_base";
 export * from "./linearreg_angle";
 export * from "./linearreg_intercept";
 export * from "./linearreg_slope";
