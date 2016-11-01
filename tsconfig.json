@@ -212,6 +212,7 @@
     "test/indicators/statisticfunctions/linearregintercept.spec.ts",
     "test/indicators/statisticfunctions/linearregslope.ts",
     "test/indicators/statisticfunctions/stddev.spec.ts",
+    "test/indicators/statisticfunctions/tsf.spec.ts",
     "test/indicators/statisticfunctions/var.spec.ts",
     "test/indicators/volatilityindicators/trange.spec.ts",
     "test/indicators/volumeindicators/ad.spec.ts",
