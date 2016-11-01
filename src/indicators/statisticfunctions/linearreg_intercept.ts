@@ -1,19 +1,17 @@
-import * as indicators from "../";
-
-import { AbstractIndicator } from "../abstractIndicator";
+import { LINEARREGBASE } from "./linearreg_base";
 
 export class LINEARREGINTERCEPT
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends LINEARREGBASE {
 
-    static LINEARREGINTERCEPT_INDICATOR_NAME: string = "LINEARREGINTERCEPT";
-    static LINEARREGINTERCEPT_INDICATOR_DESCR: string = "Linear Regression Intercept";
+    static INDICATOR_NAME: string = "LINEARREGINTERCEPT";
+    static INDICATOR_DESCR: string = "Linear Regression Intercept";
+    static TIMEPERIOD_DEFAULT: number = 14;
 
-    constructor() {
-        super(LINEARREGINTERCEPT.LINEARREGINTERCEPT_INDICATOR_NAME, LINEARREGINTERCEPT.LINEARREGINTERCEPT_INDICATOR_DESCR);
+    constructor(timePeriod: number = LINEARREGINTERCEPT.TIMEPERIOD_DEFAULT) {
+        super(LINEARREGINTERCEPT.INDICATOR_NAME, LINEARREGINTERCEPT.INDICATOR_DESCR, timePeriod);
     }
 
-    receiveData(inputData: number): boolean {
-        return this.isReady;
+    calculateResult(slope: number, intercept: number): number {
+        return intercept;
     }
 }
