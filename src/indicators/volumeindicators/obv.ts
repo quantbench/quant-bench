@@ -1,19 +1,43 @@
 import * as indicators from "../";
-
-import { AbstractIndicator } from "../abstractIndicator";
+import * as marketData from "../../data/market/";
 
 export class OBV
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceVolumeBar, number>
+    implements indicators.IIndicator<marketData.IPriceVolumeBar, number> {
 
-    static OBV_INDICATOR_NAME: string = "OBV";
-    static OBV_INDICATOR_DESCR: string = "On Balance Volume";
+    static INDICATOR_NAME: string = "OBV";
+    static INDICATOR_DESCR: string = "On Balance Volume";
+
+    private previousObv: number;
+    private previousClose: number;
+    private periodCounter: number;
 
     constructor() {
-        super(OBV.OBV_INDICATOR_NAME, OBV.OBV_INDICATOR_DESCR);
+        super(OBV.INDICATOR_NAME, OBV.INDICATOR_DESCR);
+
+        this.previousObv = 0;
+        this.previousClose = 0;
+        this.periodCounter = -1;
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData: marketData.IPriceVolumeBar): boolean {
+
+        this.periodCounter += 1;
+
+        if (this.periodCounter <= 0) {
+            this.previousClose = inputData.close;
+            this.previousObv = inputData.volume;
+            this.setCurrentValue(this.previousObv);
+        } else {
+            if (inputData.close > this.previousClose) {
+                this.previousObv += inputData.volume;
+            } else if (inputData.close < this.previousClose) {
+                this.previousObv -= inputData.volume;
+            }
+            this.previousClose = inputData.close;
+            this.setCurrentValue(this.previousObv);
+        }
+
         return this.isReady;
     }
 }

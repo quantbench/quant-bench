@@ -218,6 +218,7 @@
     "test/indicators/statisticfunctions/var.spec.ts",
     "test/indicators/volatilityindicators/trange.spec.ts",
     "test/indicators/volumeindicators/ad.spec.ts",
+    "test/indicators/volumeindicators/obv.spec.ts",
     "test/queue.spec.ts",
     "test/utils/convertleantota.ts",
     "test/utils/generateConfig.ts",
