@@ -197,6 +197,7 @@
     "test/indicators/momentumindicators/minus_dm.spec.ts",
     "test/indicators/momentumindicators/mom.spec.ts",
     "test/indicators/momentumindicators/plus_di.spec.ts",
+    "test/indicators/momentumindicators/plus_dm.spec.ts",
     "test/indicators/overlapstudies/accbands.spec.ts",
     "test/indicators/overlapstudies/bbands.spec.ts",
     "test/indicators/overlapstudies/dema.spec.ts",
