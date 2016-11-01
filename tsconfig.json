@@ -208,6 +208,7 @@
     "test/indicators/pricetransforms/typprice.spec.ts",
     "test/indicators/pricetransforms/wclprice.spec.ts",
     "test/indicators/statisticfunctions/linearreg.spec.ts",
+    "test/indicators/statisticfunctions/linearregang.spec.ts",
     "test/indicators/statisticfunctions/stddev.spec.ts",
     "test/indicators/statisticfunctions/var.spec.ts",
     "test/indicators/volatilityindicators/trange.spec.ts",
