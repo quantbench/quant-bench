@@ -1,9 +1,7 @@
 import * as indicators from "../";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class STDDEV
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "STDDEV";
     static INDICATOR_DESCR: string = "Standard Deviation";

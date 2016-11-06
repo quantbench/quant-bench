@@ -1,16 +1,14 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class CDLCLOSINGMARUBOZU
-    extends AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
-    static CDLCLOSINGMARUBOZU_INDICATOR_NAME: string = "CDLCLOSINGMARUBOZU";
-    static CDLCLOSINGMARUBOZU_INDICATOR_DESCR: string = "Closing Marubozu";
+    static INDICATOR_NAME: string = "CDLCLOSINGMARUBOZU";
+    static INDICATOR_DESCR: string = "Closing Marubozu";
 
     constructor() {
-        super(CDLCLOSINGMARUBOZU.CDLCLOSINGMARUBOZU_INDICATOR_NAME, CDLCLOSINGMARUBOZU.CDLCLOSINGMARUBOZU_INDICATOR_DESCR);
+        super(CDLCLOSINGMARUBOZU.INDICATOR_NAME, CDLCLOSINGMARUBOZU.INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

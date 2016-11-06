@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class CEIL
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static CEIL_INDICATOR_NAME: string = "CEIL";
-    static CEIL_INDICATOR_DESCR: string = "Vector Ceil";
+    static INDICATOR_NAME: string = "CEIL";
+    static INDICATOR_DESCR: string = "Vector Ceil";
 
     constructor() {
-        super(CEIL.CEIL_INDICATOR_NAME, CEIL.CEIL_INDICATOR_DESCR);
+        super(CEIL.INDICATOR_NAME, CEIL.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

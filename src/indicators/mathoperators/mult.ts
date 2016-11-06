@@ -1,19 +1,17 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class MULT
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static MULT_INDICATOR_NAME: string = "MULT";
-    static MULT_INDICATOR_DESCR: string = "Vector Arithmetic Mult";
+    static INDICATOR_NAME: string = "MULT";
+    static INDICATOR_DESCR: string = "Vector Arithmetic Mult";
 
     constructor() {
-        super(MULT.MULT_INDICATOR_NAME, MULT.MULT_INDICATOR_DESCR);
+        super(MULT.INDICATOR_NAME, MULT.INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData1: number, inputData2: number): boolean {
+        this.setCurrentValue(inputData1 * inputData2);
         return this.isReady;
     }
 }

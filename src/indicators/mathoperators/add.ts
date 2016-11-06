@@ -1,19 +1,18 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class ADD
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static ADD_INDICATOR_NAME: string = "ADD";
-    static ADD_INDICATOR_DESCR: string = "Vector Arithmetic Add";
+    static INDICATOR_NAME: string = "ADD";
+    static INDICATOR_DESCR: string = "Vector Arithmetic Add";
 
     constructor() {
-        super(ADD.ADD_INDICATOR_NAME, ADD.ADD_INDICATOR_DESCR);
+        super(ADD.INDICATOR_NAME, ADD.INDICATOR_DESCR);
+        this.setLookBack(0);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData1: number, inputData2: number): boolean {
+        this.setCurrentValue(inputData1 + inputData2);
         return this.isReady;
     }
 }

@@ -1,8 +1,7 @@
 import * as indicators from "../";
 
 export abstract class LINEARREGBASE
-    extends indicators.AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
     static TIMEPERIOD_MIN: number = 2;
 

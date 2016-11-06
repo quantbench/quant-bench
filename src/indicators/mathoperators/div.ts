@@ -1,19 +1,21 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class DIV
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static DIV_INDICATOR_NAME: string = "DIV";
-    static DIV_INDICATOR_DESCR: string = "Vector Arithmetic Div";
+    static INDICATOR_NAME: string = "DIV";
+    static INDICATOR_DESCR: string = "Vector Arithmetic Div";
 
     constructor() {
-        super(DIV.DIV_INDICATOR_NAME, DIV.DIV_INDICATOR_DESCR);
+        super(DIV.INDICATOR_NAME, DIV.INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData1: number, inputData2: number): boolean {
+        if (inputData2 !== 0) {
+            this.setCurrentValue(inputData1 / inputData2);
+        } else {
+            this.setCurrentValue(0);
+        }
         return this.isReady;
     }
 }

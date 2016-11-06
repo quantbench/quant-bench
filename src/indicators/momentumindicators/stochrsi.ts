@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class STOCHRSI
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static STOCHRSI_INDICATOR_NAME: string = "STOCHRSI";
-    static STOCHRSI_INDICATOR_DESCR: string = "Stochastic Relative Strength Index";
+    static INDICATOR_NAME: string = "STOCHRSI";
+    static INDICATOR_DESCR: string = "Stochastic Relative Strength Index";
 
     constructor() {
-        super(STOCHRSI.STOCHRSI_INDICATOR_NAME, STOCHRSI.STOCHRSI_INDICATOR_DESCR);
+        super(STOCHRSI.INDICATOR_NAME, STOCHRSI.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

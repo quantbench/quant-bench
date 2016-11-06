@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class COS
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static COS_INDICATOR_NAME: string = "COS";
-    static COS_INDICATOR_DESCR: string = "Vector Trigonometric Cos";
+    static INDICATOR_NAME: string = "COS";
+    static INDICATOR_DESCR: string = "Vector Trigonometric Cos";
 
     constructor() {
-        super(COS.COS_INDICATOR_NAME, COS.COS_INDICATOR_DESCR);
+        super(COS.INDICATOR_NAME, COS.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

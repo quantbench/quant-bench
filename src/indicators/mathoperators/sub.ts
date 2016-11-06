@@ -1,19 +1,17 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class SUB
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static SUB_INDICATOR_NAME: string = "SUB";
-    static SUB_INDICATOR_DESCR: string = "Vector Arithmetic Substraction";
+    static INDICATOR_NAME: string = "SUB";
+    static INDICATOR_DESCR: string = "Vector Arithmetic Substraction";
 
     constructor() {
-        super(SUB.SUB_INDICATOR_NAME, SUB.SUB_INDICATOR_DESCR);
+        super(SUB.INDICATOR_NAME, SUB.INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData1: number, inputData2: number): boolean {
+        this.setCurrentValue(inputData1 - inputData2);
         return this.isReady;
     }
 }

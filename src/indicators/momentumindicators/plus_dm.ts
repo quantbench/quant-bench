@@ -2,8 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class PLUSDM
-    extends indicators.AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
     static INDICATOR_NAME: string = "PLUSDM";
     static INDICATOR_DESCR: string = "Plus Directional Movement";

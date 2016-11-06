@@ -1,12 +1,11 @@
 import { IIndicator } from "./indicator";
 import { EventEmitter } from "events";
 
-export abstract class AbstractIndicator<TInputType, TOutputType>
+export abstract class AbstractIndicatorBase<TInputType>
     extends EventEmitter
-    implements IIndicator<TInputType, TOutputType> {
+    implements IIndicator<TInputType> {
     public readonly name: string;
     public readonly description: string;
-    private currentValueInternal: TOutputType;
     private isReadyInternal: boolean;
     private lookbackInternal: number;
 
@@ -18,10 +17,6 @@ export abstract class AbstractIndicator<TInputType, TOutputType>
         this.isReadyInternal = false;
     }
 
-    get currentValue(): TOutputType {
-        return this.currentValueInternal;
-    }
-
     get isReady(): boolean {
         return this.isReadyInternal;
     }
@@ -30,19 +25,25 @@ export abstract class AbstractIndicator<TInputType, TOutputType>
         return this.lookbackInternal;
     }
 
-    abstract receiveData(inputData: TInputType): boolean;
-
     protected setIsReady() {
         this.isReadyInternal = true;
     }
 
-    protected setCurrentValue(newValue: TOutputType) {
+    protected setLookBack(lookback: number) {
+        this.lookbackInternal = lookback;
+    }
+}
+
+export abstract class AbstractIndicator<TInputType> extends AbstractIndicatorBase<TInputType> {
+    protected currentValueInternal: number;
+
+    get currentValue(): number {
+        return this.currentValueInternal;
+    }
+
+    protected setCurrentValue(newValue: number) {
         this.currentValueInternal = newValue;
         this.emit("data", this.currentValue);
         this.setIsReady();
-    }
-
-    protected setLookBack(lookback: number) {
-        this.lookbackInternal = lookback;
     }
 }

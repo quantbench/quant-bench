@@ -1,16 +1,14 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class CDLTASUKIGAP
-    extends AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
-    static CDLTASUKIGAP_INDICATOR_NAME: string = "CDLTASUKIGAP";
-    static CDLTASUKIGAP_INDICATOR_DESCR: string = "Tasuki Gap";
+    static INDICATOR_NAME: string = "CDLTASUKIGAP";
+    static INDICATOR_DESCR: string = "Tasuki Gap";
 
     constructor() {
-        super(CDLTASUKIGAP.CDLTASUKIGAP_INDICATOR_NAME, CDLTASUKIGAP.CDLTASUKIGAP_INDICATOR_DESCR);
+        super(CDLTASUKIGAP.INDICATOR_NAME, CDLTASUKIGAP.INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

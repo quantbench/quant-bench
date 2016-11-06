@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class MAX
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static MAX_INDICATOR_NAME: string = "MAX";
-    static MAX_INDICATOR_DESCR: string = "Highest value over a specified period";
+    static INDICATOR_NAME: string = "MAX";
+    static INDICATOR_DESCR: string = "Highest value over a specified period";
 
     constructor() {
-        super(MAX.MAX_INDICATOR_NAME, MAX.MAX_INDICATOR_DESCR);
+        super(MAX.INDICATOR_NAME, MAX.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

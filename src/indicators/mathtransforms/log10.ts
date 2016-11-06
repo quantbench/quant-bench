@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class LOG10
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static LOG10_INDICATOR_NAME: string = "LOG10";
-    static LOG10_INDICATOR_DESCR: string = "Vector Log10";
+    static INDICATOR_NAME: string = "LOG10";
+    static INDICATOR_DESCR: string = "Vector Log10";
 
     constructor() {
-        super(LOG10.LOG10_INDICATOR_NAME, LOG10.LOG10_INDICATOR_DESCR);
+        super(LOG10.INDICATOR_NAME, LOG10.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

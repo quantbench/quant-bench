@@ -11,7 +11,7 @@ describe("AROON Indicator", () => {
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.AROON;
-    let indicatorResults: indicators.AROONResult[];
+    let indicatorResults: { aroonUp: number, aroonDown: number }[];
     let indicatorOnDataRasied: boolean = false;
     let timePeriod = 14;
 
@@ -20,7 +20,7 @@ describe("AROON Indicator", () => {
         taResultFile = path.resolve("./test/talib-results/aroon.json");
         sourceData = jsonfile.readFileSync(sourceFile);
         taResultData = jsonfile.readFileSync(taResultFile);
-        indicatorResults = new Array<indicators.AROONResult>(sourceData.close.length - taResultData.begIndex);
+        indicatorResults = new Array<{ aroonUp: number, aroonDown: number }>(sourceData.close.length - taResultData.begIndex);
     });
 
     describe("when constructing", () => {
@@ -89,7 +89,9 @@ describe("AROON Indicator", () => {
                     "open": sourceData.open[index],
                     "close": sourceData.close[index],
                 })) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "aroonUp": 0, "aroonDown": 0 };
+                    indicatorResults[idx].aroonDown = indicator.aroonDown;
+                    indicatorResults[idx].aroonUp = indicator.aroonUp;
                     idx++;
                 }
             });
@@ -130,7 +132,9 @@ describe("AROON Indicator", () => {
                     "open": sourceData.open[index],
                     "close": sourceData.close[index],
                 })) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "aroonUp": 0, "aroonDown": 0 };
+                    indicatorResults[idx].aroonDown = indicator.aroonDown;
+                    indicatorResults[idx].aroonUp = indicator.aroonUp;
                     idx++;
                 }
             }
@@ -161,7 +165,9 @@ describe("AROON Indicator", () => {
                     "open": sourceData.open[index],
                     "close": sourceData.close[index],
                 })) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "aroonUp": 0, "aroonDown": 0 };
+                    indicatorResults[idx].aroonDown = indicator.aroonDown;
+                    indicatorResults[idx].aroonUp = indicator.aroonUp;
                     idx++;
                 }
             }

@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class HTPHASOR
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static HTPHASOR_INDICATOR_NAME: string = "HTPHASOR";
-    static HTPHASOR_INDICATOR_DESCR: string = "Hilbert Transform - Phasor Components";
+    static INDICATOR_NAME: string = "HTPHASOR";
+    static INDICATOR_DESCR: string = "Hilbert Transform - Phasor Components";
 
     constructor() {
-        super(HTPHASOR.HTPHASOR_INDICATOR_NAME, HTPHASOR.HTPHASOR_INDICATOR_DESCR);
+        super(HTPHASOR.INDICATOR_NAME, HTPHASOR.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

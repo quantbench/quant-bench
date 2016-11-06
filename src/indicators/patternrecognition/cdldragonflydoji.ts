@@ -1,16 +1,14 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class CDLDRAGONFLYDOJI
-    extends AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
-    static CDLDRAGONFLYDOJI_INDICATOR_NAME: string = "CDLDRAGONFLYDOJI";
-    static CDLDRAGONFLYDOJI_INDICATOR_DESCR: string = "Dragonfly Doji";
+    static INDICATOR_NAME: string = "CDLDRAGONFLYDOJI";
+    static INDICATOR_DESCR: string = "Dragonfly Doji";
 
     constructor() {
-        super(CDLDRAGONFLYDOJI.CDLDRAGONFLYDOJI_INDICATOR_NAME, CDLDRAGONFLYDOJI.CDLDRAGONFLYDOJI_INDICATOR_DESCR);
+        super(CDLDRAGONFLYDOJI.INDICATOR_NAME, CDLDRAGONFLYDOJI.INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

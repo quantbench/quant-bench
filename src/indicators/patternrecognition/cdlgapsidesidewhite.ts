@@ -1,16 +1,14 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class CDLGAPSIDESIDEWHITE
-    extends AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
-    static CDLGAPSIDESIDEWHITE_INDICATOR_NAME: string = "CDLGAPSIDESIDEWHITE";
-    static CDLGAPSIDESIDEWHITE_INDICATOR_DESCR: string = "Up/Down-gap side-by-side white lines";
+    static INDICATOR_NAME: string = "CDLGAPSIDESIDEWHITE";
+    static INDICATOR_DESCR: string = "Up/Down-gap side-by-side white lines";
 
     constructor() {
-        super(CDLGAPSIDESIDEWHITE.CDLGAPSIDESIDEWHITE_INDICATOR_NAME, CDLGAPSIDESIDEWHITE.CDLGAPSIDESIDEWHITE_INDICATOR_DESCR);
+        super(CDLGAPSIDESIDEWHITE.INDICATOR_NAME, CDLGAPSIDESIDEWHITE.INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

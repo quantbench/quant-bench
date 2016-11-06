@@ -2,8 +2,7 @@ import * as indicators from "../";
 import { Queue } from "../queue";
 
 export class WMA
-    extends indicators.AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "WMA";
     static INDICATOR_DESCR: string = "Weighted Moving Average";

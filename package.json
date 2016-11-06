@@ -22,7 +22,7 @@
     "jasmine": "^2.5.2",
     "jasmine-console-reporter": "^1.2.7",
     "jsonfile": "^2.4.0",
-    "nunjucks": "^2.5.2",
+    "nunjucks": "^3.0.0",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "talib": "^1.0.2",
@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "typescript": "^2.0.3",
     "yamljs": "^0.2.8"
   }
 }

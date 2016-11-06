@@ -1,16 +1,14 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class CDLENGULFING
-    extends AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
-    static CDLENGULFING_INDICATOR_NAME: string = "CDLENGULFING";
-    static CDLENGULFING_INDICATOR_DESCR: string = "Engulfing Pattern";
+    static INDICATOR_NAME: string = "CDLENGULFING";
+    static INDICATOR_DESCR: string = "Engulfing Pattern";
 
     constructor() {
-        super(CDLENGULFING.CDLENGULFING_INDICATOR_NAME, CDLENGULFING.CDLENGULFING_INDICATOR_DESCR);
+        super(CDLENGULFING.INDICATOR_NAME, CDLENGULFING.INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

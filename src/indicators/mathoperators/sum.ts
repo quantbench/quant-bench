@@ -1,19 +1,17 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class SUM
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static SUM_INDICATOR_NAME: string = "SUM";
-    static SUM_INDICATOR_DESCR: string = "Summation";
+    static INDICATOR_NAME: string = "SUM";
+    static INDICATOR_DESCR: string = "Summation";
 
     constructor() {
-        super(SUM.SUM_INDICATOR_NAME, SUM.SUM_INDICATOR_DESCR);
+        super(SUM.INDICATOR_NAME, SUM.INDICATOR_DESCR);
     }
 
-    receiveData(inputData: number): boolean {
+    receiveData(inputData1: number, inputData2: number): boolean {
+        this.setCurrentValue(inputData1 + inputData2);
         return this.isReady;
     }
 }

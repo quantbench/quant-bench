@@ -174,7 +174,6 @@
     "src/indicators/statisticfunctions/stddev.ts",
     "src/indicators/statisticfunctions/tsf.ts",
     "src/indicators/statisticfunctions/var.ts",
-    "src/indicators/tradingBand.ts",
     "src/indicators/volatilityindicators/atr.ts",
     "src/indicators/volatilityindicators/natr.ts",
     "src/indicators/volatilityindicators/trange.ts",

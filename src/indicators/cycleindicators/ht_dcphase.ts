@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class HTDCPHASE
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static HTDCPHASE_INDICATOR_NAME: string = "HTDCPHASE";
-    static HTDCPHASE_INDICATOR_DESCR: string = "Hilbert Transform - Dominant Cycle Phase";
+    static INDICATOR_NAME: string = "HTDCPHASE";
+    static INDICATOR_DESCR: string = "Hilbert Transform - Dominant Cycle Phase";
 
     constructor() {
-        super(HTDCPHASE.HTDCPHASE_INDICATOR_NAME, HTDCPHASE.HTDCPHASE_INDICATOR_DESCR);
+        super(HTDCPHASE.INDICATOR_NAME, HTDCPHASE.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

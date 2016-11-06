@@ -11,7 +11,7 @@ describe("BBANDS Indicator", () => {
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.BBANDS;
-    let indicatorResults: indicators.TradingBand[];
+    let indicatorResults: { upperBand: number, middleBand: number, lowerBand: number }[];
     let indicatorOnDataRasied: boolean = false;
     let timePeriod: number = 5;
 
@@ -20,7 +20,8 @@ describe("BBANDS Indicator", () => {
         taResultFile = path.resolve("./test/talib-results/bbands.json");
         sourceData = jsonfile.readFileSync(sourceFile);
         taResultData = jsonfile.readFileSync(taResultFile);
-        indicatorResults = new Array<indicators.TradingBand>(sourceData.close.length - taResultData.begIndex);
+        indicatorResults = new Array<{ upperBand: number, middleBand: number, lowerBand: number }>(
+            sourceData.close.length - taResultData.begIndex);
     });
 
     describe("when constructing", () => {
@@ -84,7 +85,10 @@ describe("BBANDS Indicator", () => {
             let idx = 0;
             sourceData.close.forEach((value: number) => {
                 if (indicator.receiveData(value)) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "upperBand": 0, "middleBand": 0, "lowerBand": 0 };
+                    indicatorResults[idx].upperBand = indicator.upperBand;
+                    indicatorResults[idx].middleBand = indicator.middleBand;
+                    indicatorResults[idx].lowerBand = indicator.lowerBand;
                     idx++;
                 }
             });
@@ -127,7 +131,10 @@ describe("BBANDS Indicator", () => {
 
             for (let index = 0; index < indicator.lookback; index++) {
                 if (indicator.receiveData(sourceData.close[index])) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "upperBand": 0, "middleBand": 0, "lowerBand": 0 };
+                    indicatorResults[idx].upperBand = indicator.upperBand;
+                    indicatorResults[idx].middleBand = indicator.middleBand;
+                    indicatorResults[idx].lowerBand = indicator.lowerBand;
                     idx++;
                 }
             }
@@ -153,7 +160,10 @@ describe("BBANDS Indicator", () => {
 
             for (let index = 0; index <= indicator.lookback; index++) {
                 if (indicator.receiveData(sourceData.close[index])) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "upperBand": 0, "middleBand": 0, "lowerBand": 0 };
+                    indicatorResults[idx].upperBand = indicator.upperBand;
+                    indicatorResults[idx].middleBand = indicator.middleBand;
+                    indicatorResults[idx].lowerBand = indicator.lowerBand;
                     idx++;
                 }
             }

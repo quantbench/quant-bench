@@ -11,7 +11,7 @@ describe("MACDBANDS Indicator", () => {
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.MACD;
-    let indicatorResults: indicators.MACDResult[];
+    let indicatorResults: { macd: number, signal: number, histogram: number }[];
     let indicatorOnDataRasied: boolean = false;
     let fastTimePeriod: number = 12;
     let slowTimePeriod: number = 26;
@@ -22,7 +22,7 @@ describe("MACDBANDS Indicator", () => {
         taResultFile = path.resolve("./test/talib-results/macd.json");
         sourceData = jsonfile.readFileSync(sourceFile);
         taResultData = jsonfile.readFileSync(taResultFile);
-        indicatorResults = new Array<indicators.MACDResult>(sourceData.close.length - taResultData.begIndex);
+        indicatorResults = new Array<{ macd: number, signal: number, histogram: number }>(sourceData.close.length - taResultData.begIndex);
     });
 
     describe("when constructing", () => {
@@ -136,7 +136,10 @@ describe("MACDBANDS Indicator", () => {
             let idx = 0;
             sourceData.close.forEach((value: number, index: number) => {
                 if (indicator.receiveData(sourceData.close[index])) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "macd": 0, "signal": 0, "histogram": 0 };
+                    indicatorResults[idx].macd = indicator.macd;
+                    indicatorResults[idx].signal = indicator.signal;
+                    indicatorResults[idx].histogram = indicator.histogram;
                     idx++;
                 }
             });
@@ -175,7 +178,10 @@ describe("MACDBANDS Indicator", () => {
 
             for (let index = 0; index < indicator.lookback; index++) {
                 if (indicator.receiveData(sourceData.close[index])) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "macd": 0, "signal": 0, "histogram": 0 };
+                    indicatorResults[idx].macd = indicator.macd;
+                    indicatorResults[idx].signal = indicator.signal;
+                    indicatorResults[idx].histogram = indicator.histogram;
                     idx++;
                 }
             }
@@ -201,7 +207,10 @@ describe("MACDBANDS Indicator", () => {
 
             for (let index = 0; index <= indicator.lookback; index++) {
                 if (indicator.receiveData(sourceData.close[index])) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "macd": 0, "signal": 0, "histogram": 0 };
+                    indicatorResults[idx].macd = indicator.macd;
+                    indicatorResults[idx].signal = indicator.signal;
+                    indicatorResults[idx].histogram = indicator.histogram;
                     idx++;
                 }
             }

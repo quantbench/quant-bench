@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class KAMA
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static KAMA_INDICATOR_NAME: string = "KAMA";
-    static KAMA_INDICATOR_DESCR: string = "Kaufman Adaptive Moving Average";
+    static INDICATOR_NAME: string = "KAMA";
+    static INDICATOR_DESCR: string = "Kaufman Adaptive Moving Average";
 
     constructor() {
-        super(KAMA.KAMA_INDICATOR_NAME, KAMA.KAMA_INDICATOR_DESCR);
+        super(KAMA.INDICATOR_NAME, KAMA.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

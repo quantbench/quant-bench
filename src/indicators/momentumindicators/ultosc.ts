@@ -1,16 +1,14 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class ULTOSC
-    extends AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
-    static ULTOSC_INDICATOR_NAME: string = "ULTOSC";
-    static ULTOSC_INDICATOR_DESCR: string = "Ultimate Oscillator";
+    static INDICATOR_NAME: string = "ULTOSC";
+    static INDICATOR_DESCR: string = "Ultimate Oscillator";
 
     constructor() {
-        super(ULTOSC.ULTOSC_INDICATOR_NAME, ULTOSC.ULTOSC_INDICATOR_DESCR);
+        super(ULTOSC.INDICATOR_NAME, ULTOSC.INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

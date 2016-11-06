@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class ATAN
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static ATAN_INDICATOR_NAME: string = "ATAN";
-    static ATAN_INDICATOR_DESCR: string = "Vector Trigonometric ATan";
+    static INDICATOR_NAME: string = "ATAN";
+    static INDICATOR_DESCR: string = "Vector Trigonometric ATan";
 
     constructor() {
-        super(ATAN.ATAN_INDICATOR_NAME, ATAN.ATAN_INDICATOR_DESCR);
+        super(ATAN.INDICATOR_NAME, ATAN.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

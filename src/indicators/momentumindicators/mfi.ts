@@ -2,8 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class MFI
-    extends indicators.AbstractIndicator<marketData.IPriceVolumeBar, number>
-    implements indicators.IIndicator<marketData.IPriceVolumeBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceVolumeBar> {
 
     static INDICATOR_NAME: string = "MFI";
     static INDICATOR_DESCR: string = "Money Flow Index";

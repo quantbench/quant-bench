@@ -1,10 +1,7 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class ROC
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "ROC";
     static INDICATOR_DESCR: string = "Rate of change : ((price/prevPrice)-1)*100";

@@ -1,16 +1,14 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class CDLSHORTLINE
-    extends AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
-    static CDLSHORTLINE_INDICATOR_NAME: string = "CDLSHORTLINE";
-    static CDLSHORTLINE_INDICATOR_DESCR: string = "Short Line Candle";
+    static INDICATOR_NAME: string = "CDLSHORTLINE";
+    static INDICATOR_DESCR: string = "Short Line Candle";
 
     constructor() {
-        super(CDLSHORTLINE.CDLSHORTLINE_INDICATOR_NAME, CDLSHORTLINE.CDLSHORTLINE_INDICATOR_DESCR);
+        super(CDLSHORTLINE.INDICATOR_NAME, CDLSHORTLINE.INDICATOR_DESCR);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {

@@ -1,8 +1,7 @@
 import * as indicators from "../";
 
 export class MOM
-    extends indicators.AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "MOM";
     static INDICATOR_DESCR: string = "Momentum";

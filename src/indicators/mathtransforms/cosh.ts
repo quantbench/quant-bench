@@ -1,16 +1,13 @@
 import * as indicators from "../";
 
-import { AbstractIndicator } from "../abstractIndicator";
-
 export class COSH
-    extends AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
-    static COSH_INDICATOR_NAME: string = "COSH";
-    static COSH_INDICATOR_DESCR: string = "Vector Trigonometric Cosh";
+    static INDICATOR_NAME: string = "COSH";
+    static INDICATOR_DESCR: string = "Vector Trigonometric Cosh";
 
     constructor() {
-        super(COSH.COSH_INDICATOR_NAME, COSH.COSH_INDICATOR_DESCR);
+        super(COSH.INDICATOR_NAME, COSH.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

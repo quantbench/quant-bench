@@ -1,8 +1,7 @@
 import * as indicators from "../";
 
 export class TEMA
-    extends indicators.AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "TEMA";
     static INDICATOR_DESCR: string = "Triple Exponential Moving Average";

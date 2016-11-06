@@ -2,8 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class OBV
-    extends indicators.AbstractIndicator<marketData.IPriceVolumeBar, number>
-    implements indicators.IIndicator<marketData.IPriceVolumeBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceVolumeBar> {
 
     static INDICATOR_NAME: string = "OBV";
     static INDICATOR_DESCR: string = "On Balance Volume";

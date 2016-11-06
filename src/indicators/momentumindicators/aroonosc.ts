@@ -1,10 +1,8 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { AbstractIndicator } from "../abstractIndicator";
 
 export class AROONOSC
-    extends AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
     static INDICATOR_NAME: string = "AROONOSC";
     static INDICATOR_DESCR: string = "Aroon Oscillator";
@@ -25,7 +23,7 @@ export class AROONOSC
         this.timePeriod = timePeriod;
 
         this.aroon = new indicators.AROON(timePeriod);
-        this.aroon.on("data", (data: indicators.AROONResult) => this.receiveAROONData(data));
+        this.aroon.on("data", (aroonUpData: number, aroonDownData: number) => this.receiveAROONData(aroonUpData, aroonDownData));
         this.setLookBack(timePeriod);
     }
 
@@ -34,7 +32,7 @@ export class AROONOSC
         return this.isReady;
     }
 
-    private receiveAROONData(data: indicators.AROONResult) {
-        this.setCurrentValue(data.aroonUp - data.aroonDown);
+    private receiveAROONData(aroonUpData: number, aroonDownData: number) {
+        this.setCurrentValue(aroonUpData - aroonDownData);
     }
 }

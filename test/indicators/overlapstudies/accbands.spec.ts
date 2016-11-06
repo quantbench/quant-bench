@@ -11,7 +11,7 @@ describe("ACCBANDS Indicator", () => {
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.ACCBANDS;
-    let indicatorResults: indicators.TradingBand[];
+    let indicatorResults: { upperBand: number, middleBand: number, lowerBand: number }[];
     let indicatorOnDataRasied: boolean = false;
     let timePeriod = 20;
 
@@ -21,7 +21,8 @@ describe("ACCBANDS Indicator", () => {
         sourceData = jsonfile.readFileSync(sourceFile);
         taResultData = jsonfile.readFileSync(taResultFile);
 
-        indicatorResults = new Array<indicators.TradingBand>(sourceData.close.length - taResultData.begIndex);
+        indicatorResults = new Array<{ upperBand: number, middleBand: number, lowerBand: number }>(
+            sourceData.close.length - taResultData.begIndex);
     });
 
     describe("when constructing", () => {
@@ -90,7 +91,10 @@ describe("ACCBANDS Indicator", () => {
                     "open": sourceData.open[index],
                     "close": sourceData.close[index],
                 })) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "upperBand": 0, "middleBand": 0, "lowerBand": 0 };
+                    indicatorResults[idx].upperBand = indicator.upperBand;
+                    indicatorResults[idx].middleBand = indicator.middleBand;
+                    indicatorResults[idx].lowerBand = indicator.lowerBand;
                     idx++;
                 }
             });
@@ -133,7 +137,10 @@ describe("ACCBANDS Indicator", () => {
 
             for (let index = 0; index < indicator.lookback; index++) {
                 if (indicator.receiveData(sourceData.close[index])) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "upperBand": 0, "middleBand": 0, "lowerBand": 0 };
+                    indicatorResults[idx].upperBand = indicator.upperBand;
+                    indicatorResults[idx].middleBand = indicator.middleBand;
+                    indicatorResults[idx].lowerBand = indicator.lowerBand;
                     idx++;
                 }
             }
@@ -159,7 +166,10 @@ describe("ACCBANDS Indicator", () => {
 
             for (let index = 0; index <= indicator.lookback; index++) {
                 if (indicator.receiveData(sourceData.close[index])) {
-                    indicatorResults[idx] = indicator.currentValue;
+                    indicatorResults[idx] = { "upperBand": 0, "middleBand": 0, "lowerBand": 0 };
+                    indicatorResults[idx].upperBand = indicator.upperBand;
+                    indicatorResults[idx].middleBand = indicator.middleBand;
+                    indicatorResults[idx].lowerBand = indicator.lowerBand;
                     idx++;
                 }
             }

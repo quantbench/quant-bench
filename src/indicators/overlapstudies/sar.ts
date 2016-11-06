@@ -2,8 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class SAR
-    extends indicators.AbstractIndicator<marketData.IPriceBar, number>
-    implements indicators.IIndicator<marketData.IPriceBar, number> {
+    extends indicators.AbstractIndicator<marketData.IPriceBar> {
 
     static INDICATOR_NAME: string = "SAR";
     static INDICATOR_DESCR: string = "Parabolic SAR";

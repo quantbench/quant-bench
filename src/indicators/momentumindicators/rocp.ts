@@ -1,8 +1,7 @@
 import * as indicators from "../";
 
 export class ROCP
-    extends indicators.AbstractIndicator<number, number>
-    implements indicators.IIndicator<number, number> {
+    extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "ROCP";
     static INDICATOR_DESCR: string = "Rate of change Percentage: (price-prevPrice)/prevPrice";

@@ -1,19 +1,8 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class AROONResult {
-    aroonUp: number;
-    aroonDown: number;
-
-    constructor(aroonUp: number, aroonDown: number) {
-        this.aroonUp = aroonUp;
-        this.aroonDown = aroonDown;
-    }
-}
-
 export class AROON
-    extends indicators.AbstractIndicator<marketData.IPriceBar, AROONResult>
-    implements indicators.IIndicator<marketData.IPriceBar, AROONResult> {
+    extends indicators.AbstractIndicatorBase<marketData.IPriceBar> {
 
     static INDICATOR_NAME: string = "AROON";
     static INDICATOR_DESCR: string = "Aroon";
@@ -21,6 +10,9 @@ export class AROON
     static TIMEPERIOD_MIN: number = 2;
 
     public timePeriod: number;
+
+    private aroonUpInternal: number;
+    private aroonDownInternal: number;
 
     private aroonFactor: number;
     private periodCounter: number;
@@ -33,6 +25,9 @@ export class AROON
         if (timePeriod < AROON.TIMEPERIOD_MIN) {
             throw (new Error(indicators.generateMinTimePeriodError(this.name, AROON.TIMEPERIOD_MIN, timePeriod)));
         }
+
+        this.aroonUpInternal = 0;
+        this.aroonDownInternal = 0;
 
         this.timePeriod = timePeriod;
         this.periodCounter = (this.timePeriod + 1) * -1;
@@ -55,7 +50,7 @@ export class AROON
 
         if (this.periodCounter >= 0) {
             let aroonUp: number = 0;
-            let aroonDwn: number = 0;
+            let aroonDown: number = 0;
 
             let highValue = Number.MIN_VALUE;
             let highIdx = -1;
@@ -86,11 +81,26 @@ export class AROON
             let daysSinceLow = lowIdx;
 
             aroonUp = this.aroonFactor * (this.lookback - daysSinceHigh);
-            aroonDwn = this.aroonFactor * (this.lookback - daysSinceLow);
+            aroonDown = this.aroonFactor * (this.lookback - daysSinceLow);
 
-            this.setCurrentValue(new AROONResult(aroonUp, aroonDwn));
+            this.setCurrentValue(aroonUp, aroonDown);
         }
 
         return this.isReady;
+    }
+
+    public get aroonUp(): number {
+        return this.aroonUpInternal;
+    }
+
+    public get aroonDown(): number {
+        return this.aroonDownInternal;
+    }
+
+    protected setCurrentValue(aroonUp: number, aroonDown: number) {
+        this.aroonDownInternal = aroonDown;
+        this.aroonUpInternal = aroonUp;
+        this.emit("data", this.aroonUp, this.aroonDown);
+        this.setIsReady();
     }
 }

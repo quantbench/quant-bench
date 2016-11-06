@@ -1,20 +1,7 @@
 import * as indicators from "../";
 
-export class MACDResult {
-    macd: number;
-    signal: number;
-    histogram: number;
-
-    constructor(macd: number, signal: number, histogram: number) {
-        this.macd = macd;
-        this.signal = signal;
-        this.histogram = histogram;
-    }
-}
-
 export class MACD
-    extends indicators.AbstractIndicator<number, MACDResult>
-    implements indicators.IIndicator<number, MACDResult> {
+    extends indicators.AbstractIndicatorBase<number> {
 
     static INDICATOR_NAME: string = "MACD";
     static INDICATOR_DESCR: string = "Moving Average Convergence/Divergence";
@@ -28,6 +15,10 @@ export class MACD
     public fastTimePeriod: number;
     public slowTimePeriod: number;
     public signalTimePeriod: number;
+
+    private macdInternal: number;
+    private signalInternal: number;
+    private histogramInternal: number;
 
     private emaSlow: indicators.EMA;
     private emaFast: indicators.EMA;
@@ -55,6 +46,10 @@ export class MACD
             throw (new Error(indicators.generateMinTimePeriodError(this.name, MACD.SIGNAL_TIMEPERIOD_MIN, signalTimePeriod)));
         }
 
+        this.macdInternal = 0;
+        this.signalInternal = 0;
+        this.histogramInternal = 0;
+
         this.emaSlowSkip = slowTimePeriod - fastTimePeriod;
         this.emaFast = new indicators.EMA(fastTimePeriod);
         this.emaFast.on("data", (data: number) => this.receiveEmaFastData(data));
@@ -81,6 +76,26 @@ export class MACD
         return this.isReady;
     }
 
+    public get macd(): number {
+        return this.macdInternal;
+    }
+
+    public get signal(): number {
+        return this.signalInternal;
+    }
+
+    public get histogram(): number {
+        return this.histogramInternal;
+    }
+
+    protected setCurrentValue(macd: number, signal: number, histogram: number) {
+        this.macdInternal = macd;
+        this.signalInternal = signal;
+        this.histogramInternal = histogram;
+        this.emit("data", this.macd, this.signal, this.histogram);
+        this.setIsReady();
+    }
+
     private receiveEmaSlowData(data: number) {
         this.currentSlowEma = data;
         this.currentMacd = this.currentFastEma - this.currentSlowEma;
@@ -98,6 +113,6 @@ export class MACD
         let macd: number = this.currentFastEma - this.currentSlowEma;
         let signal: number = data;
         let histogram: number = macd - signal;
-        this.setCurrentValue(new MACDResult(macd, signal, histogram));
+        this.setCurrentValue(macd, signal, histogram);
     }
 }
