@@ -35,8 +35,8 @@ export class WILLR
         this.periodLowHistory.enqueue(inputData.low);
 
         if (this.periodCounter >= 0) {
-            let highestHigh = this.getQueueMax(this.periodHighHistory);
-            let lowestLow = this.getQueueMin(this.periodLowHistory);
+            let highestHigh = indicators.getQueueMax(this.periodHighHistory);
+            let lowestLow = indicators.getQueueMin(this.periodLowHistory);
             this.setCurrentValue((highestHigh - inputData.close) / (highestHigh - lowestLow) * -100.0);
         }
 
@@ -48,27 +48,5 @@ export class WILLR
             this.periodLowHistory.dequeue();
         }
         return this.isReady;
-    }
-
-    private getQueueMin(queue: indicators.Queue<number>) {
-        let min = Number.MAX_VALUE;
-        queue.toArray().forEach((value) => {
-            if (min > value) {
-                min = value;
-            }
-        });
-
-        return min;
-    }
-
-    private getQueueMax(queue: indicators.Queue<number>) {
-        let max = Number.MIN_VALUE;
-        queue.toArray().forEach((value) => {
-            if (max < value) {
-                max = value;
-            }
-        });
-
-        return max;
     }
 }

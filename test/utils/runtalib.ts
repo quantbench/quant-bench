@@ -23,6 +23,12 @@ config.forEach((item: any) => {
         if (dataInput === "inReal") {
             parameters.inReal = marketData.close;
         }
+        if (dataInput === "inReal0") {
+            parameters.inReal0 = marketData.high;
+        }
+        if (dataInput === "inReal1") {
+            parameters.inReal1 = marketData.low;
+        }
         if (dataInput === "high") {
             parameters.high = marketData.high;
         }

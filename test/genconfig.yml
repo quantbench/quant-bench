@@ -1,4 +1,81 @@
 -
+    name: ADD
+    data_inputs:
+        - inReal0
+        - inReal1
+    inputs:
+    group: math-operators
+-
+    name: DIV
+    data_inputs:
+        - inReal0
+        - inReal1
+    inputs:
+    group: math-operators
+-
+    name: MAX
+    data_inputs:
+        - inReal
+    inputs:
+        optInTimePeriod: 30
+    group: math-operators
+-
+    name: MAXINDEX
+    data_inputs:
+        - inReal
+    inputs:
+        optInTimePeriod: 30
+    group: math-operators
+-
+    name: MIN
+    data_inputs:
+        - inReal
+    inputs:
+        optInTimePeriod: 30
+    group: math-operators
+-
+    name: MININDEX
+    data_inputs:
+        - inReal
+    inputs:
+        optInTimePeriod: 30
+    group: math-operators
+-
+    name: MINMAX
+    data_inputs:
+        - inReal
+    inputs:
+        optInTimePeriod: 30
+    group: math-operators
+-
+    name: MINMAXINDEX
+    data_inputs:
+        - inReal
+    inputs:
+        optInTimePeriod: 30
+    group: math-operators
+-
+    name: MULT
+    data_inputs:
+        - inReal0
+        - inReal1
+    inputs:
+    group: math-operators
+-
+    name: SUB
+    data_inputs:
+        - inReal0
+        - inReal1
+    inputs:
+    group: math-operators
+-
+    name: SUM
+    data_inputs:
+        - inReal
+    inputs:
+        optInTimePeriod: 30
+    group: math-operators
+-
     name: ACCBANDS
     data_inputs:
         - high
@@ -564,6 +641,13 @@
         - low
         - close
     inputs:
+    group: price-transform
+-
+    name: AVGDEV
+    data_inputs:
+        - inReal
+    inputs:
+        optInTimePeriod: 14
     group: price-transform
 -
     name: MEDPRICE

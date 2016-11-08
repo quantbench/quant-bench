@@ -3,7 +3,7 @@ let talib = require("talib");
 import * as fs from "fs";
 
 let groups = ["Overlap Studies", "Volatility Indicators", "Momentum Indicators", "Cycle Indicators",
-    "Volume Indicators", "Statistic Functions", "Price Transform"];
+    "Volume Indicators", "Statistic Functions", "Price Transform", "Math Operators"];
 let functions = talib.functions;
 let functionKeys = Object.keys(functions);
 
@@ -12,7 +12,7 @@ let excludes: string[] = ["IMI", "TA_AVGDEV"];
 functionKeys.forEach((func: any) => {
     let funcExplain = talib.explain(functions[func].name);
 
-    if (groups.indexOf(functions[func].group) !== -1) {
+    if (groups.indexOf(functions[func].group) !== -1 && excludes.indexOf(functions[func].name) === -1) {
         let config = {
             "name": funcExplain.name,
             "data_inputs": new Array<string>(),
@@ -47,7 +47,7 @@ functionKeys.forEach((func: any) => {
             }
         });
 
-        if (!excludes.indexOf(config.name)) {
+        if (excludes.indexOf(config.name) === -1) {
             configs.push(config);
         }
     }

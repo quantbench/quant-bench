@@ -4,8 +4,6 @@ export * from "./max";
 export * from "./maxindex";
 export * from "./min";
 export * from "./minindex";
-export * from "./minmax";
-export * from "./minmaxindex";
 export * from "./mult";
 export * from "./sub";
 export * from "./sum";

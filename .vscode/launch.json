@@ -5,7 +5,7 @@
             "name": "Launch",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/lib/test/go.js",
+            "program": "${workspaceRoot}/lib/test/utils/runtalib.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
