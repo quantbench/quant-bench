@@ -3,7 +3,7 @@ let talib = require("talib");
 import * as fs from "fs";
 
 let groups = ["Overlap Studies", "Volatility Indicators", "Momentum Indicators", "Cycle Indicators",
-    "Volume Indicators", "Statistic Functions", "Price Transform", "Math Operators"];
+    "Volume Indicators", "Statistic Functions", "Price Transform", "Math Operators", "Math Transform"];
 let functions = talib.functions;
 let functionKeys = Object.keys(functions);
 

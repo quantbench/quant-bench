@@ -11,6 +11,7 @@ export class SINH
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.sinh(inputData));
         return this.isReady;
     }
 }

@@ -11,6 +11,7 @@ export class SIN
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.sin(inputData));
         return this.isReady;
     }
 }

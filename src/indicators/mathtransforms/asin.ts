@@ -11,6 +11,7 @@ export class ASIN
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.asin(inputData));
         return this.isReady;
     }
 }

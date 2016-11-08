@@ -11,6 +11,7 @@ export class ACOS
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.acos(inputData));
         return this.isReady;
     }
 }

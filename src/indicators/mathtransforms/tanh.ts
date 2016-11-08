@@ -11,6 +11,7 @@ export class TANH
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.tanh(inputData));
         return this.isReady;
     }
 }

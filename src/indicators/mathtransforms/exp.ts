@@ -11,6 +11,7 @@ export class EXP
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.exp(inputData));
         return this.isReady;
     }
 }

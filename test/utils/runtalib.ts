@@ -20,33 +20,38 @@ config.forEach((item: any) => {
     };
 
     item.data_inputs.forEach((dataInput: string) => {
-        if (dataInput === "inReal") {
-            parameters.inReal = marketData.close;
-        }
-        if (dataInput === "inReal0") {
-            parameters.inReal0 = marketData.high;
-        }
-        if (dataInput === "inReal1") {
-            parameters.inReal1 = marketData.low;
-        }
-        if (dataInput === "high") {
-            parameters.high = marketData.high;
-        }
+        if (item.name === "ACOS" || item.name === "ASIN") {
+            let value = Math.cos(marketData.close);
+            parameters.inReal = value;
+        } else {
+            if (dataInput === "inReal") {
+                parameters.inReal = marketData.close;
+            }
+            if (dataInput === "inReal0") {
+                parameters.inReal0 = marketData.high;
+            }
+            if (dataInput === "inReal1") {
+                parameters.inReal1 = marketData.low;
+            }
+            if (dataInput === "high") {
+                parameters.high = marketData.high;
+            }
 
-        if (dataInput === "low") {
-            parameters.low = marketData.low;
-        }
+            if (dataInput === "low") {
+                parameters.low = marketData.low;
+            }
 
-        if (dataInput === "close") {
-            parameters.close = marketData.close;
-        }
+            if (dataInput === "close") {
+                parameters.close = marketData.close;
+            }
 
-        if (dataInput === "open") {
-            parameters.open = marketData.open;
-        }
+            if (dataInput === "open") {
+                parameters.open = marketData.open;
+            }
 
-        if (dataInput === "volume") {
-            parameters.volume = marketData.volume;
+            if (dataInput === "volume") {
+                parameters.volume = marketData.volume;
+            }
         }
     });
 

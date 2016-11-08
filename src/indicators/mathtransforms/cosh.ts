@@ -11,6 +11,7 @@ export class COSH
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.cosh(inputData));
         return this.isReady;
     }
 }

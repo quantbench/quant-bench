@@ -11,6 +11,7 @@ export class CEIL
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.ceil(inputData));
         return this.isReady;
     }
 }

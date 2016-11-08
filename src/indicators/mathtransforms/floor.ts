@@ -11,6 +11,7 @@ export class FLOOR
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.floor(inputData));
         return this.isReady;
     }
 }

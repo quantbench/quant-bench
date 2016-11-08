@@ -76,6 +76,96 @@
         optInTimePeriod: 30
     group: math-operators
 -
+    name: ACOS
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: ASIN
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: ATAN
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: CEIL
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: COS
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: COSH
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: EXP
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: FLOOR
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: LN
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: LOG10
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: SIN
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: SINH
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: SQRT
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: TAN
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
+    name: TANH
+    data_inputs:
+        - inReal
+    inputs:
+    group: math-transform
+-
     name: ACCBANDS
     data_inputs:
         - high

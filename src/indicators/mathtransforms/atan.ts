@@ -11,6 +11,7 @@ export class ATAN
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.atan(inputData));
         return this.isReady;
     }
 }

@@ -11,6 +11,7 @@ export class TAN
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.tan(inputData));
         return this.isReady;
     }
 }

@@ -11,6 +11,7 @@ export class LN
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.log(inputData));
         return this.isReady;
     }
 }

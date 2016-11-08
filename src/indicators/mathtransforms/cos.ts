@@ -11,6 +11,7 @@ export class COS
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.cos(inputData));
         return this.isReady;
     }
 }

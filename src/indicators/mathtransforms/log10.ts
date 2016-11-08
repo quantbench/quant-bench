@@ -11,6 +11,7 @@ export class LOG10
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.log10(inputData));
         return this.isReady;
     }
 }

@@ -11,6 +11,7 @@ export class SQRT
     }
 
     receiveData(inputData: number): boolean {
+        this.setCurrentValue(Math.sqrt(inputData));
         return this.isReady;
     }
 }
