@@ -11,11 +11,7 @@ export class DIV
     }
 
     receiveData(inputData1: number, inputData2: number): boolean {
-        if (inputData2 !== 0) {
-            this.setCurrentValue(inputData1 / inputData2);
-        } else {
-            this.setCurrentValue(0);
-        }
+        this.setCurrentValue(inputData1 / inputData2);
         return this.isReady;
     }
 }
