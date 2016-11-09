@@ -219,6 +219,7 @@
     "test/indicators/overlapstudies/midprice.spec.ts",
     "test/indicators/overlapstudies/sar.spec.ts",
     "test/indicators/overlapstudies/sma.spec.ts",
+    "test/indicators/overlapstudies/t3.spec.ts",
     "test/indicators/overlapstudies/tema.spec.ts",
     "test/indicators/overlapstudies/trima.spec.ts",
     "test/indicators/overlapstudies/wma.spec.ts",
