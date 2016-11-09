@@ -66,14 +66,14 @@ describe("ROC Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.ROC(1);
+                indicator = new indicators.ROC(0);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ROC.TIMEPERIOD_MIN, 1);
+            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ROC.TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });

@@ -6,7 +6,7 @@ export class ROCP
     static INDICATOR_NAME: string = "ROCP";
     static INDICATOR_DESCR: string = "Rate of change Percentage: (price-prevPrice)/prevPrice";
     static TIMEPERIOD_DEFAULT: number = 10;
-    static TIMEPERIOD_MIN: number = 2;
+    static TIMEPERIOD_MIN: number = 1;
 
     public timePeriod: number;
     private periodHistory: indicators.Queue<number>;

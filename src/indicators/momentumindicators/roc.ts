@@ -6,7 +6,7 @@ export class ROC
     static INDICATOR_NAME: string = "ROC";
     static INDICATOR_DESCR: string = "Rate of change : ((price/prevPrice)-1)*100";
     static TIMEPERIOD_DEFAULT: number = 10;
-    static TIMEPERIOD_MIN: number = 2;
+    static TIMEPERIOD_MIN: number = 1;
 
     public timePeriod: number;
     private periodHistory: indicators.Queue<number>;

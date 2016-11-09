@@ -66,14 +66,14 @@ describe("ROCR Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.ROCR(1);
+                indicator = new indicators.ROCR(0);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ROCR.TIMEPERIOD_MIN, 1);
+            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ROCR.TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });

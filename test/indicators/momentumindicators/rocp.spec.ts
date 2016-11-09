@@ -66,14 +66,14 @@ describe("ROCP Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.ROCP(1);
+                indicator = new indicators.ROCP(0);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ROCP.TIMEPERIOD_MIN, 1);
+            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ROCP.TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });

@@ -6,7 +6,7 @@ export class ROCR
     static INDICATOR_NAME: string = "ROCR";
     static INDICATOR_DESCR: string = "Rate of change ratio: (price/prevPrice)";
     static TIMEPERIOD_DEFAULT: number = 10;
-    static TIMEPERIOD_MIN: number = 2;
+    static TIMEPERIOD_MIN: number = 1;
 
     public timePeriod: number;
     private periodHistory: indicators.Queue<number>;
