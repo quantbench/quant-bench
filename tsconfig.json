@@ -209,6 +209,7 @@
     "test/indicators/momentumindicators/rocr.spec.ts",
     "test/indicators/momentumindicators/rocr100.spec.ts",
     "test/indicators/momentumindicators/rsi.spec.ts",
+    "test/indicators/momentumindicators/trix.spec.ts",
     "test/indicators/momentumindicators/willr.spec.ts",
     "test/indicators/overlapstudies/accbands.spec.ts",
     "test/indicators/overlapstudies/bbands.spec.ts",
