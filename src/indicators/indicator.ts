@@ -5,3 +5,9 @@ export interface IIndicator<TInputType> {
 
     readonly lookback: number;
 }
+
+export interface INumericDataIndicator extends IIndicator<number> {
+    readonly currentValue: number;
+
+    receiveData(inputData: number): boolean;
+}
