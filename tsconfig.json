@@ -194,6 +194,7 @@
     "test/indicators/mathtransforms/acos.spec.ts",
     "test/indicators/momentumindicators/adx.spec.ts",
     "test/indicators/momentumindicators/adxr.spec.ts",
+    "test/indicators/momentumindicators/apo.spec.ts",
     "test/indicators/momentumindicators/aroon.spec.ts",
     "test/indicators/momentumindicators/aroonosc.spec.ts",
     "test/indicators/momentumindicators/cci.spec.ts",
