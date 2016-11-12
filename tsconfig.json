@@ -207,6 +207,7 @@
     "test/indicators/momentumindicators/mom.spec.ts",
     "test/indicators/momentumindicators/plus_di.spec.ts",
     "test/indicators/momentumindicators/plus_dm.spec.ts",
+    "test/indicators/momentumindicators/ppo.spec.ts",
     "test/indicators/momentumindicators/roc.spec.ts",
     "test/indicators/momentumindicators/rocp.spec.ts",
     "test/indicators/momentumindicators/rocr.spec.ts",
