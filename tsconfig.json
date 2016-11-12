@@ -211,6 +211,7 @@
     "test/indicators/momentumindicators/rocr100.spec.ts",
     "test/indicators/momentumindicators/rsi.spec.ts",
     "test/indicators/momentumindicators/stoch.spec.ts",
+    "test/indicators/momentumindicators/stochrsi.spec.ts",
     "test/indicators/momentumindicators/trix.spec.ts",
     "test/indicators/momentumindicators/ultosc.spec.ts",
     "test/indicators/momentumindicators/willr.spec.ts",
