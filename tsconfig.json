@@ -197,6 +197,7 @@
     "test/indicators/momentumindicators/apo.spec.ts",
     "test/indicators/momentumindicators/aroon.spec.ts",
     "test/indicators/momentumindicators/aroonosc.spec.ts",
+    "test/indicators/momentumindicators/bop.spec.ts",
     "test/indicators/momentumindicators/cci.spec.ts",
     "test/indicators/momentumindicators/dx.spec.ts",
     "test/indicators/momentumindicators/macd.spec.ts",
