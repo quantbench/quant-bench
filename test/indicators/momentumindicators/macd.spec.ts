@@ -5,7 +5,7 @@ let jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("MACDBANDS Indicator", () => {
+describe("MACD Indicator", () => {
     let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
