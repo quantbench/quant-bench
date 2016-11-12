@@ -1,16 +1,5 @@
 import * as indicators from "../";
-
-export enum MA_TYPE {
-    SMA,
-    EMA,
-    WMA,
-    DEMA,
-    TEMA,
-    TRIMA,
-    KAMA,
-    MAMA,
-    T3
-}
+import {MA_TYPE} from "../matype";
 
 export class MA
     extends indicators.AbstractIndicator<number> {
