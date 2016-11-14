@@ -262,6 +262,7 @@
     "test/utils/generateIndicatorTests.ts",
     "test/utils/generateIndicators.ts",
     "test/utils/runtalib.ts",
+    "test/utils/runtalibBeta.ts",
     "typings/index.d.ts"
   ]
 }

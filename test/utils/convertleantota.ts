@@ -10,7 +10,7 @@ let data = {
 };
 
 let lineReader = readline.createInterface({
-    "input": fs.createReadStream("./test/sourcedata/xom.csv"),
+    "input": fs.createReadStream("./test/sourcedata/cvx.csv"),
 });
 
 lineReader.on("line", (line: string) => {
@@ -24,7 +24,7 @@ lineReader.on("line", (line: string) => {
 
 lineReader.on("close", () => {
     let stringData = JSON.stringify(data);
-    fs.writeFile("./test/sourcedata/xom.json", stringData, "utf8", () => {
+    fs.writeFile("./test/sourcedata/sourcedata2.json", stringData, "utf8", () => {
         console.log("done");
     });
 });
