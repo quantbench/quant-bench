@@ -243,6 +243,7 @@
     "test/indicators/pricetransforms/medprice.spec.ts",
     "test/indicators/pricetransforms/typprice.spec.ts",
     "test/indicators/pricetransforms/wclprice.spec.ts",
+    "test/indicators/statisticfunctions/beta.spec.ts",
     "test/indicators/statisticfunctions/linearreg.spec.ts",
     "test/indicators/statisticfunctions/linearregangle.spec.ts",
     "test/indicators/statisticfunctions/linearregintercept.spec.ts",
