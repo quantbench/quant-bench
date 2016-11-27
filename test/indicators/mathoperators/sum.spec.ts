@@ -1,6 +1,6 @@
-import * as indicators from "../../../src/indicators/";
 import * as chai from "chai";
 import * as path from "path";
+import * as indicators from "../../../src/indicators/";
 let jsonfile = require("jsonfile");
 
 chai.should();

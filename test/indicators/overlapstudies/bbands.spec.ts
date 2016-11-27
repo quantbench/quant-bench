@@ -1,6 +1,6 @@
-import * as indicators from "../../../src/indicators/";
 import * as chai from "chai";
 import * as path from "path";
+import * as indicators from "../../../src/indicators/";
 let jsonfile = require("jsonfile");
 
 chai.should();
@@ -11,7 +11,7 @@ describe("BBANDS Indicator", () => {
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.BBANDS;
-    let indicatorResults: { upperBand: number, middleBand: number, lowerBand: number }[];
+    let indicatorResults: Array<{ upperBand: number, middleBand: number, lowerBand: number }>;
     let indicatorOnDataRasied: boolean = false;
     let timePeriod: number = 5;
 

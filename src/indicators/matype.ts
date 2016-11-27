@@ -6,6 +6,5 @@ export enum MA_TYPE {
     TEMA = 4,
     TRIMA = 5,
     KAMA = 6,
-    MAMA = 7,
-    T3 = 8
+    T3 = 8,
 }

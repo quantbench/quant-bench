@@ -17,6 +17,8 @@
         false
     ],
     "object-literal-key-quotes": [true, "always"],
-    "align": [false, "parameters"]
+    "object-literal-sort-keys": false,
+    "align": [false, "parameters"],
+    "prefer-for-of": false
   }
 }

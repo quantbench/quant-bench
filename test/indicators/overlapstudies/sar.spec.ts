@@ -1,6 +1,6 @@
-import * as indicators from "../../../src/indicators/";
 import * as chai from "chai";
 import * as path from "path";
+import * as indicators from "../../../src/indicators/";
 let jsonfile = require("jsonfile");
 
 chai.should();
@@ -69,23 +69,6 @@ describe("SAR Indicator", () => {
             indicator.accelerationFactorMax.should.equal(accelerationFactorMax);
         });
     });
-
-    // describe("when constructing with timePeriod less than the minimum", () => {
-    //     let exception: Error;
-
-    //     beforeEach(() => {
-    //         try {
-    //             indicator = new indicators.SAR(0);
-    //         } catch (error) {
-    //             exception = error;
-    //         }
-    //     });
-
-    //     it("should return a correctly formatted error", () => {
-    //         let message = indicators.generateMinTimePeriodError(indicator.name, indicators.SAR.TIMEPERIOD_MIN, 0);
-    //         exception.message.should.equal(message);
-    //     });
-    // });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {

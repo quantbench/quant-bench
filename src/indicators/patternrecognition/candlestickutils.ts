@@ -2,7 +2,7 @@ import * as marketData from "../../data/market/";
 
 export enum CandleColor {
     red,
-    black
+    black,
 }
 
 export class CandleStickUtils {

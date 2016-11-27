@@ -1,6 +1,6 @@
-import * as indicators from "../../../src/indicators/";
 import * as chai from "chai";
 import * as path from "path";
+import * as indicators from "../../../src/indicators/";
 let jsonfile = require("jsonfile");
 
 chai.should();
@@ -11,7 +11,7 @@ describe("AROON Indicator", () => {
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.AROON;
-    let indicatorResults: { aroonUp: number, aroonDown: number }[];
+    let indicatorResults: Array<{ aroonUp: number, aroonDown: number }>;
     let indicatorOnDataRasied: boolean = false;
     let timePeriod = 14;
 

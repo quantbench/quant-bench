@@ -1,6 +1,6 @@
-import * as indicators from "../../../src/indicators/";
 import * as chai from "chai";
 import * as path from "path";
+import * as indicators from "../../../src/indicators/";
 let jsonfile = require("jsonfile");
 
 chai.should();
@@ -11,7 +11,7 @@ describe("MACD Indicator", () => {
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.MACD;
-    let indicatorResults: { macd: number, signal: number, histogram: number }[];
+    let indicatorResults: Array<{ macd: number, signal: number, histogram: number }>;
     let indicatorOnDataRasied: boolean = false;
     let fastTimePeriod: number = 12;
     let slowTimePeriod: number = 26;

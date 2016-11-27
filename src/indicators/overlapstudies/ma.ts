@@ -39,11 +39,6 @@ export class MA
                 this.maType = MA_TYPE.KAMA;
                 this.setLookBack(this.ma.lookback);
                 break;
-            // case MA_TYPE.MAMA:
-            //     this.ma = new indicators.MAMA(this.timePeriod);
-            //     this.maType = MA_TYPE.MAMA;
-            //     this.setLookBack(this.ma.lookback);
-            //     break;
             case MA_TYPE.SMA:
                 this.ma = new indicators.SMA(this.timePeriod);
                 this.maType = MA_TYPE.SMA;

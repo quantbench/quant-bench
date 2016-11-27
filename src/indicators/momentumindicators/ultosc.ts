@@ -33,7 +33,7 @@ export class ULTOSC
 
     constructor(timePeriod1: number = ULTOSC.TIMEPERIOD1_DEFAULT,
         timePeriod2: number = ULTOSC.TIMEPERIOD2_DEFAULT,
-        timePeriod3: number = ULTOSC.TIMEPERIOD3_DEFAULT
+        timePeriod3: number = ULTOSC.TIMEPERIOD3_DEFAULT,
     ) {
         super(ULTOSC.INDICATOR_NAME, ULTOSC.INDICATOR_DESCR);
 

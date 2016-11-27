@@ -1,6 +1,6 @@
-import * as indicators from "../../../src/indicators/";
 import * as chai from "chai";
 import * as path from "path";
+import * as indicators from "../../../src/indicators/";
 let jsonfile = require("jsonfile");
 
 chai.should();
@@ -11,7 +11,7 @@ describe("STOCHRSI Indicator", () => {
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.STOCHRSI;
-    let indicatorResults: { fastK: number, fastD: number }[];
+    let indicatorResults: Array<{ fastK: number, fastD: number }>;
     let indicatorOnDataRasied: boolean = false;
     let timePeriod: number = 14;
     let fastKTimePeriod: number = 5;
