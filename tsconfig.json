@@ -95,6 +95,7 @@
     "src/indicators/overlapstudies/tema.ts",
     "src/indicators/overlapstudies/trima.ts",
     "src/indicators/overlapstudies/wma.ts",
+    "src/indicators/patternrecognition/candlestickutils.ts",
     "src/indicators/patternrecognition/cdl2crows.ts",
     "src/indicators/patternrecognition/cdl3blackcrows.ts",
     "src/indicators/patternrecognition/cdl3inside.ts",
@@ -244,6 +245,7 @@
     "test/indicators/pricetransforms/typprice.spec.ts",
     "test/indicators/pricetransforms/wclprice.spec.ts",
     "test/indicators/statisticfunctions/beta.spec.ts",
+    "test/indicators/statisticfunctions/correl.spec.ts",
     "test/indicators/statisticfunctions/linearreg.spec.ts",
     "test/indicators/statisticfunctions/linearregangle.spec.ts",
     "test/indicators/statisticfunctions/linearregintercept.spec.ts",
@@ -264,6 +266,7 @@
     "test/utils/generateIndicators.ts",
     "test/utils/runtalib.ts",
     "test/utils/runtalibBeta.ts",
+    "test/utils/runtalibCorrel.ts",
     "typings/index.d.ts"
   ]
 }
