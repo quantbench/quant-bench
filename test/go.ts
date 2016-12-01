@@ -1,39 +1,20 @@
-import * as chai from "chai";
-import * as path from "path";
-import * as indicators from "../src/indicators/";
-let jsonfile = require("jsonfile");
+import { SlidingWindow } from "../src/indicators/slidingWindow";
 
+import * as chai from "chai";
 chai.should();
 
-let sourceFile: string;
-let taResultFile: string;
-let sourceData: any;
-let taResultData: any;
-let indicator: indicators.LINEARREG;
-let indicatorResults: number[];
-let indicatorOnDataRasied: boolean = false;
-let timePeriod = 14;
+let windowSize = 5;
+let window: SlidingWindow<number> = null;
 
-sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
-taResultFile = path.resolve("./test/talib-results/linearreg.json");
-sourceData = jsonfile.readFileSync(sourceFile);
-taResultData = jsonfile.readFileSync(taResultFile);
-indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
+window = new SlidingWindow<number>(windowSize);
+window.clear();
+window.add(1);
+window.add(2);
+window.add(3);
 
-indicator = new indicators.LINEARREG(timePeriod);
-let idx = 0;
-indicatorOnDataRasied = false;
-indicator.on("data", () => {
-    indicatorOnDataRasied = true;
-});
-
-for (let index = 0; index <= indicator.lookback; index++) {
-    if (indicator.receiveData(sourceData.close[index])) {
-        indicatorResults[idx] = indicator.currentValue;
-        idx++;
-    }
-}
-
-indicator.isReady.should.equal(true);
-
-indicatorOnDataRasied.should.equal(true);
+let result = window.getItem(0);
+result.should.be.equal(3);
+result = window.getItem(2);
+result.should.be.equal(2);
+result = window.getItem(3);
+result.should.be.equal(1);

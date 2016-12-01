@@ -10,6 +10,7 @@ export * from "./momentumindicators/";
 export * from "./overlapstudies/";
 export * from "./patternrecognition/";
 export * from "./pricetransforms/";
+export * from "./slidingWindow";
 export * from "./statisticfunctions/";
 export * from "./volatilityindicators/";
 export * from "./volumeindicators/";
