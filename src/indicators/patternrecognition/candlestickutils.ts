@@ -1,44 +1,62 @@
 import * as marketData from "../../data/market/";
-
-export enum CandleColor {
-    red,
-    black,
-}
+import * as candleEnums from "./candleEnums";
+import { CandleSettings } from "./candleSettings";
 
 export class CandleStickUtils {
-    public static realBody(data: marketData.IPriceBar): number {
+    public static getRealBody(data: marketData.IPriceBar): number {
         return Math.abs(data.close - data.open);
     }
 
-    public static upperShadow(data: marketData.IPriceBar): number {
+    public static getUpperShadow(data: marketData.IPriceBar): number {
         return data.high - (data.close >= data.open ? data.close : data.open);
     }
 
-    public static lowerShadow(data: marketData.IPriceBar): number {
+    public static getLowerShadow(data: marketData.IPriceBar): number {
         return (data.close >= data.open ? data.open : data.close) - data.low;
     }
 
-    public static highLowRange(data: marketData.IPriceBar): number {
+    public static getHighLowRange(data: marketData.IPriceBar): number {
         return data.high - data.low;
     }
 
-    public static candleColor(data: marketData.IPriceBar): CandleColor {
-        return data.close >= data.open ? CandleColor.red : CandleColor.black;
+    public static getCandleColor(data: marketData.IPriceBar): candleEnums.CandleColor {
+        return data.close >= data.open ? candleEnums.CandleColor.White : candleEnums.CandleColor.Black;
     }
 
-    public static realBodyGapUp(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
+    public static getRealBodyGapUp(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
         return Math.min(secondBar.open, secondBar.close) > Math.max(firstBar.open, firstBar.close);
     }
 
-    public static realBodyGapDown(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
+    public static getRealBodyGapDown(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
         return Math.max(secondBar.open, secondBar.close) < Math.min(firstBar.open, firstBar.close);
     }
 
-    public static candleGapUp(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
+    public static getCandleGapUp(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
         return secondBar.low > firstBar.high;
     }
 
-    public static candleGapDown(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
+    public static getCandleGapDown(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
         return secondBar.high < firstBar.low;
+    }
+
+    public static getCandleRange(type: candleEnums.CandleSettingType, data: marketData.IPriceBar): number {
+        switch (CandleSettings.get(type).rangeType) {
+            case candleEnums.CandleRangeType.RealBody:
+                return CandleStickUtils.getRealBody(data);
+            case candleEnums.CandleRangeType.HighLow:
+                return CandleStickUtils.getHighLowRange(data);
+            case candleEnums.CandleRangeType.Shadows:
+                return CandleStickUtils.getUpperShadow(data) + CandleStickUtils.getLowerShadow(data);
+            default:
+                return 0;
+        }
+    }
+
+    public static getCandleAverage(type: candleEnums.CandleSettingType, sum: number, data: marketData.IPriceBar) {
+        let defaultSetting = CandleSettings.get(type);
+
+        return defaultSetting.factor *
+            (defaultSetting.averagePeriod !== 0 ? sum / defaultSetting.averagePeriod : CandleStickUtils.getCandleRange(type, data)) /
+            (defaultSetting.rangeType === candleEnums.CandleRangeType.Shadows ? 2.0 : 1.0);
     }
 }
