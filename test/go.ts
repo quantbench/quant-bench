@@ -9,17 +9,19 @@ let sourceFile: string;
 let taResultFile: string;
 let sourceData: any;
 let taResultData: any;
-let indicator: indicators.CDLDOJI;
+let indicator: indicators.CDLDOJISTAR;
 let indicatorResults: number[];
+let indicatorOnDataRasied: boolean = false;
 
 sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
-taResultFile = path.resolve("./test/talib-results/cdldoji.json");
+taResultFile = path.resolve("./test/talib-results/cdldojistar.json");
 sourceData = jsonfile.readFileSync(sourceFile);
 taResultData = jsonfile.readFileSync(taResultFile);
 
-indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
+indicatorResults = new Array<number>(
+    sourceData.close.length - taResultData.begIndex);
 
-indicator = new indicators.CDLDOJI();
+indicator = new indicators.CDLDOJISTAR();
 let idx = 0;
 sourceData.close.forEach((value: number, index: number) => {
     if (indicator.receiveData({
@@ -32,8 +34,3 @@ sourceData.close.forEach((value: number, index: number) => {
         idx++;
     }
 });
-
-for (let i = 0; i < taResultData.result.outRealUpperBand.length; i++) {
-    isNaN(indicatorResults[i]).should.be.false;
-    taResultData.result.outInteger[i].should.be.closeTo(indicatorResults[i], 0.001);
-}
