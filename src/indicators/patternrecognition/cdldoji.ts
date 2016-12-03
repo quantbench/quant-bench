@@ -3,7 +3,7 @@ import * as marketData from "../../data/market/";
 import { SlidingWindow } from "../slidingWindow";
 import * as candleEnums from "./candleEnums";
 import { CandleSettings } from "./candleSettings";
-import { CandleStickUtils } from "./candlestickutils";
+import { CandleStickUtils } from "./candleUtils";
 
 export class CDLDOJI
     extends indicators.AbstractIndicator<marketData.IPriceBar> {
@@ -12,25 +12,25 @@ export class CDLDOJI
     static INDICATOR_DESCR: string = "Doji";
 
     private bodyDojiPeriodTotal: number;
-    private bodyDojiTrailingIdx: number;
+    private bodyDojiAveragePeriod: number;
     private periodCounter: number;
     private slidingWindow: SlidingWindow<marketData.IPriceBar>;
 
     constructor() {
         super(CDLDOJI.INDICATOR_NAME, CDLDOJI.INDICATOR_DESCR);
 
-        this.bodyDojiTrailingIdx = CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod;
+        this.bodyDojiAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod;
         this.bodyDojiPeriodTotal = 0;
-        this.periodCounter = 0;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(this.bodyDojiTrailingIdx + 1);
-        this.setLookBack(this.bodyDojiTrailingIdx);
+        this.periodCounter = -1;
+        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(this.bodyDojiAveragePeriod + 1);
+        this.setLookBack(this.bodyDojiAveragePeriod);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {
         this.periodCounter++;
         this.slidingWindow.add(inputData);
 
-        if (this.periodCounter < this.bodyDojiTrailingIdx) {
+        if (this.periodCounter < this.lookback) {
             this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
         } else {
             let realBody = CandleStickUtils.getRealBody(inputData);
@@ -40,7 +40,7 @@ export class CDLDOJI
 
             this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData) -
                 CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji,
-                    this.slidingWindow.getItem(this.bodyDojiTrailingIdx));
+                    this.slidingWindow.getItem(this.bodyDojiAveragePeriod));
         }
 
         return this.isReady;

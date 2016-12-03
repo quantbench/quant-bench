@@ -56,7 +56,8 @@ export class CandleStickUtils {
         let defaultSetting = CandleSettings.get(type);
 
         return defaultSetting.factor *
-            (defaultSetting.averagePeriod !== 0 ? sum / defaultSetting.averagePeriod : CandleStickUtils.getCandleRange(type, data)) /
+            (defaultSetting.averagePeriod !== 0 ? sum /
+                defaultSetting.averagePeriod : CandleStickUtils.getCandleRange(type, data)) /
             (defaultSetting.rangeType === candleEnums.CandleRangeType.Shadows ? 2.0 : 1.0);
     }
 }
