@@ -36,39 +36,54 @@ export class CDLDOJISTAR
         this.periodCounter++;
         this.slidingWindow.add(inputData);
 
-        if (this.periodCounter === 0) {
-            this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, inputData);
-        } else if (this.periodCounter < this.lookback) {
-            this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, inputData);
-            this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
-        } else {
-            // 1st: long real body
-            if (CandleStickUtils.getRealBody(this.slidingWindow.getItem(1)) >
+        if (this.periodCounter < this.lookback - 1) {
+            let realbody = CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, inputData);
+            this.bodyLongPeriodTotal += realbody;
+        }
+        if (this.periodCounter > 0 && this.periodCounter < this.lookback) {
+            let highlow = CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
+            this.bodyDojiPeriodTotal += highlow;
+        }
+
+        if (this.periodCounter >= this.lookback) {
+            let previousCandle: marketData.IPriceBar = this.slidingWindow.getItem(1);
+            let currentCandle = inputData;
+
+            let hasPreviousLongRealBody = CandleStickUtils.getRealBody(previousCandle) >
                 CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyLong,
                     this.bodyLongPeriodTotal,
-                    this.slidingWindow.getItem(1)) &&
+                    previousCandle);
+
+            let hasCurrentDoji = CandleStickUtils.getRealBody(currentCandle) <=
+                CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji,
+                    this.bodyDojiPeriodTotal, currentCandle);
+
+            let hasGapUp = CandleStickUtils.getRealBodyGapUp(previousCandle, currentCandle);
+            let hasGapDown = CandleStickUtils.getRealBodyGapDown(previousCandle, currentCandle);
+
+            let previousCandleColor = CandleStickUtils.getCandleColor(previousCandle);
+
+            // 1st: long real body
+            if (hasPreviousLongRealBody &&
                 // 2nd: doji
-                CandleStickUtils.getRealBody(inputData) <= CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji,
-                    this.bodyDojiPeriodTotal, inputData) &&
-                //      that gaps up if 1st is white
-                ((CandleStickUtils.getCandleColor(this.slidingWindow.getItem(1)) ===
-                    candleEnums.CandleColor.White && CandleStickUtils.getRealBodyGapUp(inputData, this.slidingWindow.getItem(1)))
+                hasCurrentDoji &&
+                // that gaps up if 1st is white
+                ((previousCandleColor === candleEnums.CandleColor.White && hasGapUp)
                     ||
-                    //      or down if 1st is black
-                    (CandleStickUtils.getCandleColor(this.slidingWindow.getItem(1)) ===
-                        candleEnums.CandleColor.Black && CandleStickUtils.getRealBodyGapDown(inputData, this.slidingWindow.getItem(1)))
+                    // or down if 1st is black
+                    (previousCandleColor === candleEnums.CandleColor.Black && hasGapDown)
                 )) {
-                this.setCurrentValue(-CandleStickUtils.getCandleColor(this.slidingWindow.getItem(1)));
+                this.setCurrentValue(-previousCandleColor * 100);
             } else {
                 this.setCurrentValue(0);
             }
 
             this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong,
-                this.slidingWindow.getItem(1)) -
+                previousCandle) -
                 CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong,
                     this.slidingWindow.getItem(this.bodyLongAveragePeriod + 1));
 
-            this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData) -
+            this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, currentCandle) -
                 CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji,
                     this.slidingWindow.getItem(this.bodyDojiAveragePeriod));
         }

@@ -32,7 +32,7 @@ export class SlidingWindow<TInputType> {
 
     getItem(index: number): TInputType {
         if (index >= this.data.length) {
-            throw new Error(SlidingWindow.INVALID_WINDOW_INDEX + this.data.length);
+            throw new Error(SlidingWindow.INVALID_WINDOW_INDEX + this.data.length + ": " + index);
         }
         return this.data[this.data.length - index - 1];
     }

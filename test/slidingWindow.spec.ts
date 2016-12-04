@@ -118,7 +118,7 @@ describe("Sliding Window", () => {
                 exception = error;
             }
 
-            exception.message.should.be.equal(SlidingWindow.INVALID_WINDOW_INDEX + 3);
+            exception.message.should.be.equal(SlidingWindow.INVALID_WINDOW_INDEX + 3 + ": 5");
         });
 
     });

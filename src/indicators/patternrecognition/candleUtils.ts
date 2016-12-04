@@ -23,20 +23,20 @@ export class CandleStickUtils {
         return data.close >= data.open ? candleEnums.CandleColor.White : candleEnums.CandleColor.Black;
     }
 
-    public static getRealBodyGapUp(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
-        return Math.min(secondBar.open, secondBar.close) > Math.max(firstBar.open, firstBar.close);
+    public static getRealBodyGapUp(previousBar: marketData.IPriceBar, currentBar: marketData.IPriceBar): boolean {
+        return Math.min(currentBar.open, currentBar.close) > Math.max(previousBar.open, previousBar.close);
     }
 
-    public static getRealBodyGapDown(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
-        return Math.max(secondBar.open, secondBar.close) < Math.min(firstBar.open, firstBar.close);
+    public static getRealBodyGapDown(previousBar: marketData.IPriceBar, currentBar: marketData.IPriceBar): boolean {
+        return Math.max(currentBar.open, currentBar.close) < Math.min(previousBar.open, previousBar.close);
     }
 
-    public static getCandleGapUp(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
-        return secondBar.low > firstBar.high;
+    public static getCandleGapUp(previousBar: marketData.IPriceBar, currentBar: marketData.IPriceBar): boolean {
+        return currentBar.low > previousBar.high;
     }
 
-    public static getCandleGapDown(firstBar: marketData.IPriceBar, secondBar: marketData.IPriceBar): boolean {
-        return secondBar.high < firstBar.low;
+    public static getCandleGapDown(previousBar: marketData.IPriceBar, currentBar: marketData.IPriceBar): boolean {
+        return currentBar.high < previousBar.low;
     }
 
     public static getCandleRange(type: candleEnums.CandleSettingType, data: marketData.IPriceBar): number {
