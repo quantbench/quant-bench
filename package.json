@@ -18,19 +18,19 @@
         "gulp-istanbul": "^1.1.1",
         "gulp-jasmine": "^2.4.2",
         "gulp-tsconfig-files": "^0.4.0",
-        "gulp-tslint": "^7.0.1",
+        "gulp-tslint": "7.0.1",
         "jasmine": "^2.5.2",
         "jasmine-console-reporter": "^1.2.7",
         "jsonfile": "^2.4.0",
-        "nunjucks": "^3.0.0",
-        "sinon": "^1.17.6",
+        "nunjucks": "3.0.0",
+        "sinon": "1.17.7",
         "sinon-chai": "^2.8.0",
         "talib": "^1.0.2",
-        "tslint": "^4.2.0",
+        "tslint": "4.2.0",
         "typescript": "^2.1.4"
     },
     "dependencies": {
-        "bluebird": "^3.4.7",
+        "bluebird": "3.4.7",
         "yamljs": "^0.2.8"
     }
 }
