@@ -46,12 +46,10 @@ export class CDL3INSIDE
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
-            if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyLongAveragePeriod - 2
-                && this.slidingWindow.samples < this.slidingWindow.period - 2) {
+            if (this.isFirstCandle()) {
                 this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, inputData);
             }
-            if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyShortAveragePeriod - 1
-                && this.slidingWindow.samples < this.slidingWindow.period - 1) {
+            if (this.isSecondCandle()) {
                 this.bodyShortPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyShort, inputData);
             }
             return this.isReady;
@@ -63,27 +61,11 @@ export class CDL3INSIDE
         this.currentCandleColor = CandleStickUtils.getCandleColor(this.currentCandle);
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
 
-        if (CandleStickUtils.getRealBody(this.firstCandle) >
-            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyLong,
-                this.bodyLongPeriodTotal, this.firstCandle) &&
-            (CandleStickUtils.getRealBody(this.secondCandle) <=
-                CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyShort,
-                    this.bodyShortPeriodTotal, this.secondCandle) &&
-                Math.max(this.secondCandle.close, this.secondCandle.open)
-                < Math.max(this.firstCandle.close, this.firstCandle.open) &&
-                Math.min(this.secondCandle.close, this.secondCandle.open)
-                > Math.min(this.firstCandle.close, this.firstCandle.open) && (
-                    (this.firstCandleColor === candleEnums.CandleColor.White &&
-                        this.currentCandleColor === candleEnums.CandleColor.Black &&
-                        this.currentCandle.close < this.firstCandle.open
-                    ) ||
-                    (this.firstCandleColor === candleEnums.CandleColor.Black &&
-                        this.currentCandleColor === candleEnums.CandleColor.White &&
-                        this.currentCandle.close > this.firstCandle.open)
-                )
-            )
-        ) {
-            this.setCurrentValue(CandleStickUtils.getCandleColor(this.firstCandle) * -100);
+        if (this.hasFirstCandleWithLongRealBody() &&
+            this.hasSecondCandleWithShortRealBody() &&
+            this.secondCandleIsEngulfedByFirst() &&
+            this.thirdCandleContinuesPatternOfFirstStrongly()) {
+            this.setCurrentValue(this.firstCandleColor * -100);
         } else {
             this.setCurrentValue(0);
         }
@@ -96,5 +78,44 @@ export class CDL3INSIDE
             this.secondCandle) - CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort,
                 this.slidingWindow.getItem(1 + this.bodyShortAveragePeriod));
         return this.isReady;
+    }
+
+    private isFirstCandle(): boolean {
+        return this.slidingWindow.samples >= this.slidingWindow.period - this.bodyLongAveragePeriod - 2
+            && this.slidingWindow.samples < this.slidingWindow.period - 2;
+    }
+
+    private isSecondCandle(): boolean {
+        return this.slidingWindow.samples >= this.slidingWindow.period - this.bodyShortAveragePeriod - 1
+            && this.slidingWindow.samples < this.slidingWindow.period - 1;
+    }
+
+    private hasFirstCandleWithLongRealBody(): boolean {
+        return CandleStickUtils.getRealBody(this.firstCandle) >
+            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyLong,
+                this.bodyLongPeriodTotal, this.firstCandle);
+    }
+
+    private hasSecondCandleWithShortRealBody(): boolean {
+        return CandleStickUtils.getRealBody(this.secondCandle) <=
+            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyShort,
+                this.bodyShortPeriodTotal, this.secondCandle);
+    }
+
+    private secondCandleIsEngulfedByFirst(): boolean {
+        return Math.max(this.secondCandle.close, this.secondCandle.open)
+            < Math.max(this.firstCandle.close, this.firstCandle.open) &&
+            Math.min(this.secondCandle.close, this.secondCandle.open)
+            > Math.min(this.firstCandle.close, this.firstCandle.open);
+    }
+
+    private thirdCandleContinuesPatternOfFirstStrongly(): boolean {
+        return (this.firstCandleColor === candleEnums.CandleColor.White &&
+            this.currentCandleColor === candleEnums.CandleColor.Black &&
+            this.currentCandle.close < this.firstCandle.open
+        ) ||
+            (this.firstCandleColor === candleEnums.CandleColor.Black &&
+                this.currentCandleColor === candleEnums.CandleColor.White &&
+                this.currentCandle.close > this.firstCandle.open);
     }
 }
