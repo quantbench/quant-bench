@@ -53,8 +53,7 @@ export class CDLBELTHOLD
 
         this.currentCandle = inputData;
         this.candleColor = CandleStickUtils.getCandleColor(this.currentCandle);
-        if (this.hasLongRealBody() && this.hasShortShadow()
-        ) {
+        if (this.hasLongRealBody() && this.hasShortShadow()) {
             this.setCurrentValue(this.candleColor * 100);
         } else {
             this.setCurrentValue(0);
