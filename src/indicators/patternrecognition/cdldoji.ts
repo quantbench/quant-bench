@@ -13,7 +13,6 @@ export class CDLDOJI
 
     private bodyDojiPeriodTotal: number;
     private bodyDojiAveragePeriod: number;
-    private periodCounter: number;
     private slidingWindow: SlidingWindow<marketData.IPriceBar>;
 
     constructor() {
@@ -21,27 +20,27 @@ export class CDLDOJI
 
         this.bodyDojiAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod;
         this.bodyDojiPeriodTotal = 0;
-        this.periodCounter = -1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(this.bodyDojiAveragePeriod + 1);
         this.setLookBack(this.bodyDojiAveragePeriod);
     }
 
     receiveData(inputData: marketData.IPriceBar): boolean {
-        this.periodCounter++;
         this.slidingWindow.add(inputData);
 
-        if (this.periodCounter < this.lookback) {
-            this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
-        } else {
-            let realBody = CandleStickUtils.getRealBody(inputData);
-            let average = CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji,
-                this.bodyDojiPeriodTotal, inputData);
-            this.setCurrentValue(realBody <= average ? 100 : 0);
-
-            this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData) -
-                CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji,
-                    this.slidingWindow.getItem(this.bodyDojiAveragePeriod));
+        if (!this.slidingWindow.isReady) {
+            if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyDojiAveragePeriod) {
+                this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
+            }
+            return this.isReady;
         }
+        let realBody = CandleStickUtils.getRealBody(inputData);
+        let average = CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji,
+            this.bodyDojiPeriodTotal, inputData);
+        this.setCurrentValue(realBody <= average ? 100 : 0);
+
+        this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData) -
+            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji,
+                this.slidingWindow.getItem(this.bodyDojiAveragePeriod));
 
         return this.isReady;
     }
