@@ -9,11 +9,11 @@ var JasmineConsoleReporter = require('jasmine-console-reporter');
 var del = require('del');
 
 var reporter = new JasmineConsoleReporter({
-    colors: 1, // (0|false)|(1|true)|2 
+    activity: false,
     cleanStack: 1, // (0|false)|(1|true)|2|3 
-    verbosity: 4, // (0|false)|1|2|(3|true)|4 
+    colors: 2, // (0|false)|(1|true)|2 
     listStyle: 'indent', // "flat"|"indent" 
-    activity: false
+    verbosity: 1, // (0|false)|1|2|(3|true)|4 
 });
 
 require('dotbin');
@@ -79,7 +79,7 @@ gulp.task("istanbul:pre-test", function () {
 gulp.task('test', gulp.series('istanbul:pre-test', function () {
     return gulp.src('lib/test/**/*.spec.js')
         .pipe(jasmine({
-            reporter: reporter
+            reporter: reporter,
         }))
         .pipe(istanbul.writeReports());
 }));
