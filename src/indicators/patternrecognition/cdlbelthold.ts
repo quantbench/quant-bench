@@ -1,7 +1,8 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { SlidingWindow } from "../slidingWindow";
 import * as candleEnums from "./candleEnums";
+
+import { SlidingWindow } from "../slidingWindow";
 import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
