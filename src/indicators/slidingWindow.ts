@@ -5,9 +5,11 @@ export class SlidingWindow<TInputType> {
 
     private data: TInputType[];
     private windowSize: number;
+    private numSamples: number;
 
     constructor(windowSize: number) {
         this.data = new Array<TInputType>();
+        this.numSamples = 0;
 
         if (windowSize < 1) {
             throw new Error(SlidingWindow.INVALID_WINDOW_SIZE);
@@ -23,8 +25,21 @@ export class SlidingWindow<TInputType> {
         return this.windowSize;
     }
 
+    get period(): number {
+        return this.windowSize;
+    }
+
+    get samples(): number {
+        return this.numSamples;
+    }
+
+    get isReady(): boolean {
+        return this.numSamples >= this.windowSize;
+    }
+
     add(valueToAdd: TInputType) {
         this.data.push(valueToAdd);
+        this.numSamples++;
         if (this.data.length > this.windowSize) {
             this.data.splice(0, 1);
         }
