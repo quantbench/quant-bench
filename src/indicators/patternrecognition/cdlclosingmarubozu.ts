@@ -53,23 +53,7 @@ export class CDLCLOSINGMARUBOZU
 
         this.currentCandle = inputData;
         this.candleColor = CandleStickUtils.getCandleColor(this.currentCandle);
-        if (CandleStickUtils.getRealBody(this.currentCandle) >
-            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyLong,
-                this.bodyLongPeriodTotal, this.currentCandle) && (
-                (
-                    this.candleColor === candleEnums.CandleColor.White &&
-                    CandleStickUtils.getUpperShadow(this.currentCandle) <
-                    CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.ShadowVeryShort,
-                        this.shadowVeryShortPeriodTotal, this.currentCandle)
-                )
-                || (
-                    this.candleColor === candleEnums.CandleColor.Black &&
-                    CandleStickUtils.getLowerShadow(this.currentCandle) <
-                    CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.ShadowVeryShort,
-                        this.shadowVeryShortPeriodTotal, this.currentCandle)
-                )
-            )
-        ) {
+        if (this.hasLongRealBody() && this.hasVeryShortShadow()) {
             this.setCurrentValue(this.candleColor * 100);
         } else {
             this.setCurrentValue(0);
@@ -84,5 +68,26 @@ export class CDLCLOSINGMARUBOZU
                 this.slidingWindow.getItem(this.shadowVeryShortAveragePeriod));
 
         return this.isReady;
+    }
+
+    private hasLongRealBody(): boolean {
+        return CandleStickUtils.getRealBody(this.currentCandle) >
+            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyLong,
+                this.bodyLongPeriodTotal, this.currentCandle);
+    }
+
+    private hasVeryShortShadow(): boolean {
+        return (
+            this.candleColor === candleEnums.CandleColor.White &&
+            CandleStickUtils.getUpperShadow(this.currentCandle) <
+            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.ShadowVeryShort,
+                this.shadowVeryShortPeriodTotal, this.currentCandle)
+        )
+            || (
+                this.candleColor === candleEnums.CandleColor.Black &&
+                CandleStickUtils.getLowerShadow(this.currentCandle) <
+                CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.ShadowVeryShort,
+                    this.shadowVeryShortPeriodTotal, this.currentCandle)
+            );
     }
 }
