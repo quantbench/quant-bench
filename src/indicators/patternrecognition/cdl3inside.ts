@@ -17,7 +17,7 @@ export class CDL3INSIDE
     private bodyShortAveragePeriod: number;
     private bodyShortPeriodTotal: number;
     private slidingWindow: SlidingWindow<marketData.IPriceBar>;
-    private currentCandle: marketData.IPriceBar;
+    private thirdCandle: marketData.IPriceBar;
     private secondCandle: marketData.IPriceBar;
     private firstCandle: marketData.IPriceBar;
     private currentCandleColor: candleEnums.CandleColor;
@@ -31,7 +31,7 @@ export class CDL3INSIDE
 
         this.bodyLongPeriodTotal = 0;
         this.bodyShortPeriodTotal = 0;
-        this.currentCandle = undefined;
+        this.thirdCandle = undefined;
         this.secondCandle = undefined;
         this.firstCandle = undefined;
         this.currentCandleColor = candleEnums.CandleColor.Black;
@@ -55,10 +55,10 @@ export class CDL3INSIDE
             return this.isReady;
         }
 
-        this.currentCandle = inputData;
         this.firstCandle = this.slidingWindow.getItem(2);
         this.secondCandle = this.slidingWindow.getItem(1);
-        this.currentCandleColor = CandleStickUtils.getCandleColor(this.currentCandle);
+        this.thirdCandle = inputData;
+        this.currentCandleColor = CandleStickUtils.getCandleColor(this.thirdCandle);
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
 
         if (this.hasFirstCandleWithLongRealBody() &&
@@ -112,10 +112,10 @@ export class CDL3INSIDE
     private thirdCandleContinuesPatternOfFirstStrongly(): boolean {
         return (this.firstCandleColor === candleEnums.CandleColor.White &&
             this.currentCandleColor === candleEnums.CandleColor.Black &&
-            this.currentCandle.close < this.firstCandle.open
+            this.thirdCandle.close < this.firstCandle.open
         ) ||
             (this.firstCandleColor === candleEnums.CandleColor.Black &&
                 this.currentCandleColor === candleEnums.CandleColor.White &&
-                this.currentCandle.close > this.firstCandle.open);
+                this.thirdCandle.close > this.firstCandle.open);
     }
 }
