@@ -33,15 +33,18 @@ export class CDLDOJI
             }
             return this.isReady;
         }
-        let realBody = CandleStickUtils.getRealBody(inputData);
-        let average = CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji,
-            this.bodyDojiPeriodTotal, inputData);
-        this.setCurrentValue(realBody <= average ? 100 : 0);
+
+        this.setCurrentValue(this.hasVerySmallRealBody(inputData) ? 100 : 0);
 
         this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData) -
             CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji,
                 this.slidingWindow.getItem(this.bodyDojiAveragePeriod));
 
         return this.isReady;
+    }
+
+    private hasVerySmallRealBody(currentCandle: marketData.IPriceBar): boolean {
+        return CandleStickUtils.getRealBody(currentCandle) <=
+            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji, this.bodyDojiPeriodTotal, currentCandle);
     }
 }
