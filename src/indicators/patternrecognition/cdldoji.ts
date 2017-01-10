@@ -28,9 +28,7 @@ export class CDLDOJI
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
-            if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyDojiAveragePeriod) {
-                this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
-            }
+            this.seedSlidingWindow(inputData);
             return this.isReady;
         }
 
@@ -41,6 +39,12 @@ export class CDLDOJI
                 this.slidingWindow.getItem(this.bodyDojiAveragePeriod));
 
         return this.isReady;
+    }
+
+    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+        if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyDojiAveragePeriod) {
+            this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
+        }
     }
 
     private hasVerySmallRealBody(currentCandle: marketData.IPriceBar): boolean {
