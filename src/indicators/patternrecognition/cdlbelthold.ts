@@ -40,14 +40,7 @@ export class CDLBELTHOLD
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
-            if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyLongAveragePeriod) {
-                this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, inputData);
-            }
-
-            if (this.slidingWindow.samples >= this.slidingWindow.period - this.shadowVeryShortAveragePeriod) {
-                this.shadowVeryShortPeriodTotal +=
-                    CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort, inputData);
-            }
+            this.seedSlidingWindow(inputData);
             return this.isReady;
         }
 
@@ -68,6 +61,17 @@ export class CDLBELTHOLD
                 this.slidingWindow.getItem(this.shadowVeryShortAveragePeriod));
 
         return this.isReady;
+    }
+
+    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+        if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyLongAveragePeriod) {
+            this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, inputData);
+        }
+
+        if (this.slidingWindow.samples >= this.slidingWindow.period - this.shadowVeryShortAveragePeriod) {
+            this.shadowVeryShortPeriodTotal +=
+                CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort, inputData);
+        }
     }
 
     private hasLongRealBody(): boolean {
