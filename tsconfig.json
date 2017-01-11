@@ -230,6 +230,7 @@
     "test/indicators/overlapstudies/tema.spec.ts",
     "test/indicators/overlapstudies/trima.spec.ts",
     "test/indicators/overlapstudies/wma.spec.ts",
+    "test/indicators/patternrecognition/cdl2crows.spec.ts",
     "test/indicators/patternrecognition/cdl3inside.spec.ts",
     "test/indicators/patternrecognition/cdlbelthold.spec.ts",
     "test/indicators/patternrecognition/cdlclosingmarabozu.spec.ts",
