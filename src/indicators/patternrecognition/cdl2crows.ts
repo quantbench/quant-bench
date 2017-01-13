@@ -48,12 +48,7 @@ export class CDL2CROWS
             return this.isReady;
         }
 
-        this.firstCandle = this.slidingWindow.getItem(2);
-        this.secondCandle = this.slidingWindow.getItem(1);
-        this.thirdCandle = inputData;
-        this.thirdCandleColor = CandleStickUtils.getCandleColor(this.thirdCandle);
-        this.secondCandleColor = CandleStickUtils.getCandleColor(this.secondCandle);
-        this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
+        this.populateCandleVariables();
 
         if (this.hasFirstWhiteCandleWithLongRealBody() &&
             this.hasSecondBlackCandleThatGapsUp() &&
@@ -69,6 +64,15 @@ export class CDL2CROWS
                 this.slidingWindow.getItem(this.bodyLongAveragePeriod));
 
         return this.isReady;
+    }
+
+    private populateCandleVariables() {
+        this.firstCandle = this.slidingWindow.getItem(2);
+        this.secondCandle = this.slidingWindow.getItem(1);
+        this.thirdCandle = this.slidingWindow.getItem(0);
+        this.thirdCandleColor = CandleStickUtils.getCandleColor(this.thirdCandle);
+        this.secondCandleColor = CandleStickUtils.getCandleColor(this.secondCandle);
+        this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
 
     private seedSlidingWindow(inputData: marketData.IPriceBar) {
