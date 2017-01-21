@@ -3,6 +3,7 @@ var tslint = require('gulp-tslint');
 var exec = require('child_process').exec;
 var istanbul = require("gulp-istanbul");
 var jasmine = require('gulp-jasmine');
+var jasmine_parallel = require('gulp-jasmine-parallel');
 var tsconfig = require('gulp-tsconfig-files');
 var JasmineConsoleReporter = require('jasmine-console-reporter');
 
@@ -93,3 +94,4 @@ gulp.task('test-and-build', gulp.series('build', 'istanbul:pre-test', function (
 gulp.task('watch', function () {
     gulp.watch('src/**/*.ts', ['build']);
 });
+

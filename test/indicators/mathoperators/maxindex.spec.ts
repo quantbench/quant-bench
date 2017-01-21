@@ -1,12 +1,12 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
+import { TestDataFactory } from "../../testData";
 let jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("MAXINDEX Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
@@ -15,9 +15,8 @@ describe("MAXINDEX Indicator", () => {
     let timePeriod = 30;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/maxindex.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
     });

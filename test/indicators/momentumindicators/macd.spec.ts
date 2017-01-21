@@ -1,12 +1,12 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
+import { TestDataFactory } from "../../testData";
 let jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("MACD Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
@@ -18,9 +18,8 @@ describe("MACD Indicator", () => {
     let signalTimePeriod: number = 9;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/macd.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<{ macd: number, signal: number, histogram: number }>(sourceData.close.length - taResultData.begIndex);
     });

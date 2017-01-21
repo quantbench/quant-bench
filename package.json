@@ -17,6 +17,7 @@
         "gulp": "github:gulpjs/gulp#4.0",
         "gulp-istanbul": "^1.1.1",
         "gulp-jasmine": "^2.4.2",
+        "gulp-jasmine-parallel": "^0.0.4",
         "gulp-tsconfig-files": "^0.4.0",
         "gulp-tslint": "7.0.1",
         "jasmine": "^2.5.2",

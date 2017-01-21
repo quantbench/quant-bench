@@ -1,12 +1,12 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
+import { TestDataFactory } from "../../testData";
 let jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("SAR Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
@@ -17,9 +17,8 @@ describe("SAR Indicator", () => {
     let accelerationFactorMax = 0.2;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/sar.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
     });

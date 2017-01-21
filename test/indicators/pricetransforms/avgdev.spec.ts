@@ -1,4 +1,5 @@
 // import * as indicators from "../../../src/indicators/";
+// import { TestDataFactory } from "../../testData";
 // import * as chai from "chai";
 // import * as path from "path";
 // let jsonfile = require("jsonfile");
@@ -6,7 +7,7 @@
 // chai.should();
 
 // describe("AVGDEV Indicator", () => {
-//     let sourceFile: string;
+// 
 //     let taResultFile: string;
 //     let sourceData: any;
 //     let taResultData: any;
@@ -16,9 +17,9 @@
 //     let timePeriod = 30;
 
 //     beforeEach(() => {
-//         sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
+// 
 //         taResultFile = path.resolve("./test/talib-results/avgdev.json");
-//         sourceData = jsonfile.readFileSync(sourceFile);
+//         sourceData = TestDataFactory.getInstance().sourceData;
 //         taResultData = jsonfile.readFileSync(taResultFile);
 //         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
 //     });
