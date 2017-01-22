@@ -44,6 +44,10 @@ export class CDL3STARSINSOUTH
         this.bodyLongPeriodTotal = 0;
         this.shadowLongPeriodTotal = 0;
         this.shadowVeryShortPeriodTotal = new Array<number>(2);
+        for (let i = 0; i < this.shadowVeryShortPeriodTotal.length; i++) {
+            this.shadowVeryShortPeriodTotal[i] = 0;
+        }
+
         this.bodyShortPeriodTotal = 0;
 
         this.thirdCandle = undefined;

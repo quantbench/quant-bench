@@ -30,6 +30,9 @@ export class CDL3BLACKCROWS
         this.shadowVeryShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyLong).averagePeriod;
 
         this.shadowVeryShortPeriodTotal = new Array<number>(3);
+        for (let i = 0; i < this.shadowVeryShortPeriodTotal.length; i++) {
+            this.shadowVeryShortPeriodTotal[i] = 0;
+        }
         this.fourthCandle = undefined;
         this.thirdCandle = undefined;
         this.secondCandle = undefined;

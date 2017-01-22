@@ -41,17 +41,17 @@ export class CDL3WHITESOLDIERS
         this.bodyShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyShort).averagePeriod;
 
         this.shadowVeryShortPeriodTotal = new Array<number>(3);
-        this.shadowVeryShortPeriodTotal[0] = 0;
-        this.shadowVeryShortPeriodTotal[1] = 0;
-        this.shadowVeryShortPeriodTotal[2] = 0;
+        for (let i = 0; i < this.shadowVeryShortPeriodTotal.length; i++) {
+            this.shadowVeryShortPeriodTotal[i] = 0;
+        }
         this.nearPeriodTotal = new Array<number>(3);
-        this.nearPeriodTotal[0] = 0;
-        this.nearPeriodTotal[1] = 0;
-        this.nearPeriodTotal[2] = 0;
+        for (let i = 0; i < this.nearPeriodTotal.length; i++) {
+            this.nearPeriodTotal[i] = 0;
+        }
         this.farPeriodTotal = new Array<number>(3);
-        this.farPeriodTotal[0] = 0;
-        this.farPeriodTotal[1] = 0;
-        this.farPeriodTotal[2] = 0;
+        for (let i = 0; i < this.farPeriodTotal.length; i++) {
+            this.farPeriodTotal[i] = 0;
+        }
         this.bodyShortPeriodTotal = 0;
 
         this.thirdCandle = undefined;

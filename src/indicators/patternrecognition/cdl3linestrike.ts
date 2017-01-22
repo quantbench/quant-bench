@@ -29,6 +29,10 @@ export class CDL3LINESTRIKE
         this.nearAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.Near).averagePeriod;
 
         this.nearPeriodTotal = new Array<number>(4);
+        for (let i = 0; i < this.nearPeriodTotal.length; i++) {
+            this.nearPeriodTotal[i] = 0;
+        }
+
         this.fourthCandle = undefined;
         this.thirdCandle = undefined;
         this.secondCandle = undefined;
