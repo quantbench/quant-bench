@@ -2,20 +2,18 @@ var gulp = require('gulp');
 var tslint = require('gulp-tslint');
 var exec = require('child_process').exec;
 var istanbul = require("gulp-istanbul");
-var jasmine = require('gulp-jasmine');
-var jasmine_parallel = require('gulp-jasmine-parallel');
+var mocha = require('gulp-mocha');
 var tsconfig = require('gulp-tsconfig-files');
-var JasmineConsoleReporter = require('jasmine-console-reporter');
 
 var del = require('del');
 
-var reporter = new JasmineConsoleReporter({
-    activity: false,
-    cleanStack: 1, // (0|false)|(1|true)|2|3 
-    colors: 2, // (0|false)|(1|true)|2 
-    listStyle: 'indent', // "flat"|"indent" 
-    verbosity: 1, // (0|false)|1|2|(3|true)|4 
-});
+// var reporter = new JasmineConsoleReporter({
+//     activity: false,
+//     cleanStack: 1, // (0|false)|(1|true)|2|3 
+//     colors: 2, // (0|false)|(1|true)|2 
+//     listStyle: 'indent', // "flat"|"indent" 
+//     verbosity: 1, // (0|false)|1|2|(3|true)|4 
+// });
 
 require('dotbin');
 
@@ -79,19 +77,18 @@ gulp.task("istanbul:pre-test", function () {
 
 gulp.task('test', gulp.series('istanbul:pre-test', function () {
     return gulp.src('lib/test/**/*.spec.js')
-        .pipe(jasmine({
-            reporter: reporter,
+        .pipe(mocha({
+            reporter: 'min',
         }))
         .pipe(istanbul.writeReports());
 }));
 
 gulp.task('test-and-build', gulp.series('build', 'istanbul:pre-test', function () {
     return gulp.src('lib/test/**/*.spec.js')
-        .pipe(jasmine())
+        .pipe(mocha())
         .pipe(istanbul.writeReports());
 }));
 
 gulp.task('watch', function () {
     gulp.watch('src/**/*.ts', ['build']);
 });
-
