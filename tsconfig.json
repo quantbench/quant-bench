@@ -237,6 +237,7 @@
     "test/indicators/patternrecognition/cdl3outside.spec.ts",
     "test/indicators/patternrecognition/cdl3starsinsouth.spec.ts",
     "test/indicators/patternrecognition/cdl3whitesoldiers.spec.ts",
+    "test/indicators/patternrecognition/cdlabandonedbaby.spec.ts",
     "test/indicators/patternrecognition/cdlbelthold.spec.ts",
     "test/indicators/patternrecognition/cdlclosingmarabozu.spec.ts",
     "test/indicators/patternrecognition/cdldoji.spec.ts",
