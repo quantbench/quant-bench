@@ -20,7 +20,7 @@ export class CDL3INSIDE
     private thirdCandle: marketData.IPriceBar;
     private secondCandle: marketData.IPriceBar;
     private firstCandle: marketData.IPriceBar;
-    private currentCandleColor: candleEnums.CandleColor;
+    private thirdCandleColor: candleEnums.CandleColor;
     private firstCandleColor: candleEnums.CandleColor;
 
     constructor() {
@@ -34,7 +34,7 @@ export class CDL3INSIDE
         this.thirdCandle = undefined;
         this.secondCandle = undefined;
         this.firstCandle = undefined;
-        this.currentCandleColor = candleEnums.CandleColor.Black;
+        this.thirdCandleColor = candleEnums.CandleColor.Black;
         this.firstCandleColor = candleEnums.CandleColor.Black;
 
         let lookback = Math.max(this.bodyLongAveragePeriod, this.bodyShortAveragePeriod) + 2;
@@ -53,7 +53,7 @@ export class CDL3INSIDE
         this.firstCandle = this.slidingWindow.getItem(2);
         this.secondCandle = this.slidingWindow.getItem(1);
         this.thirdCandle = inputData;
-        this.currentCandleColor = CandleStickUtils.getCandleColor(this.thirdCandle);
+        this.thirdCandleColor = CandleStickUtils.getCandleColor(this.thirdCandle);
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
 
         if (this.hasFirstCandleWithLongRealBody() &&
@@ -107,11 +107,11 @@ export class CDL3INSIDE
 
     private thirdCandleContinuesPatternOfFirstStrongly(): boolean {
         return (this.firstCandleColor === candleEnums.CandleColor.White &&
-            this.currentCandleColor === candleEnums.CandleColor.Black &&
+            this.thirdCandleColor === candleEnums.CandleColor.Black &&
             this.thirdCandle.close < this.firstCandle.open
         ) ||
             (this.firstCandleColor === candleEnums.CandleColor.Black &&
-                this.currentCandleColor === candleEnums.CandleColor.White &&
+                this.thirdCandleColor === candleEnums.CandleColor.White &&
                 this.thirdCandle.close > this.firstCandle.open);
     }
 }
