@@ -240,6 +240,7 @@
     "test/indicators/patternrecognition/cdlabandonedbaby.spec.ts",
     "test/indicators/patternrecognition/cdladvanceblock.spec.ts",
     "test/indicators/patternrecognition/cdlbelthold.spec.ts",
+    "test/indicators/patternrecognition/cdlbreakaway.spec.ts",
     "test/indicators/patternrecognition/cdlclosingmarabozu.spec.ts",
     "test/indicators/patternrecognition/cdldoji.spec.ts",
     "test/indicators/patternrecognition/cdldojistar.spec.ts",
