@@ -57,6 +57,13 @@ export class CDLDRAGONFLYDOJI
             this.setCurrentValue(0);
         }
 
+        this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData) -
+            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, this.slidingWindow.getItem(this.bodyDojiAveragePeriod));
+
+        this.shadowVeryShortPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort, inputData) -
+            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort,
+                this.slidingWindow.getItem(this.shadowVeryShortAveragePeriod));
+
         return this.isReady;
     }
 
