@@ -244,6 +244,7 @@
     "test/indicators/patternrecognition/cdlclosingmarabozu.spec.ts",
     "test/indicators/patternrecognition/cdlconcealbabyswall.spec.ts",
     "test/indicators/patternrecognition/cdlcounterattack.spec.ts",
+    "test/indicators/patternrecognition/cdldarkcloudcover.spec.ts",
     "test/indicators/patternrecognition/cdldoji.spec.ts",
     "test/indicators/patternrecognition/cdldojistar.spec.ts",
     "test/indicators/pricetransforms/avgdev.spec.ts",
