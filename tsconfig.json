@@ -248,6 +248,7 @@
     "test/indicators/patternrecognition/cdldoji.spec.ts",
     "test/indicators/patternrecognition/cdldojistar.spec.ts",
     "test/indicators/patternrecognition/cdldragonflydoji.spec.ts",
+    "test/indicators/patternrecognition/cdlengulfing.spec.ts",
     "test/indicators/pricetransforms/avgdev.spec.ts",
     "test/indicators/pricetransforms/avgprice.spec.ts",
     "test/indicators/pricetransforms/medprice.spec.ts",
