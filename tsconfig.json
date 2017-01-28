@@ -253,6 +253,8 @@
     "test/indicators/patternrecognition/cdleveningstar.spec.ts",
     "test/indicators/patternrecognition/cdlgapsidesidewhite.spec.ts",
     "test/indicators/patternrecognition/cdlgravestonedoji.spec.ts",
+    "test/indicators/patternrecognition/cdlhammer.spec.ts",
+    "test/indicators/patternrecognition/cdlhangingman.spec.ts",
     "test/indicators/pricetransforms/avgdev.spec.ts",
     "test/indicators/pricetransforms/avgprice.spec.ts",
     "test/indicators/pricetransforms/medprice.spec.ts",
