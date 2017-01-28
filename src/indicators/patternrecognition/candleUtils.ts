@@ -23,19 +23,19 @@ export class CandleStickUtils {
         return data.close >= data.open ? candleEnums.CandleColor.White : candleEnums.CandleColor.Black;
     }
 
-    public static getRealBodyGapUp(previousBar: marketData.IPriceBar, currentBar: marketData.IPriceBar): boolean {
+    public static getRealBodyGapUp(currentBar: marketData.IPriceBar, previousBar: marketData.IPriceBar): boolean {
         return Math.min(currentBar.open, currentBar.close) > Math.max(previousBar.open, previousBar.close);
     }
 
-    public static getRealBodyGapDown(previousBar: marketData.IPriceBar, currentBar: marketData.IPriceBar): boolean {
+    public static getRealBodyGapDown(currentBar: marketData.IPriceBar, previousBar: marketData.IPriceBar): boolean {
         return Math.max(currentBar.open, currentBar.close) < Math.min(previousBar.open, previousBar.close);
     }
 
-    public static getCandleGapUp(previousBar: marketData.IPriceBar, currentBar: marketData.IPriceBar): boolean {
+    public static getCandleGapUp(currentBar: marketData.IPriceBar, previousBar: marketData.IPriceBar): boolean {
         return currentBar.low > previousBar.high;
     }
 
-    public static getCandleGapDown(previousBar: marketData.IPriceBar, currentBar: marketData.IPriceBar): boolean {
+    public static getCandleGapDown(currentBar: marketData.IPriceBar, previousBar: marketData.IPriceBar): boolean {
         return currentBar.high < previousBar.low;
     }
 
