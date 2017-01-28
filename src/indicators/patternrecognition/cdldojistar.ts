@@ -109,10 +109,10 @@ export class CDLDOJISTAR
     }
 
     private hasGapUp(): boolean {
-        return CandleStickUtils.getRealBodyGapUp(this.firstCandle, this.secondCandle);
+        return CandleStickUtils.getRealBodyGapUp(this.secondCandle, this.firstCandle);
     }
 
     private hasGapDown(): boolean {
-        return CandleStickUtils.getRealBodyGapDown(this.firstCandle, this.secondCandle);
+        return CandleStickUtils.getRealBodyGapDown(this.secondCandle, this.firstCandle);
     }
 }

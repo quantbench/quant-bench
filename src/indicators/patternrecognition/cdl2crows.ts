@@ -102,6 +102,6 @@ export class CDL2CROWS
     }
 
     private hasGapUp(firstCandle: marketData.IPriceBar, secondCandle: marketData.IPriceBar): boolean {
-        return CandleStickUtils.getRealBodyGapUp(firstCandle, secondCandle);
+        return CandleStickUtils.getRealBodyGapUp(secondCandle, firstCandle);
     }
 }
