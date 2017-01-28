@@ -27,6 +27,7 @@ export class CDLGAPSIDESIDEWHITE
     private thirdCandleColor: candleEnums.CandleColor;
     private secondCandleColor: candleEnums.CandleColor;
     private firstCandleColor: candleEnums.CandleColor;
+
     constructor() {
         super(CDLGAPSIDESIDEWHITE.INDICATOR_NAME, CDLGAPSIDESIDEWHITE.INDICATOR_DESCR);
 
