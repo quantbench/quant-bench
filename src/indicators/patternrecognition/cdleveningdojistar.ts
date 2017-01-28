@@ -70,23 +70,13 @@ export class CDLEVENINGDOJISTAR
 
         this.populateCandleVariables();
 
-        let a = this.firstCandleIsALongWhiteCandle();
-        let b = this.secondCandleIsADojiGappingUp();
-        let c = this.thirdCandleIsBlackLongerThanShortAndClosingWithinFirstCandleRealBody();
-
-        if (a && b && c) {
+        if (this.firstCandleIsALongWhiteCandle() &&
+            this.secondCandleIsADojiGappingUp() &&
+            this.thirdCandleIsBlackLongerThanShortAndClosingWithinFirstCandleRealBody()) {
             this.setCurrentValue(-100);
         } else {
             this.setCurrentValue(0);
         }
-
-        // if (this.firstCandleIsALongWhiteCandle() &&
-        //     this.secondCandleIsADojiGappingUp() &&
-        //     this.thirdCandleIsBlackLongerThanShortAndClosingWithinFirstCandleRealBody()) {
-        //     this.setCurrentValue(-100);
-        // } else {
-        //     this.setCurrentValue(0);
-        // }
 
         this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, this.firstCandle) -
             CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong,
@@ -134,13 +124,9 @@ export class CDLEVENINGDOJISTAR
     }
 
     private secondCandleIsADojiGappingUp() {
-        // return CandleStickUtils.getRealBody(this.secondCandle) <=
-        //     CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji, this.bodyDojiPeriodTotal, this.secondCandle) &&
-        //     CandleStickUtils.getRealBodyGapUp(this.secondCandle, this.firstCandle);
-        let a = CandleStickUtils.getRealBody(this.secondCandle);
-        let b = CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji, this.bodyDojiPeriodTotal, this.secondCandle);
-        let c = CandleStickUtils.getRealBodyGapUp(this.secondCandle, this.firstCandle);
-        return a <= b && c;
+        return CandleStickUtils.getRealBody(this.secondCandle) <=
+            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji, this.bodyDojiPeriodTotal, this.secondCandle) &&
+            CandleStickUtils.getRealBodyGapUp(this.secondCandle, this.firstCandle);
     }
 
     private thirdCandleIsBlackLongerThanShortAndClosingWithinFirstCandleRealBody() {
