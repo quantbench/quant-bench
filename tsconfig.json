@@ -256,6 +256,7 @@
     "test/indicators/patternrecognition/cdlhammer.spec.ts",
     "test/indicators/patternrecognition/cdlhangingman.spec.ts",
     "test/indicators/patternrecognition/cdlharami.spec.ts",
+    "test/indicators/patternrecognition/cdlharamicross.spec.ts",
     "test/indicators/pricetransforms/avgdev.spec.ts",
     "test/indicators/pricetransforms/avgprice.spec.ts",
     "test/indicators/pricetransforms/medprice.spec.ts",
