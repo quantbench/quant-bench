@@ -263,6 +263,7 @@
     "test/indicators/patternrecognition/cdlhomingpigeon.spec.ts",
     "test/indicators/patternrecognition/cdlidentical3crows.spec.ts",
     "test/indicators/patternrecognition/cdlinneck.spec.ts",
+    "test/indicators/patternrecognition/cdlinvertedhammer.spec.ts",
     "test/indicators/pricetransforms/avgdev.spec.ts",
     "test/indicators/pricetransforms/avgprice.spec.ts",
     "test/indicators/pricetransforms/medprice.spec.ts",
