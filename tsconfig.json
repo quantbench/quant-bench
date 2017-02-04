@@ -265,6 +265,7 @@
     "test/indicators/patternrecognition/cdlinneck.spec.ts",
     "test/indicators/patternrecognition/cdlinvertedhammer.spec.ts",
     "test/indicators/patternrecognition/cdlkicking.spec.ts",
+    "test/indicators/patternrecognition/cdlkickingbylength.spec.ts",
     "test/indicators/pricetransforms/avgdev.spec.ts",
     "test/indicators/pricetransforms/avgprice.spec.ts",
     "test/indicators/pricetransforms/medprice.spec.ts",
