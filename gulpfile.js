@@ -60,6 +60,14 @@ function tscbuild(done) {
     });
 }
 
+function runTests() {
+    return gulp.src('lib/test/**/*.spec.js')
+        .pipe(mocha({
+            reporter: 'min',
+        }))
+        .pipe(istanbul.writeReports());
+}
+
 //run tslint task, then run update-tsconfig and gen-def in parallel, then run _build
 var build = gulp.series(clean, runtslint, updatetsconfig, tscbuild);
 
@@ -70,18 +78,14 @@ gulp.task('tscbuild', tscbuild);
 gulp.task("istanbul:pre-test", function () {
     return gulp.src(['lib/src/**/*.js', '!lib/src/**/index.js'])
         // Covering files
-        .pipe(istanbul({ includeUntested: true }))
+        .pipe(istanbul({
+            includeUntested: true
+        }))
         // Force `require` to return covered files
         .pipe(istanbul.hookRequire());
 });
 
-gulp.task('test', gulp.series('istanbul:pre-test', function () {
-    return gulp.src('lib/test/**/*.spec.js')
-        .pipe(mocha({
-            reporter: 'min',
-        }))
-        .pipe(istanbul.writeReports());
-}));
+gulp.task('test', gulp.series('istanbul:pre-test', runTests));
 
 gulp.task('test-and-build', gulp.series('build', 'istanbul:pre-test', function () {
     return gulp.src('lib/test/**/*.spec.js')
