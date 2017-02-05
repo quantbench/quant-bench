@@ -269,6 +269,7 @@
     "test/indicators/patternrecognition/cdlladderbottom.spec.ts",
     "test/indicators/patternrecognition/cdllongleggeddoji.spec.ts",
     "test/indicators/patternrecognition/cdllongline.spec.ts",
+    "test/indicators/patternrecognition/cdlmarubozu.spec.ts",
     "test/indicators/pricetransforms/avgdev.spec.ts",
     "test/indicators/pricetransforms/avgprice.spec.ts",
     "test/indicators/pricetransforms/medprice.spec.ts",
