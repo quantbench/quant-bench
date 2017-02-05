@@ -275,6 +275,7 @@
     "test/indicators/patternrecognition/cdlmorningdojistar.spec.ts",
     "test/indicators/patternrecognition/cdlmorningstar.spec.ts",
     "test/indicators/patternrecognition/cdlonneck.spec.ts",
+    "test/indicators/patternrecognition/cdlpiercing.spec.ts",
     "test/indicators/pricetransforms/avgdev.spec.ts",
     "test/indicators/pricetransforms/avgprice.spec.ts",
     "test/indicators/pricetransforms/medprice.spec.ts",
