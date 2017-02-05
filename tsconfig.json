@@ -272,6 +272,7 @@
     "test/indicators/patternrecognition/cdlmarubozu.spec.ts",
     "test/indicators/patternrecognition/cdlmatchinglow.spec.ts",
     "test/indicators/patternrecognition/cdlmathold.spec.ts",
+    "test/indicators/patternrecognition/cdlmorningdojistar.spec.ts",
     "test/indicators/pricetransforms/avgdev.spec.ts",
     "test/indicators/pricetransforms/avgprice.spec.ts",
     "test/indicators/pricetransforms/medprice.spec.ts",
