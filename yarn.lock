@@ -1036,12 +1036,6 @@ gulp-sourcemaps@1.6.0:
     through2 "^2.0.0"
     vinyl "^1.0.0"
 
-gulp-tsconfig-files@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/gulp-tsconfig-files/-/gulp-tsconfig-files-0.4.0.tgz#b5f29dc41907dbb902a99032ff772ad58df00d20"
-  dependencies:
-    through "^2.3.7"
-
 gulp-tslint@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/gulp-tslint/-/gulp-tslint-7.1.0.tgz#9bd3ff4fbc16d4cbd9abb08ff786db89b563e93d"
@@ -2506,7 +2500,7 @@ through2@^2.0.0, through2@~2.0.0:
     readable-stream "^2.1.5"
     xtend "~4.0.1"
 
-through@^2.3.4, through@^2.3.7, through@~2.3.8:
+through@^2.3.4, through@~2.3.8:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
