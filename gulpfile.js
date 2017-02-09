@@ -3,7 +3,6 @@ var tslint = require('gulp-tslint');
 var exec = require('child_process').exec;
 var istanbul = require("gulp-istanbul");
 var mocha = require('gulp-mocha');
-var tsconfig = require('gulp-tsconfig-files');
 
 var del = require('del');
 
@@ -82,5 +81,5 @@ gulp.task('test-and-build', gulp.series('build', 'istanbul:pre-test', function (
 }));
 
 gulp.task('watch', function () {
-    gulp.watch('src/**/*.ts', ['build']);
+    return gulp.watch(['./src/**/*.ts', './test/**/*.ts'], gulp.series('tscbuild'));
 });
