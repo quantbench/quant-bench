@@ -66,6 +66,21 @@ export class CDLSHOOTINGSTAR
             this.setCurrentValue(0);
         }
 
+        this.bodyShortPeriodTotal +=
+            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyShort, this.secondCandle) -
+            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyShort,
+                this.slidingWindow.getItem(this.bodyShortAveragePeriod));
+
+        this.shadowLongPeriodTotal +=
+            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowLong, this.secondCandle) -
+            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowLong,
+                this.slidingWindow.getItem(this.shadowLongAveragePeriod));
+
+        this.shadowVeryShortPeriodTotal +=
+            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort, this.secondCandle) -
+            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort,
+                this.slidingWindow.getItem(this.shadowVeryShortAveragePeriod));
+
         return this.isReady;
     }
 
