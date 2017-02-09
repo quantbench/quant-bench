@@ -30,7 +30,6 @@ export class CDLSHORTLINE
         this.shadowShortPeriodTotal = 0;
 
         this.firstCandle = undefined;
-
         this.firstCandleColor = candleEnums.CandleColor.Black;
 
         const lookback = Math.max(this.shadowShortAveragePeriod, this.bodyShortAveragePeriod);
