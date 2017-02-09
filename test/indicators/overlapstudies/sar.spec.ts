@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,8 +13,8 @@ describe("SAR Indicator", () => {
     let indicator: indicators.SAR;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let accelerationFactor = 0.02;
-    let accelerationFactorMax = 0.2;
+    const accelerationFactor = 0.02;
+    const accelerationFactorMax = 0.2;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/sar.json");

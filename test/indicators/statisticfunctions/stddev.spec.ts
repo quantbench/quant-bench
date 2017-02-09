@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,7 +13,7 @@ describe("STDDEV Indicator", () => {
     let indicator: indicators.STDDEV;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 5;
+    const timePeriod = 5;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/stddev.json");
@@ -72,7 +72,7 @@ describe("STDDEV Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STDDEV.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STDDEV.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });

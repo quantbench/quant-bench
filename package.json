@@ -1,35 +1,40 @@
 {
-    "name": "quant-bench",
-    "version": "0.0.1",
-    "description": "An algorithmic backtesting library written in TypeScript.",
-    "main": "index.js",
-    "repository": {
-        "url": "git@github.com:thequantapprentice/quant-bench.git",
-        "type": "git"
-    },
-    "author": "Eugene Duvenage",
-    "license": "MIT",
-    "devDependencies": {
-        "chai": "^3.5.0",
-        "chai-spies": "^0.7.1",
-        "del": "^2.2.2",
-        "dotbin": "^1.0.1",
-        "gulp": "github:gulpjs/gulp#4.0",
-        "gulp-istanbul": "^1.1.1",
-        "gulp-mocha": "^3.0.1",
-        "gulp-tsconfig-files": "^0.4.0",
-        "gulp-tslint": "7.0.1",
-        "jsonfile": "^2.4.0",
-        "mocha": "^3.2.0",
-        "nunjucks": "3.0.0",
-        "sinon": "1.17.7",
-        "sinon-chai": "^2.8.0",
-        "talib": "^1.0.2",
-        "tslint": "4.2.0",
-        "typescript": "2.1.5"
-    },
-    "dependencies": {
-        "bluebird": "3.4.7",
-        "yamljs": "^0.2.8"
-    }
+  "name": "quant-bench",
+  "version": "0.0.1",
+  "description": "An algorithmic backtesting library written in TypeScript.",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:thequantapprentice/quant-bench.git",
+    "type": "git"
+  },
+  "author": "Eugene Duvenage",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bluebird": "^3.0.37",
+    "@types/chai": "^3.4.34",
+    "@types/chai-spies": "0.0.0",
+    "@types/mocha": "^2.2.39",
+    "@types/node": "^7.0.5",
+    "chai": "^3.5.0",
+    "chai-spies": "^0.7.1",
+    "del": "^2.2.2",
+    "dotbin": "^1.0.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-tsconfig-files": "^0.4.0",
+    "gulp-tslint": "^7.1.0",
+    "jsonfile": "^2.4.0",
+    "mocha": "^3.2.0",
+    "nunjucks": "3.0.0",
+    "sinon": "1.17.7",
+    "sinon-chai": "^2.8.0",
+    "talib": "^1.0.2",
+    "tslint": "^4.4.2",
+    "typescript": "^2.1.6"
+  },
+  "dependencies": {
+    "bluebird": "3.4.7",
+    "yamljs": "^0.2.8"
+  }
 }

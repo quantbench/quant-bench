@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,8 +13,8 @@ describe("MA Indicator", () => {
     let indicator: indicators.MA;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 30;
-    let maType: indicators.MA_TYPE = indicators.MA_TYPE.TRIMA;
+    const timePeriod = 30;
+    const maType: indicators.MA_TYPE = indicators.MA_TYPE.TRIMA;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/trima.json");
@@ -77,7 +77,7 @@ describe("MA Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.MA.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MA.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });

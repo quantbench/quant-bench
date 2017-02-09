@@ -4,7 +4,7 @@ import * as chai from "chai";
 chai.should();
 
 describe("Sliding Window", () => {
-    let windowSize = 5;
+    const windowSize = 5;
     let window: SlidingWindow<number> = null;
 
     describe("when constructing", () => {

@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 

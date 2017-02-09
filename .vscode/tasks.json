@@ -7,17 +7,25 @@
     "args": [
         "--no-color"
     ],
-    "tasks": [
-        {
+    "tasks": [{
             "taskName": "build",
             "args": [],
             "isBuildCommand": true,
-            "isWatching": false,
-            "problemMatcher": [
-                "$lessCompile",
-                "$tsc",
-                "$jshint"
-            ]
+            "isBackground": false,
+            "problemMatcher": [{
+                "owner": "tslint",
+                "fileLocation": [
+                    "absolute"
+                ],
+                "severity": "warning",
+                "pattern": {
+                    "regexp": "^(\\S.*)\\[(\\d+), (\\d+)\\]:\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }, "$tsc", "$jshint"]
         },
         {
             "taskName": "test",

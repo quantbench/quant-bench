@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,7 +13,7 @@ describe("AROON Indicator", () => {
     let indicator: indicators.AROON;
     let indicatorResults: Array<{ aroonUp: number, aroonDown: number }>;
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 14;
+    const timePeriod = 14;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/aroon.json");
@@ -72,7 +72,7 @@ describe("AROON Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.AROON.TIMEPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.AROON.TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });

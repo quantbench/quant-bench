@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,7 +13,7 @@ describe("CCI Indicator", () => {
     let indicator: indicators.CCI;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 14;
+    const timePeriod = 14;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/cci.json");
@@ -72,7 +72,7 @@ describe("CCI Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.CCI.TIMEPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.CCI.TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });

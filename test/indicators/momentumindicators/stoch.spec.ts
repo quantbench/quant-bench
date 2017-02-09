@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,11 +13,11 @@ describe("STOCH Indicator", () => {
     let indicator: indicators.STOCH;
     let indicatorResults: Array<{ slowK: number, slowD: number }>;
     let indicatorOnDataRasied: boolean = false;
-    let fastKTimePeriod: number = 5;
-    let slowDMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
-    let slowDTimePeriod: number = 3;
-    let slowKMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
-    let slowKTimePeriod: number = 3;
+    const fastKTimePeriod: number = 5;
+    const slowDMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
+    const slowDTimePeriod: number = 3;
+    const slowKMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
+    const slowKTimePeriod: number = 3;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/stoch.json");
@@ -109,7 +109,7 @@ describe("STOCH Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.FASTKPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.FASTKPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -126,7 +126,7 @@ describe("STOCH Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWKPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWKPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -143,7 +143,7 @@ describe("STOCH Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWDPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWDPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });

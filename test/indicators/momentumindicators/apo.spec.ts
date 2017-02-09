@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,9 +13,9 @@ describe("APO Indicator", () => {
     let indicator: indicators.APO;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let fastTimePeriod = 12;
-    let slowTimePeriod = 26;
-    let maType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
+    const fastTimePeriod = 12;
+    const slowTimePeriod = 26;
+    const maType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/apo.json");
@@ -102,7 +102,7 @@ describe("APO Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.FAST_TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.FAST_TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
@@ -119,7 +119,7 @@ describe("APO Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.SLOW_TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.SLOW_TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });

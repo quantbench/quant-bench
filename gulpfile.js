@@ -7,27 +7,15 @@ var tsconfig = require('gulp-tsconfig-files');
 
 var del = require('del');
 
-// var reporter = new JasmineConsoleReporter({
-//     activity: false,
-//     cleanStack: 1, // (0|false)|(1|true)|2|3 
-//     colors: 2, // (0|false)|(1|true)|2 
-//     listStyle: 'indent', // "flat"|"indent" 
-//     verbosity: 1, // (0|false)|1|2|(3|true)|4 
-// });
-
 require('dotbin');
 
-var tsFilesGlob = ['./src/**/*.ts', './test/**/*.ts', '!./src/**/index.ts'];
-var tsFilesGlob2 = ['./src/**/*.ts', './test/**/*.ts', '!./src/**/index.ts', './typings/index.d.ts'];
+// var tsFilesGlob = ['./src/**/*.ts', './test/**/*.ts', '!./src/**/index.ts'];
+var tsFilesGlob = ['./src/index.ts', './test/**/*.ts', '!./test/utils/**/*.ts'];
 
 var appName = (function (p) {
     return p.name;
 })(require('./package.json'));
 
-function updatetsconfig() {
-    return gulp.src(tsFilesGlob2)
-        .pipe(tsconfig());
-}
 
 function clean() {
     return del([
@@ -38,7 +26,7 @@ function clean() {
 function runtslint() {
     return gulp.src(tsFilesGlob)
         .pipe(tslint({
-            formatter: 'verbose'
+            formatter: 'prose' // verbose
         }))
         .pipe(tslint.report());
 }
@@ -69,7 +57,7 @@ function runTests() {
 }
 
 //run tslint task, then run update-tsconfig and gen-def in parallel, then run _build
-var build = gulp.series(clean, runtslint, updatetsconfig, tscbuild);
+var build = gulp.series(clean, runtslint, tscbuild);
 
 gulp.task('build', build);
 

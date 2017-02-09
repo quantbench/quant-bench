@@ -2,22 +2,22 @@
 // import { TestDataFactory } from "../../testData";
 // import * as chai from "chai";
 // import * as path from "path";
-// let jsonfile = require("jsonfile");
+// const jsonfile = require("jsonfile");
 
 // chai.should();
 
 // describe("AVGDEV Indicator", () => {
-// 
+//
 //     let taResultFile: string;
 //     let sourceData: any;
 //     let taResultData: any;
 //     let indicator: indicators.AVGDEV;
 //     let indicatorResults: number[];
 //     let indicatorOnDataRasied: boolean = false;
-//     let timePeriod = 30;
+//     const timePeriod = 30;
 
 //     beforeEach(() => {
-// 
+//
 //         taResultFile = path.resolve("./test/talib-results/avgdev.json");
 //         sourceData = TestDataFactory.getInstance().sourceData;
 //         taResultData = jsonfile.readFileSync(taResultFile);
@@ -74,7 +74,7 @@
 //         });
 
 //         it("should return a correctly formatted error", () => {
-//             let message = indicators.generateMinTimePeriodError(indicator.name, indicators.AVGDEV.TIMEPERIOD_MIN, 1);
+//             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.AVGDEV.TIMEPERIOD_MIN, 1);
 //             exception.message.should.equal(message);
 //         });
 //     });

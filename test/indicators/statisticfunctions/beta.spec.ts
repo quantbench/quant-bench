@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -15,7 +15,7 @@ describe("BETA Indicator", () => {
     let indicator: indicators.BETA;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 5;
+    const timePeriod = 5;
 
     beforeEach(() => {
         sourceFile2 = path.resolve("./test/sourcedata/sourcedata2.json");
@@ -76,7 +76,7 @@ describe("BETA Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.BETA.TIMEPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.BETA.TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -86,8 +86,8 @@ describe("BETA Indicator", () => {
             indicator = new indicators.BETA(timePeriod);
             let idx = 0;
             for (let i = 0; i < sourceData.close.length; i++) {
-                let value1 = sourceData.close[i];
-                let value2 = sourceData2.close[i];
+                const value1 = sourceData.close[i];
+                const value2 = sourceData2.close[i];
                 if (indicator.receiveData(value1, value2)) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
@@ -117,8 +117,8 @@ describe("BETA Indicator", () => {
             });
 
             for (let i = 0; i < indicator.lookback; i++) {
-                let value1 = sourceData.close[i];
-                let value2 = sourceData2.close[i];
+                const value1 = sourceData.close[i];
+                const value2 = sourceData2.close[i];
                 if (indicator.receiveData(value1, value2)) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
@@ -145,8 +145,8 @@ describe("BETA Indicator", () => {
             });
 
             for (let i = 0; i <= indicator.lookback; i++) {
-                let value1 = sourceData.close[i];
-                let value2 = sourceData2.close[i];
+                const value1 = sourceData.close[i];
+                const value2 = sourceData2.close[i];
                 if (indicator.receiveData(value1, value2)) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;

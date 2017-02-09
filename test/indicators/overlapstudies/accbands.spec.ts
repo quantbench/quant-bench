@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,7 +13,7 @@ describe("ACCBANDS Indicator", () => {
     let indicator: indicators.ACCBANDS;
     let indicatorResults: Array<{ upperBand: number, middleBand: number, lowerBand: number }>;
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 20;
+    const timePeriod = 20;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/accbands.json");
@@ -74,7 +74,7 @@ describe("ACCBANDS Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ACCBANDS.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ACCBANDS.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });

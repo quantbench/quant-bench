@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,9 +13,9 @@ describe("ULTOSC Indicator", () => {
     let indicator: indicators.ULTOSC;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod1 = 7;
-    let timePeriod2 = 14;
-    let timePeriod3 = 28;
+    const timePeriod1 = 7;
+    const timePeriod2 = 14;
+    const timePeriod3 = 28;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/ultosc.json");
@@ -90,7 +90,7 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD1_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD1_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -107,7 +107,7 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD2_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD2_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -124,7 +124,7 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD3_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD3_MIN, 0);
             exception.message.should.equal(message);
         });
     });

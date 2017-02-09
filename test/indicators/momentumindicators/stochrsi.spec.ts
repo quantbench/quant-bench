@@ -2,7 +2,7 @@ import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-let jsonfile = require("jsonfile");
+const jsonfile = require("jsonfile");
 
 chai.should();
 
@@ -13,10 +13,10 @@ describe("STOCHRSI Indicator", () => {
     let indicator: indicators.STOCHRSI;
     let indicatorResults: Array<{ fastK: number, fastD: number }>;
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod: number = 14;
-    let fastKTimePeriod: number = 5;
-    let fastDMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
-    let fastDTimePeriod: number = 3;
+    const timePeriod: number = 14;
+    const fastKTimePeriod: number = 5;
+    const fastDMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
+    const fastDTimePeriod: number = 3;
 
     beforeEach(() => {
         taResultFile = path.resolve("./test/talib-results/stochrsi.json");
@@ -99,7 +99,7 @@ describe("STOCHRSI Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCHRSI.TIMEPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCHRSI.TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -116,7 +116,7 @@ describe("STOCHRSI Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCHRSI.FASTKPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCHRSI.FASTKPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -133,7 +133,7 @@ describe("STOCHRSI Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCHRSI.FASTDPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCHRSI.FASTDPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
