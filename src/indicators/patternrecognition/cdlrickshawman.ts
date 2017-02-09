@@ -34,7 +34,7 @@ export class CDLRICKSHAWMAN
         this.firstCandle = undefined;
         this.firstCandleColor = candleEnums.CandleColor.Black;
 
-        let lookback = Math.max(Math.max(this.bodyDojiAveragePeriod, this.shadowLongAveragePeriod), this.nearAveragePeriod);
+        const lookback = Math.max(Math.max(this.bodyDojiAveragePeriod, this.shadowLongAveragePeriod), this.nearAveragePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
