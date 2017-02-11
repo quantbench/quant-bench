@@ -34,12 +34,7 @@ export class CDLHARAMICROSS
         this.bodyDojiAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod;
         this.bodyDojiPeriodTotal = 0;
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(this.bodyLongAveragePeriod, this.bodyDojiAveragePeriod) + 1;
+        const lookback = Math.max(this.bodyLongAveragePeriod, this.bodyDojiAveragePeriod) + 1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

@@ -30,7 +30,7 @@ export class CDLDRAGONFLYDOJI
         this.bodyDojiPeriodTotal = 0;
         this.shadowVeryShortPeriodTotal = 0;
 
-        let lookback = Math.max(CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod,
+        const lookback = Math.max(CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod,
             CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);

@@ -29,7 +29,7 @@ export class CDLHIGHWAVE
         this.shadowVeryLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryLong).averagePeriod;
         this.shadowVeryLongPeriodTotal = 0;
 
-        let lookback = Math.max(this.bodyShortAveragePeriod, this.shadowVeryLongAveragePeriod);
+        const lookback = Math.max(this.bodyShortAveragePeriod, this.shadowVeryLongAveragePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

@@ -28,14 +28,8 @@ export class CDL2CROWS
         this.bodyLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyLong).averagePeriod;
 
         this.bodyLongPeriodTotal = 0;
-        this.thirdCandle = undefined;
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.thirdCandleColor = candleEnums.CandleColor.Black;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
 
-        let lookback = this.bodyLongAveragePeriod + 2;
+        const lookback = this.bodyLongAveragePeriod + 2;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

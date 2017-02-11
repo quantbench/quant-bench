@@ -22,10 +22,8 @@ export class CDLDOJI
 
         this.bodyDojiAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod;
         this.bodyDojiPeriodTotal = 0;
-        this.firstCandle = undefined;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
 
-        let lookback = this.bodyDojiAveragePeriod;
+        const lookback = this.bodyDojiAveragePeriod;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

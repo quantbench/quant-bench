@@ -34,12 +34,7 @@ export class CDLONNECK
         this.bodyLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyLong).averagePeriod;
         this.bodyLongPeriodTotal = 0;
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(this.equalAveragePeriod, this.bodyLongAveragePeriod) + 1;
+        const lookback = Math.max(this.equalAveragePeriod, this.bodyLongAveragePeriod) + 1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

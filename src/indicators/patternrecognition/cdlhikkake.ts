@@ -20,7 +20,7 @@ export class CDLHIKKAKE
     constructor() {
         super(CDLHIKKAKE.INDICATOR_NAME, CDLHIKKAKE.INDICATOR_DESCR);
 
-        let lookback = 5;
+        const lookback = 5;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

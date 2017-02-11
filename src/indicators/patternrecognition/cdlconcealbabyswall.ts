@@ -34,16 +34,7 @@ export class CDLCONCEALBABYSWALL
             this.shadowVeryShortPeriodTotal[i] = 0;
         }
 
-        this.fourthCandle = undefined;
-        this.thirdCandle = undefined;
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.fourthCandleColor = candleEnums.CandleColor.Black;
-        this.thirdCandleColor = candleEnums.CandleColor.Black;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = this.shadowVeryShortAveragePeriod + 3;
+        const lookback = this.shadowVeryShortAveragePeriod + 3;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

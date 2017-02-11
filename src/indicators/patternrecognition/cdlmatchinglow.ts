@@ -25,12 +25,7 @@ export class CDLMATCHINGLOW
         this.equalAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.Equal).averagePeriod;
         this.equalPeriodTotal = 0;
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = this.equalAveragePeriod + 1;
+        const lookback = this.equalAveragePeriod + 1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

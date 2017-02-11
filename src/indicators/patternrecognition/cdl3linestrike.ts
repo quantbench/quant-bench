@@ -33,16 +33,7 @@ export class CDL3LINESTRIKE
             this.nearPeriodTotal[i] = 0;
         }
 
-        this.fourthCandle = undefined;
-        this.thirdCandle = undefined;
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.fourthCandleColor = candleEnums.CandleColor.Black;
-        this.thirdCandleColor = candleEnums.CandleColor.Black;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = this.nearAveragePeriod + 3;
+        const lookback = this.nearAveragePeriod + 3;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

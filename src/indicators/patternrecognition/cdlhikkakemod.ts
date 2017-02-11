@@ -26,7 +26,7 @@ export class CDLHIKKAKEMOD
 
         this.nearAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.Near).averagePeriod;
         this.nearPeriodTotal = 0;
-        let lookback = Math.max(1, this.nearAveragePeriod) + 5;
+        const lookback = Math.max(1, this.nearAveragePeriod) + 5;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

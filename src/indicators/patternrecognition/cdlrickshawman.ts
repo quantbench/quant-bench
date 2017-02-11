@@ -31,9 +31,6 @@ export class CDLRICKSHAWMAN
         this.nearAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.Near).averagePeriod;
         this.nearPeriodTotal = 0;
 
-        this.firstCandle = undefined;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
         const lookback = Math.max(Math.max(this.bodyDojiAveragePeriod, this.shadowLongAveragePeriod), this.nearAveragePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);

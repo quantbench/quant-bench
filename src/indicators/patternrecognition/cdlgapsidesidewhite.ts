@@ -36,14 +36,7 @@ export class CDLGAPSIDESIDEWHITE
         this.equalAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.Equal).averagePeriod;
         this.equalPeriodTotal = 0;
 
-        this.thirdCandle = undefined;
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.thirdCandleColor = candleEnums.CandleColor.Black;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(this.nearAveragePeriod, this.equalAveragePeriod) + 2;
+        const lookback = Math.max(this.nearAveragePeriod, this.equalAveragePeriod) + 2;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

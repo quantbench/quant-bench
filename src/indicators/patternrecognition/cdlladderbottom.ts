@@ -33,18 +33,7 @@ export class CDLLADDERBOTTOM
         this.shadowVeryShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod;
         this.shadowVeryShortPeriodTotal = 0;
 
-        this.fifthCandle = undefined;
-        this.fourthCandle = undefined;
-        this.thirdCandle = undefined;
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.fifthCandleColor = candleEnums.CandleColor.Black;
-        this.fourthCandleColor = candleEnums.CandleColor.Black;
-        this.thirdCandleColor = candleEnums.CandleColor.Black;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = this.shadowVeryShortAveragePeriod + 4;
+        const lookback = this.shadowVeryShortAveragePeriod + 4;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

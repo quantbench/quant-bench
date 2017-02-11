@@ -28,11 +28,7 @@ export class CDLDOJISTAR
         this.bodyDojiPeriodTotal = 0;
         this.bodyLongPeriodTotal = 0;
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(this.bodyDojiAveragePeriod, this.bodyLongAveragePeriod) + 1;
+        const lookback = Math.max(this.bodyDojiAveragePeriod, this.bodyLongAveragePeriod) + 1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

@@ -30,12 +30,7 @@ export class CDLPIERCING
             this.bodyLongPeriodTotal[i] = 0;
         }
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = this.bodyLongAveragePeriod + 1;
+        const lookback = this.bodyLongAveragePeriod + 1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

@@ -40,12 +40,8 @@ export class CDLINVERTEDHAMMER
         this.shadowVeryShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod;
         this.shadowVeryShortPeriodTotal = 0;
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(Math.max(this.bodyShortAveragePeriod, this.shadowLongAveragePeriod), this.shadowVeryShortAveragePeriod) + 1;
+        const lookback = Math.max(Math.max(this.bodyShortAveragePeriod, this.shadowLongAveragePeriod),
+            this.shadowVeryShortAveragePeriod) + 1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

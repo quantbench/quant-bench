@@ -28,10 +28,8 @@ export class CDLLONGLEGGEDDOJI
         this.bodyDojiPeriodTotal = 0;
         this.shadowLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowLong).averagePeriod;
         this.shadowLongPeriodTotal = 0;
-        this.firstCandle = undefined;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
 
-        let lookback = Math.max(this.bodyDojiAveragePeriod, this.shadowLongAveragePeriod);
+        const lookback = Math.max(this.bodyDojiAveragePeriod, this.shadowLongAveragePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(this.bodyDojiAveragePeriod);
 

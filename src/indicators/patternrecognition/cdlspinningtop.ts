@@ -24,9 +24,6 @@ export class CDLSPINNINGTOP
         this.bodyShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyShort).averagePeriod;
         this.bodyShortPeriodTotal = 0;
 
-        this.firstCandle = undefined;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
         const lookback = this.bodyShortAveragePeriod;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);

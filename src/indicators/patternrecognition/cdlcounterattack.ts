@@ -37,12 +37,7 @@ export class CDLCOUNTERATTACK
 
         this.equalPeriodTotal = 0;
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(CandleSettings.get(candleEnums.CandleSettingType.Equal).averagePeriod,
+        const lookback = Math.max(CandleSettings.get(candleEnums.CandleSettingType.Equal).averagePeriod,
             CandleSettings.get(candleEnums.CandleSettingType.BodyLong).averagePeriod) + 1;
 
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);

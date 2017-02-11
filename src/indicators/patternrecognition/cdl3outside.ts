@@ -23,14 +23,7 @@ export class CDL3OUTSIDE
     constructor() {
         super(CDL3OUTSIDE.INDICATOR_NAME, CDL3OUTSIDE.INDICATOR_DESCR);
 
-        this.thirdCandle = undefined;
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.thirdCandleColor = candleEnums.CandleColor.Black;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = 3;
+        const lookback = 3;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

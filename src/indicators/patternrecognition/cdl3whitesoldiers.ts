@@ -54,14 +54,7 @@ export class CDL3WHITESOLDIERS
         }
         this.bodyShortPeriodTotal = 0;
 
-        this.thirdCandle = undefined;
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.thirdCandleColor = candleEnums.CandleColor.Black;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(
+        const lookback = Math.max(
             Math.max(this.shadowVeryShortAveragePeriod, this.bodyShortAveragePeriod),
             Math.max(this.nearAveragePeriod, this.farAveragePeriod)) + 2;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);

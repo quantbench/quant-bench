@@ -43,7 +43,7 @@ export class CDLMORNINGSTAR
         this.bodyShortPeriodTotal = 0;
         this.bodyShortPeriodTotal2 = 0;
 
-        let lookback = Math.max(this.bodyLongAveragePeriod, this.bodyShortAveragePeriod) + 2;
+        const lookback = Math.max(this.bodyLongAveragePeriod, this.bodyShortAveragePeriod) + 2;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

@@ -32,10 +32,7 @@ export class CDLLONGLINE
         this.bodyLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyLong).averagePeriod;
         this.bodyLongPeriodTotal = 0;
 
-        this.firstCandle = undefined;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(this.shadowShortAveragePeriod, this.bodyLongAveragePeriod);
+        const lookback = Math.max(this.shadowShortAveragePeriod, this.bodyLongAveragePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

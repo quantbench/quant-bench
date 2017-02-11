@@ -32,10 +32,7 @@ export class CDLMARUBOZU
         this.shadowVeryShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod;
         this.shadowVeryShortPeriodTotal = 0;
 
-        this.firstCandle = undefined;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(this.shadowVeryShortAveragePeriod, this.bodyLongAveragePeriod);
+        const lookback = Math.max(this.shadowVeryShortAveragePeriod, this.bodyLongAveragePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

@@ -37,27 +37,18 @@ export class CDL3STARSINSOUTH
         super(CDL3STARSINSOUTH.INDICATOR_NAME, CDL3STARSINSOUTH.INDICATOR_DESCR);
 
         this.bodyLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyLong).averagePeriod;
-        this.shadowLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowLong).averagePeriod;
-        this.shadowVeryShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod;
-        this.bodyShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyShort).averagePeriod;
-
         this.bodyLongPeriodTotal = 0;
+        this.shadowLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowLong).averagePeriod;
         this.shadowLongPeriodTotal = 0;
+        this.shadowVeryShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod;
         this.shadowVeryShortPeriodTotal = new Array<number>(2);
         for (let i = 0; i < this.shadowVeryShortPeriodTotal.length; i++) {
             this.shadowVeryShortPeriodTotal[i] = 0;
         }
-
+        this.bodyShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyShort).averagePeriod;
         this.bodyShortPeriodTotal = 0;
 
-        this.thirdCandle = undefined;
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.thirdCandleColor = candleEnums.CandleColor.Black;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max((Math.max(this.shadowVeryShortAveragePeriod, this.shadowLongAveragePeriod),
+        const lookback = Math.max((Math.max(this.shadowVeryShortAveragePeriod, this.shadowLongAveragePeriod),
             this.bodyLongAveragePeriod, this.bodyShortAveragePeriod)) + 2;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);

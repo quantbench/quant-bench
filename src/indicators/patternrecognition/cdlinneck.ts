@@ -34,7 +34,7 @@ export class CDLINNECK
         this.bodyLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyLong).averagePeriod;
         this.bodyLongPeriodTotal = 0;
 
-        let lookback = Math.max(this.equalAveragePeriod, this.bodyLongAveragePeriod) + 1;
+        const lookback = Math.max(this.equalAveragePeriod, this.bodyLongAveragePeriod) + 1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

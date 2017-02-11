@@ -29,9 +29,6 @@ export class CDLSHORTLINE
         this.shadowShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowShort).averagePeriod;
         this.shadowShortPeriodTotal = 0;
 
-        this.firstCandle = undefined;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
         const lookback = Math.max(this.shadowShortAveragePeriod, this.bodyShortAveragePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);

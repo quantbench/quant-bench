@@ -29,7 +29,7 @@ export class CDLGRAVESTONEDOJI
         this.shadowVeryShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod;
         this.shadowVeryShortPeriodTotal = 0;
 
-        let lookback = Math.max(this.bodyDojiAveragePeriod, this.shadowVeryShortAveragePeriod);
+        const lookback = Math.max(this.bodyDojiAveragePeriod, this.shadowVeryShortAveragePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

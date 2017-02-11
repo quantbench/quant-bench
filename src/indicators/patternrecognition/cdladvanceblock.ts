@@ -63,14 +63,7 @@ export class CDLADVANCEBLOCK
 
         this.bodyLongPeriodTotal = 0;
 
-        this.thirdCandle = undefined;
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.thirdCandleColor = candleEnums.CandleColor.Black;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(Math.max(
+        const lookback = Math.max(Math.max(
             Math.max(CandleSettings.get(candleEnums.CandleSettingType.ShadowLong).averagePeriod,
                 CandleSettings.get(candleEnums.CandleSettingType.ShadowShort).averagePeriod),
             Math.max(CandleSettings.get(candleEnums.CandleSettingType.Far).averagePeriod,

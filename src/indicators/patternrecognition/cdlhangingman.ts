@@ -46,12 +46,7 @@ export class CDLHANGINGMAN
         this.nearAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.Near).averagePeriod;
         this.nearPeriodTotal = 0;
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(
+        const lookback = Math.max(
             Math.max(Math.max(this.bodyShortAveragePeriod, this.shadowLongAveragePeriod),
                 this.shadowVeryShortAveragePeriod), this.nearAveragePeriod) + 1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);

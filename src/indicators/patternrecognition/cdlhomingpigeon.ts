@@ -34,12 +34,7 @@ export class CDLHOMINGPIGEON
         this.bodyShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyShort).averagePeriod;
         this.bodyShortPeriodTotal = 0;
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = Math.max(this.bodyShortAveragePeriod, this.bodyLongAveragePeriod) + 1;
+        const lookback = Math.max(this.bodyShortAveragePeriod, this.bodyLongAveragePeriod) + 1;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

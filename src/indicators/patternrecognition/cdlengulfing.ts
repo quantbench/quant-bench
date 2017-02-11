@@ -21,12 +21,7 @@ export class CDLENGULFING
     constructor() {
         super(CDLENGULFING.INDICATOR_NAME, CDLENGULFING.INDICATOR_DESCR);
 
-        this.secondCandle = undefined;
-        this.firstCandle = undefined;
-        this.secondCandleColor = candleEnums.CandleColor.Black;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
-
-        let lookback = 2;
+        const lookback = 2;
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

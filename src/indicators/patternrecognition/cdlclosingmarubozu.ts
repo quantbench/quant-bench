@@ -28,10 +28,8 @@ export class CDLCLOSINGMARUBOZU
 
         this.bodyLongPeriodTotal = 0;
         this.shadowVeryShortPeriodTotal = 0;
-        this.firstCandle = undefined;
-        this.firstCandleColor = candleEnums.CandleColor.Black;
 
-        let lookback = Math.max(this.bodyLongAveragePeriod, this.shadowVeryShortAveragePeriod);
+        const lookback = Math.max(this.bodyLongAveragePeriod, this.shadowVeryShortAveragePeriod);
         this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
