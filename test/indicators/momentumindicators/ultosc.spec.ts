@@ -1,26 +1,25 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
-let jsonfile = require("jsonfile");
+import { TestDataFactory } from "../../testData";
+const jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("ULTOSC Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.ULTOSC;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod1 = 7;
-    let timePeriod2 = 14;
-    let timePeriod3 = 28;
+    const timePeriod1 = 7;
+    const timePeriod2 = 14;
+    const timePeriod3 = 28;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/ultosc.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
     });
@@ -91,7 +90,7 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD1_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD1_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -108,7 +107,7 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD2_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD2_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -125,7 +124,7 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD3_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD3_MIN, 0);
             exception.message.should.equal(message);
         });
     });

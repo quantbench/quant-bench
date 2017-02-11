@@ -1,0 +1,556 @@
+-
+    name: CDL2CROWS
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDL3BLACKCROWS
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDL3INSIDE
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDL3LINESTRIKE
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDL3OUTSIDE
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDL3STARSINSOUTH
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDL3WHITESOLDIERS
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLABANDONEDBABY
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+        optInPenetration: 0.3
+    group: pattern-recognition
+-
+    name: CDLADVANCEBLOCK
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLBELTHOLD
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLBREAKAWAY
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLCLOSINGMARUBOZU
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLCONCEALBABYSWALL
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLCOUNTERATTACK
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLDARKCLOUDCOVER
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+        optInPenetration: 0.5
+    group: pattern-recognition
+-
+    name: CDLDOJI
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLDOJISTAR
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLDRAGONFLYDOJI
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLENGULFING
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLEVENINGDOJISTAR
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+        optInPenetration: 0.3
+    group: pattern-recognition
+-
+    name: CDLEVENINGSTAR
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+        optInPenetration: 0.3
+    group: pattern-recognition
+-
+    name: CDLGAPSIDESIDEWHITE
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLGRAVESTONEDOJI
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLHAMMER
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLHANGINGMAN
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLHARAMI
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLHARAMICROSS
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLHIGHWAVE
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLHIKKAKE
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLHIKKAKEMOD
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLHOMINGPIGEON
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLIDENTICAL3CROWS
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLINNECK
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLINVERTEDHAMMER
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLKICKING
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLKICKINGBYLENGTH
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLLADDERBOTTOM
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLLONGLEGGEDDOJI
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLLONGLINE
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLMARUBOZU
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLMATCHINGLOW
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLMATHOLD
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+        optInPenetration: 0.5
+    group: pattern-recognition
+-
+    name: CDLMORNINGDOJISTAR
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+        optInPenetration: 0.3
+    group: pattern-recognition
+-
+    name: CDLMORNINGSTAR
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+        optInPenetration: 0.3
+    group: pattern-recognition
+-
+    name: CDLONNECK
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLPIERCING
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLRICKSHAWMAN
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLRISEFALL3METHODS
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLSEPARATINGLINES
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLSHOOTINGSTAR
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLSHORTLINE
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLSPINNINGTOP
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLSTALLEDPATTERN
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLSTICKSANDWICH
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLTAKURI
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLTASUKIGAP
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLTHRUSTING
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLTRISTAR
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLUNIQUE3RIVER
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLUPSIDEGAP2CROWS
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition
+-
+    name: CDLXSIDEGAP3METHODS
+    data_inputs:
+        - open
+        - high
+        - low
+        - close
+    inputs:
+    group: pattern-recognition

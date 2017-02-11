@@ -4,7 +4,7 @@ import * as chai from "chai";
 chai.should();
 
 describe("Queue", () => {
-    let queue = new Queue<number>();
+    const queue = new Queue<number>();
 
     describe("when enqueuing", () => {
 
@@ -16,7 +16,7 @@ describe("Queue", () => {
         });
 
         it("should enqueue in order", () => {
-            let result = queue.toArray();
+            const result = queue.toArray();
             result[0].should.be.equal(1);
             result[1].should.be.equal(2);
             result[2].should.be.equal(3);
@@ -34,7 +34,7 @@ describe("Queue", () => {
         });
 
         it("should dequeue from the first in", () => {
-            let result = queue.toArray();
+            const result = queue.toArray();
             result[0].should.be.equal(2);
             result[1].should.be.equal(3);
         });
@@ -51,7 +51,7 @@ describe("Queue", () => {
         });
 
         it("should peek from the first in", () => {
-            let result = queue.peek();
+            const result = queue.peek();
             result.should.be.equal(2);
         });
     });

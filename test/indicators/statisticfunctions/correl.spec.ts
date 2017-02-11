@@ -1,12 +1,12 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
-let jsonfile = require("jsonfile");
+import { TestDataFactory } from "../../testData";
+const jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("CORREL Indicator", () => {
-    let sourceFile: string;
     let sourceFile2: string;
     let taResultFile: string;
     let sourceData: any;
@@ -15,13 +15,12 @@ describe("CORREL Indicator", () => {
     let indicator: indicators.CORREL;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 30;
+    const timePeriod = 30;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         sourceFile2 = path.resolve("./test/sourcedata/sourcedata2.json");
         taResultFile = path.resolve("./test/talib-results/correl.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         sourceData2 = jsonfile.readFileSync(sourceFile2);
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
@@ -77,7 +76,7 @@ describe("CORREL Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.CORREL.TIMEPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.CORREL.TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -87,8 +86,8 @@ describe("CORREL Indicator", () => {
             indicator = new indicators.CORREL(timePeriod);
             let idx = 0;
             for (let i = 0; i < sourceData.close.length; i++) {
-                let value1 = sourceData.close[i];
-                let value2 = sourceData2.close[i];
+                const value1 = sourceData.close[i];
+                const value2 = sourceData2.close[i];
                 if (indicator.receiveData(value1, value2)) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
@@ -118,8 +117,8 @@ describe("CORREL Indicator", () => {
             });
 
             for (let i = 0; i < indicator.lookback; i++) {
-                let value1 = sourceData.close[i];
-                let value2 = sourceData2.close[i];
+                const value1 = sourceData.close[i];
+                const value2 = sourceData2.close[i];
                 if (indicator.receiveData(value1, value2)) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
@@ -146,8 +145,8 @@ describe("CORREL Indicator", () => {
             });
 
             for (let i = 0; i <= indicator.lookback; i++) {
-                let value1 = sourceData.close[i];
-                let value2 = sourceData2.close[i];
+                const value1 = sourceData.close[i];
+                const value2 = sourceData2.close[i];
                 if (indicator.receiveData(value1, value2)) {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;

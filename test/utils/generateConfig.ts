@@ -2,8 +2,9 @@ let yaml = require("yamljs");
 let talib = require("talib");
 import * as fs from "fs";
 
-let groups = ["Overlap Studies", "Volatility Indicators", "Momentum Indicators", "Cycle Indicators",
-    "Volume Indicators", "Statistic Functions", "Price Transform", "Math Operators", "Math Transform"];
+// let groups = ["Overlap Studies", "Volatility Indicators", "Momentum Indicators", "Cycle Indicators",
+//     "Volume Indicators", "Statistic Functions", "Price Transform", "Math Operators", "Math Transform"];
+let groups = ["Pattern Recognition"];
 let functions = talib.functions;
 let functionKeys = Object.keys(functions);
 
@@ -55,7 +56,7 @@ functionKeys.forEach((func: any) => {
 
 let yamlString = yaml.stringify(configs, 4);
 
-fs.writeFile("./test/genconfig.yml", yamlString, (err) => {
+fs.writeFile("./test/genconfigCandleSticks.yml", yamlString, (err) => {
     if (err) {
         console.log(err);
     }

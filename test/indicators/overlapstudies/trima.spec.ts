@@ -1,24 +1,23 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
-let jsonfile = require("jsonfile");
+import { TestDataFactory } from "../../testData";
+const jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("TRIMA Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.TRIMA;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 30;
+    const timePeriod = 30;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/trima.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
     });
@@ -73,7 +72,7 @@ describe("TRIMA Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.TRIMA.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.TRIMA.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });

@@ -1,26 +1,25 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
-let jsonfile = require("jsonfile");
+import { TestDataFactory } from "../../testData";
+const jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("APO Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.APO;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let fastTimePeriod = 12;
-    let slowTimePeriod = 26;
-    let maType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
+    const fastTimePeriod = 12;
+    const slowTimePeriod = 26;
+    const maType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/apo.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
     });
@@ -103,7 +102,7 @@ describe("APO Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.FAST_TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.FAST_TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
@@ -120,7 +119,7 @@ describe("APO Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.SLOW_TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.SLOW_TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });

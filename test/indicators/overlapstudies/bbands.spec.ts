@@ -1,24 +1,23 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
-let jsonfile = require("jsonfile");
+import { TestDataFactory } from "../../testData";
+const jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("BBANDS Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.BBANDS;
     let indicatorResults: Array<{ upperBand: number, middleBand: number, lowerBand: number }>;
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod: number = 5;
+    const timePeriod: number = 5;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/bbands.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<{ upperBand: number, middleBand: number, lowerBand: number }>(
             sourceData.close.length - taResultData.begIndex);
@@ -74,7 +73,7 @@ describe("BBANDS Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.BBANDS.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.BBANDS.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });

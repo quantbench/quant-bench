@@ -1,26 +1,25 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
-let jsonfile = require("jsonfile");
+import { TestDataFactory } from "../../testData";
+const jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("MACD Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.MACD;
     let indicatorResults: Array<{ macd: number, signal: number, histogram: number }>;
     let indicatorOnDataRasied: boolean = false;
-    let fastTimePeriod: number = 12;
-    let slowTimePeriod: number = 26;
-    let signalTimePeriod: number = 9;
+    const fastTimePeriod: number = 12;
+    const slowTimePeriod: number = 26;
+    const signalTimePeriod: number = 9;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/macd.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<{ macd: number, signal: number, histogram: number }>(sourceData.close.length - taResultData.begIndex);
     });
@@ -91,7 +90,7 @@ describe("MACD Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.MACD.FAST_TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MACD.FAST_TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
@@ -108,7 +107,7 @@ describe("MACD Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.MACD.SLOW_TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MACD.SLOW_TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
@@ -125,7 +124,7 @@ describe("MACD Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.MACD.SIGNAL_TIMEPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MACD.SIGNAL_TIMEPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });

@@ -1,25 +1,24 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
-let jsonfile = require("jsonfile");
+import { TestDataFactory } from "../../testData";
+const jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("MA Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.MA;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    let timePeriod = 30;
-    let maType: indicators.MA_TYPE = indicators.MA_TYPE.EMA;
+    const timePeriod = 30;
+    const maType: indicators.MA_TYPE = indicators.MA_TYPE.EMA;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/ema.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
     });
@@ -78,7 +77,7 @@ describe("MA Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.MA.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MA.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });

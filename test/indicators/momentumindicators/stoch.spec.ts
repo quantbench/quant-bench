@@ -1,28 +1,27 @@
 import * as chai from "chai";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
-let jsonfile = require("jsonfile");
+import { TestDataFactory } from "../../testData";
+const jsonfile = require("jsonfile");
 
 chai.should();
 
 describe("STOCH Indicator", () => {
-    let sourceFile: string;
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
     let indicator: indicators.STOCH;
     let indicatorResults: Array<{ slowK: number, slowD: number }>;
     let indicatorOnDataRasied: boolean = false;
-    let fastKTimePeriod: number = 5;
-    let slowDMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
-    let slowDTimePeriod: number = 3;
-    let slowKMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
-    let slowKTimePeriod: number = 3;
+    const fastKTimePeriod: number = 5;
+    const slowDMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
+    const slowDTimePeriod: number = 3;
+    const slowKMAType: indicators.MA_TYPE = indicators.MA_TYPE.SMA;
+    const slowKTimePeriod: number = 3;
 
     beforeEach(() => {
-        sourceFile = path.resolve("./test/sourcedata/sourcedata.json");
         taResultFile = path.resolve("./test/talib-results/stoch.json");
-        sourceData = jsonfile.readFileSync(sourceFile);
+        sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<{ slowK: number, slowD: number }>(sourceData.close.length - taResultData.begIndex);
     });
@@ -110,7 +109,7 @@ describe("STOCH Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.FASTKPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.FASTKPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -127,7 +126,7 @@ describe("STOCH Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWKPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWKPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
@@ -144,7 +143,7 @@ describe("STOCH Indicator", () => {
         });
 
         it("should return a correctly formatted error", () => {
-            let message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWDPERIOD_MIN, 0);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWDPERIOD_MIN, 0);
             exception.message.should.equal(message);
         });
     });
