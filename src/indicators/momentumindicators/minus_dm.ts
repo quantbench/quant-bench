@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class MINUSDM
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "MINUSDM";
     static INDICATOR_DESCR: string = "Minus Directional Movement";
@@ -32,7 +32,7 @@ export class MINUSDM
         this.setLookBack(timePeriod - 1);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.periodCounter += 1;
         let high = inputData.high;
         let low = inputData.low;

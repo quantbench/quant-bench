@@ -1,21 +1,21 @@
 import * as indicators from "../";
 
-export class MAXINDEX
+export class MinIndex
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "MAXINDEX";
-    static INDICATOR_DESCR: string = "Index of highest value over a specified period";
+    static INDICATOR_NAME: string = "MinIndex";
+    static INDICATOR_DESCR: string = "Index of lowest value over a specified period";
     static TIMEPERIOD_DEFAULT: number = 30;
     static TIMEPERIOD_MIN: number = 2;
 
     public timePeriod: number;
     private periodHistory: indicators.Queue<number>;
 
-    constructor(timePeriod: number = MAXINDEX.TIMEPERIOD_DEFAULT) {
-        super(MAXINDEX.INDICATOR_NAME, MAXINDEX.INDICATOR_DESCR);
+    constructor(timePeriod: number = MinIndex.TIMEPERIOD_DEFAULT) {
+        super(MinIndex.INDICATOR_NAME, MinIndex.INDICATOR_DESCR);
 
-        if (timePeriod < MAXINDEX.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MAXINDEX.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < MinIndex.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, MinIndex.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -32,7 +32,7 @@ export class MAXINDEX
         }
 
         if (this.periodHistory.count >= this.timePeriod) {
-            this.setCurrentValue(indicators.getQueueMaxIndex(this.periodHistory));
+            this.setCurrentValue(indicators.getQueueMinIndex(this.periodHistory));
         }
 
         return this.isReady;

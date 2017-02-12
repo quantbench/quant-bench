@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLHIGHWAVE
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLHIGHWAVE";
     static INDICATOR_DESCR: string = "High-Wave Candle";
@@ -19,7 +19,7 @@ export class CDLHIGHWAVE
 
     private shadowVeryLongAveragePeriod: number;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
     constructor() {
         super(CDLHIGHWAVE.INDICATOR_NAME, CDLHIGHWAVE.INDICATOR_DESCR);
@@ -30,11 +30,11 @@ export class CDLHIGHWAVE
         this.shadowVeryLongPeriodTotal = 0;
 
         const lookback = Math.max(this.bodyShortAveragePeriod, this.shadowVeryLongAveragePeriod);
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -64,7 +64,7 @@ export class CDLHIGHWAVE
 
         return this.isReady;
     }
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyShortAveragePeriod) {
             this.bodyShortPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyShort, inputData);
         }

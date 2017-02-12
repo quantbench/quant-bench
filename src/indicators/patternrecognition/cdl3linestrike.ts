@@ -6,19 +6,19 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDL3LINESTRIKE
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDL3LINESTRIKE";
     static INDICATOR_DESCR: string = "Three-Line Strike ";
 
     private nearPeriodTotal: number[];
     private nearAveragePeriod: number;
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
-    private fourthCandle: marketData.IPriceBar;
-    private thirdCandle: marketData.IPriceBar;
-    private secondCandle: marketData.IPriceBar;
-    private firstCandle: marketData.IPriceBar;
+    private fourthCandle: marketData.PriceBar;
+    private thirdCandle: marketData.PriceBar;
+    private secondCandle: marketData.PriceBar;
+    private firstCandle: marketData.PriceBar;
     private fourthCandleColor: candleEnums.CandleColor;
     private thirdCandleColor: candleEnums.CandleColor;
     private secondCandleColor: candleEnums.CandleColor;
@@ -34,11 +34,11 @@ export class CDL3LINESTRIKE
         }
 
         const lookback = this.nearAveragePeriod + 3;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -76,7 +76,7 @@ export class CDL3LINESTRIKE
         this.secondCandleColor = CandleStickUtils.getCandleColor(this.secondCandle);
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.nearAveragePeriod) {
             this.nearPeriodTotal[3] +=
                 CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.Near, this.slidingWindow.getItem(3));

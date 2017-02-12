@@ -6,11 +6,11 @@ const jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("SUB Indicator", () => {
+describe("Subtract", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.SUB;
+    let indicator: indicators.Subtract;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
 
@@ -23,15 +23,15 @@ describe("SUB Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.SUB();
+            indicator = new indicators.Subtract();
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.SUB.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.Subtract.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.SUB.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.Subtract.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -41,7 +41,7 @@ describe("SUB Indicator", () => {
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.SUB();
+            indicator = new indicators.Subtract();
             let idx = 0;
             sourceData.close.forEach((value: number, index: number) => {
                 if (indicator.receiveData(
@@ -67,7 +67,7 @@ describe("SUB Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.SUB();
+            indicator = new indicators.Subtract();
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -95,7 +95,7 @@ describe("SUB Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.SUB();
+            indicator = new indicators.Subtract();
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

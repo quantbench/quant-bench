@@ -7,7 +7,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLUNIQUE3RIVER
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLUNIQUE3RIVER";
     static INDICATOR_DESCR: string = "Unique 3 River";
@@ -17,10 +17,10 @@ export class CDLUNIQUE3RIVER
     private bodyShortAveragePeriod: number;
     private bodyShortPeriodTotal: number;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
-    private thirdCandle: marketData.IPriceBar;
-    private secondCandle: marketData.IPriceBar;
-    private firstCandle: marketData.IPriceBar;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
+    private thirdCandle: marketData.PriceBar;
+    private secondCandle: marketData.PriceBar;
+    private firstCandle: marketData.PriceBar;
     private thirdCandleColor: candleEnums.CandleColor;
     private secondCandleColor: candleEnums.CandleColor;
     private firstCandleColor: candleEnums.CandleColor;
@@ -34,11 +34,11 @@ export class CDLUNIQUE3RIVER
         this.bodyShortPeriodTotal = 0;
 
         const lookback = Math.max(this.bodyLongAveragePeriod, this.bodyShortAveragePeriod) + 2;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -78,7 +78,7 @@ export class CDLUNIQUE3RIVER
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyLongAveragePeriod - 2
             && this.slidingWindow.samples < this.slidingWindow.period - 2) {
             this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, inputData);

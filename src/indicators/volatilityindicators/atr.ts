@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class ATR
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ATR";
     static INDICATOR_DESCR: string = "Average True Range";
@@ -33,7 +33,7 @@ export class ATR
         this.setLookBack(this.timePeriod);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.trueRange.receiveData(inputData);
         return this.isReady;
     }

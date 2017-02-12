@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class MEDPRICE
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "MEDPRICE";
     static INDICATOR_DESCR: string = "Median Price";
@@ -12,7 +12,7 @@ export class MEDPRICE
         this.setLookBack(0);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.setCurrentValue((inputData.high + inputData.low) / 2.0);
         return this.isReady;
     }

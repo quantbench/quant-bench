@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class PLUSDM
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "PLUSDM";
     static INDICATOR_DESCR: string = "Plus Directional Movement";
@@ -31,7 +31,7 @@ export class PLUSDM
         this.setLookBack(timePeriod - 1);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
 
         this.periodCounter += 1;
         let high = inputData.high;

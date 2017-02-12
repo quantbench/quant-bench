@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class BOP
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "BOP";
     static INDICATOR_DESCR: string = "Balance Of Power";
@@ -15,7 +15,7 @@ export class BOP
         this.setLookBack(0);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.highLow = inputData.high - inputData.low;
         if (this.highLow === 0) {
             this.setCurrentValue(0);

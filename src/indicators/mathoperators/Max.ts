@@ -1,9 +1,9 @@
 import * as indicators from "../";
 
-export class MAX
+export class Max
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "MAX";
+    static INDICATOR_NAME: string = "Max";
     static INDICATOR_DESCR: string = "Highest value over a specified period";
     static TIMEPERIOD_DEFAULT: number = 30;
     static TIMEPERIOD_MIN: number = 2;
@@ -12,11 +12,11 @@ export class MAX
     private periodHistory: indicators.Queue<number>;
     private currentHigh: number;
 
-    constructor(timePeriod: number = MAX.TIMEPERIOD_DEFAULT) {
-        super(MAX.INDICATOR_NAME, MAX.INDICATOR_DESCR);
+    constructor(timePeriod: number = Max.TIMEPERIOD_DEFAULT) {
+        super(Max.INDICATOR_NAME, Max.INDICATOR_DESCR);
 
-        if (timePeriod < MAX.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MAX.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < Max.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Max.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;

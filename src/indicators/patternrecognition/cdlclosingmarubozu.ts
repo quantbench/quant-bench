@@ -7,7 +7,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLCLOSINGMARUBOZU
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLCLOSINGMARUBOZU";
     static INDICATOR_DESCR: string = "Closing Marubozu";
@@ -16,8 +16,8 @@ export class CDLCLOSINGMARUBOZU
     private bodyLongPeriodTotal: number;
     private shadowVeryShortAveragePeriod: number;
     private shadowVeryShortPeriodTotal: number;
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
-    private firstCandle: marketData.IPriceBar;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
+    private firstCandle: marketData.PriceBar;
     private firstCandleColor: candleEnums.CandleColor;
 
     constructor() {
@@ -30,11 +30,11 @@ export class CDLCLOSINGMARUBOZU
         this.shadowVeryShortPeriodTotal = 0;
 
         const lookback = Math.max(this.bodyLongAveragePeriod, this.shadowVeryShortAveragePeriod);
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -67,7 +67,7 @@ export class CDLCLOSINGMARUBOZU
         this.firstCandle = this.slidingWindow.getItem(0);
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyLongAveragePeriod) {
             this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, inputData);
         }

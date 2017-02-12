@@ -6,11 +6,11 @@ const jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("SUM Indicator", () => {
+describe("Sum Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.SUM;
+    let indicator: indicators.Sum;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
     const timePeriod = 30;
@@ -24,15 +24,15 @@ describe("SUM Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.SUM(timePeriod);
+            indicator = new indicators.Sum(timePeriod);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.SUM.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.Sum.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.SUM.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.Sum.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -42,7 +42,7 @@ describe("SUM Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.SUM(timePeriod + 1);
+            indicator = new indicators.Sum(timePeriod + 1);
         });
 
         it("should set the timePeriod", () => {
@@ -52,11 +52,11 @@ describe("SUM Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.SUM();
+            indicator = new indicators.Sum();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.SUM.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.Sum.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -65,21 +65,21 @@ describe("SUM Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.SUM(1);
+                indicator = new indicators.Sum(1);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.SUM.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.Sum.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.SUM(timePeriod);
+            indicator = new indicators.Sum(timePeriod);
             let idx = 0;
             sourceData.close.forEach((value: number) => {
                 if (indicator.receiveData(value)) {
@@ -103,7 +103,7 @@ describe("SUM Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.SUM(timePeriod);
+            indicator = new indicators.Sum(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -129,7 +129,7 @@ describe("SUM Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.SUM(timePeriod);
+            indicator = new indicators.Sum(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

@@ -6,16 +6,16 @@ const jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("MININDEX Indicator", () => {
+describe("MaxIndex Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.MININDEX;
+    let indicator: indicators.MaxIndex;
     let indicatorResults: number[];
     const timePeriod = 30;
 
     beforeEach(() => {
-        taResultFile = path.resolve("./test/talib-results/minindex.json");
+        taResultFile = path.resolve("./test/talib-results/maxindex.json");
         sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
@@ -23,15 +23,15 @@ describe("MININDEX Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.MININDEX(timePeriod);
+            indicator = new indicators.MaxIndex(timePeriod);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.MININDEX.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.MaxIndex.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.MININDEX.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.MaxIndex.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -41,7 +41,7 @@ describe("MININDEX Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MININDEX(timePeriod + 1);
+            indicator = new indicators.MaxIndex(timePeriod + 1);
         });
 
         it("should set the timePeriod", () => {
@@ -51,11 +51,11 @@ describe("MININDEX Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MININDEX();
+            indicator = new indicators.MaxIndex();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.MININDEX.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.MaxIndex.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -64,14 +64,14 @@ describe("MININDEX Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.MININDEX(1);
+                indicator = new indicators.MaxIndex(1);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MININDEX.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MaxIndex.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });

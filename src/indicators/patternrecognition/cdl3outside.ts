@@ -6,16 +6,16 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDL3OUTSIDE
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDL3OUTSIDE";
     static INDICATOR_DESCR: string = "Three Outside Up/Down";
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
-    private thirdCandle: marketData.IPriceBar;
-    private secondCandle: marketData.IPriceBar;
-    private firstCandle: marketData.IPriceBar;
+    private thirdCandle: marketData.PriceBar;
+    private secondCandle: marketData.PriceBar;
+    private firstCandle: marketData.PriceBar;
     private thirdCandleColor: candleEnums.CandleColor;
     private secondCandleColor: candleEnums.CandleColor;
     private firstCandleColor: candleEnums.CandleColor;
@@ -24,11 +24,11 @@ export class CDL3OUTSIDE
         super(CDL3OUTSIDE.INDICATOR_NAME, CDL3OUTSIDE.INDICATOR_DESCR);
 
         const lookback = 3;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {

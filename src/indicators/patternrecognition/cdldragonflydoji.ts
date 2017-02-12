@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLDRAGONFLYDOJI
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLDRAGONFLYDOJI";
     static INDICATOR_DESCR: string = "Dragonfly Doji";
@@ -19,7 +19,7 @@ export class CDLDRAGONFLYDOJI
 
     private shadowVeryShortAveragePeriod: number;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
     constructor() {
         super(CDLDRAGONFLYDOJI.INDICATOR_NAME, CDLDRAGONFLYDOJI.INDICATOR_DESCR);
@@ -32,11 +32,11 @@ export class CDLDRAGONFLYDOJI
 
         const lookback = Math.max(CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod,
             CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod);
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -67,7 +67,7 @@ export class CDLDRAGONFLYDOJI
         return this.isReady;
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyDojiAveragePeriod) {
             this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
         }

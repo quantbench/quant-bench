@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLONNECK
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLONNECK";
     static INDICATOR_DESCR: string = "On-Neck Pattern";
@@ -19,10 +19,10 @@ export class CDLONNECK
 
     private equalAveragePeriod: number;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
-    private secondCandle: marketData.IPriceBar;
-    private firstCandle: marketData.IPriceBar;
+    private secondCandle: marketData.PriceBar;
+    private firstCandle: marketData.PriceBar;
     private secondCandleColor: candleEnums.CandleColor;
     private firstCandleColor: candleEnums.CandleColor;
 
@@ -35,11 +35,11 @@ export class CDLONNECK
         this.bodyLongPeriodTotal = 0;
 
         const lookback = Math.max(this.equalAveragePeriod, this.bodyLongAveragePeriod) + 1;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -74,7 +74,7 @@ export class CDLONNECK
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.equalAveragePeriod) {
             this.equalPeriodTotal +=
                 CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.Equal, this.slidingWindow.getItem(1));

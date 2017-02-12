@@ -1,13 +1,13 @@
 import * as indicators from "../";
 
-export class ADD
+export class Add
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "ADD";
+    static INDICATOR_NAME: string = "Add";
     static INDICATOR_DESCR: string = "Vector Arithmetic Add";
 
     constructor() {
-        super(ADD.INDICATOR_NAME, ADD.INDICATOR_DESCR);
+        super(Add.INDICATOR_NAME, Add.INDICATOR_DESCR);
         this.setLookBack(0);
     }
 

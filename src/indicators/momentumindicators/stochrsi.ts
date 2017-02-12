@@ -21,8 +21,8 @@ export class STOCHRSI
     private periodCounter: number;
     private fastDMA: indicators.MA;
     private rsi: indicators.RSI;
-    private maxValue: indicators.MAX;
-    private minValue: indicators.MIN;
+    private maxValue: indicators.Max;
+    private minValue: indicators.Min;
     private currentPeriodHigh: number;
     private currentPeriodLow: number;
     private currentRSI: number;
@@ -56,9 +56,9 @@ export class STOCHRSI
         this.fastDMAType = fastDMAType;
 
         this.periodCounter = this.fastKTimePeriod * -1;
-        this.maxValue = new indicators.MAX(this.fastKTimePeriod);
+        this.maxValue = new indicators.Max(this.fastKTimePeriod);
         this.maxValue.on("data", (data: number) => this.receiveMaxValueData(data));
-        this.minValue = new indicators.MIN(this.fastKTimePeriod);
+        this.minValue = new indicators.Min(this.fastKTimePeriod);
         this.minValue.on("data", (data: number) => this.receiveMinValueData(data));
         this.rsi = new indicators.RSI(this.timePeriod);
         this.rsi.on("data", (data: number) => this.receiveRSIData(data));

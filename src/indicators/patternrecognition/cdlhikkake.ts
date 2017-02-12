@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLHIKKAKE
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLHIKKAKE";
     static INDICATOR_DESCR: string = "Hikkake Pattern";
@@ -15,17 +15,17 @@ export class CDLHIKKAKE
 
     private patternResult: number;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
     constructor() {
         super(CDLHIKKAKE.INDICATOR_NAME, CDLHIKKAKE.INDICATOR_DESCR);
 
         const lookback = 5;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -67,7 +67,7 @@ export class CDLHIKKAKE
         return this.isReady;
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples > 3) {
             if (this.slidingWindow.getItem(1).high <
                 this.slidingWindow.getItem(2).high && this.slidingWindow.getItem(1).low > this.slidingWindow.getItem(2).low &&

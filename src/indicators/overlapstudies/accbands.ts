@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class ACCBANDS
-    extends indicators.AbstractIndicatorBase<marketData.IPriceBar> {
+    extends indicators.AbstractIndicatorBase<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ACCBANDS";
     static INDICATOR_DESCR: string = "Acceleration Bands";
@@ -37,7 +37,7 @@ export class ACCBANDS
         this.setLookBack(this.timePeriod - 1);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         let highPlusLow = inputData.high + inputData.low;
         let highMinusLow = inputData.high - inputData.low;
         let tempReal = 4 * highMinusLow / highPlusLow;

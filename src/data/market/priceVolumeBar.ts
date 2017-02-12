@@ -1,6 +1,6 @@
-import { IPriceBar } from "./priceBar";
+import { PriceBar } from "./priceBar";
 
-export interface IPriceVolumeBar extends IPriceBar {
+export interface PriceVolumeBar extends PriceBar {
     readonly open: number;
     readonly high: number;
     readonly low: number;

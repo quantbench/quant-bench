@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class DX
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "DX";
     static INDICATOR_DESCR: string = "Directional Movement Index";
@@ -34,7 +34,7 @@ export class DX
         this.setLookBack(timePeriod);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.minusDI.receiveData(inputData);
         this.plusDI.receiveData(inputData);
         return this.isReady;

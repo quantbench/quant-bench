@@ -3,7 +3,7 @@ import * as marketData from "../../data/market/";
 import {MA_TYPE} from "../matype";
 
 export class STOCH
-    extends indicators.AbstractIndicatorBase<marketData.IPriceBar> {
+    extends indicators.AbstractIndicatorBase<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "STOCH";
     static INDICATOR_DESCR: string = "Stochastic";
@@ -25,8 +25,8 @@ export class STOCH
     private slowKMA: indicators.MA;
     private slowDMA: indicators.MA;
 
-    private maxValue: indicators.MAX;
-    private minValue: indicators.MIN;
+    private maxValue: indicators.Max;
+    private minValue: indicators.Min;
 
     private periodCounter: number;
     private currentPeriodHigh: number;
@@ -67,9 +67,9 @@ export class STOCH
         this.slowDMAType = slowDMAType;
         this.slowDMA = new indicators.MA(this.slowDTimePeriod, slowDMAType);
         this.slowDMA.on("data", (data: number) => this.receiveSlowDMAData(data));
-        this.maxValue = new indicators.MAX(this.fastKTimePeriod);
+        this.maxValue = new indicators.Max(this.fastKTimePeriod);
         this.maxValue.on("data", (data: number) => this.receiveMaxValueData(data));
-        this.minValue = new indicators.MIN(this.fastKTimePeriod);
+        this.minValue = new indicators.Min(this.fastKTimePeriod);
         this.minValue.on("data", (data: number) => this.receiveMinValueData(data));
 
         this.currentPeriodHigh = 0;
@@ -98,7 +98,7 @@ export class STOCH
         this.setIsReady();
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.periodCounter += 1;
         this.maxValue.receiveData(inputData.high);
         this.minValue.receiveData(inputData.low);

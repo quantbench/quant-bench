@@ -1,13 +1,13 @@
 import * as indicators from "../";
 
-export class DIV
+export class Divide
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "DIV";
+    static INDICATOR_NAME: string = "Divide";
     static INDICATOR_DESCR: string = "Vector Arithmetic Div";
 
     constructor() {
-        super(DIV.INDICATOR_NAME, DIV.INDICATOR_DESCR);
+        super(Divide.INDICATOR_NAME, Divide.INDICATOR_DESCR);
     }
 
     receiveData(inputData1: number, inputData2: number): boolean {

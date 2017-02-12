@@ -2,8 +2,8 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class ADX
-    extends indicators.AbstractIndicator<marketData.IPriceBar>
-    implements indicators.IIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar>
+    implements indicators.IIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ADX";
     static INDICATOR_DESCR: string = "Average Directional Movement Index";
@@ -37,7 +37,7 @@ export class ADX
         this.setLookBack(2 * this.timePeriod - 1);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.dx.receiveData(inputData);
         return this.isReady;
     }

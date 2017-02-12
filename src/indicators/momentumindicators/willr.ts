@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class WILLR
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "WILLR";
     static INDICATOR_DESCR: string = "Williams' %R";
@@ -29,7 +29,7 @@ export class WILLR
 
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.periodCounter += 1;
         this.periodHighHistory.enqueue(inputData.high);
         this.periodLowHistory.enqueue(inputData.low);

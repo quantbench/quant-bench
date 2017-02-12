@@ -1,13 +1,13 @@
 import * as indicators from "../";
 
-export class SUB
+export class Subtract
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "SUB";
+    static INDICATOR_NAME: string = "Subtract";
     static INDICATOR_DESCR: string = "Vector Arithmetic Substraction";
 
     constructor() {
-        super(SUB.INDICATOR_NAME, SUB.INDICATOR_DESCR);
+        super(Subtract.INDICATOR_NAME, Subtract.INDICATOR_DESCR);
     }
 
     receiveData(inputData1: number, inputData2: number): boolean {

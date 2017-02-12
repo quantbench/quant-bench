@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLHANGINGMAN
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLHANGINGMAN";
     static INDICATOR_DESCR: string = "Hanging Man";
@@ -27,10 +27,10 @@ export class CDLHANGINGMAN
 
     private nearAveragePeriod: number;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
-    private secondCandle: marketData.IPriceBar;
-    private firstCandle: marketData.IPriceBar;
+    private secondCandle: marketData.PriceBar;
+    private firstCandle: marketData.PriceBar;
     private secondCandleColor: candleEnums.CandleColor;
     private firstCandleColor: candleEnums.CandleColor;
 
@@ -49,11 +49,11 @@ export class CDLHANGINGMAN
         const lookback = Math.max(
             Math.max(Math.max(this.bodyShortAveragePeriod, this.shadowLongAveragePeriod),
                 this.shadowVeryShortAveragePeriod), this.nearAveragePeriod) + 1;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -97,7 +97,7 @@ export class CDLHANGINGMAN
         this.secondCandleColor = CandleStickUtils.getCandleColor(this.secondCandle);
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyShortAveragePeriod) {
             this.bodyShortPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyShort, inputData);
         }

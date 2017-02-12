@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class TRANGE
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "TRANGE";
     static INDICATOR_DESCR: string = "True Range";
@@ -18,7 +18,7 @@ export class TRANGE
         this.setLookBack(1);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
 
         this.periodCounter++;
 

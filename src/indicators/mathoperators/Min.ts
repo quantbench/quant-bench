@@ -1,9 +1,9 @@
 import * as indicators from "../";
 
-export class MIN
+export class Min
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "MIN";
+    static INDICATOR_NAME: string = "Min";
     static INDICATOR_DESCR: string = "Lowest value over a specified period";
     static TIMEPERIOD_DEFAULT: number = 30;
     static TIMEPERIOD_MIN: number = 2;
@@ -12,11 +12,11 @@ export class MIN
     private periodHistory: indicators.Queue<number>;
     private currentLow: number;
 
-    constructor(timePeriod: number = MIN.TIMEPERIOD_DEFAULT) {
-        super(MIN.INDICATOR_NAME, MIN.INDICATOR_DESCR);
+    constructor(timePeriod: number = Min.TIMEPERIOD_DEFAULT) {
+        super(Min.INDICATOR_NAME, Min.INDICATOR_DESCR);
 
-        if (timePeriod < MIN.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MIN.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < Min.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Min.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;

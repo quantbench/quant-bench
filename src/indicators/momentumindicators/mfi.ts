@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class MFI
-    extends indicators.AbstractIndicator<marketData.IPriceVolumeBar> {
+    extends indicators.AbstractIndicator<marketData.PriceVolumeBar> {
 
     static INDICATOR_NAME: string = "MFI";
     static INDICATOR_DESCR: string = "Money Flow Index";
@@ -40,7 +40,7 @@ export class MFI
         this.setLookBack(timePeriod);
     }
 
-    receiveData(inputData: marketData.IPriceVolumeBar): boolean {
+    receiveData(inputData: marketData.PriceVolumeBar): boolean {
         this.currentVolume = inputData.volume;
         this.typPrice.receiveData(inputData);
         return this.isReady;

@@ -6,16 +6,16 @@ const jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("DIV Indicator", () => {
+describe("Multiply Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.DIV;
+    let indicator: indicators.Multiply;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
 
     beforeEach(() => {
-        taResultFile = path.resolve("./test/talib-results/div.json");
+        taResultFile = path.resolve("./test/talib-results/mult.json");
         sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
@@ -23,15 +23,15 @@ describe("DIV Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.DIV();
+            indicator = new indicators.Multiply();
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.DIV.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.Multiply.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.DIV.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.Multiply.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -41,7 +41,7 @@ describe("DIV Indicator", () => {
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.DIV();
+            indicator = new indicators.Multiply();
             let idx = 0;
             sourceData.close.forEach((value: number, index: number) => {
                 if (indicator.receiveData(
@@ -67,7 +67,7 @@ describe("DIV Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.DIV();
+            indicator = new indicators.Multiply();
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -95,7 +95,7 @@ describe("DIV Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.DIV();
+            indicator = new indicators.Multiply();
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

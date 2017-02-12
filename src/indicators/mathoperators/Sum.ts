@@ -1,9 +1,9 @@
 import * as indicators from "../";
 
-export class SUM
+export class Sum
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "SUM";
+    static INDICATOR_NAME: string = "Sum";
     static INDICATOR_DESCR: string = "Summation";
     static TIMEPERIOD_DEFAULT: number = 30;
     static TIMEPERIOD_MIN: number = 2;
@@ -12,11 +12,11 @@ export class SUM
     private periodHistory: indicators.Queue<number>;
     private currentSum: number;
 
-    constructor(timePeriod: number = SUM.TIMEPERIOD_DEFAULT) {
-        super(SUM.INDICATOR_NAME, SUM.INDICATOR_DESCR);
+    constructor(timePeriod: number = Sum.TIMEPERIOD_DEFAULT) {
+        super(Sum.INDICATOR_NAME, Sum.INDICATOR_DESCR);
 
-        if (timePeriod < SUM.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, SUM.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < Sum.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Sum.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;

@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLRISEFALL3METHODS
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLRISEFALL3METHODS";
     static INDICATOR_DESCR: string = "Rising/Falling Three Methods";
@@ -15,18 +15,18 @@ export class CDLRISEFALL3METHODS
     private bodyLongAveragePeriod: number;
     private bodyPeriodTotal: number[];
 
-    private fifthCandle: marketData.IPriceBar;
-    private fourthCandle: marketData.IPriceBar;
-    private thirdCandle: marketData.IPriceBar;
-    private secondCandle: marketData.IPriceBar;
-    private firstCandle: marketData.IPriceBar;
+    private fifthCandle: marketData.PriceBar;
+    private fourthCandle: marketData.PriceBar;
+    private thirdCandle: marketData.PriceBar;
+    private secondCandle: marketData.PriceBar;
+    private firstCandle: marketData.PriceBar;
     private fifthCandleColor: candleEnums.CandleColor;
     private fourthCandleColor: candleEnums.CandleColor;
     private thirdCandleColor: candleEnums.CandleColor;
     private secondCandleColor: candleEnums.CandleColor;
     private firstCandleColor: candleEnums.CandleColor;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
     constructor() {
         super(CDLRISEFALL3METHODS.INDICATOR_NAME, CDLRISEFALL3METHODS.INDICATOR_DESCR);
@@ -39,11 +39,11 @@ export class CDLRISEFALL3METHODS
         }
 
         const lookback = Math.max(this.bodyShortAveragePeriod, this.bodyLongAveragePeriod) + 4;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -98,7 +98,7 @@ export class CDLRISEFALL3METHODS
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples > this.slidingWindow.period - this.bodyShortAveragePeriod) {
             this.bodyPeriodTotal[3] +=
                 CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyShort, this.slidingWindow.getItem(3));

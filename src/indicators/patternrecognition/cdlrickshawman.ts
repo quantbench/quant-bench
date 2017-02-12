@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLRICKSHAWMAN
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLRICKSHAWMAN";
     static INDICATOR_DESCR: string = "Rickshaw Man";
@@ -17,9 +17,9 @@ export class CDLRICKSHAWMAN
     private shadowLongAveragePeriod: number;
     private nearPeriodTotal: number;
     private nearAveragePeriod: number;
-    private firstCandle: marketData.IPriceBar;
+    private firstCandle: marketData.PriceBar;
     private firstCandleColor: candleEnums.CandleColor;
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
     constructor() {
         super(CDLRICKSHAWMAN.INDICATOR_NAME, CDLRICKSHAWMAN.INDICATOR_DESCR);
@@ -32,11 +32,11 @@ export class CDLRICKSHAWMAN
         this.nearPeriodTotal = 0;
 
         const lookback = Math.max(Math.max(this.bodyDojiAveragePeriod, this.shadowLongAveragePeriod), this.nearAveragePeriod);
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -73,7 +73,7 @@ export class CDLRICKSHAWMAN
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyDojiAveragePeriod) {
             this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
         }

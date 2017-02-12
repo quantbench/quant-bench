@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class OBV
-    extends indicators.AbstractIndicator<marketData.IPriceVolumeBar> {
+    extends indicators.AbstractIndicator<marketData.PriceVolumeBar> {
 
     static INDICATOR_NAME: string = "OBV";
     static INDICATOR_DESCR: string = "On Balance Volume";
@@ -19,7 +19,7 @@ export class OBV
         this.periodCounter = -1;
     }
 
-    receiveData(inputData: marketData.IPriceVolumeBar): boolean {
+    receiveData(inputData: marketData.PriceVolumeBar): boolean {
 
         this.periodCounter += 1;
 

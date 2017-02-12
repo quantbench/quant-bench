@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class NATR
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "NATR";
     static INDICATOR_DESCR: string = "Normalized Average True Range";
@@ -28,7 +28,7 @@ export class NATR
         this.setLookBack(this.timePeriod);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.currentClose = inputData.close;
         this.atr.receiveData(inputData);
         return this.isReady;

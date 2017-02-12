@@ -7,7 +7,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLBREAKAWAY
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLBREAKAWAY";
     static INDICATOR_DESCR: string = "Breakaway";
@@ -15,12 +15,12 @@ export class CDLBREAKAWAY
     private bodyLongAveragePeriod: number;
     private bodyLongPeriodTotal: number;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
-    private fifthCandle: marketData.IPriceBar;
-    private fourthCandle: marketData.IPriceBar;
-    private thirdCandle: marketData.IPriceBar;
-    private secondCandle: marketData.IPriceBar;
-    private firstCandle: marketData.IPriceBar;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
+    private fifthCandle: marketData.PriceBar;
+    private fourthCandle: marketData.PriceBar;
+    private thirdCandle: marketData.PriceBar;
+    private secondCandle: marketData.PriceBar;
+    private firstCandle: marketData.PriceBar;
     private fifthCandleColor: candleEnums.CandleColor;
     private fourthCandleColor: candleEnums.CandleColor;
     private thirdCandleColor: candleEnums.CandleColor;
@@ -34,11 +34,11 @@ export class CDLBREAKAWAY
         this.bodyLongPeriodTotal = 0;
 
         const lookback = this.bodyLongAveragePeriod + 4;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -83,7 +83,7 @@ export class CDLBREAKAWAY
         this.fifthCandleColor = CandleStickUtils.getCandleColor(this.fifthCandle);
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyLongAveragePeriod) {
             this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong,
                 this.slidingWindow.getItem(4));

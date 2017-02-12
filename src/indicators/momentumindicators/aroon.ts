@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class AROON
-    extends indicators.AbstractIndicatorBase<marketData.IPriceBar> {
+    extends indicators.AbstractIndicatorBase<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "AROON";
     static INDICATOR_DESCR: string = "Aroon";
@@ -38,7 +38,7 @@ export class AROON
         this.setLookBack(this.timePeriod);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.periodCounter += 1;
         this.periodHighHistory.enqueue(inputData.high);
         this.periodLowHistory.enqueue(inputData.low);

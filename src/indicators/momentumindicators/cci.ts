@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class CCI
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CCI";
     static INDICATOR_DESCR: string = "Commodity Channel Index";
@@ -34,7 +34,7 @@ export class CCI
         this.setLookBack(timePeriod - 1);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.periodCounter += 1;
 
         // calculate the typical price

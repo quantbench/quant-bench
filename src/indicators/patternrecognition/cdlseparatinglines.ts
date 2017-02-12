@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLSEPARATINGLINES
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLSEPARATINGLINES";
     static INDICATOR_DESCR: string = "Separating Lines";
@@ -18,13 +18,13 @@ export class CDLSEPARATINGLINES
     private equalAveragePeriod: number;
     private equalPeriodTotal: number;
 
-    private firstCandle: marketData.IPriceBar;
-    private secondCandle: marketData.IPriceBar;
+    private firstCandle: marketData.PriceBar;
+    private secondCandle: marketData.PriceBar;
 
     private firstCandleColor: candleEnums.CandleColor;
     private secondCandleColor: candleEnums.CandleColor;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
     constructor() {
         super(CDLSEPARATINGLINES.INDICATOR_NAME, CDLSEPARATINGLINES.INDICATOR_DESCR);
@@ -37,11 +37,11 @@ export class CDLSEPARATINGLINES
         this.equalPeriodTotal = 0;
 
         const lookback = Math.max(Math.max(this.shadowVeryShortAveragePeriod, this.bodyLongAveragePeriod), this.equalAveragePeriod) + 1;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -86,7 +86,7 @@ export class CDLSEPARATINGLINES
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.shadowVeryShortAveragePeriod) {
             this.shadowVeryShortPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort, inputData);
         }

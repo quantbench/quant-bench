@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class AROONOSC
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "AROONOSC";
     static INDICATOR_DESCR: string = "Aroon Oscillator";
@@ -27,7 +27,7 @@ export class AROONOSC
         this.setLookBack(timePeriod);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.aroon.receiveData(inputData);
         return this.isReady;
     }

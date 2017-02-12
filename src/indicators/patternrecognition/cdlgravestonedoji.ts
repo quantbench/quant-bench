@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLGRAVESTONEDOJI
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLGRAVESTONEDOJI";
     static INDICATOR_DESCR: string = "Gravestone Doji";
@@ -19,7 +19,7 @@ export class CDLGRAVESTONEDOJI
 
     private shadowVeryShortAveragePeriod: number;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
     constructor() {
         super(CDLGRAVESTONEDOJI.INDICATOR_NAME, CDLGRAVESTONEDOJI.INDICATOR_DESCR);
@@ -30,11 +30,11 @@ export class CDLGRAVESTONEDOJI
         this.shadowVeryShortPeriodTotal = 0;
 
         const lookback = Math.max(this.bodyDojiAveragePeriod, this.shadowVeryShortAveragePeriod);
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -63,7 +63,7 @@ export class CDLGRAVESTONEDOJI
         return this.isReady;
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyDojiAveragePeriod) {
             this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
         }

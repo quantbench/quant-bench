@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLHIKKAKEMOD
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLHIKKAKEMOD";
     static INDICATOR_DESCR: string = "Modified Hikkake Pattern";
@@ -19,7 +19,7 @@ export class CDLHIKKAKEMOD
 
     private patternResult: number;
 
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
     constructor() {
         super(CDLHIKKAKEMOD.INDICATOR_NAME, CDLHIKKAKEMOD.INDICATOR_DESCR);
@@ -27,11 +27,11 @@ export class CDLHIKKAKEMOD
         this.nearAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.Near).averagePeriod;
         this.nearPeriodTotal = 0;
         const lookback = Math.max(1, this.nearAveragePeriod) + 5;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -90,7 +90,7 @@ export class CDLHIKKAKEMOD
         return this.isReady;
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >=
             this.slidingWindow.period - this.nearAveragePeriod - 3 && this.slidingWindow.samples < this.slidingWindow.period - 3) {
             this.nearPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.Near, this.slidingWindow.getItem(2));

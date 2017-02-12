@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class ULTOSC
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ULTOSC";
     static INDICATOR_DESCR: string = "Ultimate Oscillator";
@@ -97,7 +97,7 @@ export class ULTOSC
         this.setLookBack(maxPeriod);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.trueRange.receiveData(inputData);
         if (this.trueRange.isReady) {
             this.buyingPressure = inputData.close - Math.min(inputData.low, this.previousClose);

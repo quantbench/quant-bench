@@ -6,7 +6,7 @@ import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
 export class CDLLADDERBOTTOM
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CDLLADDERBOTTOM";
     static INDICATOR_DESCR: string = "Ladder Bottom";
@@ -14,13 +14,13 @@ export class CDLLADDERBOTTOM
     private shadowVeryShortPeriodTotal: number;
 
     private shadowVeryShortAveragePeriod: number;
-    private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+    private slidingWindow: SlidingWindow<marketData.PriceBar>;
 
-    private fifthCandle: marketData.IPriceBar;
-    private fourthCandle: marketData.IPriceBar;
-    private thirdCandle: marketData.IPriceBar;
-    private secondCandle: marketData.IPriceBar;
-    private firstCandle: marketData.IPriceBar;
+    private fifthCandle: marketData.PriceBar;
+    private fourthCandle: marketData.PriceBar;
+    private thirdCandle: marketData.PriceBar;
+    private secondCandle: marketData.PriceBar;
+    private firstCandle: marketData.PriceBar;
     private fifthCandleColor: candleEnums.CandleColor;
     private fourthCandleColor: candleEnums.CandleColor;
     private thirdCandleColor: candleEnums.CandleColor;
@@ -34,11 +34,11 @@ export class CDLLADDERBOTTOM
         this.shadowVeryShortPeriodTotal = 0;
 
         const lookback = this.shadowVeryShortAveragePeriod + 4;
-        this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
         this.slidingWindow.add(inputData);
 
         if (!this.slidingWindow.isReady) {
@@ -78,7 +78,7 @@ export class CDLLADDERBOTTOM
         this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
     }
 
-    private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    private seedSlidingWindow(inputData: marketData.PriceBar) {
         if (this.slidingWindow.samples >= this.slidingWindow.period - this.shadowVeryShortAveragePeriod) {
             this.shadowVeryShortPeriodTotal +=
                 CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort, this.slidingWindow.getItem(1));

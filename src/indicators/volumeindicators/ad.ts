@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class AD
-    extends indicators.AbstractIndicator<marketData.IPriceVolumeBar> {
+    extends indicators.AbstractIndicator<marketData.PriceVolumeBar> {
 
     static INDICATOR_NAME: string = "AD";
     static INDICATOR_DESCR: string = "Chaikin A/D Line";
@@ -16,7 +16,7 @@ export class AD
         this.setLookBack(0);
     }
 
-    receiveData(inputData: marketData.IPriceVolumeBar): boolean {
+    receiveData(inputData: marketData.PriceVolumeBar): boolean {
         let highLow = inputData.high - inputData.low;
 
         if (highLow > 0) {

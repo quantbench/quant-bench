@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class ADOSC
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ADOSC";
     static INDICATOR_DESCR: string = "Chaikin A/D Oscillator";
@@ -58,7 +58,7 @@ export class ADOSC
         this.setLookBack(slowestPeriod - 1);
     }
 
-    receiveData(inputData: marketData.IPriceVolumeBar): boolean {
+    receiveData(inputData: marketData.PriceVolumeBar): boolean {
         this.periodCounter++;
         this.ad.receiveData(inputData);
 

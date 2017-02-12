@@ -2,7 +2,7 @@ import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
 export class PLUSDI
-    extends indicators.AbstractIndicator<marketData.IPriceBar> {
+    extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "PLUSDI";
     static INDICATOR_DESCR: string = "PLUS Directional Indicator";
@@ -38,7 +38,7 @@ export class PLUSDI
         this.setLookBack(timePeriod);
     }
 
-    receiveData(inputData: marketData.IPriceBar): boolean {
+    receiveData(inputData: marketData.PriceBar): boolean {
 
         // forward to the true range indicator first using previous data
         this.trueRange.receiveData(inputData);
