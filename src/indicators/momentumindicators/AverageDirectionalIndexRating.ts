@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class ADXR
+export class AverageDirectionalIndexRating
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ADXR";
@@ -12,20 +12,20 @@ export class ADXR
     public timePeriod: number;
 
     private periodCounter: number;
-    private adx: indicators.ADX;
+    private adx: indicators.AverageDirectionalIndex;
     private periodHistory: indicators.Queue<number>;
 
-    constructor(timePeriod: number = ADXR.TIMEPERIOD_DEFAULT) {
-        super(ADXR.INDICATOR_NAME, ADXR.INDICATOR_DESCR);
+    constructor(timePeriod: number = AverageDirectionalIndexRating.TIMEPERIOD_DEFAULT) {
+        super(AverageDirectionalIndexRating.INDICATOR_NAME, AverageDirectionalIndexRating.INDICATOR_DESCR);
 
-        if (timePeriod < ADXR.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ADXR.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < AverageDirectionalIndexRating.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AverageDirectionalIndexRating.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
         this.periodCounter = 0;
         this.periodHistory = new indicators.Queue<number>();
-        this.adx = new indicators.ADX(timePeriod);
+        this.adx = new indicators.AverageDirectionalIndex(timePeriod);
         this.adx.on("data", (data: number) => this.receiveADXData(data));
         this.setLookBack(this.timePeriod - 1 + this.adx.lookback);
     }
@@ -40,14 +40,15 @@ export class ADXR
         this.periodHistory.enqueue(data);
 
         if (this.periodCounter > this.lookback) {
-            let adxN = this.periodHistory.peek();
-            let result = (data + adxN) / 2;
-
-            this.setCurrentValue(result);
+            this.setCurrentValue((data + this.periodHistory.peek()) / 2);
         }
 
         if (this.periodHistory.count >= this.timePeriod) {
             this.periodHistory.dequeue();
         }
     }
+}
+
+export class ADXR extends AverageDirectionalIndexRating {
+
 }

@@ -14,11 +14,11 @@ describe("ADX Indicator", () => {
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
     const timePeriod = 14;
+    taResultFile = path.resolve("./test/talib-results/adx.json");
+    sourceData = TestDataFactory.getInstance().sourceData;
+    taResultData = jsonfile.readFileSync(taResultFile);
 
     beforeEach(() => {
-        taResultFile = path.resolve("./test/talib-results/adx.json");
-        sourceData = TestDataFactory.getInstance().sourceData;
-        taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
     });
 

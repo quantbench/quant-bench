@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class APO
+export class AbsolutePriceOscillator
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "APO";
@@ -57,7 +57,11 @@ export class APO
         if (this.slowMA.currentValue === 0) {
             this.setCurrentValue(0);
         } else {
-            this.setCurrentValue( (this.fastMA.currentValue - this.slowMA.currentValue) );
+            this.setCurrentValue((this.fastMA.currentValue - this.slowMA.currentValue));
         }
     }
+}
+
+export class APO extends AbsolutePriceOscillator {
+
 }

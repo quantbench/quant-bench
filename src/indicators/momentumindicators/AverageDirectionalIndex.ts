@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class ADX
+export class AverageDirectionalIndex
     extends indicators.AbstractIndicator<marketData.PriceBar>
     implements indicators.IIndicator<marketData.PriceBar> {
 
@@ -17,12 +17,13 @@ export class ADX
     private currentDX: number;
     private sumDX: number;
     private previousAdx: number;
+    private currentAdx: number;
 
-    constructor(timePeriod: number = ADX.TIMEPERIOD_DEFAULT) {
-        super(ADX.INDICATOR_NAME, ADX.INDICATOR_DESCR);
+    constructor(timePeriod: number = AverageDirectionalIndex.TIMEPERIOD_DEFAULT) {
+        super(AverageDirectionalIndex.INDICATOR_NAME, AverageDirectionalIndex.INDICATOR_DESCR);
 
-        if (timePeriod < ADX.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ADX.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < AverageDirectionalIndex.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AverageDirectionalIndex.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -33,6 +34,7 @@ export class ADX
         this.currentDX = 0;
         this.sumDX = 0;
         this.previousAdx = 0;
+        this.currentAdx = 0;
 
         this.setLookBack(2 * this.timePeriod - 1);
     }
@@ -51,17 +53,21 @@ export class ADX
         } else if (this.periodCounter === 0) {
             this.sumDX += this.currentDX;
 
-            let result = this.sumDX / this.timePeriod;
+            this.currentAdx = this.sumDX / this.timePeriod;
 
-            this.setCurrentValue(result);
+            this.setCurrentValue(this.currentAdx);
 
-            this.previousAdx = result;
+            this.previousAdx = this.currentAdx;
         } else {
-            let result = (this.previousAdx * (this.timePeriod - 1) + this.currentDX) / this.timePeriod;
+            this.currentAdx = (this.previousAdx * (this.timePeriod - 1) + this.currentDX) / this.timePeriod;
 
-            this.setCurrentValue(result);
+            this.setCurrentValue(this.currentAdx);
 
-            this.previousAdx = result;
+            this.previousAdx = this.currentAdx;
         }
     }
+}
+
+export class ADX extends AverageDirectionalIndex {
+
 }
