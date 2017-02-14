@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class MIDPOINT
+export class MidPoint
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "MIDPOINT";
@@ -13,11 +13,11 @@ export class MIDPOINT
     private highestValue: number;
     private lowestValue: number;
 
-    constructor(timePeriod: number = MIDPOINT.TIMEPERIOD_DEFAULT) {
-        super(MIDPOINT.INDICATOR_NAME, MIDPOINT.INDICATOR_DESCR);
+    constructor(timePeriod: number = MidPoint.TIMEPERIOD_DEFAULT) {
+        super(MidPoint.INDICATOR_NAME, MidPoint.INDICATOR_DESCR);
 
-        if (timePeriod < MIDPOINT.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MIDPOINT.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < MidPoint.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, MidPoint.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -52,4 +52,8 @@ export class MIDPOINT
 
         return this.isReady;
     }
+}
+
+export class MIDPOINT extends MidPoint {
+
 }

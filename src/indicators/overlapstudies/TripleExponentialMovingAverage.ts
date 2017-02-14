@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class TEMA
+export class TripleExponentialMovingAverage
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "TEMA";
@@ -16,11 +16,11 @@ export class TEMA
     private ema2: indicators.EMA;
     private ema3: indicators.EMA;
 
-    constructor(timePeriod: number = TEMA.TIMEPERIOD_DEFAULT) {
-        super(TEMA.INDICATOR_NAME, TEMA.INDICATOR_DESCR);
+    constructor(timePeriod: number = TripleExponentialMovingAverage.TIMEPERIOD_DEFAULT) {
+        super(TripleExponentialMovingAverage.INDICATOR_NAME, TripleExponentialMovingAverage.INDICATOR_DESCR);
 
-        if (timePeriod < TEMA.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, TEMA.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < TripleExponentialMovingAverage.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, TripleExponentialMovingAverage.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -52,4 +52,8 @@ export class TEMA
         // TEMA = (3*EMA – 3*EMA(EMA)) + EMA(EMA(EMA))
         this.setCurrentValue((3 * this.currentEMA - 3 * this.currentEMA2) + data);
     }
+}
+
+export class TEMA extends TripleExponentialMovingAverage {
+
 }

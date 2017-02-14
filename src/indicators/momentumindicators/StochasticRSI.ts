@@ -19,7 +19,7 @@ export class StochasticRSI
     public fastDMAType: indicators.MA_TYPE;
 
     private periodCounter: number;
-    private fastDMA: indicators.MA;
+    private fastDMA: indicators.MovingAverage;
     private rsi: indicators.RSI;
     private maxValue: indicators.Max;
     private minValue: indicators.Min;
@@ -62,7 +62,7 @@ export class StochasticRSI
         this.minValue.on("data", (data: number) => this.receiveMinValueData(data));
         this.rsi = new indicators.RSI(this.timePeriod);
         this.rsi.on("data", (data: number) => this.receiveRSIData(data));
-        this.fastDMA = new indicators.MA(this.fastDTimePeriod, this.fastDMAType);
+        this.fastDMA = new indicators.MovingAverage(this.fastDTimePeriod, this.fastDMAType);
         this.fastDMA.on("data", (data: number) => this.receiveFastDMAData(data));
 
         this.currentPeriodHigh = 0;

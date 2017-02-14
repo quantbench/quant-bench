@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import { Queue } from "../queue";
 
-export class SMA
+export class SimpleMovingAverage
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "SMA";
@@ -14,11 +14,11 @@ export class SMA
     private periodHistory: Queue<number>;
     private periodTotal: number;
 
-    constructor(timePeriod: number = SMA.TIMEPERIOD_DEFAULT) {
-        super(SMA.INDICATOR_NAME, SMA.INDICATOR_DESCR);
+    constructor(timePeriod: number = SimpleMovingAverage.TIMEPERIOD_DEFAULT) {
+        super(SimpleMovingAverage.INDICATOR_NAME, SimpleMovingAverage.INDICATOR_DESCR);
 
-        if (timePeriod < SMA.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, SMA.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < SimpleMovingAverage.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, SimpleMovingAverage.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -43,4 +43,8 @@ export class SMA
         }
         return this.isReady;
     }
+}
+
+export class SMA extends SimpleMovingAverage {
+
 }

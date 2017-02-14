@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class ACCBANDS
+export class AccelerationBands
     extends indicators.AbstractIndicatorBase<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ACCBANDS";
@@ -19,11 +19,11 @@ export class ACCBANDS
     private middleSMA: indicators.SMA;
     private lowerSMA: indicators.SMA;
 
-    constructor(timePeriod: number = ACCBANDS.TIMEPERIOD_DEFAULT) {
-        super(ACCBANDS.INDICATOR_NAME, ACCBANDS.INDICATOR_DESCR);
+    constructor(timePeriod: number = AccelerationBands.TIMEPERIOD_DEFAULT) {
+        super(AccelerationBands.INDICATOR_NAME, AccelerationBands.INDICATOR_DESCR);
 
-        if (timePeriod < ACCBANDS.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ACCBANDS.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < AccelerationBands.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AccelerationBands.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.upperBandInternal = 0;
@@ -79,4 +79,8 @@ export class ACCBANDS
         this.emit("data", this.upperBand, this.middleBand, this.lowerBand);
         this.setIsReady();
     }
+}
+
+export class ACCBANDS extends AccelerationBands {
+
 }

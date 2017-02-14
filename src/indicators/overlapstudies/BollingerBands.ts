@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class BBANDS
+export class BollingerBands
     extends indicators.AbstractIndicatorBase<number> {
 
     static INDICATOR_NAME: string = "BBANDS";
@@ -18,11 +18,11 @@ export class BBANDS
     private stdDev: indicators.STDDEV;
     private currentSma: number;
 
-    constructor(timePeriod: number = BBANDS.TIMEPERIOD_DEFAULT) {
-        super(BBANDS.INDICATOR_NAME, BBANDS.INDICATOR_DESCR);
+    constructor(timePeriod: number = BollingerBands.TIMEPERIOD_DEFAULT) {
+        super(BollingerBands.INDICATOR_NAME, BollingerBands.INDICATOR_DESCR);
 
-        if (timePeriod < BBANDS.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, BBANDS.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < BollingerBands.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, BollingerBands.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.upperBandInternal = 0;
@@ -74,4 +74,8 @@ export class BBANDS
         let lowerBand = this.currentSma - 2 * data;
         this.setCurrentValue(upperBand, this.sma.currentValue, lowerBand);
     }
+}
+
+export class BBANDS extends BollingerBands {
+
 }

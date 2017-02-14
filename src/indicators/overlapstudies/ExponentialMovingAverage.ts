@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class EMA
+export class ExponentialMovingAverage
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "EMA";
@@ -15,11 +15,11 @@ export class EMA
     private previousEma: number;
     private periodTotal: number;
 
-    constructor(timePeriod: number = EMA.TIMEPERIOD_DEFAULT) {
-        super(EMA.INDICATOR_NAME, EMA.INDICATOR_DESCR);
+    constructor(timePeriod: number = ExponentialMovingAverage.TIMEPERIOD_DEFAULT) {
+        super(ExponentialMovingAverage.INDICATOR_NAME, ExponentialMovingAverage.INDICATOR_DESCR);
 
-        if (timePeriod < EMA.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, EMA.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < ExponentialMovingAverage.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, ExponentialMovingAverage.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -44,4 +44,8 @@ export class EMA
         this.previousEma = this.currentValue;
         return this.isReady;
     }
+}
+
+export class EMA extends ExponentialMovingAverage {
+
 }

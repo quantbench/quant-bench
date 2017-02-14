@@ -16,8 +16,8 @@ export class PercentagePriceOscillator
     public slowTimePeriod: number;
     public maType: indicators.MA_TYPE;
 
-    private fastMA: indicators.MA;
-    private slowMA: indicators.MA;
+    private fastMA: indicators.MovingAverage;
+    private slowMA: indicators.MovingAverage;
 
     constructor(fastTimePeriod: number = PercentagePriceOscillator.FAST_TIMEPERIOD_DEFAULT,
         slowTimePeriod: number = PercentagePriceOscillator.SLOW_TIMEPERIOD_DEFAULT,
@@ -43,8 +43,8 @@ export class PercentagePriceOscillator
             this.slowTimePeriod = fastTimePeriod;
         }
 
-        this.fastMA = new indicators.MA(this.fastTimePeriod, this.maType);
-        this.slowMA = new indicators.MA(this.slowTimePeriod, this.maType);
+        this.fastMA = new indicators.MovingAverage(this.fastTimePeriod, this.maType);
+        this.slowMA = new indicators.MovingAverage(this.slowTimePeriod, this.maType);
         this.slowMA.on("data", (data: number) => this.receiveSlowMAData(data));
 
         this.setLookBack(this.slowMA.lookback);

@@ -1,7 +1,7 @@
 import * as indicators from "../";
-import {MA_TYPE} from "../matype";
+import { MA_TYPE } from "../matype";
 
-export class MA
+export class MovingAverage
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "MA";
@@ -14,11 +14,11 @@ export class MA
     public maType: MA_TYPE;
     private ma: indicators.INumericDataIndicator;
 
-    constructor(timePeriod: number = MA.TIMEPERIOD_DEFAULT, maType: MA_TYPE = MA.MATYPE_DEFAULT) {
-        super(MA.INDICATOR_NAME, MA.INDICATOR_DESCR);
+    constructor(timePeriod: number = MovingAverage.TIMEPERIOD_DEFAULT, maType: MA_TYPE = MovingAverage.MATYPE_DEFAULT) {
+        super(MovingAverage.INDICATOR_NAME, MovingAverage.INDICATOR_DESCR);
 
-        if (timePeriod < MA.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MA.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < MovingAverage.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, MovingAverage.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -75,4 +75,8 @@ export class MA
         }
         return this.isReady;
     }
+}
+
+export class MA extends MovingAverage {
+
 }

@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class DEMA
+export class DoubleExponentialMovingAverage
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "DEMA";
@@ -14,11 +14,11 @@ export class DEMA
     private ema1: indicators.EMA;
     private ema2: indicators.EMA;
 
-    constructor(timePeriod: number = DEMA.TIMEPERIOD_DEFAULT) {
-        super(DEMA.INDICATOR_NAME, DEMA.INDICATOR_DESCR);
+    constructor(timePeriod: number = DoubleExponentialMovingAverage.TIMEPERIOD_DEFAULT) {
+        super(DoubleExponentialMovingAverage.INDICATOR_NAME, DoubleExponentialMovingAverage.INDICATOR_DESCR);
 
-        if (timePeriod < DEMA.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, DEMA.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < DoubleExponentialMovingAverage.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, DoubleExponentialMovingAverage.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -42,4 +42,8 @@ export class DEMA
     private receiveEMA2Data(inputData: number) {
         this.setCurrentValue((2 * this.currentEMA) - inputData);
     }
+}
+
+export class DEMA extends DoubleExponentialMovingAverage {
+
 }

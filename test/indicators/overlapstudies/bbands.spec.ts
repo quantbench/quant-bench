@@ -10,7 +10,7 @@ describe("BBANDS Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.BBANDS;
+    let indicator: indicators.BollingerBands;
     let indicatorResults: Array<{ upperBand: number, middleBand: number, lowerBand: number }>;
     let indicatorOnDataRasied: boolean = false;
     const timePeriod: number = 5;
@@ -25,15 +25,15 @@ describe("BBANDS Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.BBANDS(timePeriod);
+            indicator = new indicators.BollingerBands(timePeriod);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.BBANDS.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.BollingerBands.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.BBANDS.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.BollingerBands.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -43,7 +43,7 @@ describe("BBANDS Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.BBANDS(timePeriod + 1);
+            indicator = new indicators.BollingerBands(timePeriod + 1);
         });
 
         it("should set the timePeriod", () => {
@@ -53,11 +53,11 @@ describe("BBANDS Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.BBANDS();
+            indicator = new indicators.BollingerBands();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.BBANDS.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.BollingerBands.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -66,21 +66,21 @@ describe("BBANDS Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.BBANDS(1);
+                indicator = new indicators.BollingerBands(1);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.BBANDS.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.BollingerBands.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.BBANDS(timePeriod);
+            indicator = new indicators.BollingerBands(timePeriod);
             let idx = 0;
             sourceData.close.forEach((value: number) => {
                 if (indicator.receiveData(value)) {
@@ -121,7 +121,7 @@ describe("BBANDS Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.BBANDS(timePeriod);
+            indicator = new indicators.BollingerBands(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -150,7 +150,7 @@ describe("BBANDS Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.BBANDS(timePeriod);
+            indicator = new indicators.BollingerBands(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

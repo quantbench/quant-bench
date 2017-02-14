@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class SAR
+export class ParabolicStopAndReverse
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "SAR";
@@ -23,9 +23,9 @@ export class SAR
     private hasInitialDirection: boolean;
     private isLong: boolean;
 
-    constructor(accelerationFactor: number = SAR.ACCELERATION_FACTOR,
-        accelerationFactorMax: number = SAR.ACCELERATION_FACTOR_MAX) {
-        super(SAR.INDICATOR_NAME, SAR.INDICATOR_DESCR);
+    constructor(accelerationFactor: number = ParabolicStopAndReverse.ACCELERATION_FACTOR,
+        accelerationFactorMax: number = ParabolicStopAndReverse.ACCELERATION_FACTOR_MAX) {
+        super(ParabolicStopAndReverse.INDICATOR_NAME, ParabolicStopAndReverse.INDICATOR_DESCR);
 
         this.timePeriod = 1;
         this.acceleration = this.accelerationFactor = accelerationFactor;
@@ -214,4 +214,8 @@ export class SAR
         }
         this.hasInitialDirection = true;
     }
+}
+
+export class SAR extends ParabolicStopAndReverse {
+
 }

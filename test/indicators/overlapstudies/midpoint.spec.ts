@@ -10,7 +10,7 @@ describe("MIDPOINT Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.MIDPOINT;
+    let indicator: indicators.MidPoint;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
     const timePeriod = 14;
@@ -24,15 +24,15 @@ describe("MIDPOINT Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.MIDPOINT(timePeriod);
+            indicator = new indicators.MidPoint(timePeriod);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.MIDPOINT.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.MidPoint.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.MIDPOINT.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.MidPoint.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -42,7 +42,7 @@ describe("MIDPOINT Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MIDPOINT(timePeriod + 1);
+            indicator = new indicators.MidPoint(timePeriod + 1);
         });
 
         it("should set the timePeriod", () => {
@@ -52,11 +52,11 @@ describe("MIDPOINT Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MIDPOINT();
+            indicator = new indicators.MidPoint();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.MIDPOINT.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.MidPoint.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -65,21 +65,21 @@ describe("MIDPOINT Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.MIDPOINT(1);
+                indicator = new indicators.MidPoint(1);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MIDPOINT.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MidPoint.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.MIDPOINT(timePeriod);
+            indicator = new indicators.MidPoint(timePeriod);
             let idx = 0;
             sourceData.close.forEach((value: number) => {
                 if (indicator.receiveData(value)) {
@@ -103,7 +103,7 @@ describe("MIDPOINT Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MIDPOINT(timePeriod);
+            indicator = new indicators.MidPoint(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -129,7 +129,7 @@ describe("MIDPOINT Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MIDPOINT(timePeriod);
+            indicator = new indicators.MidPoint(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

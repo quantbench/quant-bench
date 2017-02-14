@@ -10,7 +10,7 @@ describe("MA Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.MA;
+    let indicator: indicators.MovingAverage;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
     const timePeriod = 5;
@@ -25,15 +25,15 @@ describe("MA Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.MA(timePeriod, maType);
+            indicator = new indicators.MovingAverage(timePeriod, maType);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.MA.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.MovingAverage.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.MA.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.MovingAverage.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -43,7 +43,7 @@ describe("MA Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MA(timePeriod + 1, maType);
+            indicator = new indicators.MovingAverage(timePeriod + 1, maType);
         });
 
         it("should set the timePeriod", () => {
@@ -53,15 +53,15 @@ describe("MA Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MA();
+            indicator = new indicators.MovingAverage();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.MA.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.MovingAverage.TIMEPERIOD_DEFAULT);
         });
 
         it("should set the default ma type", () => {
-            indicator.maType.should.equal(indicators.MA.MATYPE_DEFAULT);
+            indicator.maType.should.equal(indicators.MovingAverage.MATYPE_DEFAULT);
         });
     });
 
@@ -70,21 +70,21 @@ describe("MA Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.MA(1, maType);
+                indicator = new indicators.MovingAverage(1, maType);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MA.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MovingAverage.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.MA(timePeriod, maType);
+            indicator = new indicators.MovingAverage(timePeriod, maType);
             let idx = 0;
             sourceData.close.forEach((value: number) => {
                 if (indicator.receiveData(value)) {
@@ -108,7 +108,7 @@ describe("MA Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MA(timePeriod, maType);
+            indicator = new indicators.MovingAverage(timePeriod, maType);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -134,7 +134,7 @@ describe("MA Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MA(timePeriod, maType);
+            indicator = new indicators.MovingAverage(timePeriod, maType);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

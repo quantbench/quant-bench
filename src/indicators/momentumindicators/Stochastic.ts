@@ -22,8 +22,8 @@ export class Stochastic
     public slowDTimePeriod: number;
     public slowDMAType: indicators.MA_TYPE;
 
-    private slowKMA: indicators.MA;
-    private slowDMA: indicators.MA;
+    private slowKMA: indicators.MovingAverage;
+    private slowDMA: indicators.MovingAverage;
 
     private maxValue: indicators.Max;
     private minValue: indicators.Min;
@@ -62,10 +62,10 @@ export class Stochastic
         this.slowDTimePeriod = slowDTimePeriod;
         this.periodCounter = this.fastKTimePeriod * -1;
         this.slowKMAType = slowKMAType;
-        this.slowKMA = new indicators.MA(this.slowKTimePeriod, slowKMAType);
+        this.slowKMA = new indicators.MovingAverage(this.slowKTimePeriod, slowKMAType);
         this.slowKMA.on("data", (data: number) => this.receiveSlowKMAData(data));
         this.slowDMAType = slowDMAType;
-        this.slowDMA = new indicators.MA(this.slowDTimePeriod, slowDMAType);
+        this.slowDMA = new indicators.MovingAverage(this.slowDTimePeriod, slowDMAType);
         this.slowDMA.on("data", (data: number) => this.receiveSlowDMAData(data));
         this.maxValue = new indicators.Max(this.fastKTimePeriod);
         this.maxValue.on("data", (data: number) => this.receiveMaxValueData(data));

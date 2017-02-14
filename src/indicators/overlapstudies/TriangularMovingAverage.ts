@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class TRIMA
+export class TriangularMovingAverage
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "TRIMA";
@@ -14,11 +14,11 @@ export class TRIMA
     private sma1: indicators.SMA;
     private sma2: indicators.SMA;
 
-    constructor(timePeriod: number = TRIMA.TIMEPERIOD_DEFAULT) {
-        super(TRIMA.INDICATOR_NAME, TRIMA.INDICATOR_DESCR);
+    constructor(timePeriod: number = TriangularMovingAverage.TIMEPERIOD_DEFAULT) {
+        super(TriangularMovingAverage.INDICATOR_NAME, TriangularMovingAverage.INDICATOR_DESCR);
 
-        if (timePeriod < TRIMA.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, TRIMA.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < TriangularMovingAverage.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, TriangularMovingAverage.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -49,11 +49,15 @@ export class TRIMA
     }
 
     private receiveSMA1Data(data: number) {
-            this.currentSMA = data;
-            this.sma2.receiveData(data);
+        this.currentSMA = data;
+        this.sma2.receiveData(data);
     }
 
     private receiveSMA2Data(data: number) {
         this.setCurrentValue(data);
     }
+}
+
+export class TRIMA extends TriangularMovingAverage {
+
 }

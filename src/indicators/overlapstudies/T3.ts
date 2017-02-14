@@ -27,7 +27,8 @@ export class T3
     private periodHistory: indicators.Queue<number>;
     private periodCounter: number;
 
-    constructor(timePeriod: number = T3.TIMEPERIOD_DEFAULT, volumeFactor: number = T3.VOLUMEFACTOR_DEFAULT) {
+    constructor(timePeriod: number = T3.TIMEPERIOD_DEFAULT, volumeFactor: number =
+        T3.VOLUMEFACTOR_DEFAULT) {
         super(T3.INDICATOR_NAME, T3.INDICATOR_DESCR);
 
         if (timePeriod < T3.TIMEPERIOD_MIN) {
@@ -35,11 +36,13 @@ export class T3
         }
 
         if (volumeFactor < T3.VOLUMEFACTOR_MIN) {
-            throw (new Error(indicators.generateMinVolumeFactorError(this.name, T3.VOLUMEFACTOR_MIN, timePeriod)));
+            throw (new Error(indicators.generateMinVolumeFactorError(this.name,
+                T3.VOLUMEFACTOR_MIN, timePeriod)));
         }
 
         if (volumeFactor > T3.VOLUMEFACTOR_MAX) {
-            throw (new Error(indicators.generateMaxVolumeFactorError(this.name, T3.VOLUMEFACTOR_MIN, timePeriod)));
+            throw (new Error(indicators.generateMaxVolumeFactorError(this.name,
+                T3.VOLUMEFACTOR_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;

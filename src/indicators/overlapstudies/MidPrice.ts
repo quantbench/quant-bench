@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class MIDPRICE
+export class MidPrice
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "MIDPRICE";
@@ -15,11 +15,11 @@ export class MIDPRICE
     private highestValue: number;
     private lowestValue: number;
 
-    constructor(timePeriod: number = MIDPRICE.TIMEPERIOD_DEFAULT) {
-        super(MIDPRICE.INDICATOR_NAME, MIDPRICE.INDICATOR_DESCR);
+    constructor(timePeriod: number = MidPrice.TIMEPERIOD_DEFAULT) {
+        super(MidPrice.INDICATOR_NAME, MidPrice.INDICATOR_DESCR);
 
-        if (timePeriod < MIDPRICE.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MIDPRICE.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < MidPrice.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, MidPrice.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -60,4 +60,8 @@ export class MIDPRICE
 
         return this.isReady;
     }
+}
+
+export class MIDPRICE extends MidPrice {
+
 }

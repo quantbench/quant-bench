@@ -15,8 +15,8 @@ export class AbsolutePriceOscillator
     public slowTimePeriod: number;
     public maType: indicators.MA_TYPE;
 
-    private fastMA: indicators.MA;
-    private slowMA: indicators.MA;
+    private fastMA: indicators.MovingAverage;
+    private slowMA: indicators.MovingAverage;
 
     constructor(fastTimePeriod: number = APO.FAST_TIMEPERIOD_DEFAULT,
         slowTimePeriod: number = APO.SLOW_TIMEPERIOD_DEFAULT,
@@ -40,8 +40,8 @@ export class AbsolutePriceOscillator
             this.slowTimePeriod = fastTimePeriod;
         }
 
-        this.fastMA = new indicators.MA(this.fastTimePeriod, this.maType);
-        this.slowMA = new indicators.MA(this.slowTimePeriod, this.maType);
+        this.fastMA = new indicators.MovingAverage(this.fastTimePeriod, this.maType);
+        this.slowMA = new indicators.MovingAverage(this.slowTimePeriod, this.maType);
         this.slowMA.on("data", (data: number) => this.receiveSlowMAData(data));
 
         this.setLookBack(this.slowMA.lookback);

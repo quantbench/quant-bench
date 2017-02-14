@@ -10,7 +10,7 @@ describe("ACCBANDS Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.ACCBANDS;
+    let indicator: indicators.AccelerationBands;
     let indicatorResults: Array<{ upperBand: number, middleBand: number, lowerBand: number }>;
     let indicatorOnDataRasied: boolean = false;
     const timePeriod = 20;
@@ -26,15 +26,15 @@ describe("ACCBANDS Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.ACCBANDS(timePeriod);
+            indicator = new indicators.AccelerationBands(timePeriod);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.ACCBANDS.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.AccelerationBands.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.ACCBANDS.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.AccelerationBands.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -44,7 +44,7 @@ describe("ACCBANDS Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.ACCBANDS(timePeriod + 1);
+            indicator = new indicators.AccelerationBands(timePeriod + 1);
         });
 
         it("should set the timePeriod", () => {
@@ -54,11 +54,11 @@ describe("ACCBANDS Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.ACCBANDS();
+            indicator = new indicators.AccelerationBands();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.ACCBANDS.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.AccelerationBands.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -67,21 +67,21 @@ describe("ACCBANDS Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.ACCBANDS(1);
+                indicator = new indicators.AccelerationBands(1);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ACCBANDS.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.AccelerationBands.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.ACCBANDS(timePeriod);
+            indicator = new indicators.AccelerationBands(timePeriod);
             let idx = 0;
             sourceData.close.forEach((value: number, index: number) => {
                 if (indicator.receiveData({
@@ -127,7 +127,7 @@ describe("ACCBANDS Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.ACCBANDS(timePeriod);
+            indicator = new indicators.AccelerationBands(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -156,7 +156,7 @@ describe("ACCBANDS Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.ACCBANDS(timePeriod);
+            indicator = new indicators.AccelerationBands(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class KAMA
+export class KaufmanAdaptiveMovingAverage
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "KAMA";
@@ -18,11 +18,11 @@ export class KAMA
     private previousClose: number;
     private previousKama: number;
 
-    constructor(timePeriod: number = KAMA.TIMEPERIOD_DEFAULT) {
-        super(KAMA.INDICATOR_NAME, KAMA.INDICATOR_DESCR);
+    constructor(timePeriod: number = KaufmanAdaptiveMovingAverage.TIMEPERIOD_DEFAULT) {
+        super(KaufmanAdaptiveMovingAverage.INDICATOR_NAME, KaufmanAdaptiveMovingAverage.INDICATOR_DESCR);
 
-        if (timePeriod < KAMA.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, KAMA.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < KaufmanAdaptiveMovingAverage.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, KaufmanAdaptiveMovingAverage.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -110,4 +110,8 @@ export class KAMA
         let epsilon = 0.00000000000001;
         return (((-epsilon) < value) && (value < epsilon));
     }
+}
+
+export class KAMA extends KaufmanAdaptiveMovingAverage {
+
 }

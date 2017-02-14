@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import { Queue } from "../queue";
 
-export class WMA
+export class WeightedMovingAverage
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "WMA";
@@ -15,11 +15,11 @@ export class WMA
     private periodCounter: number;
     private periodWeightTotal: number;
 
-    constructor(timePeriod: number = WMA.TIMEPERIOD_DEFAULT) {
-        super(WMA.INDICATOR_NAME, WMA.INDICATOR_DESCR);
+    constructor(timePeriod: number = WeightedMovingAverage.TIMEPERIOD_DEFAULT) {
+        super(WeightedMovingAverage.INDICATOR_NAME, WeightedMovingAverage.INDICATOR_DESCR);
 
-        if (timePeriod < WMA.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, WMA.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < WeightedMovingAverage.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, WeightedMovingAverage.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -62,4 +62,9 @@ export class WMA
 
         return this.isReady;
     }
+}
+
+
+export class WMA extends WeightedMovingAverage {
+
 }
