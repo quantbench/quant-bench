@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class MACD
+export class MovingAverageConvergenceDivergence
     extends indicators.AbstractIndicatorBase<number> {
 
     static INDICATOR_NAME: string = "MACD";
@@ -29,21 +29,24 @@ export class MACD
     private emaSlowSkip: number;
     private periodCounter: number;
 
-    constructor(fastTimePeriod: number = MACD.FAST_TIMEPERIOD_DEFAULT,
-        slowTimePeriod: number = MACD.SLOW_TIMEPERIOD_DEFAULT,
-        signalTimePeriod: number = MACD.SIGNAL_TIMEPERIOD_DEFAULT) {
-        super(MACD.INDICATOR_NAME, MACD.INDICATOR_DESCR);
+    constructor(fastTimePeriod: number = MovingAverageConvergenceDivergence.FAST_TIMEPERIOD_DEFAULT,
+        slowTimePeriod: number = MovingAverageConvergenceDivergence.SLOW_TIMEPERIOD_DEFAULT,
+        signalTimePeriod: number = MovingAverageConvergenceDivergence.SIGNAL_TIMEPERIOD_DEFAULT) {
+        super(MovingAverageConvergenceDivergence.INDICATOR_NAME, MovingAverageConvergenceDivergence.INDICATOR_DESCR);
 
-        if (fastTimePeriod < MACD.FAST_TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MACD.FAST_TIMEPERIOD_MIN, fastTimePeriod)));
+        if (fastTimePeriod < MovingAverageConvergenceDivergence.FAST_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name,
+                MovingAverageConvergenceDivergence.FAST_TIMEPERIOD_MIN, fastTimePeriod)));
         }
 
-        if (slowTimePeriod < MACD.SLOW_TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MACD.SLOW_TIMEPERIOD_MIN, slowTimePeriod)));
+        if (slowTimePeriod < MovingAverageConvergenceDivergence.SLOW_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name,
+                MovingAverageConvergenceDivergence.SLOW_TIMEPERIOD_MIN, slowTimePeriod)));
         }
 
-        if (signalTimePeriod < MACD.SIGNAL_TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MACD.SIGNAL_TIMEPERIOD_MIN, signalTimePeriod)));
+        if (signalTimePeriod < MovingAverageConvergenceDivergence.SIGNAL_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name,
+                MovingAverageConvergenceDivergence.SIGNAL_TIMEPERIOD_MIN, signalTimePeriod)));
         }
 
         this.macdInternal = 0;
@@ -115,4 +118,8 @@ export class MACD
         let histogram: number = macd - signal;
         this.setCurrentValue(macd, signal, histogram);
     }
+}
+
+export class MACD extends MovingAverageConvergenceDivergence {
+
 }

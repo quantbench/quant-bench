@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class MINUSDI
+export class MinusDirectionalIndicator
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "MINUSDI";
@@ -19,11 +19,11 @@ export class MINUSDI
     private currentTrueRange: number;
     private trueRange: indicators.TRANGE;
 
-    constructor(timePeriod: number = MINUSDI.TIMEPERIOD_DEFAULT) {
-        super(MINUSDI.INDICATOR_NAME, MINUSDI.INDICATOR_DESCR);
+    constructor(timePeriod: number = MinusDirectionalIndicator.TIMEPERIOD_DEFAULT) {
+        super(MinusDirectionalIndicator.INDICATOR_NAME, MinusDirectionalIndicator.INDICATOR_DESCR);
 
-        if (timePeriod < MINUSDI.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MINUSDI.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < MinusDirectionalIndicator.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, MinusDirectionalIndicator.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.periodCounter = -1;
@@ -99,4 +99,8 @@ export class MINUSDI
     private receiveTRangeData(data: number) {
         this.currentTrueRange = data;
     }
+}
+
+export class MINUSDI extends MinusDirectionalIndicator {
+
 }

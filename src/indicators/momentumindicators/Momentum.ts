@@ -1,28 +1,29 @@
 import * as indicators from "../";
 
-export class ROCR
+export class Momentum
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "ROCR";
-    static INDICATOR_DESCR: string = "Rate of change ratio: (price/prevPrice)";
+    static INDICATOR_NAME: string = "MOM";
+    static INDICATOR_DESCR: string = "Momentum";
     static TIMEPERIOD_DEFAULT: number = 10;
-    static TIMEPERIOD_MIN: number = 1;
+    static TIMEPERIOD_MIN: number = 2;
 
     public timePeriod: number;
+
     private periodHistory: indicators.Queue<number>;
     private periodCounter: number;
 
-    constructor(timePeriod: number = ROCR.TIMEPERIOD_DEFAULT) {
-        super(ROCR.INDICATOR_NAME, ROCR.INDICATOR_DESCR);
+    constructor(timePeriod: number = Momentum.TIMEPERIOD_DEFAULT) {
+        super(Momentum.INDICATOR_NAME, Momentum.INDICATOR_DESCR);
 
-        if (timePeriod < ROCR.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ROCR.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < Momentum.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Momentum.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
         this.periodCounter = timePeriod * -1;
         this.periodHistory = new indicators.Queue<number>();
-        this.setLookBack(this.timePeriod);
+        this.setLookBack(timePeriod);
     }
 
     receiveData(inputData: number): boolean {
@@ -30,13 +31,10 @@ export class ROCR
         this.periodHistory.enqueue(inputData);
 
         if (this.periodCounter > 0) {
-            // RocR = price/previousPrice
+            // Mom = price - previousPrice
             let previousPrice = this.periodHistory.peek();
 
-            let result = 0;
-            if (previousPrice !== 0) {
-                result = inputData / previousPrice;
-            }
+            let result = inputData - previousPrice;
 
             this.setCurrentValue(result);
         }
@@ -47,4 +45,8 @@ export class ROCR
 
         return this.isReady;
     }
+}
+
+export class MOM extends Momentum {
+
 }

@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class ROCP
+export class RateOfChangePercent
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "ROCP";
@@ -12,11 +12,11 @@ export class ROCP
     private periodHistory: indicators.Queue<number>;
     private periodCounter: number;
 
-    constructor(timePeriod: number = ROCP.TIMEPERIOD_DEFAULT) {
-        super(ROCP.INDICATOR_NAME, ROCP.INDICATOR_DESCR);
+    constructor(timePeriod: number = RateOfChangePercent.TIMEPERIOD_DEFAULT) {
+        super(RateOfChangePercent.INDICATOR_NAME, RateOfChangePercent.INDICATOR_DESCR);
 
-        if (timePeriod < ROCP.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ROCP.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < RateOfChangePercent.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, RateOfChangePercent.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -47,4 +47,8 @@ export class ROCP
 
         return this.isReady;
     }
+}
+
+export class ROCP extends RateOfChangePercent {
+
 }

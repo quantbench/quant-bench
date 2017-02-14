@@ -1,11 +1,11 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class PLUSDI
+export class PlusDirectionalIndicator
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "PLUSDI";
-    static INDICATOR_DESCR: string = "PLUS Directional Indicator";
+    static INDICATOR_DESCR: string = "Plus Directional Indicator";
     static TIMEPERIOD_DEFAULT: number = 14;
     static TIMEPERIOD_MIN: number = 1;
 
@@ -19,11 +19,11 @@ export class PLUSDI
     private currentTrueRange: number;
     private trueRange: indicators.TRANGE;
 
-    constructor(timePeriod: number = PLUSDI.TIMEPERIOD_DEFAULT) {
-        super(PLUSDI.INDICATOR_NAME, PLUSDI.INDICATOR_DESCR);
+    constructor(timePeriod: number = PlusDirectionalIndicator.TIMEPERIOD_DEFAULT) {
+        super(PlusDirectionalIndicator.INDICATOR_NAME, PlusDirectionalIndicator.INDICATOR_DESCR);
 
-        if (timePeriod < PLUSDI.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, PLUSDI.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < PlusDirectionalIndicator.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, PlusDirectionalIndicator.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.periodCounter = -1;
@@ -99,4 +99,8 @@ export class PLUSDI
     private receiveTRangeData(data: number) {
         this.currentTrueRange = data;
     }
+}
+
+export class PLUSDI extends PlusDirectionalIndicator {
+
 }

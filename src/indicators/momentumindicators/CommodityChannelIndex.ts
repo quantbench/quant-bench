@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class CCI
+export class CommodityChannelIndex
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "CCI";
@@ -17,11 +17,11 @@ export class CCI
     private typicalPriceHistory: indicators.Queue<number>;
     private currentTypicalPrice: number;
 
-    constructor(timePeriod: number = CCI.TIMEPERIOD_DEFAULT) {
-        super(CCI.INDICATOR_NAME, CCI.INDICATOR_DESCR);
+    constructor(timePeriod: number = CommodityChannelIndex.TIMEPERIOD_DEFAULT) {
+        super(CommodityChannelIndex.INDICATOR_NAME, CommodityChannelIndex.INDICATOR_DESCR);
 
-        if (timePeriod < CCI.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, CCI.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < CommodityChannelIndex.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, CommodityChannelIndex.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -65,4 +65,8 @@ export class CCI
         meanDeviation /= this.timePeriod;
         this.setCurrentValue((this.currentTypicalPrice - data) / (this.factor * meanDeviation));
     }
+}
+
+export class CCI extends CommodityChannelIndex {
+
 }

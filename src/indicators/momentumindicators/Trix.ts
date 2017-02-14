@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class TRIX
+export class Trix
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "TRIX";
@@ -14,11 +14,11 @@ export class TRIX
     private ema3: indicators.EMA;
     private roc: indicators.ROC;
 
-    constructor(timePeriod: number = TRIX.TIMEPERIOD_DEFAULT) {
-        super(TRIX.INDICATOR_NAME, TRIX.INDICATOR_DESCR);
+    constructor(timePeriod: number = Trix.TIMEPERIOD_DEFAULT) {
+        super(Trix.INDICATOR_NAME, Trix.INDICATOR_DESCR);
 
-        if (timePeriod < TRIX.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, TRIX.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < Trix.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Trix.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -56,4 +56,8 @@ export class TRIX
     private receiveROCData(data: number) {
         this.setCurrentValue(data);
     }
+}
+
+export class TRIX extends Trix {
+
 }

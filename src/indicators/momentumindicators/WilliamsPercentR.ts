@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class WILLR
+export class WilliamsPercentR
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "WILLR";
@@ -14,11 +14,11 @@ export class WILLR
     private periodLowHistory: indicators.Queue<number>;
     private periodCounter: number;
 
-    constructor(timePeriod: number = WILLR.TIMEPERIOD_DEFAULT) {
-        super(WILLR.INDICATOR_NAME, WILLR.INDICATOR_DESCR);
+    constructor(timePeriod: number = WilliamsPercentR.TIMEPERIOD_DEFAULT) {
+        super(WilliamsPercentR.INDICATOR_NAME, WilliamsPercentR.INDICATOR_DESCR);
 
-        if (timePeriod < WILLR.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, WILLR.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < WilliamsPercentR.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, WilliamsPercentR.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -49,4 +49,8 @@ export class WILLR
         }
         return this.isReady;
     }
+}
+
+export class WILLR extends WilliamsPercentR {
+
 }

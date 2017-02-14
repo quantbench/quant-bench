@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class AROON
+export class Aroon
     extends indicators.AbstractIndicatorBase<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "AROON";
@@ -19,11 +19,11 @@ export class AROON
     private periodHighHistory: indicators.Queue<number>;
     private periodLowHistory: indicators.Queue<number>;
 
-    constructor(timePeriod: number = AROON.TIMEPERIOD_DEFAULT) {
-        super(AROON.INDICATOR_NAME, AROON.INDICATOR_DESCR);
+    constructor(timePeriod: number = Aroon.TIMEPERIOD_DEFAULT) {
+        super(Aroon.INDICATOR_NAME, Aroon.INDICATOR_DESCR);
 
-        if (timePeriod < AROON.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, AROON.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < Aroon.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Aroon.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.aroonUpInternal = 0;
@@ -103,4 +103,8 @@ export class AROON
         this.emit("data", this.aroonUp, this.aroonDown);
         this.setIsReady();
     }
+}
+
+export class AROON extends Aroon {
+
 }

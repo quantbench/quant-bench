@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class PPO
+export class PercentagePriceOscillator
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "PPO";
@@ -19,17 +19,19 @@ export class PPO
     private fastMA: indicators.MA;
     private slowMA: indicators.MA;
 
-    constructor(fastTimePeriod: number = PPO.FAST_TIMEPERIOD_DEFAULT,
-        slowTimePeriod: number = PPO.SLOW_TIMEPERIOD_DEFAULT,
-        maType: indicators.MA_TYPE = PPO.MATYPE_DEFAULT) {
-        super(PPO.INDICATOR_NAME, PPO.INDICATOR_DESCR);
+    constructor(fastTimePeriod: number = PercentagePriceOscillator.FAST_TIMEPERIOD_DEFAULT,
+        slowTimePeriod: number = PercentagePriceOscillator.SLOW_TIMEPERIOD_DEFAULT,
+        maType: indicators.MA_TYPE = PercentagePriceOscillator.MATYPE_DEFAULT) {
+        super(PercentagePriceOscillator.INDICATOR_NAME, PercentagePriceOscillator.INDICATOR_DESCR);
 
-        if (fastTimePeriod < PPO.FAST_TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, PPO.FAST_TIMEPERIOD_MIN, fastTimePeriod)));
+        if (fastTimePeriod < PercentagePriceOscillator.FAST_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name,
+                PercentagePriceOscillator.FAST_TIMEPERIOD_MIN, fastTimePeriod)));
         }
 
-        if (slowTimePeriod < PPO.SLOW_TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, PPO.SLOW_TIMEPERIOD_MIN, slowTimePeriod)));
+        if (slowTimePeriod < PercentagePriceOscillator.SLOW_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name,
+                PercentagePriceOscillator.SLOW_TIMEPERIOD_MIN, slowTimePeriod)));
         }
 
         this.maType = maType;
@@ -58,7 +60,11 @@ export class PPO
         if (this.slowMA.currentValue === 0) {
             this.setCurrentValue(0);
         } else {
-            this.setCurrentValue( (this.fastMA.currentValue - this.slowMA.currentValue) / this.slowMA.currentValue * 100.0 );
+            this.setCurrentValue((this.fastMA.currentValue - this.slowMA.currentValue) / this.slowMA.currentValue * 100.0);
         }
     }
+}
+
+export class PPO extends PercentagePriceOscillator {
+
 }

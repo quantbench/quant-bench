@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class PLUSDM
+export class PlusDirectionalMovement
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "PLUSDM";
@@ -16,11 +16,11 @@ export class PLUSDM
     private previousLow: number;
     private previousPlusDM: number;
 
-    constructor(timePeriod: number = PLUSDM.TIMEPERIOD_DEFAULT) {
-        super(PLUSDM.INDICATOR_NAME, PLUSDM.INDICATOR_DESCR);
+    constructor(timePeriod: number = PlusDirectionalMovement.TIMEPERIOD_DEFAULT) {
+        super(PlusDirectionalMovement.INDICATOR_NAME, PlusDirectionalMovement.INDICATOR_DESCR);
 
-        if (timePeriod < PLUSDM.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, PLUSDM.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < PlusDirectionalMovement.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, PlusDirectionalMovement.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.periodCounter = -1;
@@ -82,4 +82,8 @@ export class PLUSDM
 
         return this.isReady;
     }
+}
+
+export class PLUSDM extends PlusDirectionalMovement {
+
 }

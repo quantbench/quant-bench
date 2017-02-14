@@ -1,10 +1,11 @@
 import * as indicators from "../";
 
-export class RSI
+export class ChandeMomentumOscillator
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "RSI";
-    static INDICATOR_DESCR: string = "Relative Strength Index";
+    static INDICATOR_NAME: string = "CMO";
+    static INDICATOR_DESCR: string = "Chande Momentum Oscillator";
+
     static TIMEPERIOD_DEFAULT: number = 14;
     static TIMEPERIOD_MIN: number = 2;
 
@@ -14,11 +15,11 @@ export class RSI
     private previousGain: number;
     private previousLoss: number;
 
-    constructor(timePeriod: number = RSI.TIMEPERIOD_DEFAULT) {
-        super(RSI.INDICATOR_NAME, RSI.INDICATOR_DESCR);
+    constructor(timePeriod: number = ChandeMomentumOscillator.TIMEPERIOD_DEFAULT) {
+        super(ChandeMomentumOscillator.INDICATOR_NAME, ChandeMomentumOscillator.INDICATOR_DESCR);
 
-        if (timePeriod < RSI.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, RSI.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < ChandeMomentumOscillator.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, ChandeMomentumOscillator.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -47,11 +48,11 @@ export class RSI
                 this.previousLoss /= this.timePeriod;
 
                 let result = 0;
-                // Rsi = 100 * (prevGain / (prevGain + prevLoss))
+                // CMO = 100 * ((prevGain - prevLoss)  / (prevGain + prevLoss))
                 if (this.previousGain + this.previousLoss === 0) {
                     result = 0;
                 } else {
-                    result = 100 * (this.previousGain / (this.previousGain + this.previousLoss));
+                    result = 100 * ((this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
                 }
 
                 this.setCurrentValue(result);
@@ -75,7 +76,7 @@ export class RSI
                 if (this.previousGain + this.previousLoss === 0) {
                     result = 0;
                 } else {
-                    result = 100 * (this.previousGain / (this.previousGain + this.previousLoss));
+                    result = 100 * ((this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
                 }
 
                 this.setCurrentValue(result);
@@ -85,4 +86,8 @@ export class RSI
 
         return this.isReady;
     }
+}
+
+export class CMO extends ChandeMomentumOscillator {
+
 }

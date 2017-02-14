@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class STOCHRSI
+export class StochasticRSI
     extends indicators.AbstractIndicatorBase<number> {
 
     static INDICATOR_NAME: string = "STOCHRSI";
@@ -32,22 +32,22 @@ export class STOCHRSI
     private fastDInternal: number;
     private fastKInternal: number;
 
-    constructor(timePeriod: number = STOCHRSI.TIMEPERIOD_DEFAULT,
-        fastKTimePeriod: number = STOCHRSI.FASTKPERIOD_DEFAULT,
-        fastDTimePeriod: number = STOCHRSI.FASTDPERIOD_DEFAULT,
-        fastDMAType: indicators.MA_TYPE = STOCHRSI.FASTDMATYPE_DEFAULT) {
-        super(STOCHRSI.INDICATOR_NAME, STOCHRSI.INDICATOR_DESCR);
+    constructor(timePeriod: number = StochasticRSI.TIMEPERIOD_DEFAULT,
+        fastKTimePeriod: number = StochasticRSI.FASTKPERIOD_DEFAULT,
+        fastDTimePeriod: number = StochasticRSI.FASTDPERIOD_DEFAULT,
+        fastDMAType: indicators.MA_TYPE = StochasticRSI.FASTDMATYPE_DEFAULT) {
+        super(StochasticRSI.INDICATOR_NAME, StochasticRSI.INDICATOR_DESCR);
 
-        if (timePeriod < STOCHRSI.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, STOCHRSI.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < StochasticRSI.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, StochasticRSI.TIMEPERIOD_MIN, timePeriod)));
         }
 
-        if (fastKTimePeriod < STOCHRSI.FASTKPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, STOCHRSI.FASTKPERIOD_MIN, fastKTimePeriod)));
+        if (fastKTimePeriod < StochasticRSI.FASTKPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, StochasticRSI.FASTKPERIOD_MIN, fastKTimePeriod)));
         }
 
-        if (fastDTimePeriod < STOCHRSI.FASTDPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, STOCHRSI.FASTDPERIOD_MIN, fastDTimePeriod)));
+        if (fastDTimePeriod < StochasticRSI.FASTDPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, StochasticRSI.FASTDPERIOD_MIN, fastDTimePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -126,4 +126,8 @@ export class STOCHRSI
     private receiveMinValueData(data: number) {
         this.currentPeriodLow = data;
     }
+}
+
+export class STOCHRSI extends StochasticRSI {
+
 }

@@ -1,11 +1,10 @@
 import * as indicators from "../";
 
-export class CMO
+export class RelativeStrengthIndex
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "CMO";
-    static INDICATOR_DESCR: string = "Chande Momentum Oscillator";
-
+    static INDICATOR_NAME: string = "RSI";
+    static INDICATOR_DESCR: string = "Relative Strength Index";
     static TIMEPERIOD_DEFAULT: number = 14;
     static TIMEPERIOD_MIN: number = 2;
 
@@ -15,11 +14,11 @@ export class CMO
     private previousGain: number;
     private previousLoss: number;
 
-    constructor(timePeriod: number = CMO.TIMEPERIOD_DEFAULT) {
-        super(CMO.INDICATOR_NAME, CMO.INDICATOR_DESCR);
+    constructor(timePeriod: number = RelativeStrengthIndex.TIMEPERIOD_DEFAULT) {
+        super(RelativeStrengthIndex.INDICATOR_NAME, RelativeStrengthIndex.INDICATOR_DESCR);
 
-        if (timePeriod < CMO.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, CMO.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < RelativeStrengthIndex.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, RelativeStrengthIndex.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -48,11 +47,11 @@ export class CMO
                 this.previousLoss /= this.timePeriod;
 
                 let result = 0;
-                // CMO = 100 * ((prevGain - prevLoss)  / (prevGain + prevLoss))
+                // Rsi = 100 * (prevGain / (prevGain + prevLoss))
                 if (this.previousGain + this.previousLoss === 0) {
                     result = 0;
                 } else {
-                    result = 100 * ( (this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
+                    result = 100 * (this.previousGain / (this.previousGain + this.previousLoss));
                 }
 
                 this.setCurrentValue(result);
@@ -76,7 +75,7 @@ export class CMO
                 if (this.previousGain + this.previousLoss === 0) {
                     result = 0;
                 } else {
-                    result = 100 * ( (this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
+                    result = 100 * (this.previousGain / (this.previousGain + this.previousLoss));
                 }
 
                 this.setCurrentValue(result);
@@ -86,4 +85,8 @@ export class CMO
 
         return this.isReady;
     }
+}
+
+export class RSI extends RelativeStrengthIndex {
+
 }

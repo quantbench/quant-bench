@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class DX
+export class DirectionalMovementIndex
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "DX";
@@ -16,11 +16,11 @@ export class DX
     private currentPlusDI: number;
     private currentMinusDI: number;
 
-    constructor(timePeriod: number = DX.TIMEPERIOD_DEFAULT) {
-        super(DX.INDICATOR_NAME, DX.INDICATOR_DESCR);
+    constructor(timePeriod: number = DirectionalMovementIndex.TIMEPERIOD_DEFAULT) {
+        super(DirectionalMovementIndex.INDICATOR_NAME, DirectionalMovementIndex.INDICATOR_DESCR);
 
-        if (timePeriod < DX.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, DX.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < DirectionalMovementIndex.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, DirectionalMovementIndex.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -57,4 +57,8 @@ export class DX
 
         this.setCurrentValue(result);
     }
+}
+
+export class DX extends DirectionalMovementIndex {
+
 }

@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class MFI
+export class MoneyFlowIndex
     extends indicators.AbstractIndicator<marketData.PriceVolumeBar> {
 
     static INDICATOR_NAME: string = "MFI";
@@ -20,11 +20,11 @@ export class MFI
     private previousTypPrice: number;
     private currentVolume: number;
 
-    constructor(timePeriod: number = MFI.TIMEPERIOD_DEFAULT) {
-        super(MFI.INDICATOR_NAME, MFI.INDICATOR_DESCR);
+    constructor(timePeriod: number = MoneyFlowIndex.TIMEPERIOD_DEFAULT) {
+        super(MoneyFlowIndex.INDICATOR_NAME, MoneyFlowIndex.INDICATOR_DESCR);
 
-        if (timePeriod < MFI.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MFI.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < MoneyFlowIndex.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, MoneyFlowIndex.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -104,4 +104,8 @@ export class MFI
             this.negativeHistory.dequeue();
         }
     }
+}
+
+export class MFI extends MoneyFlowIndex {
+
 }

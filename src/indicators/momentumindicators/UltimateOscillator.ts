@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class ULTOSC
+export class UltimateOscillator
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ULTOSC";
@@ -31,22 +31,22 @@ export class ULTOSC
     private average2: number;
     private average3: number;
 
-    constructor(timePeriod1: number = ULTOSC.TIMEPERIOD1_DEFAULT,
-        timePeriod2: number = ULTOSC.TIMEPERIOD2_DEFAULT,
-        timePeriod3: number = ULTOSC.TIMEPERIOD3_DEFAULT,
+    constructor(timePeriod1: number = UltimateOscillator.TIMEPERIOD1_DEFAULT,
+        timePeriod2: number = UltimateOscillator.TIMEPERIOD2_DEFAULT,
+        timePeriod3: number = UltimateOscillator.TIMEPERIOD3_DEFAULT,
     ) {
-        super(ULTOSC.INDICATOR_NAME, ULTOSC.INDICATOR_DESCR);
+        super(UltimateOscillator.INDICATOR_NAME, UltimateOscillator.INDICATOR_DESCR);
 
-        if (timePeriod1 < ULTOSC.TIMEPERIOD1_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ULTOSC.TIMEPERIOD1_MIN, timePeriod1)));
+        if (timePeriod1 < UltimateOscillator.TIMEPERIOD1_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, UltimateOscillator.TIMEPERIOD1_MIN, timePeriod1)));
         }
 
-        if (timePeriod2 < ULTOSC.TIMEPERIOD2_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ULTOSC.TIMEPERIOD2_MIN, timePeriod2)));
+        if (timePeriod2 < UltimateOscillator.TIMEPERIOD2_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, UltimateOscillator.TIMEPERIOD2_MIN, timePeriod2)));
         }
 
-        if (timePeriod3 < ULTOSC.TIMEPERIOD3_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ULTOSC.TIMEPERIOD3_MIN, timePeriod3)));
+        if (timePeriod3 < UltimateOscillator.TIMEPERIOD3_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, UltimateOscillator.TIMEPERIOD3_MIN, timePeriod3)));
         }
 
         // sort the time periods from shortest to longest
@@ -123,4 +123,8 @@ export class ULTOSC
         this.previousClose = inputData.close;
         return this.isReady;
     }
+}
+
+export class ULTOSC extends UltimateOscillator {
+
 }

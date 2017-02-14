@@ -1,8 +1,8 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import {MA_TYPE} from "../matype";
+import { MA_TYPE } from "../matype";
 
-export class STOCH
+export class Stochastic
     extends indicators.AbstractIndicatorBase<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "STOCH";
@@ -38,23 +38,23 @@ export class STOCH
     private slowDInternal: number;
     private slowKInternal: number;
 
-    constructor(fastKTimePeriod: number = STOCH.FASTKPERIOD_DEFAULT,
-        slowKTimePeriod: number = STOCH.SLOWKPERIOD_DEFAULT,
-        slowKMAType: indicators.MA_TYPE = STOCH.SLOWKMATYPE_DEFAULT,
-        slowDTimePeriod: number = STOCH.SLOWDPERIOD_DEFAULT,
-        slowDMAType: indicators.MA_TYPE = STOCH.SLOWDMATYPE_DEFAULT) {
-        super(STOCH.INDICATOR_NAME, STOCH.INDICATOR_DESCR);
+    constructor(fastKTimePeriod: number = Stochastic.FASTKPERIOD_DEFAULT,
+        slowKTimePeriod: number = Stochastic.SLOWKPERIOD_DEFAULT,
+        slowKMAType: indicators.MA_TYPE = Stochastic.SLOWKMATYPE_DEFAULT,
+        slowDTimePeriod: number = Stochastic.SLOWDPERIOD_DEFAULT,
+        slowDMAType: indicators.MA_TYPE = Stochastic.SLOWDMATYPE_DEFAULT) {
+        super(Stochastic.INDICATOR_NAME, Stochastic.INDICATOR_DESCR);
 
-        if (fastKTimePeriod < STOCH.FASTKPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, STOCH.FASTKPERIOD_MIN, fastKTimePeriod)));
+        if (fastKTimePeriod < Stochastic.FASTKPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Stochastic.FASTKPERIOD_MIN, fastKTimePeriod)));
         }
 
-        if (slowKTimePeriod < STOCH.SLOWKPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, STOCH.SLOWKPERIOD_MIN, slowKTimePeriod)));
+        if (slowKTimePeriod < Stochastic.SLOWKPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Stochastic.SLOWKPERIOD_MIN, slowKTimePeriod)));
         }
 
-        if (slowDTimePeriod < STOCH.SLOWDPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, STOCH.SLOWDPERIOD_MIN, slowDTimePeriod)));
+        if (slowDTimePeriod < Stochastic.SLOWDPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Stochastic.SLOWDPERIOD_MIN, slowDTimePeriod)));
         }
 
         this.fastKTimePeriod = fastKTimePeriod;
@@ -127,4 +127,8 @@ export class STOCH
     private receiveMinValueData(data: number) {
         this.currentPeriodLow = data;
     }
+}
+
+export class STOCH extends Stochastic {
+
 }

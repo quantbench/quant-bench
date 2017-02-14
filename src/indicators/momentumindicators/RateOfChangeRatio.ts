@@ -1,10 +1,10 @@
 import * as indicators from "../";
 
-export class ROCR100
+export class RateOfChangeRatio
     extends indicators.AbstractIndicator<number> {
 
-    static INDICATOR_NAME: string = "ROCR100";
-    static INDICATOR_DESCR: string = "Rate of change ratio 100 scale: (price/prevPrice)*100";
+    static INDICATOR_NAME: string = "ROCR";
+    static INDICATOR_DESCR: string = "Rate of change ratio: (price/prevPrice)";
     static TIMEPERIOD_DEFAULT: number = 10;
     static TIMEPERIOD_MIN: number = 1;
 
@@ -12,11 +12,11 @@ export class ROCR100
     private periodHistory: indicators.Queue<number>;
     private periodCounter: number;
 
-    constructor(timePeriod: number = ROCR100.TIMEPERIOD_DEFAULT) {
-        super(ROCR100.INDICATOR_NAME, ROCR100.INDICATOR_DESCR);
+    constructor(timePeriod: number = RateOfChangeRatio.TIMEPERIOD_DEFAULT) {
+        super(RateOfChangeRatio.INDICATOR_NAME, RateOfChangeRatio.INDICATOR_DESCR);
 
-        if (timePeriod < ROCR100.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ROCR100.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < RateOfChangeRatio.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, RateOfChangeRatio.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -30,12 +30,12 @@ export class ROCR100
         this.periodHistory.enqueue(inputData);
 
         if (this.periodCounter > 0) {
-            // RocR100 = (price/previousPrice - 1) * 100
+            // RocR = price/previousPrice
             let previousPrice = this.periodHistory.peek();
 
             let result = 0;
             if (previousPrice !== 0) {
-                result = (inputData / previousPrice) * 100;
+                result = inputData / previousPrice;
             }
 
             this.setCurrentValue(result);
@@ -47,4 +47,8 @@ export class ROCR100
 
         return this.isReady;
     }
+}
+
+export class ROCR extends RateOfChangeRatio {
+
 }

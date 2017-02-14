@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class BOP
+export class BalanceOfPower
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "BOP";
@@ -9,7 +9,7 @@ export class BOP
 
     private highLow: number;
     constructor() {
-        super(BOP.INDICATOR_NAME, BOP.INDICATOR_DESCR);
+        super(BalanceOfPower.INDICATOR_NAME, BalanceOfPower.INDICATOR_DESCR);
 
         this.highLow = 0;
         this.setLookBack(0);
@@ -24,4 +24,8 @@ export class BOP
         }
         return this.isReady;
     }
+}
+
+export class BOP extends BalanceOfPower {
+
 }

@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class ROC
+export class RateOfChange
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "ROC";
@@ -12,11 +12,11 @@ export class ROC
     private periodHistory: indicators.Queue<number>;
     private periodCounter: number;
 
-    constructor(timePeriod: number = ROC.TIMEPERIOD_DEFAULT) {
-        super(ROC.INDICATOR_NAME, ROC.INDICATOR_DESCR);
+    constructor(timePeriod: number = RateOfChange.TIMEPERIOD_DEFAULT) {
+        super(RateOfChange.INDICATOR_NAME, RateOfChange.INDICATOR_DESCR);
 
-        if (timePeriod < ROC.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ROC.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < RateOfChange.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, RateOfChange.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -48,4 +48,8 @@ export class ROC
 
         return this.isReady;
     }
+}
+
+export class ROC extends RateOfChange {
+
 }
