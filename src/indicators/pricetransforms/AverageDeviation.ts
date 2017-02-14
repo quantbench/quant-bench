@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class AVGDEV
+export class AverageDeviation
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "AVGDEV";
@@ -12,11 +12,11 @@ export class AVGDEV
 
     private periodHistory: indicators.Queue<number>;
 
-    constructor(timePeriod: number = AVGDEV.TIMEPERIOD_DEFAULT) {
-        super(AVGDEV.INDICATOR_NAME, AVGDEV.INDICATOR_DESCR);
+    constructor(timePeriod: number = AverageDeviation.TIMEPERIOD_DEFAULT) {
+        super(AverageDeviation.INDICATOR_NAME, AverageDeviation.INDICATOR_DESCR);
 
-        if (timePeriod < AVGDEV.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, AVGDEV.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < AverageDeviation.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AverageDeviation.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -47,4 +47,8 @@ export class AVGDEV
 
         return this.isReady;
     }
+}
+
+export class AVGDEV extends AverageDeviation {
+
 }

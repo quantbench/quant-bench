@@ -10,7 +10,7 @@ describe("WCLPRICE Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.WCLPRICE;
+    let indicator: indicators.WeightedClosePrice;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
 
@@ -23,15 +23,15 @@ describe("WCLPRICE Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.WCLPRICE();
+            indicator = new indicators.WeightedClosePrice();
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.WCLPRICE.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.WeightedClosePrice.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.WCLPRICE.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.WeightedClosePrice.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -41,7 +41,7 @@ describe("WCLPRICE Indicator", () => {
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.WCLPRICE();
+            indicator = new indicators.WeightedClosePrice();
             let idx = 0;
             sourceData.close.forEach((value: number, index: number) => {
                 if (indicator.receiveData({
@@ -70,7 +70,7 @@ describe("WCLPRICE Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.WCLPRICE();
+            indicator = new indicators.WeightedClosePrice();
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -101,7 +101,7 @@ describe("WCLPRICE Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.WCLPRICE();
+            indicator = new indicators.WeightedClosePrice();
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

@@ -12,7 +12,7 @@ export class MoneyFlowIndex
     public timePeriod: number;
 
     private periodCounter: number;
-    private typPrice: indicators.TYPPRICE;
+    private typPrice: indicators.TypicalPrice;
     private positiveMoneyFlow: number;
     private negativeMoneyFlow: number;
     private positiveHistory: indicators.Queue<number>;
@@ -35,7 +35,7 @@ export class MoneyFlowIndex
         this.negativeHistory = new indicators.Queue<number>();
         this.previousTypPrice = 0;
         this.currentVolume = 0;
-        this.typPrice = new indicators.TYPPRICE();
+        this.typPrice = new indicators.TypicalPrice();
         this.typPrice.on("data", (data: number) => { this.receiveTYPPRICEData(data); });
         this.setLookBack(timePeriod);
     }

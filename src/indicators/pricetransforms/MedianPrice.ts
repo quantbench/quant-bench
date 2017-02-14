@@ -1,14 +1,14 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class MEDPRICE
+export class MedianPrice
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "MEDPRICE";
     static INDICATOR_DESCR: string = "Median Price";
 
     constructor() {
-        super(MEDPRICE.INDICATOR_NAME, MEDPRICE.INDICATOR_DESCR);
+        super(MedianPrice.INDICATOR_NAME, MedianPrice.INDICATOR_DESCR);
         this.setLookBack(0);
     }
 
@@ -16,4 +16,8 @@ export class MEDPRICE
         this.setCurrentValue((inputData.high + inputData.low) / 2.0);
         return this.isReady;
     }
+}
+
+export class MEDPRICE extends MedianPrice {
+
 }
