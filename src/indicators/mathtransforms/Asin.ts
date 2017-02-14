@@ -1,13 +1,13 @@
 import * as indicators from "../";
 
-export class ASIN
+export class Asin
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "ASIN";
-    static INDICATOR_DESCR: string = "Vector Trigonometric ASin";
+    static INDICATOR_DESCR: string = "Vector Trigonometric Asin";
 
     constructor() {
-        super(ASIN.INDICATOR_NAME, ASIN.INDICATOR_DESCR);
+        super(Asin.INDICATOR_NAME, Asin.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

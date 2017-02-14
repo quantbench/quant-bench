@@ -1,13 +1,13 @@
 import * as indicators from "../";
 
-export class EXP
+export class Exp
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "EXP";
     static INDICATOR_DESCR: string = "Vector Arithmetic Exp";
 
     constructor() {
-        super(EXP.INDICATOR_NAME, EXP.INDICATOR_DESCR);
+        super(Exp.INDICATOR_NAME, Exp.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

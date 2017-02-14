@@ -1,13 +1,13 @@
 import * as indicators from "../";
 
-export class ATAN
+export class Atan
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "ATAN";
-    static INDICATOR_DESCR: string = "Vector Trigonometric ATan";
+    static INDICATOR_DESCR: string = "Vector Trigonometric Atan";
 
     constructor() {
-        super(ATAN.INDICATOR_NAME, ATAN.INDICATOR_DESCR);
+        super(Atan.INDICATOR_NAME, Atan.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

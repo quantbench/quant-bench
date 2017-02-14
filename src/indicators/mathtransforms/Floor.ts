@@ -1,13 +1,13 @@
 import * as indicators from "../";
 
-export class FLOOR
+export class Floor
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "FLOOR";
     static INDICATOR_DESCR: string = "Vector Floor";
 
     constructor() {
-        super(FLOOR.INDICATOR_NAME, FLOOR.INDICATOR_DESCR);
+        super(Floor.INDICATOR_NAME, Floor.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {

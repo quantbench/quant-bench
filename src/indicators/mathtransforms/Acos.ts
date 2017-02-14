@@ -1,13 +1,13 @@
 import * as indicators from "../";
 
-export class ACOS
+export class Acos
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "ACOS";
-    static INDICATOR_DESCR: string = "Vector Trigonometric ACos";
+    static INDICATOR_DESCR: string = "Vector Trigonometric Acos";
 
     constructor() {
-        super(ACOS.INDICATOR_NAME, ACOS.INDICATOR_DESCR);
+        super(Acos.INDICATOR_NAME, Acos.INDICATOR_DESCR);
     }
 
     receiveData(inputData: number): boolean {
