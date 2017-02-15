@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class TRANGE
+export class TrueRange
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "TRANGE";
@@ -11,7 +11,7 @@ export class TRANGE
     periodCounter: number;
 
     constructor() {
-        super(TRANGE.INDICATOR_NAME, TRANGE.INDICATOR_DESCR);
+        super(TrueRange.INDICATOR_NAME, TrueRange.INDICATOR_DESCR);
 
         this.previousClose = 0;
         this.periodCounter = -1;
@@ -31,4 +31,8 @@ export class TRANGE
 
         return this.isReady;
     }
+}
+
+export class TRANGE extends TrueRange {
+
 }

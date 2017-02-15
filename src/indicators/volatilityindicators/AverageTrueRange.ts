@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class ATR
+export class AverageTrueRange
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ATR";
@@ -15,11 +15,11 @@ export class ATR
     private trueRange: indicators.TRANGE;
     private sma: indicators.SMA;
 
-    constructor(timePeriod: number = ATR.TIMEPERIOD_DEFAULT) {
-        super(ATR.INDICATOR_NAME, ATR.INDICATOR_DESCR);
+    constructor(timePeriod: number = AverageTrueRange.TIMEPERIOD_DEFAULT) {
+        super(AverageTrueRange.INDICATOR_NAME, AverageTrueRange.INDICATOR_DESCR);
 
-        if (timePeriod < ATR.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ATR.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < AverageTrueRange.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AverageTrueRange.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -53,4 +53,8 @@ export class ATR
             this.previousAvgTrueRange = this.currentValue;
         }
     }
+}
+
+export class ATR extends AverageTrueRange {
+
 }

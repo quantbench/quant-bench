@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class NATR
+export class NormalisedAverageTrueRange
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "NATR";
@@ -13,11 +13,11 @@ export class NATR
     private atr: indicators.ATR;
     private currentClose: number;
 
-    constructor(timePeriod: number = NATR.TIMEPERIOD_DEFAULT) {
-        super(NATR.INDICATOR_NAME, NATR.INDICATOR_DESCR);
+    constructor(timePeriod: number = NormalisedAverageTrueRange.TIMEPERIOD_DEFAULT) {
+        super(NormalisedAverageTrueRange.INDICATOR_NAME, NormalisedAverageTrueRange.INDICATOR_DESCR);
 
-        if (timePeriod < NATR.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, NATR.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < NormalisedAverageTrueRange.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, NormalisedAverageTrueRange.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -37,4 +37,8 @@ export class NATR
     private receiveATRData(data: number) {
         this.setCurrentValue(this.atr.currentValue / this.currentClose * 100.0);
     }
+}
+
+export class NATR extends NormalisedAverageTrueRange {
+
 }
