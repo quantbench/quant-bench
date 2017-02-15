@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class BETA
+export class Beta
     extends indicators.AbstractIndicator<number> {
     static INDICATOR_NAME: string = "BETA";
     static INDICATOR_DESCR: string = "Beta";
@@ -32,11 +32,11 @@ export class BETA
     private lastPriceY: number;
 
     private periodCounter: number;
-    constructor(timePeriod: number = BETA.TIMEPERIOD_DEFAULT) {
-        super(BETA.INDICATOR_NAME, BETA.INDICATOR_DESCR);
+    constructor(timePeriod: number = Beta.TIMEPERIOD_DEFAULT) {
+        super(Beta.INDICATOR_NAME, Beta.INDICATOR_DESCR);
 
-        if (timePeriod < BETA.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, BETA.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < Beta.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Beta.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -138,4 +138,8 @@ export class BETA
         }
         return this.isReady;
     }
+}
+
+export class BETA extends Beta {
+
 }

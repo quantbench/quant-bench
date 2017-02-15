@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class STDDEV
+export class StandardDeviation
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "STDDEV";
@@ -12,11 +12,11 @@ export class STDDEV
 
     private variance: indicators.VAR;
 
-    constructor(timePeriod: number = STDDEV.TIMEPERIOD_DEFAULT) {
-        super(STDDEV.INDICATOR_NAME, STDDEV.INDICATOR_DESCR);
+    constructor(timePeriod: number = StandardDeviation.TIMEPERIOD_DEFAULT) {
+        super(StandardDeviation.INDICATOR_NAME, StandardDeviation.INDICATOR_DESCR);
 
-        if (timePeriod < STDDEV.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, STDDEV.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < StandardDeviation.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, StandardDeviation.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -35,4 +35,8 @@ export class STDDEV
         let result: number = Math.sqrt(variance);
         this.setCurrentValue(result);
     }
+}
+
+export class STDDEV extends StandardDeviation {
+
 }

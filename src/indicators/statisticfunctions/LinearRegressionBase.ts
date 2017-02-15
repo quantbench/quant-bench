@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export abstract class LINEARREGBASE
+export abstract class LinearRegressionBase
     extends indicators.AbstractIndicator<number> {
 
     static TIMEPERIOD_MIN: number = 2;
@@ -16,8 +16,8 @@ export abstract class LINEARREGBASE
     constructor(name: string, description: string, timePeriod: number) {
         super(name, description);
 
-        if (timePeriod < LINEARREGBASE.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(name, LINEARREGBASE.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < LinearRegressionBase.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(name, LinearRegressionBase.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -68,4 +68,8 @@ export abstract class LINEARREGBASE
     }
 
     public abstract calculateResult(slope: number, intercept: number): number;
+}
+
+export abstract class LINEARREGBASE extends LinearRegressionBase {
+
 }

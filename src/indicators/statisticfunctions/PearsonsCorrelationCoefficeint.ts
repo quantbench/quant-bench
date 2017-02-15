@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class CORREL
+export class PearsonsCorrelationCoefficeint
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "CORREL";
@@ -124,4 +124,8 @@ export class CORREL
 
         return this.isReady;
     }
+}
+
+export class CORREL extends PearsonsCorrelationCoefficeint {
+
 }

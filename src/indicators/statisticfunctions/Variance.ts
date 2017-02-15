@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import { Queue } from "../queue";
 
-export class VAR
+export class Variance
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "VAR";
@@ -16,11 +16,11 @@ export class VAR
     private rollingSum: number;
     private rollingSumOfSquares: number;
 
-    constructor(timePeriod: number = VAR.TIMEPERIOD_DEFAULT) {
-        super(VAR.INDICATOR_NAME, VAR.INDICATOR_DESCR);
+    constructor(timePeriod: number = Variance.TIMEPERIOD_DEFAULT) {
+        super(Variance.INDICATOR_NAME, Variance.INDICATOR_DESCR);
 
-        if (timePeriod < VAR.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, VAR.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < Variance.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, Variance.TIMEPERIOD_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -55,4 +55,8 @@ export class VAR
 
         return this.isReady;
     }
+}
+
+export class VAR extends Variance {
+
 }
