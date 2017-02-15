@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { AbstractIndicatorBase } from "./abstractIndicatorBase";
+import { AbstractIndicatorBase } from "./AbstractIndicatorBase";
 
 export abstract class AbstractIndicator<TInputType> extends AbstractIndicatorBase<TInputType> {
     protected currentValueInternal: number;

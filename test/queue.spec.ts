@@ -1,4 +1,4 @@
-import { Queue } from "../src/indicators/queue";
+import { Queue } from "../src/indicators/Queue";
 
 import * as chai from "chai";
 chai.should();

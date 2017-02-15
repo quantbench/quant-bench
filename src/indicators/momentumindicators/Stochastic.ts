@@ -1,6 +1,6 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
-import { MA_TYPE } from "../matype";
+import { MA_TYPE } from "../MovingAverageType";
 
 export class Stochastic
     extends indicators.AbstractIndicatorBase<marketData.PriceBar> {

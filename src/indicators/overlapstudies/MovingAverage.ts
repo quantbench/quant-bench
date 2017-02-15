@@ -1,5 +1,5 @@
 import * as indicators from "../";
-import { MA_TYPE } from "../matype";
+import { MA_TYPE } from "../MovingAverageType";
 
 export class MovingAverage
     extends indicators.AbstractIndicator<number> {

@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { IIndicator } from "./indicator";
+import { IIndicator } from "./Indicator";
 
 export abstract class AbstractIndicatorBase<TInputType>
     extends EventEmitter

@@ -1,5 +1,5 @@
 import * as indicators from "../";
-import { Queue } from "../queue";
+import { Queue } from "../Queue";
 
 export class Variance
     extends indicators.AbstractIndicator<number> {
