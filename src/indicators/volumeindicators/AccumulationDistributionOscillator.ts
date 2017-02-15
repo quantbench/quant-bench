@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class ADOSC
+export class AccumulationDistributionOscillator
     extends indicators.AbstractIndicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ADOSC";
@@ -23,15 +23,15 @@ export class ADOSC
     private oneMinusSlowK: number;
     private periodCounter: number;
 
-    constructor(slowTimePeriod: number = ADOSC.SLOW_TIMEPERIOD_DEFAULT, fastTimePeriod: number = ADOSC.FAST_TIMEPERIOD_DEFAULT) {
-        super(ADOSC.INDICATOR_NAME, ADOSC.INDICATOR_DESCR);
+    constructor(slowTimePeriod: number = AccumulationDistributionOscillator.SLOW_TIMEPERIOD_DEFAULT, fastTimePeriod: number = AccumulationDistributionOscillator.FAST_TIMEPERIOD_DEFAULT) {
+        super(AccumulationDistributionOscillator.INDICATOR_NAME, AccumulationDistributionOscillator.INDICATOR_DESCR);
 
-        if (slowTimePeriod < ADOSC.SLOW_TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ADOSC.SLOW_TIMEPERIOD_MIN, slowTimePeriod)));
+        if (slowTimePeriod < AccumulationDistributionOscillator.SLOW_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AccumulationDistributionOscillator.SLOW_TIMEPERIOD_MIN, slowTimePeriod)));
         }
 
-        if (fastTimePeriod < ADOSC.FAST_TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, ADOSC.FAST_TIMEPERIOD_MIN, fastTimePeriod)));
+        if (fastTimePeriod < AccumulationDistributionOscillator.FAST_TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AccumulationDistributionOscillator.FAST_TIMEPERIOD_MIN, fastTimePeriod)));
         }
 
         this.slowTimePeriod = slowTimePeriod;
@@ -80,4 +80,8 @@ export class ADOSC
     private periodToK(period: number): number {
         return 2 / (period + 1);
     }
+}
+
+export class ADOSC extends AccumulationDistributionOscillator {
+
 }

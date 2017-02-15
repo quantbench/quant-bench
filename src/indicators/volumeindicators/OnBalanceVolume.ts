@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class OBV
+export class OnBalanceVolume
     extends indicators.AbstractIndicator<marketData.PriceVolumeBar> {
 
     static INDICATOR_NAME: string = "OBV";
@@ -12,7 +12,7 @@ export class OBV
     private periodCounter: number;
 
     constructor() {
-        super(OBV.INDICATOR_NAME, OBV.INDICATOR_DESCR);
+        super(OnBalanceVolume.INDICATOR_NAME, OnBalanceVolume.INDICATOR_DESCR);
 
         this.previousObv = 0;
         this.previousClose = 0;
@@ -39,4 +39,8 @@ export class OBV
 
         return this.isReady;
     }
+}
+
+export class OBV extends OnBalanceVolume {
+
 }

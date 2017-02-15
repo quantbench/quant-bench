@@ -1,7 +1,7 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class AD
+export class AccumulationDistributionLine
     extends indicators.AbstractIndicator<marketData.PriceVolumeBar> {
 
     static INDICATOR_NAME: string = "AD";
@@ -10,7 +10,7 @@ export class AD
     private currentADL: number;
 
     constructor() {
-        super(AD.INDICATOR_NAME, AD.INDICATOR_DESCR);
+        super(AccumulationDistributionLine.INDICATOR_NAME, AccumulationDistributionLine.INDICATOR_DESCR);
 
         this.currentADL = 0;
         this.setLookBack(0);
@@ -26,4 +26,9 @@ export class AD
         this.setCurrentValue(this.currentADL);
         return this.isReady;
     }
+}
+
+
+export class AD extends AccumulationDistributionLine {
+
 }

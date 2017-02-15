@@ -1,6 +1,6 @@
 import * as indicators from "../";
 
-export class T3
+export class T3MovingAverage
     extends indicators.AbstractIndicator<number> {
 
     static INDICATOR_NAME: string = "T3";
@@ -27,22 +27,22 @@ export class T3
     private periodHistory: indicators.Queue<number>;
     private periodCounter: number;
 
-    constructor(timePeriod: number = T3.TIMEPERIOD_DEFAULT, volumeFactor: number =
-        T3.VOLUMEFACTOR_DEFAULT) {
-        super(T3.INDICATOR_NAME, T3.INDICATOR_DESCR);
+    constructor(timePeriod: number = T3MovingAverage.TIMEPERIOD_DEFAULT, volumeFactor: number =
+        T3MovingAverage.VOLUMEFACTOR_DEFAULT) {
+        super(T3MovingAverage.INDICATOR_NAME, T3MovingAverage.INDICATOR_DESCR);
 
-        if (timePeriod < T3.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, T3.TIMEPERIOD_MIN, timePeriod)));
+        if (timePeriod < T3MovingAverage.TIMEPERIOD_MIN) {
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, T3MovingAverage.TIMEPERIOD_MIN, timePeriod)));
         }
 
-        if (volumeFactor < T3.VOLUMEFACTOR_MIN) {
+        if (volumeFactor < T3MovingAverage.VOLUMEFACTOR_MIN) {
             throw (new Error(indicators.generateMinVolumeFactorError(this.name,
-                T3.VOLUMEFACTOR_MIN, timePeriod)));
+                T3MovingAverage.VOLUMEFACTOR_MIN, timePeriod)));
         }
 
-        if (volumeFactor > T3.VOLUMEFACTOR_MAX) {
+        if (volumeFactor > T3MovingAverage.VOLUMEFACTOR_MAX) {
             throw (new Error(indicators.generateMaxVolumeFactorError(this.name,
-                T3.VOLUMEFACTOR_MIN, timePeriod)));
+                T3MovingAverage.VOLUMEFACTOR_MIN, timePeriod)));
         }
 
         this.timePeriod = timePeriod;
@@ -161,4 +161,8 @@ export class T3
 
         return this.isReady;
     }
+}
+
+export class T3 extends T3MovingAverage {
+
 }

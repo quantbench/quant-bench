@@ -8,7 +8,7 @@ export * from "./MidPoint";
 export * from "./MidPrice";
 export * from "./ParabolicStopAndReverse";
 export * from "./SimpleMovingAverage";
-export * from "./T3";
+export * from "./T3MovingAverage";
 export * from "./TripleExponentialMovingAverage";
 export * from "./TriangularMovingAverage";
 export * from "./WeightedMovingAverage";
