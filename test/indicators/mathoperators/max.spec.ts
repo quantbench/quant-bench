@@ -6,11 +6,11 @@ const jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("MAX Indicator", () => {
+describe("Max Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.MAX;
+    let indicator: indicators.Max;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
     const timePeriod = 30;
@@ -24,15 +24,15 @@ describe("MAX Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.MAX(timePeriod);
+            indicator = new indicators.Max(timePeriod);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.MAX.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.Max.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.MAX.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.Max.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -42,7 +42,7 @@ describe("MAX Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MAX(timePeriod + 1);
+            indicator = new indicators.Max(timePeriod + 1);
         });
 
         it("should set the timePeriod", () => {
@@ -52,11 +52,11 @@ describe("MAX Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MAX();
+            indicator = new indicators.Max();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.MAX.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.Max.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -65,21 +65,21 @@ describe("MAX Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.MAX(1);
+                indicator = new indicators.Max(1);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MAX.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.Max.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.MAX(timePeriod);
+            indicator = new indicators.Max(timePeriod);
             let idx = 0;
             sourceData.close.forEach((value: number) => {
                 if (indicator.receiveData(value)) {
@@ -103,7 +103,7 @@ describe("MAX Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MAX(timePeriod);
+            indicator = new indicators.Max(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -129,7 +129,7 @@ describe("MAX Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MAX(timePeriod);
+            indicator = new indicators.Max(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

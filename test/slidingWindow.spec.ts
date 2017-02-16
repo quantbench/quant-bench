@@ -1,4 +1,4 @@
-import { SlidingWindow } from "../src/indicators/slidingWindow";
+import { SlidingWindow } from "../src/indicators/SlidingWindow";
 
 import * as chai from "chai";
 chai.should();

@@ -10,7 +10,7 @@ describe("MEDPRICE Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.MEDPRICE;
+    let indicator: indicators.MedianPrice;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
 
@@ -23,15 +23,15 @@ describe("MEDPRICE Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.MEDPRICE();
+            indicator = new indicators.MedianPrice();
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.MEDPRICE.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.MedianPrice.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.MEDPRICE.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.MedianPrice.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -41,7 +41,7 @@ describe("MEDPRICE Indicator", () => {
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.MEDPRICE();
+            indicator = new indicators.MedianPrice();
             let idx = 0;
             sourceData.close.forEach((value: number, index: number) => {
                 if (indicator.receiveData({
@@ -70,7 +70,7 @@ describe("MEDPRICE Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MEDPRICE();
+            indicator = new indicators.MedianPrice();
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -101,7 +101,7 @@ describe("MEDPRICE Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MEDPRICE();
+            indicator = new indicators.MedianPrice();
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {

@@ -6,11 +6,11 @@ const jsonfile = require("jsonfile");
 
 chai.should();
 
-describe("MIN Indicator", () => {
+describe("Min Indicator", () => {
     let taResultFile: string;
     let sourceData: any;
     let taResultData: any;
-    let indicator: indicators.MIN;
+    let indicator: indicators.Min;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
     const timePeriod = 30;
@@ -25,15 +25,15 @@ describe("MIN Indicator", () => {
 
     describe("when constructing", () => {
         beforeEach(() => {
-            indicator = new indicators.MIN(timePeriod);
+            indicator = new indicators.Min(timePeriod);
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.MIN.INDICATOR_NAME);
+            indicator.name.should.equal(indicators.Min.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.MIN.INDICATOR_DESCR);
+            indicator.description.should.equal(indicators.Min.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
@@ -43,7 +43,7 @@ describe("MIN Indicator", () => {
 
     describe("when constructing with explicit non default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MIN(timePeriod + 1);
+            indicator = new indicators.Min(timePeriod + 1);
         });
 
         it("should set the timePeriod", () => {
@@ -53,11 +53,11 @@ describe("MIN Indicator", () => {
 
     describe("when constructing with default arguments", () => {
         beforeEach(() => {
-            indicator = new indicators.MIN();
+            indicator = new indicators.Min();
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.MIN.TIMEPERIOD_DEFAULT);
+            indicator.timePeriod.should.equal(indicators.Min.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -66,21 +66,21 @@ describe("MIN Indicator", () => {
 
         beforeEach(() => {
             try {
-                indicator = new indicators.MIN(1);
+                indicator = new indicators.Min(1);
             } catch (error) {
                 exception = error;
             }
         });
 
         it("should return a correctly formatted error", () => {
-            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MIN.TIMEPERIOD_MIN, 1);
+            const message = indicators.generateMinTimePeriodError(indicator.name, indicators.Min.TIMEPERIOD_MIN, 1);
             exception.message.should.equal(message);
         });
     });
 
     describe("when receiving all tick data", () => {
         beforeEach(() => {
-            indicator = new indicators.MIN(timePeriod);
+            indicator = new indicators.Min(timePeriod);
             let idx = 0;
             sourceData.close.forEach((value: number) => {
                 if (indicator.receiveData(value)) {
@@ -104,7 +104,7 @@ describe("MIN Indicator", () => {
 
     describe("when receiving less tick data than the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MIN(timePeriod);
+            indicator = new indicators.Min(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
@@ -130,7 +130,7 @@ describe("MIN Indicator", () => {
 
     describe("when receiving tick data equal to the lookback period", () => {
         beforeEach(() => {
-            indicator = new indicators.MIN(timePeriod);
+            indicator = new indicators.Min(timePeriod);
             let idx = 0;
             indicatorOnDataRasied = false;
             indicator.on("data", () => {
