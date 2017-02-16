@@ -1,9 +1,9 @@
 import { EventEmitter } from "events";
-import { IIndicator } from "./Indicator";
+import { Indicator } from "./Indicator";
 
 export abstract class AbstractIndicatorBase<TInputType>
     extends EventEmitter
-    implements IIndicator<TInputType> {
+    implements Indicator<TInputType> {
     public readonly name: string;
     public readonly description: string;
     private isReadyInternal: boolean;

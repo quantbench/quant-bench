@@ -1,4 +1,4 @@
-export * from "./priceBar";
-export * from "./priceVolumeBar";
-export * from "./tradeBar";
+export * from "./PriceBar";
+export * from "./PriceVolumeBar";
+export * from "./TradeBar";
 

@@ -1,4 +1,4 @@
-import { PriceBar } from "./priceBar";
+import { PriceBar } from "./PriceBar";
 
 export interface PriceVolumeBar extends PriceBar {
     readonly open: number;

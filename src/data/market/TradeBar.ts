@@ -1,4 +1,4 @@
-import { PriceBar } from "./priceBar";
+import { PriceBar } from "./PriceBar";
 
 export interface TradeBar extends PriceBar {
     readonly symbol: string;

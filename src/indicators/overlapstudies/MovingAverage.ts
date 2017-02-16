@@ -12,7 +12,7 @@ export class MovingAverage
 
     public timePeriod: number;
     public maType: MA_TYPE;
-    private ma: indicators.INumericDataIndicator;
+    private ma: indicators.NumericDataIndicator;
 
     constructor(timePeriod: number = MovingAverage.TIMEPERIOD_DEFAULT, maType: MA_TYPE = MovingAverage.MATYPE_DEFAULT) {
         super(MovingAverage.INDICATOR_NAME, MovingAverage.INDICATOR_DESCR);

@@ -3,7 +3,7 @@ import * as marketData from "../../data/market/";
 
 export class AverageDirectionalIndex
     extends indicators.AbstractIndicator<marketData.PriceBar>
-    implements indicators.IIndicator<marketData.PriceBar> {
+    implements indicators.Indicator<marketData.PriceBar> {
 
     static INDICATOR_NAME: string = "ADX";
     static INDICATOR_DESCR: string = "Average Directional Movement Index";
