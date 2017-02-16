@@ -16,6 +16,11 @@ export class MinusDirectionalMovement
     private previousLow: number;
     private previousMinusDM: number;
 
+    private currentHigh: number;
+    private currentLow: number;
+    private diffP: number;
+    private diffM: number;
+
     constructor(timePeriod: number = MinusDirectionalMovement.TIMEPERIOD_DEFAULT) {
         super(MinusDirectionalMovement.INDICATOR_NAME, MinusDirectionalMovement.INDICATOR_DESCR);
 
@@ -28,22 +33,26 @@ export class MinusDirectionalMovement
         this.previousHigh = 0;
         this.previousLow = 0;
         this.previousMinusDM = 0;
+        this.currentHigh = 0;
+        this.currentLow = 0;
+        this.diffP = 0;
+        this.diffM = 0;
         this.timePeriod = timePeriod;
         this.setLookBack(timePeriod - 1);
     }
 
     receiveData(inputData: marketData.PriceBar): boolean {
         this.periodCounter += 1;
-        let high = inputData.high;
-        let low = inputData.low;
-        let diffP = high - this.previousHigh;
-        let diffM = this.previousLow - low;
+        this.currentHigh = inputData.high;
+        this.currentLow = inputData.low;
+        this.diffP = this.currentHigh - this.previousHigh;
+        this.diffM = this.previousLow - this.currentLow;
 
         if (this.lookback === 1) {
             if (this.periodCounter > 0) {
                 let result = 0;
-                if ((diffM > 0) && (diffP < diffM)) {
-                    result = diffM;
+                if ((this.diffM > 0) && (this.diffP < this.diffM)) {
+                    result = this.diffM;
                 } else {
                     result = 0;
                 }
@@ -53,19 +62,17 @@ export class MinusDirectionalMovement
         } else {
             if (this.periodCounter > 0) {
                 if (this.periodCounter < this.timePeriod) {
-                    if ((diffM > 0) && (diffP < diffM)) {
-                        this.previousMinusDM += diffM;
+                    if ((this.diffM > 0) && (this.diffP < this.diffM)) {
+                        this.previousMinusDM += this.diffM;
                     }
 
                     if (this.periodCounter === this.timePeriod - 1) {
-                        let result = this.previousMinusDM;
-
-                        this.setCurrentValue(result);
+                        this.setCurrentValue(this.previousMinusDM);
                     }
                 } else {
                     let result = 0;
-                    if ((diffM > 0) && (diffP < diffM)) {
-                        result = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + diffM;
+                    if ((this.diffM > 0) && (this.diffP < this.diffM)) {
+                        result = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + this.diffM;
                     } else {
                         result = this.previousMinusDM - (this.previousMinusDM / this.timePeriod);
                     }
@@ -77,8 +84,8 @@ export class MinusDirectionalMovement
             }
         }
 
-        this.previousHigh = high;
-        this.previousLow = low;
+        this.previousHigh = this.currentHigh;
+        this.previousLow = this.currentLow;
         return this.isReady;
     }
 }
