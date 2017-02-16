@@ -19,6 +19,13 @@ export class Aroon
     private periodHighHistory: indicators.Queue<number>;
     private periodLowHistory: indicators.Queue<number>;
 
+    private daysSinceHigh: number;
+    private daysSinceLow: number;
+    private highValue: number;
+    private highIdx: number;
+    private lowValue: number;
+    private lowIdx: number;
+
     constructor(timePeriod: number = Aroon.TIMEPERIOD_DEFAULT) {
         super(Aroon.INDICATOR_NAME, Aroon.INDICATOR_DESCR);
 
@@ -28,6 +35,13 @@ export class Aroon
 
         this.aroonUpInternal = 0;
         this.aroonDownInternal = 0;
+
+        this.daysSinceHigh = 0;
+        this.daysSinceLow = 0;
+        this.highValue = 0;
+        this.highIdx = 0;
+        this.lowValue = 0;
+        this.lowIdx = 0;
 
         this.timePeriod = timePeriod;
         this.periodCounter = (this.timePeriod + 1) * -1;
@@ -52,36 +66,36 @@ export class Aroon
             let aroonUp: number = 0;
             let aroonDown: number = 0;
 
-            let highValue = Number.MIN_VALUE;
-            let highIdx = -1;
+            this.highValue = Number.MIN_VALUE;
+            this.highIdx = -1;
             let i = (1 + this.lookback);
 
             this.periodHighHistory.toArray().forEach((value: number) => {
                 i--;
-                if (highValue <= value) {
-                    highValue = value;
-                    highIdx = i;
+                if (this.highValue <= value) {
+                    this.highValue = value;
+                    this.highIdx = i;
                 }
             });
 
-            let daysSinceHigh = highIdx;
+            this.daysSinceHigh = this.highIdx;
 
-            let lowValue = Number.MAX_VALUE;
-            let lowIdx = -1;
+            this.lowValue = Number.MAX_VALUE;
+            this.lowIdx = -1;
             i = (1 + this.lookback);
 
             this.periodLowHistory.toArray().forEach((value) => {
                 i--;
-                if (lowValue >= value) {
-                    lowValue = value;
-                    lowIdx = i;
+                if (this.lowValue >= value) {
+                    this.lowValue = value;
+                    this.lowIdx = i;
                 }
             });
 
-            let daysSinceLow = lowIdx;
+            this.daysSinceLow = this.lowIdx;
 
-            aroonUp = this.aroonFactor * (this.lookback - daysSinceHigh);
-            aroonDown = this.aroonFactor * (this.lookback - daysSinceLow);
+            aroonUp = this.aroonFactor * (this.lookback - this.daysSinceHigh);
+            aroonDown = this.aroonFactor * (this.lookback - this.daysSinceLow);
 
             this.setCurrentValue(aroonUp, aroonDown);
         }
