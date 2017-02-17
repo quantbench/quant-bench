@@ -47,15 +47,11 @@ export class DirectionalMovementIndex
     private receivePlusDIData(data: number) {
         this.currentPlusDI = data;
 
-        let result = 0;
-        let tmp = this.currentMinusDI + this.currentPlusDI;
-        if (tmp !== 0) {
-            result = 100 * (Math.abs(this.currentMinusDI - this.currentPlusDI) / tmp);
+        if (this.currentMinusDI + this.currentPlusDI !== 0) {
+            this.setCurrentValue(100 * (Math.abs(this.currentMinusDI - this.currentPlusDI) / (this.currentMinusDI + this.currentPlusDI)));
         } else {
-            result = 0;
+            this.setCurrentValue(0);
         }
-
-        this.setCurrentValue(result);
     }
 }
 
