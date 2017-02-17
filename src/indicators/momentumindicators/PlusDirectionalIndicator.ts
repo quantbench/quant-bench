@@ -18,6 +18,10 @@ export class PlusDirectionalIndicator
     private previousTrueRange: number;
     private currentTrueRange: number;
     private trueRange: indicators.TRANGE;
+    private currentHigh: number;
+    private currentLow: number;
+    private diffP: number;
+    private diffM: number;
 
     constructor(timePeriod: number = PlusDirectionalIndicator.TIMEPERIOD_DEFAULT) {
         super(PlusDirectionalIndicator.INDICATOR_NAME, PlusDirectionalIndicator.INDICATOR_DESCR);
@@ -34,6 +38,10 @@ export class PlusDirectionalIndicator
         this.previousPlusDM = 0;
         this.previousTrueRange = 0;
         this.currentTrueRange = 0;
+        this.currentHigh = 0;
+        this.currentLow = 0;
+        this.diffP = 0;
+        this.diffM = 0;
         this.timePeriod = timePeriod;
         this.setLookBack(timePeriod);
     }
@@ -44,19 +52,18 @@ export class PlusDirectionalIndicator
         this.trueRange.receiveData(inputData);
 
         this.periodCounter += 1;
-        let high = inputData.high;
-        let low = inputData.low;
-        let diffP = high - this.previousHigh;
-        let diffM = this.previousLow - low;
+        this.currentHigh = inputData.high;
+        this.currentLow = inputData.low;
+        this.diffP = this.currentHigh - this.previousHigh;
+        this.diffM = this.previousLow - this.currentLow;
 
         if (this.lookback === 1) {
             if (this.periodCounter > 0) {
-                // forward to the true range indicator first using previous data
                 this.trueRange.receiveData(inputData);
 
                 let result = 0;
-                if ((diffP > 0) && (diffP > diffM) && this.currentTrueRange !== 0) {
-                    result = diffP / this.currentTrueRange;
+                if ((this.diffP > 0) && (this.diffP > this.diffM) && this.currentTrueRange !== 0) {
+                    result = this.diffP / this.currentTrueRange;
                 } else {
                     result = 0;
                 }
@@ -66,15 +73,15 @@ export class PlusDirectionalIndicator
         } else {
             if (this.periodCounter > 0) {
                 if (this.periodCounter < this.timePeriod) {
-                    if ((diffP > 0) && (diffP > diffM)) {
-                        this.previousPlusDM += diffP;
+                    if ((this.diffP > 0) && (this.diffP > this.diffM)) {
+                        this.previousPlusDM += this.diffP;
                     }
                     this.previousTrueRange += this.currentTrueRange;
                 } else {
                     let result = 0;
                     this.previousTrueRange = this.previousTrueRange - (this.previousTrueRange / this.timePeriod) + this.currentTrueRange;
-                    if ((diffP > 0) && (diffP > diffM)) {
-                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + diffP;
+                    if ((this.diffP > 0) && (this.diffP > this.diffM)) {
+                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + this.diffP;
                     } else {
                         this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod);
                     }
@@ -90,8 +97,8 @@ export class PlusDirectionalIndicator
             }
         }
 
-        this.previousHigh = high;
-        this.previousLow = low;
+        this.previousHigh = this.currentHigh;
+        this.previousLow = this.currentLow;
 
         return this.isReady;
     }
