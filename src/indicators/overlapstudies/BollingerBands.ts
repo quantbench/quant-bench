@@ -70,9 +70,9 @@ export class BollingerBands
     }
 
     private receiveStdDevData(data: number) {
-        let upperBand = this.currentSma + 2 * data;
-        let lowerBand = this.currentSma - 2 * data;
-        this.setCurrentValue(upperBand, this.sma.currentValue, lowerBand);
+        // upperBand = this.currentSma + 2 * data;
+        // lowerBand = this.currentSma - 2 * data;
+        this.setCurrentValue(this.currentSma + 2 * data, this.sma.currentValue, this.currentSma - 2 * data);
     }
 }
 
