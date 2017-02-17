@@ -37,7 +37,7 @@ export abstract class LinearRegressionBase
         this.sumXSquare = this.timePeriod * timePeriodFMinusOne * (2 * this.timePeriod - 1) / 6;
         this.divisor = this.sumX * this.sumX - this.timePeriod * this.sumXSquare;
         this.sumXY = 0;
-        this.sumX = 0;
+        this.sumY = 0;
         this.i = 0;
         this.m = 0;
         this.b = 0;
