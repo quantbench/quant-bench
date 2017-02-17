@@ -109,14 +109,11 @@ export class MovingAverageConvergenceDivergence
         this.currentFastEma = data;
     }
 
-    private receiveEmaSignalData(data: number) {
+    private receiveEmaSignalData(signal: number) {
         // Macd Line: (12-day EmaWithoutStorage - 26-day EmaWithoutStorage)
         // Signal Line: 9-day EmaWithoutStorage of Macd Line
         // Macd Histogram: Macd Line - Signal Line
-        let macd: number = this.currentFastEma - this.currentSlowEma;
-        let signal: number = data;
-        let histogram: number = macd - signal;
-        this.setCurrentValue(macd, signal, histogram);
+        this.setCurrentValue(this.currentMacd, signal, this.currentMacd - signal);
     }
 }
 
