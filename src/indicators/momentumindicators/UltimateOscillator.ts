@@ -50,9 +50,9 @@ export class UltimateOscillator
         }
 
         // sort the time periods from shortest to longest
-        let periods: number[] = new Array(3);
-        let usedFlag: number[] = new Array(3);
-        let sortedPeriods: number[] = new Array(3);
+        const periods: number[] = new Array(3);
+        const usedFlag: number[] = new Array(3);
+        const sortedPeriods: number[] = new Array(3);
         let longestPeriod = 0;
         let longestIndex = 0;
         periods[0] = timePeriod1;
@@ -93,8 +93,7 @@ export class UltimateOscillator
         this.trSMA3 = new indicators.SMA(this.timePeriod3);
         this.trueRange = new indicators.TRANGE();
 
-        let maxPeriod = Math.max(Math.max(timePeriod1, timePeriod2), timePeriod3);
-        this.setLookBack(maxPeriod);
+        this.setLookBack(Math.max(Math.max(timePeriod1, timePeriod2), timePeriod3));
     }
 
     receiveData(inputData: marketData.PriceBar): boolean {
