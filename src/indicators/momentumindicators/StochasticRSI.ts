@@ -108,10 +108,8 @@ export class StochasticRSI
         this.minValue.receiveData(data);
 
         if (this.periodCounter >= 0) {
-            let diff = this.currentPeriodHigh - this.currentPeriodLow;
-
-            if (diff !== 0) {
-                this.currentFastK = 100.0 * ((this.currentRSI - this.currentPeriodLow) / diff);
+            if ((this.currentPeriodHigh - this.currentPeriodLow) !== 0) {
+                this.currentFastK = 100.0 * ((this.currentRSI - this.currentPeriodLow) / (this.currentPeriodHigh - this.currentPeriodLow));
             } else {
                 this.currentFastK = 0;
             }
