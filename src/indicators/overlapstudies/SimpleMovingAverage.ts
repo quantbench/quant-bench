@@ -33,8 +33,7 @@ export class SimpleMovingAverage
             this.periodHistory.enqueue(inputData);
             this.periodTotal += inputData;
         } else {
-            let valueToRemove: number = this.periodHistory.peek();
-            this.periodTotal = this.periodTotal - valueToRemove + inputData;
+            this.periodTotal = this.periodTotal - this.periodHistory.peek() + inputData;
             this.periodHistory.dequeue();
             this.periodHistory.enqueue(inputData);
         }
