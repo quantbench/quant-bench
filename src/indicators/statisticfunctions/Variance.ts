@@ -16,6 +16,10 @@ export class Variance
     private rollingSum: number;
     private rollingSumOfSquares: number;
 
+    private mean1: number;
+    private mean2: number;
+    private removed: number;
+
     constructor(timePeriod: number = Variance.TIMEPERIOD_DEFAULT) {
         super(Variance.INDICATOR_NAME, Variance.INDICATOR_DESCR);
 
@@ -28,6 +32,11 @@ export class Variance
         this.rollingSumOfSquares = 0;
         this.periodCounter = 0;
         this.periodHistory = new Queue<number>();
+
+        this.mean1 = 0;
+        this.mean2 = 0;
+        this.removed = 0;
+
         this.setLookBack(this.timePeriod - 1);
     }
 
@@ -43,13 +52,13 @@ export class Variance
 
         if (this.periodCounter === this.timePeriod) {
 
-            let mean1 = this.rollingSum / this.timePeriod;
-            let mean2 = this.rollingSumOfSquares / this.timePeriod;
-            let removed = this.periodHistory.dequeue();
-            this.rollingSum -= removed;
-            this.rollingSumOfSquares -= removed * removed;
+            this.mean1 = this.rollingSum / this.timePeriod;
+            this.mean2 = this.rollingSumOfSquares / this.timePeriod;
+            this.removed = this.periodHistory.dequeue();
+            this.rollingSum -= this.removed;
+            this.rollingSumOfSquares -= this.removed * this.removed;
 
-            this.setCurrentValue(mean2 - mean1 * mean1);
+            this.setCurrentValue(this.mean2 - this.mean1 * this.mean1);
             this.setIsReady();
         }
 
