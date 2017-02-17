@@ -61,14 +61,11 @@ export class PlusDirectionalIndicator
             if (this.periodCounter > 0) {
                 this.trueRange.receiveData(inputData);
 
-                let result = 0;
                 if ((this.diffP > 0) && (this.diffP > this.diffM) && this.currentTrueRange !== 0) {
-                    result = this.diffP / this.currentTrueRange;
+                    this.setCurrentValue(this.diffP / this.currentTrueRange);
                 } else {
-                    result = 0;
+                    this.setCurrentValue(0);
                 }
-
-                this.setCurrentValue(result);
             }
         } else {
             if (this.periodCounter > 0) {
@@ -78,7 +75,6 @@ export class PlusDirectionalIndicator
                     }
                     this.previousTrueRange += this.currentTrueRange;
                 } else {
-                    let result = 0;
                     this.previousTrueRange = this.previousTrueRange - (this.previousTrueRange / this.timePeriod) + this.currentTrueRange;
                     if ((this.diffP > 0) && (this.diffP > this.diffM)) {
                         this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + this.diffP;
@@ -87,12 +83,10 @@ export class PlusDirectionalIndicator
                     }
 
                     if (this.previousTrueRange !== 0) {
-                        result = 100.0 * this.previousPlusDM / this.previousTrueRange;
+                        this.setCurrentValue(100.0 * this.previousPlusDM / this.previousTrueRange);
                     } else {
-                        result = 0;
+                        this.setCurrentValue(0);
                     }
-
-                    this.setCurrentValue(result);
                 }
             }
         }
