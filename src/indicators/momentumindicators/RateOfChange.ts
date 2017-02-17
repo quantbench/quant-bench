@@ -36,12 +36,11 @@ export class RateOfChange
             // Roc = (price/previousPrice - 1) * 100
             this.previousPrice = this.periodHistory.peek();
 
-            let result = 0;
             if (this.previousPrice !== 0) {
-                result = 100 * ((inputData / this.previousPrice) - 1);
+                this.setCurrentValue(100 * ((inputData / this.previousPrice) - 1));
+            } else {
+                this.setCurrentValue(0);
             }
-
-            this.setCurrentValue(result);
         }
 
         if (this.periodHistory.count > this.timePeriod) {
