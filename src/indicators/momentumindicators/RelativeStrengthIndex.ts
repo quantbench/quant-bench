@@ -46,15 +46,12 @@ export class RelativeStrengthIndex
                 this.previousGain /= this.timePeriod;
                 this.previousLoss /= this.timePeriod;
 
-                let result = 0;
                 // Rsi = 100 * (prevGain / (prevGain + prevLoss))
                 if (this.previousGain + this.previousLoss === 0) {
-                    result = 0;
+                    this.setCurrentValue(0);
                 } else {
-                    result = 100 * (this.previousGain / (this.previousGain + this.previousLoss));
+                    this.setCurrentValue(100 * (this.previousGain / (this.previousGain + this.previousLoss)));
                 }
-
-                this.setCurrentValue(result);
             }
 
             if (this.periodCounter > 0) {
