@@ -7,6 +7,7 @@ export class KaufmanAdaptiveMovingAverage
     static INDICATOR_DESCR: string = "Kaufman Adaptive Moving Average";
     static TIMEPERIOD_DEFAULT: number = 30;
     static TIMEPERIOD_MIN: number = 2;
+    static epsilon = 0.00000000000001;
 
     public timePeriod: number;
     private periodHistory: indicators.Queue<number>;
@@ -17,6 +18,12 @@ export class KaufmanAdaptiveMovingAverage
     private periodROC: number;
     private previousClose: number;
     private previousKama: number;
+
+    private closeMinusN: number;
+    private closeMinusN1: number;
+    private er: number;
+    private sc: number;
+
 
     constructor(timePeriod: number = KaufmanAdaptiveMovingAverage.TIMEPERIOD_DEFAULT) {
         super(KaufmanAdaptiveMovingAverage.INDICATOR_NAME, KaufmanAdaptiveMovingAverage.INDICATOR_DESCR);
@@ -37,6 +44,11 @@ export class KaufmanAdaptiveMovingAverage
         this.previousClose = 0;
         this.previousKama = 0;
 
+        this.closeMinusN = 0;
+        this.closeMinusN1 = 0;
+        this.er = 0;
+        this.sc = 0;
+
         this.setLookBack(this.timePeriod);
     }
 
@@ -51,51 +63,47 @@ export class KaufmanAdaptiveMovingAverage
         }
 
         if (this.periodCounter === 0) {
-            let er = 0;
-            let sc = 0;
-            let closeMinusN = this.periodHistory.peek();
+            this.er = 0;
+            this.sc = 0;
+            this.closeMinusN = this.periodHistory.peek();
             this.previousKama = this.previousClose;
-            this.periodROC = inputData - closeMinusN;
+            this.periodROC = inputData - this.closeMinusN;
 
             // calculate the efficiency ratio
             if (this.sumROC <= this.periodROC || this.isZero(this.sumROC)) {
-                er = 1;
+                this.er = 1;
             } else {
-                er = Math.abs(this.periodROC / this.sumROC);
+                this.er = Math.abs(this.periodROC / this.sumROC);
             }
 
-            sc = (er * this.constantDiff) + this.constantMax;
-            sc *= sc;
-            this.previousKama = ((inputData - this.previousKama) * sc) + this.previousKama;
+            this.sc = (this.er * this.constantDiff) + this.constantMax;
+            this.sc *= this.sc;
+            this.previousKama = ((inputData - this.previousKama) * this.sc) + this.previousKama;
 
-            let result = this.previousKama;
-
-            this.setCurrentValue(result);
+            this.setCurrentValue(this.previousKama);
         } else if (this.periodCounter > 0) {
-            let er = 0;
-            let sc = 0;
-            let closeMinusN = this.periodHistory.peek();
-            let closeMinusN1 = this.periodHistory.toArray()[1];
+            this.er = 0;
+            this.sc = 0;
+            this.closeMinusN = this.periodHistory.peek();
+            this.closeMinusN1 = this.periodHistory.toArray()[1];
 
-            this.periodROC = inputData - closeMinusN1;
+            this.periodROC = inputData - this.closeMinusN1;
 
-            this.sumROC -= Math.abs(closeMinusN1 - closeMinusN);
+            this.sumROC -= Math.abs(this.closeMinusN1 - this.closeMinusN);
             this.sumROC += Math.abs(inputData - this.previousClose);
 
             // calculate the efficiency ratio
             if (this.sumROC <= this.periodROC || this.isZero(this.sumROC)) {
-                er = 1;
+                this.er = 1;
             } else {
-                er = Math.abs(this.periodROC / this.sumROC);
+                this.er = Math.abs(this.periodROC / this.sumROC);
             }
 
-            sc = (er * this.constantDiff) + this.constantMax;
-            sc *= sc;
-            this.previousKama = ((inputData - this.previousKama) * sc) + this.previousKama;
+            this.sc = (this.er * this.constantDiff) + this.constantMax;
+            this.sc *= this.sc;
+            this.previousKama = ((inputData - this.previousKama) * this.sc) + this.previousKama;
 
-            let result = this.previousKama;
-
-            this.setCurrentValue(result);
+            this.setCurrentValue(this.previousKama);
         }
 
         this.previousClose = inputData;
@@ -107,8 +115,7 @@ export class KaufmanAdaptiveMovingAverage
     }
 
     private isZero(value: number): boolean {
-        let epsilon = 0.00000000000001;
-        return (((-epsilon) < value) && (value < epsilon));
+        return (((-KaufmanAdaptiveMovingAverage.epsilon) < value) && (value < KaufmanAdaptiveMovingAverage.epsilon));
     }
 }
 

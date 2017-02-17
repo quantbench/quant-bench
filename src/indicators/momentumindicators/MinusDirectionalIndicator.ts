@@ -19,6 +19,11 @@ export class MinusDirectionalIndicator
     private currentTrueRange: number;
     private trueRange: indicators.TRANGE;
 
+    private currentHigh: number;
+    private currentLow: number;
+    private diffP: number;
+    private diffM: number;
+
     constructor(timePeriod: number = MinusDirectionalIndicator.TIMEPERIOD_DEFAULT) {
         super(MinusDirectionalIndicator.INDICATOR_NAME, MinusDirectionalIndicator.INDICATOR_DESCR);
 
@@ -34,6 +39,10 @@ export class MinusDirectionalIndicator
         this.previousMinusDM = 0;
         this.previousTrueRange = 0;
         this.currentTrueRange = 0;
+        this.currentHigh = 0;
+        this.currentLow = 0;
+        this.diffP = 0;
+        this.diffM = 0;
         this.timePeriod = timePeriod;
         this.setLookBack(timePeriod);
     }
@@ -44,54 +53,47 @@ export class MinusDirectionalIndicator
         this.trueRange.receiveData(inputData);
 
         this.periodCounter += 1;
-        let high = inputData.high;
-        let low = inputData.low;
-        let diffP = high - this.previousHigh;
-        let diffM = this.previousLow - low;
+        this.currentHigh = inputData.high;
+        this.currentLow = inputData.low;
+        this.diffP = this.currentHigh - this.previousHigh;
+        this.diffM = this.previousLow - this.currentLow;
 
         if (this.lookback === 1) {
             if (this.periodCounter > 0) {
-                // forward to the true range indicator first using previous data
                 this.trueRange.receiveData(inputData);
 
-                let result = 0;
-                if ((diffM > 0) && (diffP < diffM) && this.currentTrueRange !== 0) {
-                    result = diffM / this.currentTrueRange;
+                if ((this.diffM > 0) && (this.diffP < this.diffM) && this.currentTrueRange !== 0) {
+                    this.setCurrentValue(this.diffM / this.currentTrueRange);
                 } else {
-                    result = 0;
+                    this.setCurrentValue(0);
                 }
-
-                this.setCurrentValue(result);
             }
         } else {
             if (this.periodCounter > 0) {
                 if (this.periodCounter < this.timePeriod) {
-                    if ((diffM > 0) && (diffP < diffM)) {
-                        this.previousMinusDM += diffM;
+                    if ((this.diffM > 0) && (this.diffP < this.diffM)) {
+                        this.previousMinusDM += this.diffM;
                     }
                     this.previousTrueRange += this.currentTrueRange;
                 } else {
-                    let result = 0;
                     this.previousTrueRange = this.previousTrueRange - (this.previousTrueRange / this.timePeriod) + this.currentTrueRange;
-                    if ((diffM > 0) && (diffP < diffM)) {
-                        this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + diffM;
+                    if ((this.diffM > 0) && (this.diffP < this.diffM)) {
+                        this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + this.diffM;
                     } else {
                         this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod);
                     }
 
                     if (this.previousTrueRange !== 0) {
-                        result = 100.0 * this.previousMinusDM / this.previousTrueRange;
+                        this.setCurrentValue(100.0 * this.previousMinusDM / this.previousTrueRange);
                     } else {
-                        result = 0;
+                        this.setCurrentValue(0);
                     }
-
-                    this.setCurrentValue(result);
                 }
             }
         }
 
-        this.previousHigh = high;
-        this.previousLow = low;
+        this.previousHigh = this.currentHigh;
+        this.previousLow = this.currentLow;
 
         return this.isReady;
     }

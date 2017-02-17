@@ -15,6 +15,10 @@ export class PlusDirectionalMovement
     private previousHigh: number;
     private previousLow: number;
     private previousPlusDM: number;
+    private currentHigh: number;
+    private currentLow: number;
+    private diffP: number;
+    private diffM: number;
 
     constructor(timePeriod: number = PlusDirectionalMovement.TIMEPERIOD_DEFAULT) {
         super(PlusDirectionalMovement.INDICATOR_NAME, PlusDirectionalMovement.INDICATOR_DESCR);
@@ -27,6 +31,10 @@ export class PlusDirectionalMovement
         this.previousHigh = 0;
         this.previousLow = 0;
         this.previousPlusDM = 0;
+        this.currentHigh = 0;
+        this.currentLow = 0;
+        this.diffP = 0;
+        this.diffM = 0;
         this.timePeriod = timePeriod;
         this.setLookBack(timePeriod - 1);
     }
@@ -34,51 +42,43 @@ export class PlusDirectionalMovement
     receiveData(inputData: marketData.PriceBar): boolean {
 
         this.periodCounter += 1;
-        let high = inputData.high;
-        let low = inputData.low;
-        let diffP = high - this.previousHigh;
-        let diffM = this.previousLow - low;
+        this.currentHigh = inputData.high;
+        this.currentLow = inputData.low;
+        this.diffP = this.currentHigh - this.previousHigh;
+        this.diffM = this.previousLow - this.currentLow;
 
         if (this.lookback === 1) {
             if (this.periodCounter > 0) {
-                let result = 0;
-                if ((diffP > 0) && (diffP > diffM)) {
-                    result = diffP;
+                if ((this.diffP > 0) && (this.diffP > this.diffM)) {
+                    this.setCurrentValue(this.diffP);
                 } else {
-                    result = 0;
+                    this.setCurrentValue(0);
                 }
-
-                this.setCurrentValue(result);
             }
         } else {
             if (this.periodCounter > 0) {
                 if (this.periodCounter < this.timePeriod) {
-                    if ((diffP > 0) && (diffP > diffM)) {
-                        this.previousPlusDM += diffP;
+                    if ((this.diffP > 0) && (this.diffP > this.diffM)) {
+                        this.previousPlusDM += this.diffP;
                     }
 
                     if (this.periodCounter === this.timePeriod - 1) {
-                        let result = this.previousPlusDM;
-
-                        this.setCurrentValue(result);
+                        this.setCurrentValue(this.previousPlusDM);
                     }
                 } else {
-                    let result = 0;
-                    if ((diffP > 0) && (diffP > diffM)) {
-                        result = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + diffP;
+                    if ((this.diffP > 0) && (this.diffP > this.diffM)) {
+                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + this.diffP;
                     } else {
-                        result = this.previousPlusDM - (this.previousPlusDM / this.timePeriod);
+                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod);
                     }
 
-                    this.setCurrentValue(result);
-
-                    this.previousPlusDM = result;
+                    this.setCurrentValue(this.previousPlusDM);
                 }
             }
         }
 
-        this.previousHigh = high;
-        this.previousLow = low;
+        this.previousHigh = this.currentHigh;
+        this.previousLow = this.currentLow;
 
         return this.isReady;
     }

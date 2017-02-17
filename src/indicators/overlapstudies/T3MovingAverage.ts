@@ -27,6 +27,10 @@ export class T3MovingAverage
     private periodHistory: indicators.Queue<number>;
     private periodCounter: number;
 
+    private historyData: number[];
+    private historyIter: number;
+    private temp: number;
+
     constructor(timePeriod: number = T3MovingAverage.TIMEPERIOD_DEFAULT, volumeFactor: number =
         T3MovingAverage.VOLUMEFACTOR_DEFAULT) {
         super(T3MovingAverage.INDICATOR_NAME, T3MovingAverage.INDICATOR_DESCR);
@@ -56,12 +60,14 @@ export class T3MovingAverage
         this.e4 = 0;
         this.e5 = 0;
         this.e6 = 0;
+        this.historyIter = 0;
+        this.temp = 0;
 
-        let temp: number = volumeFactor * volumeFactor;
-        this.c1 = -(temp * volumeFactor);
-        this.c2 = 3.0 * (temp - this.c1);
-        this.c3 = -6.0 * temp - 3.0 * (volumeFactor - this.c1);
-        this.c4 = 1.0 + 3.0 * volumeFactor - this.c1 + 3.0 * temp;
+        const tempVal: number = volumeFactor * volumeFactor;
+        this.c1 = -(tempVal * volumeFactor);
+        this.c2 = 3.0 * (tempVal - this.c1);
+        this.c3 = -6.0 * tempVal - 3.0 * (volumeFactor - this.c1);
+        this.c4 = 1.0 + 3.0 * volumeFactor - this.c1 + 3.0 * tempVal;
 
         this.setLookBack(6 * (this.timePeriod - 1));
     }
@@ -71,72 +77,72 @@ export class T3MovingAverage
 
         if (this.periodCounter === this.lookback + 1) {
             this.periodHistory.enqueue(inputData);
-            let temp: number = 0;
+            this.temp = 0;
 
-            let data = this.periodHistory.toArray();
-            let iter = 0;
+            this.historyData = this.periodHistory.toArray();
+            this.historyIter = 0;
 
             // init e1
-            temp = data[iter++];
+            this.temp = this.historyData[this.historyIter++];
             for (let i = this.timePeriod - 1; i > 0; i--) {
-                temp += data[iter++];
+                this.temp += this.historyData[this.historyIter++];
             };
-            this.e1 = temp / this.timePeriod;
+            this.e1 = this.temp / this.timePeriod;
 
             // init e2
-            temp = this.e1;
+            this.temp = this.e1;
             for (let i = this.timePeriod - 1; i > 0; i--) {
-                this.e1 = (this.k * data[iter++]) + (this.oneMinusK * this.e1);
-                temp += this.e1;
+                this.e1 = (this.k * this.historyData[this.historyIter++]) + (this.oneMinusK * this.e1);
+                this.temp += this.e1;
             };
-            this.e2 = temp / this.timePeriod;
+            this.e2 = this.temp / this.timePeriod;
 
             // init e3
-            temp = this.e2;
+            this.temp = this.e2;
             for (let i = this.timePeriod - 1; i > 0; i--) {
-                this.e1 = (this.k * data[iter++]) + (this.oneMinusK * this.e1);
+                this.e1 = (this.k * this.historyData[this.historyIter++]) + (this.oneMinusK * this.e1);
                 this.e2 = (this.k * this.e1) + (this.oneMinusK * this.e2);
-                temp += this.e2;
+                this.temp += this.e2;
             };
 
-            this.e3 = temp / this.timePeriod;
+            this.e3 = this.temp / this.timePeriod;
 
             // init e4
-            temp = this.e3;
+            this.temp = this.e3;
             for (let i = this.timePeriod - 1; i > 0; i--) {
-                this.e1 = (this.k * data[iter++]) + (this.oneMinusK * this.e1);
+                this.e1 = (this.k * this.historyData[this.historyIter++]) + (this.oneMinusK * this.e1);
                 this.e2 = (this.k * this.e1) + (this.oneMinusK * this.e2);
                 this.e3 = (this.k * this.e2) + (this.oneMinusK * this.e3);
-                temp += this.e3;
+                this.temp += this.e3;
             }
 
-            this.e4 = temp / this.timePeriod;
+            this.e4 = this.temp / this.timePeriod;
 
             // init e5
-            temp = this.e4;
+            this.temp = this.e4;
             for (let i = this.timePeriod - 1; i > 0; i--) {
-                this.e1 = (this.k * data[iter++]) + (this.oneMinusK * this.e1);
+                this.e1 = (this.k * this.historyData[this.historyIter++]) + (this.oneMinusK * this.e1);
                 this.e2 = (this.k * this.e1) + (this.oneMinusK * this.e2);
                 this.e3 = (this.k * this.e2) + (this.oneMinusK * this.e3);
                 this.e4 = (this.k * this.e3) + (this.oneMinusK * this.e4);
-                temp += this.e4;
+                this.temp += this.e4;
             }
-            this.e5 = temp / this.timePeriod;
+            this.e5 = this.temp / this.timePeriod;
 
             // init e6
-            temp = this.e5;
+            this.temp = this.e5;
             for (let i = this.timePeriod - 1; i > 0; i--) {
-                this.e1 = (this.k * data[iter++]) + (this.oneMinusK * this.e1);
+                this.e1 = (this.k * this.historyData[this.historyIter++]) + (this.oneMinusK * this.e1);
                 this.e2 = (this.k * this.e1) + (this.oneMinusK * this.e2);
                 this.e3 = (this.k * this.e2) + (this.oneMinusK * this.e3);
                 this.e4 = (this.k * this.e3) + (this.oneMinusK * this.e4);
                 this.e5 = (this.k * this.e4) + (this.oneMinusK * this.e5);
-                temp += this.e5;
+                this.temp += this.e5;
             }
-            this.e6 = temp / this.timePeriod;
+            this.e6 = this.temp / this.timePeriod;
 
-            while (iter < this.lookback - 1) {
-                this.e1 = (this.k * data[iter++]) + (this.oneMinusK * this.e1);
+            while (this.historyIter < this.lookback - 1) {
+                this.e1 = (this.k * this.historyData[this.historyIter++]) + (this.oneMinusK * this.e1);
                 this.e2 = (this.k * this.e1) + (this.oneMinusK * this.e2);
                 this.e3 = (this.k * this.e2) + (this.oneMinusK * this.e3);
                 this.e4 = (this.k * this.e3) + (this.oneMinusK * this.e4);

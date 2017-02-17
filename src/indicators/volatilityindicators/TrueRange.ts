@@ -7,14 +7,19 @@ export class TrueRange
     static INDICATOR_NAME: string = "TRANGE";
     static INDICATOR_DESCR: string = "True Range";
 
-    previousClose: number;
-    periodCounter: number;
+    private previousClose: number;
+    private periodCounter: number;
+
+    private high: number;
+    private low: number;
 
     constructor() {
         super(TrueRange.INDICATOR_NAME, TrueRange.INDICATOR_DESCR);
 
         this.previousClose = 0;
         this.periodCounter = -1;
+        this.high = 0;
+        this.low = 0;
         this.setLookBack(1);
     }
 
@@ -23,9 +28,9 @@ export class TrueRange
         this.periodCounter++;
 
         if (this.periodCounter > 0) {
-            let high: number = inputData.high > this.previousClose ? inputData.high : this.previousClose;
-            let low: number = inputData.low < this.previousClose ? inputData.low : this.previousClose;
-            this.setCurrentValue(high - low);
+            this.high = inputData.high > this.previousClose ? inputData.high : this.previousClose;
+            this.low = inputData.low < this.previousClose ? inputData.low : this.previousClose;
+            this.setCurrentValue(this.high - this.low);
         }
         this.previousClose = inputData.close;
 

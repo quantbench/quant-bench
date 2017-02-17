@@ -13,6 +13,14 @@ export abstract class LinearRegressionBase
     private sumXSquare: number;
     private divisor: number;
 
+    private sumXY: number;
+    private sumY: number;
+    private i: number;
+    private history: number[];
+    private m: number;
+    private b: number;
+    private e: number;
+
     constructor(name: string, description: string, timePeriod: number) {
         super(name, description);
 
@@ -24,10 +32,17 @@ export abstract class LinearRegressionBase
         this.periodCounter = timePeriod * -1;
         this.periodHistory = new indicators.Queue<number>();
 
-        let timePeriodFMinusOne = this.timePeriod - 1;
+        const timePeriodFMinusOne = this.timePeriod - 1;
         this.sumX = this.timePeriod * timePeriodFMinusOne * 0.5;
         this.sumXSquare = this.timePeriod * timePeriodFMinusOne * (2 * this.timePeriod - 1) / 6;
         this.divisor = this.sumX * this.sumX - this.timePeriod * this.sumXSquare;
+        this.sumXY = 0;
+        this.sumY = 0;
+        this.i = 0;
+        this.m = 0;
+        this.b = 0;
+        this.e = 0;
+        this.history = [];
 
         this.setLookBack(this.timePeriod - 1);
     }
@@ -36,28 +51,26 @@ export abstract class LinearRegressionBase
         this.periodCounter += 1;
 
         if (this.periodCounter >= 0) {
-            let sumXY = 0;
-            let sumY = 0;
-            let i = this.timePeriod;
+            this.sumXY = 0;
+            this.sumY = 0;
+            this.i = this.timePeriod;
 
-            let history = this.periodHistory.toArray();
-            for (let y = 0; y < history.length; y++) {
-                let e = history[y];
-                if (e === 0) {
+            this.history = this.periodHistory.toArray();
+            for (let y = 0; y < this.history.length; y++) {
+                this.e = this.history[y];
+                if (this.e === 0) {
                     break;
                 }
 
-                i--;
-                sumY += e;
-                sumXY += i * e;
+                this.i--;
+                this.sumY += this.e;
+                this.sumXY += this.i * this.e;
             }
 
-            sumY += inputData;
-            let m = (this.timePeriod * sumXY - this.sumX * sumY) / this.divisor;
-            let b = (sumY - m * this.sumX) / this.timePeriod;
-            let result = this.calculateResult(m, b);
-
-            this.setCurrentValue(result);
+            this.sumY += inputData;
+            this.m = (this.timePeriod * this.sumXY - this.sumX * this.sumY) / this.divisor;
+            this.b = (this.sumY - this.m * this.sumX) / this.timePeriod;
+            this.setCurrentValue(this.calculateResult(this.m, this.b));
         }
 
         this.periodHistory.enqueue(inputData);

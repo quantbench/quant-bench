@@ -69,7 +69,6 @@ export class ParabolicStopAndReverse
             }
 
             if (this.periodCounter >= 0) {
-                let result: number = 0;
                 if (this.isLong) {
                     if (inputData.low <= this.previousSar) {
                         // switch to short if the low penetrates the Sar value
@@ -84,17 +83,14 @@ export class ParabolicStopAndReverse
                             this.previousSar = inputData.high;
                         }
 
-                        result = this.previousSar;
-
-                        this.setCurrentValue(result);
+                        this.setCurrentValue(this.previousSar);
 
                         // adjust af and extremePoint
                         this.acceleration = this.accelerationFactor;
                         this.extremePoint = inputData.low;
 
                         // calculate the new Sar
-                        let diff = this.extremePoint - this.previousSar;
-                        this.previousSar = this.previousSar + this.acceleration * (diff);
+                        this.previousSar = this.previousSar + this.acceleration * (this.extremePoint - this.previousSar);
 
                         // make sure the overridden Sar is within yesterdays and todays range
                         if (this.previousSar < this.previousHigh) {
@@ -108,9 +104,7 @@ export class ParabolicStopAndReverse
                         // no switch
 
                         // just output the current Sar
-                        result = this.previousSar;
-
-                        this.setCurrentValue(result);
+                        this.setCurrentValue(this.previousSar);
 
                         if (inputData.high > this.extremePoint) {
                             // adjust af and extremePoint
@@ -122,8 +116,7 @@ export class ParabolicStopAndReverse
                         }
 
                         // calculate the new Sar
-                        let diff = this.extremePoint - this.previousSar;
-                        this.previousSar = this.previousSar + this.acceleration * (diff);
+                        this.previousSar = this.previousSar + this.acceleration * (this.extremePoint - this.previousSar);
 
                         // make sure the overridden Sar is within yesterdays and todays range
                         if (this.previousSar > this.previousLow) {
@@ -148,17 +141,14 @@ export class ParabolicStopAndReverse
                             this.previousSar = inputData.low;
                         }
 
-                        result = this.previousSar;
-
-                        this.setCurrentValue(result);
+                        this.setCurrentValue(this.previousSar);
 
                         // adjust af and extremePoint
                         this.acceleration = this.accelerationFactor;
                         this.extremePoint = inputData.high;
 
                         // calculate the new Sar
-                        let diff = this.extremePoint - this.previousSar;
-                        this.previousSar = this.previousSar + this.acceleration * (diff);
+                        this.previousSar = this.previousSar + this.acceleration * (this.extremePoint - this.previousSar);
 
                         // make sure the overridden Sar is within yesterdays and todays range
                         if (this.previousSar > this.previousLow) {
@@ -171,9 +161,7 @@ export class ParabolicStopAndReverse
                         // no switch
 
                         // just output the current Sar
-                        result = this.previousSar;
-
-                        this.setCurrentValue(result);
+                        this.setCurrentValue(this.previousSar);
 
                         if (inputData.low < this.extremePoint) {
                             // adjust af and extremePoint
@@ -185,8 +173,7 @@ export class ParabolicStopAndReverse
                         }
 
                         // calculate the new Sar
-                        let diff = this.extremePoint - this.previousSar;
-                        this.previousSar = this.previousSar + this.acceleration * (diff);
+                        this.previousSar = this.previousSar + this.acceleration * (this.extremePoint - this.previousSar);
 
                         // make sure the overridden Sar is within yesterdays and todays range
                         if (this.previousSar < this.previousHigh) {

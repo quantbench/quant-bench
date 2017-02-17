@@ -10,6 +10,8 @@ export class AverageDeviation
 
     public timePeriod: number;
 
+    private sum: number;
+    private deviation: number;
     private periodHistory: indicators.Queue<number>;
 
     constructor(timePeriod: number = AverageDeviation.TIMEPERIOD_DEFAULT) {
@@ -19,6 +21,8 @@ export class AverageDeviation
             throw (new Error(indicators.generateMinTimePeriodError(this.name, AverageDeviation.TIMEPERIOD_MIN, timePeriod)));
         }
 
+        this.sum = 0;
+        this.deviation = 0;
         this.timePeriod = timePeriod;
         this.periodHistory = new indicators.Queue<number>();
         this.setLookBack(this.timePeriod - 1);
@@ -31,16 +35,16 @@ export class AverageDeviation
             if (this.periodHistory.count > this.timePeriod) {
                 this.periodHistory.dequeue();
             }
-            let sum = 0;
+            this.sum = 0;
             this.periodHistory.toArray().forEach((value) => {
-                sum += value;
+                this.sum += value;
             });
-            let deviation = 0;
+            this.deviation = 0;
             this.periodHistory.toArray().forEach((value) => {
-                deviation += Math.abs(value - sum / this.timePeriod);
+                this.deviation += Math.abs(value - this.sum / this.timePeriod);
             });
 
-            this.setCurrentValue(deviation / this.timePeriod);
+            this.setCurrentValue(this.deviation / this.timePeriod);
 
             this.periodHistory.dequeue();
         }

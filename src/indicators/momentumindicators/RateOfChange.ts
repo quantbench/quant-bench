@@ -11,6 +11,7 @@ export class RateOfChange
     public timePeriod: number;
     private periodHistory: indicators.Queue<number>;
     private periodCounter: number;
+    private previousPrice: number;
 
     constructor(timePeriod: number = RateOfChange.TIMEPERIOD_DEFAULT) {
         super(RateOfChange.INDICATOR_NAME, RateOfChange.INDICATOR_DESCR);
@@ -19,6 +20,7 @@ export class RateOfChange
             throw (new Error(indicators.generateMinTimePeriodError(this.name, RateOfChange.TIMEPERIOD_MIN, timePeriod)));
         }
 
+        this.previousPrice = 0;
         this.timePeriod = timePeriod;
         this.periodCounter = timePeriod * -1;
         this.periodHistory = new indicators.Queue<number>();
@@ -32,14 +34,13 @@ export class RateOfChange
 
         if (this.periodCounter > 0) {
             // Roc = (price/previousPrice - 1) * 100
-            let previousPrice = this.periodHistory.peek();
+            this.previousPrice = this.periodHistory.peek();
 
-            let result = 0;
-            if (previousPrice !== 0) {
-                result = 100 * ((inputData / previousPrice) - 1);
+            if (this.previousPrice !== 0) {
+                this.setCurrentValue(100 * ((inputData / this.previousPrice) - 1));
+            } else {
+                this.setCurrentValue(0);
             }
-
-            this.setCurrentValue(result);
         }
 
         if (this.periodHistory.count > this.timePeriod) {

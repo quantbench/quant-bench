@@ -15,6 +15,8 @@ export class ChandeMomentumOscillator
     private previousGain: number;
     private previousLoss: number;
 
+    private currentMomentum: number;
+
     constructor(timePeriod: number = ChandeMomentumOscillator.TIMEPERIOD_DEFAULT) {
         super(ChandeMomentumOscillator.INDICATOR_NAME, ChandeMomentumOscillator.INDICATOR_DESCR);
 
@@ -26,6 +28,7 @@ export class ChandeMomentumOscillator
         this.previousClose = 0;
         this.previousGain = 0;
         this.previousLoss = 0;
+        this.currentMomentum = 0;
         this.periodCounter = (timePeriod * -1) - 1;
         this.setLookBack(this.timePeriod);
     }
@@ -47,15 +50,15 @@ export class ChandeMomentumOscillator
                 this.previousGain /= this.timePeriod;
                 this.previousLoss /= this.timePeriod;
 
-                let result = 0;
+                this.currentMomentum = 0;
                 // CMO = 100 * ((prevGain - prevLoss)  / (prevGain + prevLoss))
                 if (this.previousGain + this.previousLoss === 0) {
-                    result = 0;
+                    this.currentMomentum = 0;
                 } else {
-                    result = 100 * ((this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
+                    this.currentMomentum = 100 * ((this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
                 }
 
-                this.setCurrentValue(result);
+                this.setCurrentValue(this.currentMomentum);
             }
 
             if (this.periodCounter > 0) {
@@ -71,15 +74,15 @@ export class ChandeMomentumOscillator
                 this.previousGain /= this.timePeriod;
                 this.previousLoss /= this.timePeriod;
 
-                let result = 0;
+                this.currentMomentum = 0;
                 // Rsi = 100 * (prevGain / (prevGain + prevLoss))
                 if (this.previousGain + this.previousLoss === 0) {
-                    result = 0;
+                    this.currentMomentum = 0;
                 } else {
-                    result = 100 * ((this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
+                    this.currentMomentum = 100 * ((this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
                 }
 
-                this.setCurrentValue(result);
+                this.setCurrentValue(this.currentMomentum);
             }
         }
         this.previousClose = inputData;

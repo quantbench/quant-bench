@@ -32,11 +32,7 @@ export class Momentum
 
         if (this.periodCounter > 0) {
             // Mom = price - previousPrice
-            let previousPrice = this.periodHistory.peek();
-
-            let result = inputData - previousPrice;
-
-            this.setCurrentValue(result);
+            this.setCurrentValue(inputData - this.periodHistory.peek());
         }
 
         if (this.periodHistory.count > this.timePeriod) {

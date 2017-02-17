@@ -15,6 +15,9 @@ export class WeightedMovingAverage
     private periodCounter: number;
     private periodWeightTotal: number;
 
+    private iter: number;
+    private sum: number;
+
     constructor(timePeriod: number = WeightedMovingAverage.TIMEPERIOD_DEFAULT) {
         super(WeightedMovingAverage.INDICATOR_NAME, WeightedMovingAverage.INDICATOR_DESCR);
 
@@ -25,6 +28,9 @@ export class WeightedMovingAverage
         this.timePeriod = timePeriod;
         this.periodCounter = timePeriod * -1;
         this.periodHistory = new Queue<number>();
+
+        this.iter = 0;
+        this.sum = 0;
 
         let weightedTotal = 0;
         for (let i = 1; i <= timePeriod; i++) {
@@ -45,19 +51,19 @@ export class WeightedMovingAverage
 
         if (this.periodCounter >= 0) {
             // calculate the ind
-            let iter: number = 1;
-            let sum = 0;
+            this.iter = 1;
+            this.sum = 0;
 
             this.periodHistory.toArray().forEach((item) => {
                 let localSum = 0;
-                for (let i = 1; i <= iter; i++) {
+                for (let i = 1; i <= this.iter; i++) {
                     localSum += item;
                 }
-                sum += localSum;
-                iter++;
+                this.sum += localSum;
+                this.iter++;
             });
 
-            this.setCurrentValue(sum / this.periodWeightTotal);
+            this.setCurrentValue(this.sum / this.periodWeightTotal);
         }
 
         return this.isReady;

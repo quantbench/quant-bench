@@ -31,9 +31,7 @@ export class StandardDeviation
     }
 
     receiveVarianceData(data: number) {
-        let variance = this.variance.currentValue;
-        let result: number = Math.sqrt(variance);
-        this.setCurrentValue(result);
+        this.setCurrentValue(Math.sqrt(this.variance.currentValue));
     }
 }
 

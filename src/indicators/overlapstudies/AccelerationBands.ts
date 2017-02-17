@@ -18,6 +18,9 @@ export class AccelerationBands
     private upperSMA: indicators.SMA;
     private middleSMA: indicators.SMA;
     private lowerSMA: indicators.SMA;
+    private highPlusLow: number;
+    private highMinusLow: number;
+    private tempReal: number;
 
     constructor(timePeriod: number = AccelerationBands.TIMEPERIOD_DEFAULT) {
         super(AccelerationBands.INDICATOR_NAME, AccelerationBands.INDICATOR_DESCR);
@@ -30,6 +33,10 @@ export class AccelerationBands
         this.middleBandInternal = 0;
         this.lowerBandInternal = 0;
 
+        this.highPlusLow = 0;
+        this.highMinusLow = 0;
+        this.tempReal = 0;
+
         this.timePeriod = timePeriod;
         this.upperSMA = new indicators.SMA(this.timePeriod);
         this.middleSMA = new indicators.SMA(this.timePeriod);
@@ -38,14 +45,14 @@ export class AccelerationBands
     }
 
     receiveData(inputData: marketData.PriceBar): boolean {
-        let highPlusLow = inputData.high + inputData.low;
-        let highMinusLow = inputData.high - inputData.low;
-        let tempReal = 4 * highMinusLow / highPlusLow;
+        this.highPlusLow = inputData.high + inputData.low;
+        this.highMinusLow = inputData.high - inputData.low;
+        this.tempReal = 4 * this.highMinusLow / this.highPlusLow;
 
         this.middleSMA.receiveData(inputData.close);
-        if (highPlusLow > 0) {
-            this.upperSMA.receiveData(inputData.high * (1 + tempReal));
-            this.lowerSMA.receiveData(inputData.low * (1 - tempReal));
+        if (this.highPlusLow > 0) {
+            this.upperSMA.receiveData(inputData.high * (1 + this.tempReal));
+            this.lowerSMA.receiveData(inputData.low * (1 - this.tempReal));
         } else {
             this.upperSMA.receiveData(inputData.high);
             this.lowerSMA.receiveData(inputData.low);

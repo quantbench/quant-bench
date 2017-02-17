@@ -38,11 +38,10 @@ export class CommodityChannelIndex
         this.periodCounter += 1;
 
         // calculate the typical price
-        let typicalPrice = (inputData.high + inputData.low + inputData.close) / 3;
-        this.currentTypicalPrice = typicalPrice;
+        this.currentTypicalPrice = (inputData.high + inputData.low + inputData.close) / 3;
 
         // push it to the history
-        this.typicalPriceHistory.enqueue(typicalPrice);
+        this.typicalPriceHistory.enqueue(this.currentTypicalPrice);
 
         // trim the history
         if (this.typicalPriceHistory.count > this.timePeriod) {
@@ -50,7 +49,7 @@ export class CommodityChannelIndex
         }
 
         // add it to the average
-        this.sma.receiveData(typicalPrice);
+        this.sma.receiveData(this.currentTypicalPrice);
 
         return this.isReady;
     }

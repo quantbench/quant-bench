@@ -17,9 +17,7 @@ export class AccumulationDistributionLine
     }
 
     receiveData(inputData: marketData.PriceVolumeBar): boolean {
-        let highLow = inputData.high - inputData.low;
-
-        if (highLow > 0) {
+        if ((inputData.high - inputData.low) > 0) {
             this.currentADL += ((inputData.close - inputData.low) - (inputData.high - inputData.close)) /
                 (inputData.high - inputData.low) * inputData.volume;
         }
