@@ -23,15 +23,18 @@ export class AccumulationDistributionOscillator
     private oneMinusSlowK: number;
     private periodCounter: number;
 
-    constructor(slowTimePeriod: number = AccumulationDistributionOscillator.SLOW_TIMEPERIOD_DEFAULT, fastTimePeriod: number = AccumulationDistributionOscillator.FAST_TIMEPERIOD_DEFAULT) {
+    constructor(slowTimePeriod: number = AccumulationDistributionOscillator.SLOW_TIMEPERIOD_DEFAULT,
+        fastTimePeriod: number = AccumulationDistributionOscillator.FAST_TIMEPERIOD_DEFAULT) {
         super(AccumulationDistributionOscillator.INDICATOR_NAME, AccumulationDistributionOscillator.INDICATOR_DESCR);
 
         if (slowTimePeriod < AccumulationDistributionOscillator.SLOW_TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, AccumulationDistributionOscillator.SLOW_TIMEPERIOD_MIN, slowTimePeriod)));
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AccumulationDistributionOscillator.SLOW_TIMEPERIOD_MIN,
+                slowTimePeriod)));
         }
 
         if (fastTimePeriod < AccumulationDistributionOscillator.FAST_TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, AccumulationDistributionOscillator.FAST_TIMEPERIOD_MIN, fastTimePeriod)));
+            throw (new Error(indicators.generateMinTimePeriodError(this.name, AccumulationDistributionOscillator.FAST_TIMEPERIOD_MIN,
+                fastTimePeriod)));
         }
 
         this.slowTimePeriod = slowTimePeriod;
