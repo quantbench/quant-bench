@@ -62,14 +62,11 @@ export class MinusDirectionalIndicator
             if (this.periodCounter > 0) {
                 this.trueRange.receiveData(inputData);
 
-                let result = 0;
                 if ((this.diffM > 0) && (this.diffP < this.diffM) && this.currentTrueRange !== 0) {
-                    result = this.diffM / this.currentTrueRange;
+                    this.setCurrentValue(this.diffM / this.currentTrueRange);
                 } else {
-                    result = 0;
+                    this.setCurrentValue(0);
                 }
-
-                this.setCurrentValue(result);
             }
         } else {
             if (this.periodCounter > 0) {
@@ -79,7 +76,6 @@ export class MinusDirectionalIndicator
                     }
                     this.previousTrueRange += this.currentTrueRange;
                 } else {
-                    let result = 0;
                     this.previousTrueRange = this.previousTrueRange - (this.previousTrueRange / this.timePeriod) + this.currentTrueRange;
                     if ((this.diffM > 0) && (this.diffP < this.diffM)) {
                         this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + this.diffM;
@@ -88,12 +84,10 @@ export class MinusDirectionalIndicator
                     }
 
                     if (this.previousTrueRange !== 0) {
-                        result = 100.0 * this.previousMinusDM / this.previousTrueRange;
+                        this.setCurrentValue(100.0 * this.previousMinusDM / this.previousTrueRange);
                     } else {
-                        result = 0;
+                        this.setCurrentValue(0);
                     }
-
-                    this.setCurrentValue(result);
                 }
             }
         }
