@@ -35,7 +35,6 @@ export class RateOfChangeRatio100
             // RocR100 = (price/previousPrice - 1) * 100
             this.previousPrice = this.periodHistory.peek();
 
-
             if (this.previousPrice !== 0) {
                 this.setCurrentValue((inputData / this.previousPrice) * 100);
             } else {
