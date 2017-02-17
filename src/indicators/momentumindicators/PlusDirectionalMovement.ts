@@ -49,14 +49,11 @@ export class PlusDirectionalMovement
 
         if (this.lookback === 1) {
             if (this.periodCounter > 0) {
-                let result = 0;
                 if ((this.diffP > 0) && (this.diffP > this.diffM)) {
-                    result = this.diffP;
+                    this.setCurrentValue(this.diffP);
                 } else {
-                    result = 0;
+                    this.setCurrentValue(0);
                 }
-
-                this.setCurrentValue(result);
             }
         } else {
             if (this.periodCounter > 0) {
@@ -69,16 +66,13 @@ export class PlusDirectionalMovement
                         this.setCurrentValue(this.previousPlusDM);
                     }
                 } else {
-                    let result = 0;
                     if ((this.diffP > 0) && (this.diffP > this.diffM)) {
-                        result = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + this.diffP;
+                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + this.diffP;
                     } else {
-                        result = this.previousPlusDM - (this.previousPlusDM / this.timePeriod);
+                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod);
                     }
 
-                    this.setCurrentValue(result);
-
-                    this.previousPlusDM = result;
+                    this.setCurrentValue(this.previousPlusDM);
                 }
             }
         }
