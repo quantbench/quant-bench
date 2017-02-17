@@ -19,6 +19,7 @@ export class MoneyFlowIndex
     private negativeHistory: indicators.Queue<number>;
     private previousTypPrice: number;
     private currentVolume: number;
+    private currentMoneyFlow: number;
 
     constructor(timePeriod: number = MoneyFlowIndex.TIMEPERIOD_DEFAULT) {
         super(MoneyFlowIndex.INDICATOR_NAME, MoneyFlowIndex.INDICATOR_DESCR);
@@ -35,6 +36,7 @@ export class MoneyFlowIndex
         this.negativeHistory = new indicators.Queue<number>();
         this.previousTypPrice = 0;
         this.currentVolume = 0;
+        this.currentMoneyFlow = 0;
         this.typPrice = new indicators.TypicalPrice();
         this.typPrice.on("data", (data: number) => { this.receiveTYPPRICEData(data); });
         this.setLookBack(timePeriod);
@@ -50,17 +52,17 @@ export class MoneyFlowIndex
         this.periodCounter += 1;
 
         if (this.periodCounter > (this.timePeriod * -1)) {
-            let moneyFlow = data * this.currentVolume;
+            this.currentMoneyFlow = data * this.currentVolume;
 
             if (this.periodCounter <= 0) {
                 if (data > this.previousTypPrice) {
-                    this.positiveMoneyFlow += moneyFlow;
-                    this.positiveHistory.enqueue(moneyFlow);
+                    this.positiveMoneyFlow += this.currentMoneyFlow;
+                    this.positiveHistory.enqueue(this.currentMoneyFlow);
                     this.negativeHistory.enqueue(0);
                 } else if (data < this.previousTypPrice) {
-                    this.negativeMoneyFlow += moneyFlow;
+                    this.negativeMoneyFlow += this.currentMoneyFlow;
                     this.positiveHistory.enqueue(0);
-                    this.negativeHistory.enqueue(moneyFlow);
+                    this.negativeHistory.enqueue(this.currentMoneyFlow);
                 } else {
                     this.positiveHistory.enqueue(0);
                     this.negativeHistory.enqueue(0);
@@ -72,20 +74,17 @@ export class MoneyFlowIndex
             }
 
             if (this.periodCounter > 0) {
-                let firstPositive = this.positiveHistory.peek();
-                this.positiveMoneyFlow -= firstPositive;
-
-                let firstNegative = this.negativeHistory.peek();
-                this.negativeMoneyFlow -= firstNegative;
+                this.positiveMoneyFlow -= this.positiveHistory.peek();
+                this.negativeMoneyFlow -= this.negativeHistory.peek();
 
                 if (data > this.previousTypPrice) {
-                    this.positiveMoneyFlow += moneyFlow;
-                    this.positiveHistory.enqueue(moneyFlow);
+                    this.positiveMoneyFlow += this.currentMoneyFlow;
+                    this.positiveHistory.enqueue(this.currentMoneyFlow);
                     this.negativeHistory.enqueue(0);
                 } else if (data < this.previousTypPrice) {
-                    this.negativeMoneyFlow += moneyFlow;
+                    this.negativeMoneyFlow += this.currentMoneyFlow;
                     this.positiveHistory.enqueue(0);
-                    this.negativeHistory.enqueue(moneyFlow);
+                    this.negativeHistory.enqueue(this.currentMoneyFlow);
                 } else {
                     this.positiveHistory.enqueue(0);
                     this.negativeHistory.enqueue(0);
