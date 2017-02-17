@@ -13,6 +13,8 @@ export class WilliamsPercentR
     private periodHighHistory: indicators.Queue<number>;
     private periodLowHistory: indicators.Queue<number>;
     private periodCounter: number;
+    private highestHigh: number;
+    private lowestLow: number;
 
     constructor(timePeriod: number = WilliamsPercentR.TIMEPERIOD_DEFAULT) {
         super(WilliamsPercentR.INDICATOR_NAME, WilliamsPercentR.INDICATOR_DESCR);
@@ -21,6 +23,8 @@ export class WilliamsPercentR
             throw (new Error(indicators.generateMinTimePeriodError(this.name, WilliamsPercentR.TIMEPERIOD_MIN, timePeriod)));
         }
 
+        this.highestHigh = 0;
+        this.lowestLow = 0;
         this.timePeriod = timePeriod;
         this.periodCounter = timePeriod * -1;
         this.periodHighHistory = new indicators.Queue<number>();
@@ -35,9 +39,9 @@ export class WilliamsPercentR
         this.periodLowHistory.enqueue(inputData.low);
 
         if (this.periodCounter >= 0) {
-            let highestHigh = indicators.getQueueMax(this.periodHighHistory);
-            let lowestLow = indicators.getQueueMin(this.periodLowHistory);
-            this.setCurrentValue((highestHigh - inputData.close) / (highestHigh - lowestLow) * -100.0);
+            this.highestHigh = indicators.getQueueMax(this.periodHighHistory);
+            this.lowestLow = indicators.getQueueMin(this.periodLowHistory);
+            this.setCurrentValue((this.highestHigh - inputData.close) / (this.highestHigh - this.lowestLow) * -100.0);
         }
 
         if (this.periodHighHistory.count >= this.timePeriod) {
