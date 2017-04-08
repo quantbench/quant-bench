@@ -10,30 +10,30 @@
   "author": "Eugene Duvenage",
   "license": "MIT",
   "devDependencies": {
-    "@types/bluebird": "^3.0.37",
-    "@types/chai": "^3.4.34",
+    "@types/bluebird": "^3.5.2",
+    "@types/chai": "^3.4.35",
     "@types/chai-spies": "0.0.0",
-    "@types/mocha": "^2.2.39",
-    "@types/node": "^7.0.5",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.12",
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
     "del": "^2.2.2",
     "dotbin": "^1.0.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-istanbul": "^1.1.1",
-    "gulp-mocha": "^3.0.1",
+    "gulp-mocha": "^4.1.0",
     "gulp-tslint": "^7.1.0",
     "jsonfile": "^2.4.0",
     "mocha": "^3.2.0",
     "nunjucks": "3.0.0",
-    "sinon": "1.17.7",
-    "sinon-chai": "^2.8.0",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^2.9.0",
     "talib": "^1.0.2",
-    "tslint": "^4.4.2",
-    "typescript": "^2.1.6"
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.2"
   },
   "dependencies": {
-    "bluebird": "3.4.7",
+    "bluebird": "^3.5.0",
     "yamljs": "^0.2.8"
   }
 }
