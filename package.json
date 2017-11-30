@@ -3,38 +3,68 @@
   "version": "0.0.1",
   "description": "An algorithmic backtesting library written in TypeScript.",
   "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc --watch -p tsconfig.json",
+    "precommit": "npm test && lint-staged",
+    "lint": "tslint --fix"
+  },
   "repository": {
-    "url": "git@github.com:thequantapprentice/quant-bench.git",
+    "url": "git@github.com:quant-bench/quant-bench.git",
     "type": "git"
   },
   "author": "Eugene Duvenage",
   "license": "MIT",
   "devDependencies": {
     "@types/bluebird": "^3.5.18",
-    "@types/chai": "^4.0.6",
-    "@types/chai-spies": "0.0.0",
-    "@types/mocha": "^2.2.44",
+    "@types/jest": "^21.1.8",
     "@types/node": "^8.0.53",
-    "chai": "^4.1.2",
-    "chai-spies": "^0.7.1",
     "del": "^3.0.0",
-    "dirty-chai": "^2.0.1",
     "dotbin": "^1.0.1",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-mocha": "^4.1.0",
-    "gulp-tslint": "^8.1.2",
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
     "jsonfile": "^4.0.0",
-    "mocha": "^3.5.3",
+    "lint-staged": "^5.0.0",
     "nunjucks": "^3.0.1",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0",
     "talib": "^1.0.2",
+    "ts-jest": "^21.2.3",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
     "yamljs": "^0.3.0"
+  },
+  "jest": {
+    "transform": {
+      ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": ".*\\.spec\\.ts$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "tslint --fix",
+      "git add"
+    ]
   }
 }
