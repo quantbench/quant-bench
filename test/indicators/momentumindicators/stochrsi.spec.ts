@@ -178,7 +178,7 @@ describe("STOCHRSI Indicator", () => {
                     indicatorResults[idx].fastK = indicator.fastK;
                     idx++;
                 }
-            };
+            }
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
@@ -206,7 +206,7 @@ describe("STOCHRSI Indicator", () => {
                     indicatorResults[idx].fastK = indicator.fastK;
                     idx++;
                 }
-            };
+            }
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {

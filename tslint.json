@@ -4,22 +4,26 @@
     "interface-name": [false],
     "max-line-length": [true, 140],
     "member-access": [
-        false
+      false
     ],
-    "member-ordering": [true,
-      "public-before-private",
-      "static-before-instance",
-      "variables-before-functions"
-    ],
+    "member-ordering": [true, {
+      "order": "fields-first"
+    }],
     "no-require-imports": false,
     "no-var-requires": false,
+    "no-unused-expression": [
+      false
+    ],
     "no-console": [
-        false
+      false
     ],
     "object-literal-key-quotes": [true, "always"],
     "object-literal-sort-keys": false,
     "align": [false, "parameters"],
     "prefer-for-of": false,
     "max-classes-per-file": [true, 2]
-  }
+  },
+  "ordered-imports": [
+    true
+  ]
 }

@@ -198,7 +198,7 @@ describe("STOCH Indicator", () => {
                     indicatorResults[idx].slowK = indicator.slowK;
                     idx++;
                 }
-            };
+            }
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
@@ -231,7 +231,7 @@ describe("STOCH Indicator", () => {
                     indicatorResults[idx].slowK = indicator.slowK;
                     idx++;
                 }
-            };
+            }
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {

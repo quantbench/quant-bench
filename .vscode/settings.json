@@ -1,5 +1,4 @@
 {
-    "typescript.check.workspaceVersion": false,
     "lcov.path": "coverage/lcov.info",
     "lcov.sourceMaps": true
 }

@@ -92,7 +92,7 @@ describe("CORREL Indicator", () => {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }
-            };
+            }
         });
 
         it("should match the talib results", () => {
@@ -123,7 +123,7 @@ describe("CORREL Indicator", () => {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }
-            };
+            }
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
@@ -151,7 +151,7 @@ describe("CORREL Indicator", () => {
                     indicatorResults[idx] = indicator.currentValue;
                     idx++;
                 }
-            };
+            }
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {

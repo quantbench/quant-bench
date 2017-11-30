@@ -15,7 +15,8 @@
             "problemMatcher": [{
                 "owner": "tslint",
                 "fileLocation": [
-                    "absolute"
+                    "relative",
+					"${workspaceRoot}"
                 ],
                 "severity": "warning",
                 "pattern": {

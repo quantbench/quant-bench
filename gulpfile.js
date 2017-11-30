@@ -8,7 +8,6 @@ var del = require('del');
 
 require('dotbin');
 
-// var tsFilesGlob = ['./src/**/*.ts', './test/**/*.ts', '!./src/**/index.ts'];
 var tsFilesGlob = ['./src/index.ts', './test/**/*.ts', '!./test/utils/**/*.ts'];
 
 var appName = (function (p) {
@@ -25,7 +24,7 @@ function clean() {
 function runtslint() {
     return gulp.src(tsFilesGlob)
         .pipe(tslint({
-            formatter: 'prose' // verbose
+            formatter: 'verbose' //'prose' //
         }))
         .pipe(tslint.report());
 }
