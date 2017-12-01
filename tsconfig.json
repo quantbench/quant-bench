@@ -3,14 +3,13 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "target": "es6",
-        "noImplicitAny": false,
-        "strictNullChecks": true,
-        "declaration": true,
         "sourceMap": true,
-        "outDir": "./dist",
-        "removeComments": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true
+        "outDir": "./dist"
     },
-    "types": ["node", "jest"]
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]    
   }

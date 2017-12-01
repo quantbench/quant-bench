@@ -53,7 +53,7 @@ export class CandleStickUtils {
     }
 
     public static getCandleAverage(type: candleEnums.CandleSettingType, sum: number, data: marketData.PriceBar) {
-        let defaultSetting = CandleSettings.get(type);
+        const defaultSetting = CandleSettings.get(type);
 
         return defaultSetting.factor *
             (defaultSetting.averagePeriod !== 0 ? sum /

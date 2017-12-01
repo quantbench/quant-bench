@@ -1,10 +1,8 @@
 
 import * as path from "path";
-import * as indicators from "../../../src/indicators/";
+import * as indicators from "../";
 import { TestDataFactory } from "../../../testdata/testData";
 const jsonfile = require("jsonfile");
-
-
 
 describe("CDL3LINESTRIKE Indicator", () => {
     let taResultFile: string;
@@ -15,7 +13,7 @@ describe("CDL3LINESTRIKE Indicator", () => {
     let indicatorOnDataRasied: boolean = false;
 
     beforeEach(() => {
-        taResultFile = path.resolve("./test/talib-results/cdl3linestrike.json");
+        taResultFile = path.resolve("./testdata/talib-results/cdl3linestrike.json");
         sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
 

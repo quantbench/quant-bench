@@ -67,11 +67,9 @@ export class MinusDirectionalMovement
                         this.setCurrentValue(this.previousMinusDM);
                     }
                 } else {
-                    if ((this.diffM > 0) && (this.diffP < this.diffM)) {
-                        this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + this.diffM;
-                    } else {
+                    ((this.diffM > 0) && (this.diffP < this.diffM)) ?
+                        this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + this.diffM :
                         this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod);
-                    }
 
                     this.setCurrentValue(this.previousMinusDM);
                 }

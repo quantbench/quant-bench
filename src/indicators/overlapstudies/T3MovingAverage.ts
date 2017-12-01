@@ -86,7 +86,7 @@ export class T3MovingAverage
             this.temp = this.historyData[this.historyIter++];
             for (let i = this.timePeriod - 1; i > 0; i--) {
                 this.temp += this.historyData[this.historyIter++];
-            };
+            }
             this.e1 = this.temp / this.timePeriod;
 
             // init e2
@@ -94,7 +94,7 @@ export class T3MovingAverage
             for (let i = this.timePeriod - 1; i > 0; i--) {
                 this.e1 = (this.k * this.historyData[this.historyIter++]) + (this.oneMinusK * this.e1);
                 this.temp += this.e1;
-            };
+            }
             this.e2 = this.temp / this.timePeriod;
 
             // init e3
@@ -103,7 +103,7 @@ export class T3MovingAverage
                 this.e1 = (this.k * this.historyData[this.historyIter++]) + (this.oneMinusK * this.e1);
                 this.e2 = (this.k * this.e1) + (this.oneMinusK * this.e2);
                 this.temp += this.e2;
-            };
+            }
 
             this.e3 = this.temp / this.timePeriod;
 

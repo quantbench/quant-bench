@@ -1,10 +1,8 @@
 
 import * as path from "path";
-import * as indicators from "../../../src/indicators/";
+import * as indicators from "../";
 import { TestDataFactory } from "../../../testdata/testData";
 const jsonfile = require("jsonfile");
-
-
 
 describe("BETA Indicator", () => {
     let sourceFile2: string;
@@ -18,8 +16,8 @@ describe("BETA Indicator", () => {
     const timePeriod = 5;
 
     beforeEach(() => {
-        sourceFile2 = path.resolve("./test/sourcedata/sourcedata2.json");
-        taResultFile = path.resolve("./test/talib-results/beta.json");
+        sourceFile2 = path.resolve("./testdata/sourcedata/sourcedata2.json");
+        taResultFile = path.resolve("./testdata/talib-results/beta.json");
         sourceData = TestDataFactory.getInstance().sourceData;
         sourceData2 = jsonfile.readFileSync(sourceFile2);
         taResultData = jsonfile.readFileSync(taResultFile);

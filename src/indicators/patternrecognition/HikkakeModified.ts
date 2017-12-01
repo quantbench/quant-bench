@@ -82,7 +82,7 @@ export class HikkakeModified
             }
         }
 
-        // add the current range and subtract the first range: this is done after the pattern recognition 
+        // add the current range and subtract the first range: this is done after the pattern recognition
         // when avgPeriod is not 0, that means "compare with the previous candles" (it excludes the current candle)
 
         this.nearPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.Near, this.slidingWindow.getItem(2)) -
@@ -136,7 +136,7 @@ export class HikkakeModified
                 }
             }
 
-            // add the current range and subtract the first range: this is done after the pattern recognition 
+            // add the current range and subtract the first range: this is done after the pattern recognition
             // when avgPeriod is not 0, that means "compare with the previous candles" (it excludes the current candle)
 
             this.nearPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.Near, this.slidingWindow.getItem(2)) -

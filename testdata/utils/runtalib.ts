@@ -1,18 +1,18 @@
-let yaml = require("yamljs");
-let talib = require("talib");
+const yaml = require("yamljs");
+const talib = require("talib");
 import * as Promise from "bluebird";
 import * as fs from "fs";
 
 // Load market data
-let marketContents = fs.readFileSync("./test/sourcedata/sourcedata.json", "utf8");
-let marketData = JSON.parse(marketContents);
+const marketContents = fs.readFileSync("./test/sourcedata/sourcedata.json", "utf8");
+const marketData = JSON.parse(marketContents);
 
-let config = yaml.load("./test/genconfig.yml");
-let indicators: any[] = [];
+const config = yaml.load("./test/genconfig.yml");
+const indicators: any[] = [];
 console.log("TALib Version: " + talib.version);
 
 config.forEach((item: any) => {
-    let parameters: any = {
+    const parameters: any = {
         "endIdx": marketData.close.length - 1,
         "inReal": marketData.close,
         "startIdx": 0,
@@ -21,7 +21,7 @@ config.forEach((item: any) => {
 
     item.data_inputs.forEach((dataInput: string) => {
         if (item.name === "ACOS" || item.name === "ASIN") {
-            let value = Math.cos(marketData.close);
+            const value = Math.cos(marketData.close);
             parameters.inReal = value;
         } else {
             if (dataInput === "inReal") {
@@ -73,9 +73,9 @@ Promise.each(indicators, (indicator) => {
             talib.execute(indicator, (result: any) => {
 
                 // write the results to a file
-                let resultString = JSON.stringify(result);
+                const resultString = JSON.stringify(result);
 
-                fs.writeFile("./test/talib-results/" + indicator.name.toLowerCase() + ".json", resultString, (err) => {
+                fs.writeFile("./testdata/talib-results/" + indicator.name.toLowerCase() + ".json", resultString, (err) => {
                     if (err) {
                         console.log(err);
                     }

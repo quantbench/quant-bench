@@ -1,6 +1,6 @@
 
 import * as path from "path";
-import * as indicators from "../../../src/indicators/";
+import * as indicators from "../";
 import { TestDataFactory } from "../../../testdata/testData";
 const jsonfile = require("jsonfile");
 
@@ -16,7 +16,7 @@ describe("MACD Indicator", () => {
     const signalTimePeriod: number = 9;
 
     beforeEach(() => {
-        taResultFile = path.resolve("./test/talib-results/macd.json");
+        taResultFile = path.resolve("./testdata/talib-results/macd.json");
         sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<{ macd: number, signal: number, histogram: number }>(sourceData.close.length - taResultData.begIndex);

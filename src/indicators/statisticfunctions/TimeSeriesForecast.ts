@@ -19,4 +19,3 @@ export class TimeSeriesForecast
 export class TSF extends TimeSeriesForecast {
 
 }
-

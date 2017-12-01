@@ -48,8 +48,9 @@ export class ThreeStarsInTheSouth
         this.bodyShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyShort).averagePeriod;
         this.bodyShortPeriodTotal = 0;
 
-        const lookback = Math.max((Math.max(this.shadowVeryShortAveragePeriod, this.shadowLongAveragePeriod),
-            this.bodyLongAveragePeriod, this.bodyShortAveragePeriod)) + 2;
+        const lookback = Math.max(
+            Math.max(this.shadowVeryShortAveragePeriod, this.shadowLongAveragePeriod),
+            Math.max(this.bodyLongAveragePeriod, this.bodyShortAveragePeriod)) + 2;
         this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
         this.setLookBack(lookback);
     }

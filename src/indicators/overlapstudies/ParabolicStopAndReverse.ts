@@ -194,11 +194,7 @@ export class ParabolicStopAndReverse
     }
 
     private receiveMINUSDMData(data: number) {
-        if (data > 0) {
-            this.isLong = false;
-        } else {
-            this.isLong = true;
-        }
+        (data > 0) ? this.isLong = false : this.isLong = true;
         this.hasInitialDirection = true;
     }
 }

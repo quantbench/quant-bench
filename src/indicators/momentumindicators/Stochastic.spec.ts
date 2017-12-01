@@ -1,6 +1,6 @@
 
 import * as path from "path";
-import * as indicators from "../../../src/indicators/";
+import * as indicators from "../";
 import { TestDataFactory } from "../../../testdata/testData";
 const jsonfile = require("jsonfile");
 
@@ -18,7 +18,7 @@ describe("STOCH Indicator", () => {
     const slowKTimePeriod: number = 3;
 
     beforeEach(() => {
-        taResultFile = path.resolve("./test/talib-results/stoch.json");
+        taResultFile = path.resolve("./testdata/talib-results/stoch.json");
         sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<{ slowK: number, slowD: number }>(sourceData.close.length - taResultData.begIndex);

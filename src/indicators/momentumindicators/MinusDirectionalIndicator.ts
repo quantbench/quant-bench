@@ -77,11 +77,9 @@ export class MinusDirectionalIndicator
                     this.previousTrueRange += this.currentTrueRange;
                 } else {
                     this.previousTrueRange = this.previousTrueRange - (this.previousTrueRange / this.timePeriod) + this.currentTrueRange;
-                    if ((this.diffM > 0) && (this.diffP < this.diffM)) {
-                        this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + this.diffM;
-                    } else {
+                    ((this.diffM > 0) && (this.diffP < this.diffM)) ?
+                        this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + this.diffM :
                         this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod);
-                    }
 
                     if (this.previousTrueRange !== 0) {
                         this.setCurrentValue(100.0 * this.previousMinusDM / this.previousTrueRange);

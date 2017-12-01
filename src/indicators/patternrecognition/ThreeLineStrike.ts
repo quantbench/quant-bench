@@ -108,7 +108,7 @@ export class ThreeLineStrike
     }
 
     private fourthCandleEngulfsPreviousThree(): boolean {
-        if ( // three white candles
+        if (// three white candles
             (this.thirdCandleColor === candleEnums.CandleColor.White &&
                 // with consecutive higher closes
                 this.thirdCandle.close > this.secondCandle.close && this.secondCandle.close > this.firstCandle.close &&
@@ -117,7 +117,7 @@ export class ThreeLineStrike
                 // fourth closes below first candles open
                 this.fourthCandle.close < this.firstCandle.open
 
-            ) || ( // three black candles
+            ) || (// three black candles
                 // with consecutive lower closes
                 this.thirdCandle.close < this.secondCandle.close && this.secondCandle.close < this.firstCandle.close &&
                 // fourth candle opens below prior close

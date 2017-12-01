@@ -52,12 +52,9 @@ export class ChandeMomentumOscillator
 
                 this.currentMomentum = 0;
                 // CMO = 100 * ((prevGain - prevLoss)  / (prevGain + prevLoss))
-                if (this.previousGain + this.previousLoss === 0) {
-                    this.currentMomentum = 0;
-                } else {
+                (this.previousGain + this.previousLoss === 0) ?
+                    this.currentMomentum = 0 :
                     this.currentMomentum = 100 * ((this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
-                }
-
                 this.setCurrentValue(this.currentMomentum);
             }
 
@@ -76,11 +73,9 @@ export class ChandeMomentumOscillator
 
                 this.currentMomentum = 0;
                 // Rsi = 100 * (prevGain / (prevGain + prevLoss))
-                if (this.previousGain + this.previousLoss === 0) {
-                    this.currentMomentum = 0;
-                } else {
+                (this.previousGain + this.previousLoss === 0) ?
+                    this.currentMomentum = 0 :
                     this.currentMomentum = 100 * ((this.previousGain - this.previousLoss) / (this.previousGain + this.previousLoss));
-                }
 
                 this.setCurrentValue(this.currentMomentum);
             }

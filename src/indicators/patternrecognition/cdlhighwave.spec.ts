@@ -1,10 +1,8 @@
 
 import * as path from "path";
-import * as indicators from "../../../src/indicators/";
+import * as indicators from "../";
 import { TestDataFactory } from "../../../testdata/testData";
 const jsonfile = require("jsonfile");
-
-
 
 describe("CDLHIGHWAVE Indicator", () => {
     let taResultFile: string;
@@ -15,7 +13,7 @@ describe("CDLHIGHWAVE Indicator", () => {
     let indicatorOnDataRasied: boolean = false;
 
     beforeEach(() => {
-        taResultFile = path.resolve("./test/talib-results/cdlhighwave.json");
+        taResultFile = path.resolve("./testdata/talib-results/cdlhighwave.json");
         sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
 

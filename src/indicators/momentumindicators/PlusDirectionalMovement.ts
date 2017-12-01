@@ -66,11 +66,9 @@ export class PlusDirectionalMovement
                         this.setCurrentValue(this.previousPlusDM);
                     }
                 } else {
-                    if ((this.diffP > 0) && (this.diffP > this.diffM)) {
-                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + this.diffP;
-                    } else {
+                    ((this.diffP > 0) && (this.diffP > this.diffM)) ?
+                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + this.diffP :
                         this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod);
-                    }
 
                     this.setCurrentValue(this.previousPlusDM);
                 }

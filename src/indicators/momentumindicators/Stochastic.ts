@@ -91,13 +91,6 @@ export class Stochastic
         return this.slowDInternal;
     }
 
-    protected setCurrentValue(slowK: number, slowD: number) {
-        this.slowKInternal = slowK;
-        this.slowDInternal = slowD;
-        this.emit("data", this.slowK, this.slowD);
-        this.setIsReady();
-    }
-
     receiveData(inputData: marketData.PriceBar): boolean {
         this.periodCounter += 1;
         this.maxValue.receiveData(inputData.high);
@@ -110,6 +103,12 @@ export class Stochastic
         return this.isReady;
     }
 
+    protected setCurrentValue(slowK: number, slowD: number) {
+        this.slowKInternal = slowK;
+        this.slowDInternal = slowD;
+        this.emit("data", this.slowK, this.slowD);
+        this.setIsReady();
+    }
     private receiveSlowKMAData(data: number) {
         this.currentSlowKMA = data;
         this.slowDMA.receiveData(data);

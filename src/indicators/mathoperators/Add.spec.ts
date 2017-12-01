@@ -1,6 +1,6 @@
 
 import * as path from "path";
-import * as indicators from "../../../src/indicators/";
+import * as indicators from "../";
 
 import { TestDataFactory } from "../../../testdata/testData";
 
@@ -13,7 +13,7 @@ describe("Add Indicator", () => {
     let indicator: indicators.Add;
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
-    taResultFile = path.resolve("./test/talib-results/add.json");
+    taResultFile = path.resolve("./testdata/talib-results/add.json");
     sourceData = TestDataFactory.getInstance().sourceData;
     taResultData = jsonfile.readFileSync(taResultFile);
 

@@ -1,20 +1,20 @@
-let yaml = require("yamljs");
-let talib = require("talib");
+const yaml = require("yamljs");
+const talib = require("talib");
 import * as fs from "fs";
 
 // let groups = ["Overlap Studies", "Volatility Indicators", "Momentum Indicators", "Cycle Indicators",
 //     "Volume Indicators", "Statistic Functions", "Price Transform", "Math Operators", "Math Transform"];
-let groups = ["Pattern Recognition"];
-let functions = talib.functions;
-let functionKeys = Object.keys(functions);
+const groups = ["Pattern Recognition"];
+const functions = talib.functions;
+const functionKeys = Object.keys(functions);
 
-let configs: any[] = [];
-let excludes: string[] = ["IMI", "TA_AVGDEV"];
+const configs: any[] = [];
+const excludes: string[] = ["IMI", "TA_AVGDEV"];
 functionKeys.forEach((func: any) => {
-    let funcExplain = talib.explain(functions[func].name);
+    const funcExplain = talib.explain(functions[func].name);
 
     if (groups.indexOf(functions[func].group) !== -1 && excludes.indexOf(functions[func].name) === -1) {
-        let config = {
+        const config = {
             "name": funcExplain.name,
             "data_inputs": new Array<string>(),
             "inputs": new Object(),
@@ -22,9 +22,9 @@ functionKeys.forEach((func: any) => {
         };
         funcExplain.inputs.forEach((input: any) => {
             if (input.type === "price") {
-                for (let i in input.flags) {
+                for (const i in input.flags) {
                     if (input.flags[i]) {
-                        let flag = input.flags[i];
+                        const flag = input.flags[i];
                         config.data_inputs.push(flag);
                     }
                 }
@@ -42,9 +42,9 @@ functionKeys.forEach((func: any) => {
                 //     }
                 // }
             } else {
-                let val: any = input.defaultValue;
-                let name: string = input.name;
-                (<any> config.inputs)[name] = val;
+                const val: any = input.defaultValue;
+                const name: string = input.name;
+                (config.inputs as any)[name] = val;
             }
         });
 
@@ -54,7 +54,7 @@ functionKeys.forEach((func: any) => {
     }
 });
 
-let yamlString = yaml.stringify(configs, 4);
+const yamlString = yaml.stringify(configs, 4);
 
 fs.writeFile("./test/genconfigCandleSticks.yml", yamlString, (err) => {
     if (err) {

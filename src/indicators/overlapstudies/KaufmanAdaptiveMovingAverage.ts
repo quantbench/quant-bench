@@ -24,7 +24,6 @@ export class KaufmanAdaptiveMovingAverage
     private er: number;
     private sc: number;
 
-
     constructor(timePeriod: number = KaufmanAdaptiveMovingAverage.TIMEPERIOD_DEFAULT) {
         super(KaufmanAdaptiveMovingAverage.INDICATOR_NAME, KaufmanAdaptiveMovingAverage.INDICATOR_DESCR);
 
@@ -70,11 +69,9 @@ export class KaufmanAdaptiveMovingAverage
             this.periodROC = inputData - this.closeMinusN;
 
             // calculate the efficiency ratio
-            if (this.sumROC <= this.periodROC || this.isZero(this.sumROC)) {
-                this.er = 1;
-            } else {
+            (this.sumROC <= this.periodROC || this.isZero(this.sumROC)) ?
+                this.er = 1 :
                 this.er = Math.abs(this.periodROC / this.sumROC);
-            }
 
             this.sc = (this.er * this.constantDiff) + this.constantMax;
             this.sc *= this.sc;
@@ -93,11 +90,9 @@ export class KaufmanAdaptiveMovingAverage
             this.sumROC += Math.abs(inputData - this.previousClose);
 
             // calculate the efficiency ratio
-            if (this.sumROC <= this.periodROC || this.isZero(this.sumROC)) {
-                this.er = 1;
-            } else {
+            (this.sumROC <= this.periodROC || this.isZero(this.sumROC)) ?
+                this.er = 1 :
                 this.er = Math.abs(this.periodROC / this.sumROC);
-            }
 
             this.sc = (this.er * this.constantDiff) + this.constantMax;
             this.sc *= this.sc;

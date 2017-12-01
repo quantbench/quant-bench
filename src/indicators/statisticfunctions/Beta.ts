@@ -65,19 +65,15 @@ export class Beta
             this.sumYHistory.enqueue(this.sumY);
         } else if (this.periodCounter < this.timePeriod) {
             this.tmpReal = inputData1;
-            if (this.lastPriceX !== 0) {
-                this.x = (this.tmpReal - this.lastPriceX) / this.lastPriceX;
-            } else {
+            (this.lastPriceX !== 0) ?
+                this.x = (this.tmpReal - this.lastPriceX) / this.lastPriceX :
                 this.x = 0.0;
-            }
             this.lastPriceX = this.tmpReal;
 
             this.tmpReal = inputData2;
-            if (this.lastPriceY !== 0) {
-                this.y = (this.tmpReal - this.lastPriceY) / this.lastPriceY;
-            } else {
+            (this.lastPriceY !== 0) ?
+                this.y = (this.tmpReal - this.lastPriceY) / this.lastPriceY :
                 this.y = 0.0;
-            }
             this.lastPriceY = this.tmpReal;
 
             this.sumXX += this.x * this.x;
@@ -91,19 +87,15 @@ export class Beta
         } else {
 
             this.tmpReal = inputData1;
-            if (this.lastPriceX !== 0) {
-                this.x = (this.tmpReal - this.lastPriceX) / this.lastPriceX;
-            } else {
+            (this.lastPriceX !== 0) ?
+                this.x = (this.tmpReal - this.lastPriceX) / this.lastPriceX :
                 this.x = 0.0;
-            }
             this.lastPriceX = this.tmpReal;
 
             this.tmpReal = inputData2;
-            if (this.lastPriceY !== 0) {
-                this.y = (this.tmpReal - this.lastPriceY) / this.lastPriceY;
-            } else {
+            (this.lastPriceY !== 0) ?
+                this.y = (this.tmpReal - this.lastPriceY) / this.lastPriceY :
                 this.y = 0.0;
-            }
             this.lastPriceY = this.tmpReal;
 
             this.sumXX += this.x * this.x;

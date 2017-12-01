@@ -26,7 +26,6 @@ export class AccumulationDistributionLine
     }
 }
 
-
 export class AD extends AccumulationDistributionLine {
 
 }

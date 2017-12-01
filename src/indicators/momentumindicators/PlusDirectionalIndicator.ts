@@ -76,11 +76,9 @@ export class PlusDirectionalIndicator
                     this.previousTrueRange += this.currentTrueRange;
                 } else {
                     this.previousTrueRange = this.previousTrueRange - (this.previousTrueRange / this.timePeriod) + this.currentTrueRange;
-                    if ((this.diffP > 0) && (this.diffP > this.diffM)) {
-                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + this.diffP;
-                    } else {
+                    ((this.diffP > 0) && (this.diffP > this.diffM)) ?
+                        this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod) + this.diffP :
                         this.previousPlusDM = this.previousPlusDM - (this.previousPlusDM / this.timePeriod);
-                    }
 
                     if (this.previousTrueRange !== 0) {
                         this.setCurrentValue(100.0 * this.previousPlusDM / this.previousTrueRange);

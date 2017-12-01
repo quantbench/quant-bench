@@ -53,11 +53,10 @@ export class AccumulationDistributionOscillator
         this.periodCounter = -1;
 
         let slowestPeriod: number = 0;
-        if (fastTimePeriod < slowTimePeriod) {
-            slowestPeriod = slowTimePeriod;
-        } else {
+        (fastTimePeriod < slowTimePeriod) ?
+            slowestPeriod = slowTimePeriod :
             slowestPeriod = fastTimePeriod;
-        }
+
         this.setLookBack(slowestPeriod - 1);
     }
 

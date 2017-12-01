@@ -1,6 +1,6 @@
 
 import * as path from "path";
-import * as indicators from "../../../src/indicators/";
+import * as indicators from "../";
 import { TestDataFactory } from "../../../testdata/testData";
 const jsonfile = require("jsonfile");
 
@@ -12,7 +12,7 @@ describe("ADX Indicator", () => {
     let indicatorResults: number[];
     let indicatorOnDataRasied: boolean = false;
     const timePeriod = 14;
-    taResultFile = path.resolve("./test/talib-results/adx.json");
+    taResultFile = path.resolve("./testdata/talib-results/adx.json");
     sourceData = TestDataFactory.getInstance().sourceData;
     taResultData = jsonfile.readFileSync(taResultFile);
 

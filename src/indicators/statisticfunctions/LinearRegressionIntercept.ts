@@ -19,4 +19,3 @@ export class LinearRegressionIntercept
 export class LINEARREGINTERCEPT extends LinearRegressionIntercept {
 
 }
-

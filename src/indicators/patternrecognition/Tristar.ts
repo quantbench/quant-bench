@@ -102,7 +102,7 @@ export class Tristar
 
     private secondCandleGapsDownWithThirdNotLowerThanSecond() {
         return CandleStickUtils.getRealBodyGapDown(this.secondCandle, this.firstCandle) &&
-            // 3rd is not lower than 2nd 
+            // 3rd is not lower than 2nd
             Math.min(this.thirdCandle.open, this.thirdCandle.close) >
             Math.min(this.secondCandle.open, this.secondCandle.close);
     }

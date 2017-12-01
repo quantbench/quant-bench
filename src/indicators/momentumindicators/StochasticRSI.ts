@@ -84,16 +84,15 @@ export class StochasticRSI
         return this.fastDInternal;
     }
 
+    receiveData(inputData: number): boolean {
+        this.rsi.receiveData(inputData);
+        return this.isReady;
+    }
     protected setCurrentValue(fastK: number, fastD: number) {
         this.fastKInternal = fastK;
         this.fastDInternal = fastD;
         this.emit("data", this.fastK, this.fastD);
         this.setIsReady();
-    }
-
-    receiveData(inputData: number): boolean {
-        this.rsi.receiveData(inputData);
-        return this.isReady;
     }
 
     private receiveFastDMAData(data: number) {
@@ -108,11 +107,10 @@ export class StochasticRSI
         this.minValue.receiveData(data);
 
         if (this.periodCounter >= 0) {
-            if ((this.currentPeriodHigh - this.currentPeriodLow) !== 0) {
-                this.currentFastK = 100.0 * ((this.currentRSI - this.currentPeriodLow) / (this.currentPeriodHigh - this.currentPeriodLow));
-            } else {
+            ((this.currentPeriodHigh - this.currentPeriodLow) !== 0) ?
+                this.currentFastK = 100.0 * ((this.currentRSI - this.currentPeriodLow) / (this.currentPeriodHigh - this.currentPeriodLow)) :
                 this.currentFastK = 0;
-            }
+
             this.fastDMA.receiveData(this.currentFastK);
         }
     }

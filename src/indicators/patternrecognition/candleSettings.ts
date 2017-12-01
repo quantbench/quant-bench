@@ -32,8 +32,6 @@ export class CandleSettings {
                 return DefaultSettings.far;
             case candleEnums.CandleSettingType.Equal:
                 return DefaultSettings.equal;
-            default:
-                return undefined;
         }
     }
 

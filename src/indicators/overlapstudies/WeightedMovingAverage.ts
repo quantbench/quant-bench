@@ -70,7 +70,6 @@ export class WeightedMovingAverage
     }
 }
 
-
 export class WMA extends WeightedMovingAverage {
 
 }

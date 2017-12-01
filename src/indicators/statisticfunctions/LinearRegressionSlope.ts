@@ -19,4 +19,3 @@ export class LinearRegressionSlope
 export class LINEARREGSLOPE extends LinearRegressionSlope {
 
 }
-

@@ -1,5 +1,5 @@
+import * as jsonfile from "jsonfile";
 import * as path from "path";
-const jsonfile = require("jsonfile");
 
 export interface ITestData {
     sourceData: any;
@@ -25,7 +25,7 @@ class TestData extends TestDataFactory {
     constructor() {
         super();
 
-        const sourceFile: string = path.resolve("./test/sourcedata/sourcedata.json");
+        const sourceFile: string = path.resolve("./testdata/sourcedata/sourcedata.json");
         this.sourceData = jsonfile.readFileSync(sourceFile);
     }
 }

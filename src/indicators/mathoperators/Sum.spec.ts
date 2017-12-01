@@ -1,6 +1,6 @@
 
 import * as path from "path";
-import * as indicators from "../../../src/indicators/";
+import * as indicators from "../";
 import { TestDataFactory } from "../../../testdata/testData";
 const jsonfile = require("jsonfile");
 
@@ -14,7 +14,7 @@ describe("Sum Indicator", () => {
     const timePeriod = 30;
 
     beforeEach(() => {
-        taResultFile = path.resolve("./test/talib-results/sum.json");
+        taResultFile = path.resolve("./testdata/talib-results/sum.json");
         sourceData = TestDataFactory.getInstance().sourceData;
         taResultData = jsonfile.readFileSync(taResultFile);
         indicatorResults = new Array<number>(sourceData.close.length - taResultData.begIndex);
