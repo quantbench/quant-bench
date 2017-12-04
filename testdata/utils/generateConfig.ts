@@ -1,4 +1,4 @@
-const yaml = require("yamljs");
+const yaml = require("js-yaml");
 const talib = require("talib");
 import * as fs from "fs";
 
