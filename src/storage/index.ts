@@ -1,2 +1,2 @@
 export * from "./StorageProvider";
-export * from "./localfilestorage";
+export * from "./filesystem";

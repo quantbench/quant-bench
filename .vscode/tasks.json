@@ -17,6 +17,13 @@
       "problemMatcher": [
         "$tslint5"
       ]
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": [
+        "$tslint5"
+      ]
     }
   ]
 }
