@@ -1,43 +1,47 @@
 import * as indicators from "../";
 
-export class Sum
-    extends indicators.AbstractIndicator<number> {
+export class Sum extends indicators.AbstractIndicator<number> {
+  public static INDICATOR_NAME: string = "Sum";
+  public static INDICATOR_DESCR: string = "Summation";
+  public static TIMEPERIOD_DEFAULT: number = 30;
+  public static TIMEPERIOD_MIN: number = 2;
 
-    static INDICATOR_NAME: string = "Sum";
-    static INDICATOR_DESCR: string = "Summation";
-    static TIMEPERIOD_DEFAULT: number = 30;
-    static TIMEPERIOD_MIN: number = 2;
+  public timePeriod: number;
+  private periodHistory: indicators.Queue<number>;
+  private currentSum: number;
 
-    public timePeriod: number;
-    private periodHistory: indicators.Queue<number>;
-    private currentSum: number;
+  constructor(timePeriod: number = Sum.TIMEPERIOD_DEFAULT) {
+    super(Sum.INDICATOR_NAME, Sum.INDICATOR_DESCR);
 
-    constructor(timePeriod: number = Sum.TIMEPERIOD_DEFAULT) {
-        super(Sum.INDICATOR_NAME, Sum.INDICATOR_DESCR);
-
-        if (timePeriod < Sum.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, Sum.TIMEPERIOD_MIN, timePeriod)));
-        }
-
-        this.timePeriod = timePeriod;
-        this.currentSum = 0;
-        this.periodHistory = new indicators.Queue<number>();
-
-        this.setLookBack(this.timePeriod - 1);
+    if (timePeriod < Sum.TIMEPERIOD_MIN) {
+      throw new Error(
+        indicators.generateMinTimePeriodError(
+          this.name,
+          Sum.TIMEPERIOD_MIN,
+          timePeriod
+        )
+      );
     }
 
-    receiveData(inputData: number): boolean {
-        this.periodHistory.enqueue(inputData);
-        this.currentSum += inputData;
+    this.timePeriod = timePeriod;
+    this.currentSum = 0;
+    this.periodHistory = new indicators.Queue<number>();
 
-        if (this.periodHistory.count > this.timePeriod) {
-            this.currentSum -= this.periodHistory.dequeue();
-        }
+    this.setLookBack(this.timePeriod - 1);
+  }
 
-        if (this.periodHistory.count >= this.timePeriod) {
-            this.setCurrentValue(this.currentSum);
-        }
+  public receiveData(inputData: number): boolean {
+    this.periodHistory.enqueue(inputData);
+    this.currentSum += inputData;
 
-        return this.isReady;
+    if (this.periodHistory.count > this.timePeriod) {
+      this.currentSum -= this.periodHistory.dequeue();
     }
+
+    if (this.periodHistory.count >= this.timePeriod) {
+      this.setCurrentValue(this.currentSum);
+    }
+
+    return this.isReady;
+  }
 }

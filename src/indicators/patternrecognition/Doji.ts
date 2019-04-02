@@ -5,65 +5,81 @@ import * as candleEnums from "./candleEnums";
 import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
-export class Doji
-    extends indicators.AbstractIndicator<marketData.PriceBar> {
+export class Doji extends indicators.AbstractIndicator<marketData.IPriceBar> {
+  public static INDICATOR_NAME: string = "CDLDOJI";
+  public static INDICATOR_DESCR: string = "Doji";
 
-    static INDICATOR_NAME: string = "CDLDOJI";
-    static INDICATOR_DESCR: string = "Doji";
+  private bodyDojiPeriodTotal: number;
+  private bodyDojiAveragePeriod: number;
+  private slidingWindow: SlidingWindow<marketData.IPriceBar>;
+  private firstCandle: marketData.IPriceBar;
+  private firstCandleColor: candleEnums.CandleColor;
 
-    private bodyDojiPeriodTotal: number;
-    private bodyDojiAveragePeriod: number;
-    private slidingWindow: SlidingWindow<marketData.PriceBar>;
-    private firstCandle: marketData.PriceBar;
-    private firstCandleColor: candleEnums.CandleColor;
+  constructor() {
+    super(Doji.INDICATOR_NAME, Doji.INDICATOR_DESCR);
 
-    constructor() {
-        super(Doji.INDICATOR_NAME, Doji.INDICATOR_DESCR);
+    this.bodyDojiAveragePeriod = CandleSettings.get(
+      candleEnums.CandleSettingType.BodyDoji
+    ).averagePeriod;
+    this.bodyDojiPeriodTotal = 0;
 
-        this.bodyDojiAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod;
-        this.bodyDojiPeriodTotal = 0;
+    const lookback = this.bodyDojiAveragePeriod;
+    this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+    this.setLookBack(lookback);
+  }
 
-        const lookback = this.bodyDojiAveragePeriod;
-        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
-        this.setLookBack(lookback);
+  public receiveData(inputData: marketData.IPriceBar): boolean {
+    this.slidingWindow.add(inputData);
+
+    if (!this.slidingWindow.isReady) {
+      this.seedSlidingWindow(inputData);
+      return this.isReady;
     }
 
-    receiveData(inputData: marketData.PriceBar): boolean {
-        this.slidingWindow.add(inputData);
+    this.populateCandleVariables();
 
-        if (!this.slidingWindow.isReady) {
-            this.seedSlidingWindow(inputData);
-            return this.isReady;
-        }
+    this.setCurrentValue(this.hasVerySmallRealBody() ? 100 : 0);
 
-        this.populateCandleVariables();
+    this.bodyDojiPeriodTotal +=
+      CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.BodyDoji,
+        inputData
+      ) -
+      CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.BodyDoji,
+        this.slidingWindow.getItem(this.bodyDojiAveragePeriod)
+      );
 
-        this.setCurrentValue(this.hasVerySmallRealBody() ? 100 : 0);
+    return this.isReady;
+  }
 
-        this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData) -
-            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji,
-                this.slidingWindow.getItem(this.bodyDojiAveragePeriod));
+  private populateCandleVariables() {
+    this.firstCandle = this.slidingWindow.getItem(0);
+    this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
+  }
 
-        return this.isReady;
+  private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    if (
+      this.slidingWindow.samples >=
+      this.slidingWindow.period - this.bodyDojiAveragePeriod
+    ) {
+      this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.BodyDoji,
+        inputData
+      );
     }
+  }
 
-    private populateCandleVariables() {
-        this.firstCandle = this.slidingWindow.getItem(0);
-        this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
-    }
-
-    private seedSlidingWindow(inputData: marketData.PriceBar) {
-        if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyDojiAveragePeriod) {
-            this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
-        }
-    }
-
-    private hasVerySmallRealBody(): boolean {
-        return CandleStickUtils.getRealBody(this.firstCandle) <=
-            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji, this.bodyDojiPeriodTotal, this.firstCandle);
-    }
+  private hasVerySmallRealBody(): boolean {
+    return (
+      CandleStickUtils.getRealBody(this.firstCandle) <=
+      CandleStickUtils.getCandleAverage(
+        candleEnums.CandleSettingType.BodyDoji,
+        this.bodyDojiPeriodTotal,
+        this.firstCandle
+      )
+    );
+  }
 }
 
-export class CDLDOJI extends Doji {
-
-}
+export class CDLDOJI extends Doji {}

@@ -1,10 +1,10 @@
-import * as chai from "chai";
+
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
+import * as jsonfile from "jsonfile";
 
-chai.should();
+
 
 describe("PLUSDI Indicator", () => {
     let taResultFile: string;
@@ -28,15 +28,15 @@ describe("PLUSDI Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.PLUSDI.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.PLUSDI.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.PLUSDI.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.PLUSDI.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -46,7 +46,7 @@ describe("PLUSDI Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(timePeriod + 1);
+            expect(indicator.timePeriod).toBe(timePeriod + 1);
         });
     });
 
@@ -56,7 +56,7 @@ describe("PLUSDI Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.PLUSDI.TIMEPERIOD_DEFAULT);
+            expect(indicator.timePeriod).toBe(indicators.PLUSDI.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -73,7 +73,7 @@ describe("PLUSDI Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.PLUSDI.TIMEPERIOD_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -96,13 +96,13 @@ describe("PLUSDI Indicator", () => {
 
         it("should match the talib results", () => {
             for (let i = 0; i < taResultData.result.outReal.length; i++) {
-                isNaN(indicatorResults[i]).should.be.false;
-                taResultData.result.outReal[i].should.be.closeTo(indicatorResults[i], 0.001);
+                expect(isNaN(indicatorResults[i])).toBe(false);
+                expect(taResultData.result.outReal[i]).toBeCloseTo(indicatorResults[i], 0.001);
             }
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -129,11 +129,11 @@ describe("PLUSDI Indicator", () => {
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(false);
+            expect(indicator.isReady).toBe(false);
         });
 
         it("should not have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(false);
+            expect(indicatorOnDataRasied).toBe(false);
         });
     });
 
@@ -160,11 +160,11 @@ describe("PLUSDI Indicator", () => {
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(true);
+            expect(indicator.isReady).toBe(true);
         });
 
         it("should have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(true);
+            expect(indicatorOnDataRasied).toBe(true);
         });
     });
 });

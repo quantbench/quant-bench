@@ -1,10 +1,8 @@
-import * as chai from "chai";
+
+import * as jsonfile from "jsonfile";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
-
-chai.should();
 
 describe("AROON Indicator", () => {
     let taResultFile: string;
@@ -28,15 +26,15 @@ describe("AROON Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.AROON.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.AROON.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.AROON.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.AROON.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -46,7 +44,7 @@ describe("AROON Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(timePeriod + 1);
+            expect(indicator.timePeriod).toBe(timePeriod + 1);
         });
     });
 
@@ -56,7 +54,7 @@ describe("AROON Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.AROON.TIMEPERIOD_DEFAULT);
+            expect(indicator.timePeriod).toBe(indicators.AROON.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -73,7 +71,7 @@ describe("AROON Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.AROON.TIMEPERIOD_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -98,20 +96,20 @@ describe("AROON Indicator", () => {
 
         it("should match the talib aroonup results", () => {
             for (let i = 0; i < taResultData.result.outAroonUp.length; i++) {
-                isNaN(indicatorResults[i].aroonUp).should.be.false;
-                taResultData.result.outAroonUp[i].should.be.closeTo(indicatorResults[i].aroonUp, 0.001);
+                expect(isNaN(indicatorResults[i].aroonUp)).toBe(false);
+                expect(taResultData.result.outAroonUp[i]).toBeCloseTo(indicatorResults[i].aroonUp, 0.001);
             }
         });
 
         it("should match the talib aroondown results", () => {
             for (let i = 0; i < taResultData.result.outAroonDown.length; i++) {
-                isNaN(indicatorResults[i].aroonDown).should.be.false;
-                taResultData.result.outAroonDown[i].should.be.closeTo(indicatorResults[i].aroonDown, 0.001);
+                expect(isNaN(indicatorResults[i].aroonDown)).toBe(false);
+                expect(taResultData.result.outAroonDown[i]).toBeCloseTo(indicatorResults[i].aroonDown, 0.001);
             }
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -126,10 +124,10 @@ describe("AROON Indicator", () => {
 
             for (let index = 0; index < indicator.lookback; index++) {
                 if (indicator.receiveData({
+                    "close": sourceData.close[index],
                     "high": sourceData.high[index],
                     "low": sourceData.low[index],
                     "open": sourceData.open[index],
-                    "close": sourceData.close[index],
                 })) {
                     indicatorResults[idx] = { "aroonUp": 0, "aroonDown": 0 };
                     indicatorResults[idx].aroonDown = indicator.aroonDown;
@@ -140,11 +138,11 @@ describe("AROON Indicator", () => {
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(false);
+            expect(indicator.isReady).toBe(false);
         });
 
         it("should not have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(false);
+            expect(indicatorOnDataRasied).toBe(false);
         });
     });
 
@@ -159,10 +157,10 @@ describe("AROON Indicator", () => {
 
             for (let index = 0; index <= indicator.lookback; index++) {
                 if (indicator.receiveData({
+                    "close": sourceData.close[index],
                     "high": sourceData.high[index],
                     "low": sourceData.low[index],
                     "open": sourceData.open[index],
-                    "close": sourceData.close[index],
                 })) {
                     indicatorResults[idx] = { "aroonUp": 0, "aroonDown": 0 };
                     indicatorResults[idx].aroonDown = indicator.aroonDown;
@@ -173,11 +171,11 @@ describe("AROON Indicator", () => {
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(true);
+            expect(indicator.isReady).toBe(true);
         });
 
         it("should have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(true);
+            expect(indicatorOnDataRasied).toBe(true);
         });
     });
 });

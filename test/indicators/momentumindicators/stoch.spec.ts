@@ -1,10 +1,10 @@
-import * as chai from "chai";
+
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
+import * as jsonfile from "jsonfile";
 
-chai.should();
+
 
 describe("STOCH Indicator", () => {
     let taResultFile: string;
@@ -32,15 +32,15 @@ describe("STOCH Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.STOCH.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.STOCH.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.STOCH.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.STOCH.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -51,23 +51,23 @@ describe("STOCH Indicator", () => {
         });
 
         it("should set the fastKTimePeriod", () => {
-            indicator.fastKTimePeriod.should.equal(fastKTimePeriod + 1);
+            expect(indicator.fastKTimePeriod).toBe(fastKTimePeriod + 1);
         });
 
         it("should set the slowKTimePeriod", () => {
-            indicator.slowKTimePeriod.should.equal(slowKTimePeriod + 1);
+            expect(indicator.slowKTimePeriod).toBe(slowKTimePeriod + 1);
         });
 
         it("should set the slowKMAType", () => {
-            indicator.slowKMAType.should.equal(slowKMAType + 1);
+            expect(indicator.slowKMAType).toBe(slowKMAType + 1);
         });
 
         it("should set the slowDTimePeriod", () => {
-            indicator.slowDTimePeriod.should.equal(slowDTimePeriod + 1);
+            expect(indicator.slowDTimePeriod).toBe(slowDTimePeriod + 1);
         });
 
         it("should set the slowDMAType", () => {
-            indicator.slowDMAType.should.equal(slowDMAType + 1);
+            expect(indicator.slowDMAType).toBe(slowDMAType + 1);
         });
     });
 
@@ -77,23 +77,23 @@ describe("STOCH Indicator", () => {
         });
 
         it("should set the fastKTimePeriod", () => {
-            indicator.fastKTimePeriod.should.equal(indicators.STOCH.FASTKPERIOD_DEFAULT);
+            expect(indicator.fastKTimePeriod).toBe(indicators.STOCH.FASTKPERIOD_DEFAULT);
         });
 
         it("should set the slowKTimePeriod", () => {
-            indicator.slowKTimePeriod.should.equal(indicators.STOCH.SLOWKPERIOD_DEFAULT);
+            expect(indicator.slowKTimePeriod).toBe(indicators.STOCH.SLOWKPERIOD_DEFAULT);
         });
 
         it("should set the slowKMAType", () => {
-            indicator.slowKMAType.should.equal(indicators.STOCH.SLOWKMATYPE_DEFAULT);
+            expect(indicator.slowKMAType).toBe(indicators.STOCH.SLOWKMATYPE_DEFAULT);
         });
 
         it("should set the slowDTimePeriod", () => {
-            indicator.slowDTimePeriod.should.equal(indicators.STOCH.SLOWDPERIOD_DEFAULT);
+            expect(indicator.slowDTimePeriod).toBe(indicators.STOCH.SLOWDPERIOD_DEFAULT);
         });
 
         it("should set the slowDMAType", () => {
-            indicator.slowDMAType.should.equal(indicators.STOCH.SLOWDMATYPE_DEFAULT);
+            expect(indicator.slowDMAType).toBe(indicators.STOCH.SLOWDMATYPE_DEFAULT);
         });
     });
 
@@ -110,7 +110,7 @@ describe("STOCH Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.FASTKPERIOD_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -127,7 +127,7 @@ describe("STOCH Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWKPERIOD_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -144,7 +144,7 @@ describe("STOCH Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCH.SLOWDPERIOD_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -169,15 +169,15 @@ describe("STOCH Indicator", () => {
 
         it("should match the talib slowD results", () => {
             for (let i = 0; i < taResultData.result.outSlowD.length; i++) {
-                isNaN(indicatorResults[i].slowD).should.be.false;
-                taResultData.result.outSlowD[i].should.be.closeTo(indicatorResults[i].slowD, 0.001);
+                expect(isNaN(indicatorResults[i].slowD)).toBe(false);
+                expect(taResultData.result.outSlowD[i]).toBeCloseTo(indicatorResults[i].slowD, 0.001);
             }
         });
 
         it("should match the talib slowK results", () => {
             for (let i = 0; i < taResultData.result.outSlowK.length; i++) {
-                isNaN(indicatorResults[i].slowK).should.be.false;
-                taResultData.result.outSlowK[i].should.be.closeTo(indicatorResults[i].slowK, 0.001);
+                expect(isNaN(indicatorResults[i].slowK)).toBe(false);
+                expect(taResultData.result.outSlowK[i]).toBeCloseTo(indicatorResults[i].slowK, 0.001);
             }
         });
     });
@@ -202,11 +202,11 @@ describe("STOCH Indicator", () => {
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(false);
+            expect(indicator.isReady).toBe(false);
         });
 
         it("should not have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(false);
+            expect(indicatorOnDataRasied).toBe(false);
         });
     });
 
@@ -235,11 +235,11 @@ describe("STOCH Indicator", () => {
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(true);
+            expect(indicator.isReady).toBe(true);
         });
 
         it("should have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(true);
+            expect(indicatorOnDataRasied).toBe(true);
         });
     });
 });

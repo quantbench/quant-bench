@@ -5,101 +5,126 @@ import * as candleEnums from "./candleEnums";
 import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
-export class TwoCrows
-    extends indicators.AbstractIndicator<marketData.PriceBar> {
+export class TwoCrows extends indicators.AbstractIndicator<
+  marketData.IPriceBar
+> {
+  public static INDICATOR_NAME: string = "CDL2CROWS";
+  public static INDICATOR_DESCR: string = "Two Crows";
 
-    static INDICATOR_NAME: string = "CDL2CROWS";
-    static INDICATOR_DESCR: string = "Two Crows";
+  private bodyLongPeriodTotal: number;
+  private bodyLongAveragePeriod: number;
+  private slidingWindow: SlidingWindow<marketData.IPriceBar>;
 
-    private bodyLongPeriodTotal: number;
-    private bodyLongAveragePeriod: number;
-    private slidingWindow: SlidingWindow<marketData.PriceBar>;
+  private thirdCandle: marketData.IPriceBar;
+  private secondCandle: marketData.IPriceBar;
+  private firstCandle: marketData.IPriceBar;
+  private thirdCandleColor: candleEnums.CandleColor;
+  private secondCandleColor: candleEnums.CandleColor;
+  private firstCandleColor: candleEnums.CandleColor;
 
-    private thirdCandle: marketData.PriceBar;
-    private secondCandle: marketData.PriceBar;
-    private firstCandle: marketData.PriceBar;
-    private thirdCandleColor: candleEnums.CandleColor;
-    private secondCandleColor: candleEnums.CandleColor;
-    private firstCandleColor: candleEnums.CandleColor;
+  constructor() {
+    super(TwoCrows.INDICATOR_NAME, TwoCrows.INDICATOR_DESCR);
 
-    constructor() {
-        super(TwoCrows.INDICATOR_NAME, TwoCrows.INDICATOR_DESCR);
+    this.bodyLongAveragePeriod = CandleSettings.get(
+      candleEnums.CandleSettingType.BodyLong
+    ).averagePeriod;
 
-        this.bodyLongAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyLong).averagePeriod;
+    this.bodyLongPeriodTotal = 0;
 
-        this.bodyLongPeriodTotal = 0;
+    const lookback = this.bodyLongAveragePeriod + 2;
+    this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+    this.setLookBack(lookback);
+  }
 
-        const lookback = this.bodyLongAveragePeriod + 2;
-        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
-        this.setLookBack(lookback);
+  public receiveData(inputData: marketData.IPriceBar): boolean {
+    this.slidingWindow.add(inputData);
+
+    if (!this.slidingWindow.isReady) {
+      this.seedSlidingWindow(inputData);
+      return this.isReady;
     }
 
-    receiveData(inputData: marketData.PriceBar): boolean {
-        this.slidingWindow.add(inputData);
+    this.populateCandleVariables();
 
-        if (!this.slidingWindow.isReady) {
-            this.seedSlidingWindow(inputData);
-            return this.isReady;
-        }
-
-        this.populateCandleVariables();
-
-        if (this.hasFirstWhiteCandleWithLongRealBody() &&
-            this.hasSecondBlackCandleThatGapsUp() &&
-            this.hasThirdBlackCandleOpeningWithSecondAndClosingWithinFirstRealBody()
-        ) {
-            this.setCurrentValue(-100);
-        } else {
-            this.setCurrentValue(0);
-        }
-
-        this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong,
-            this.thirdCandle) - CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong,
-                this.slidingWindow.getItem(this.bodyLongAveragePeriod));
-
-        return this.isReady;
+    if (
+      this.hasFirstWhiteCandleWithLongRealBody() &&
+      this.hasSecondBlackCandleThatGapsUp() &&
+      this.hasThirdBlackCandleOpeningWithSecondAndClosingWithinFirstRealBody()
+    ) {
+      this.setCurrentValue(-100);
+    } else {
+      this.setCurrentValue(0);
     }
 
-    private populateCandleVariables() {
-        this.firstCandle = this.slidingWindow.getItem(2);
-        this.secondCandle = this.slidingWindow.getItem(1);
-        this.thirdCandle = this.slidingWindow.getItem(0);
-        this.thirdCandleColor = CandleStickUtils.getCandleColor(this.thirdCandle);
-        this.secondCandleColor = CandleStickUtils.getCandleColor(this.secondCandle);
-        this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
-    }
+    this.bodyLongPeriodTotal +=
+      CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.BodyLong,
+        this.thirdCandle
+      ) -
+      CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.BodyLong,
+        this.slidingWindow.getItem(this.bodyLongAveragePeriod)
+      );
 
-    private seedSlidingWindow(inputData: marketData.PriceBar) {
-        if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyLongAveragePeriod - 2
-            && this.slidingWindow.samples < this.slidingWindow.period - 2) {
-            this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyLong, inputData);
-        }
-    }
+    return this.isReady;
+  }
 
-    private hasFirstWhiteCandleWithLongRealBody() {
-        return this.firstCandleColor === candleEnums.CandleColor.White &&
-            CandleStickUtils.getRealBody(this.firstCandle) >
-            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyLong,
-                this.bodyLongPeriodTotal, this.firstCandle);
-    }
+  private populateCandleVariables() {
+    this.firstCandle = this.slidingWindow.getItem(2);
+    this.secondCandle = this.slidingWindow.getItem(1);
+    this.thirdCandle = this.slidingWindow.getItem(0);
+    this.thirdCandleColor = CandleStickUtils.getCandleColor(this.thirdCandle);
+    this.secondCandleColor = CandleStickUtils.getCandleColor(this.secondCandle);
+    this.firstCandleColor = CandleStickUtils.getCandleColor(this.firstCandle);
+  }
 
-    private hasSecondBlackCandleThatGapsUp() {
-        return this.secondCandleColor === candleEnums.CandleColor.Black &&
-            this.hasGapUp(this.firstCandle, this.secondCandle);
+  private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    if (
+      this.slidingWindow.samples >=
+        this.slidingWindow.period - this.bodyLongAveragePeriod - 2 &&
+      this.slidingWindow.samples < this.slidingWindow.period - 2
+    ) {
+      this.bodyLongPeriodTotal += CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.BodyLong,
+        inputData
+      );
     }
+  }
 
-    private hasThirdBlackCandleOpeningWithSecondAndClosingWithinFirstRealBody() {
-        return this.thirdCandle.open < this.secondCandle.open &&
-            this.thirdCandle.open > this.secondCandle.close &&
-            this.thirdCandle.close > this.firstCandle.open &&
-            this.thirdCandle.close < this.firstCandle.close;
-    }
+  private hasFirstWhiteCandleWithLongRealBody() {
+    return (
+      this.firstCandleColor === candleEnums.CandleColor.White &&
+      CandleStickUtils.getRealBody(this.firstCandle) >
+        CandleStickUtils.getCandleAverage(
+          candleEnums.CandleSettingType.BodyLong,
+          this.bodyLongPeriodTotal,
+          this.firstCandle
+        )
+    );
+  }
 
-    private hasGapUp(firstCandle: marketData.PriceBar, secondCandle: marketData.PriceBar): boolean {
-        return CandleStickUtils.getRealBodyGapUp(secondCandle, firstCandle);
-    }
+  private hasSecondBlackCandleThatGapsUp() {
+    return (
+      this.secondCandleColor === candleEnums.CandleColor.Black &&
+      this.hasGapUp(this.firstCandle, this.secondCandle)
+    );
+  }
+
+  private hasThirdBlackCandleOpeningWithSecondAndClosingWithinFirstRealBody() {
+    return (
+      this.thirdCandle.open < this.secondCandle.open &&
+      this.thirdCandle.open > this.secondCandle.close &&
+      this.thirdCandle.close > this.firstCandle.open &&
+      this.thirdCandle.close < this.firstCandle.close
+    );
+  }
+
+  private hasGapUp(
+    firstCandle: marketData.IPriceBar,
+    secondCandle: marketData.IPriceBar
+  ): boolean {
+    return CandleStickUtils.getRealBodyGapUp(secondCandle, firstCandle);
+  }
 }
 
-export class CDL2CROWS extends TwoCrows {
-
-}
+export class CDL2CROWS extends TwoCrows {}

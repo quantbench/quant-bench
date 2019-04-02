@@ -1,10 +1,8 @@
-import * as chai from "chai";
+
+import * as jsonfile from "jsonfile";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
-
-chai.should();
 
 describe("MaxIndex Indicator", () => {
     let taResultFile: string;
@@ -27,15 +25,15 @@ describe("MaxIndex Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.MaxIndex.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.MaxIndex.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.MaxIndex.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.MaxIndex.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -45,7 +43,7 @@ describe("MaxIndex Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(timePeriod + 1);
+            expect(indicator.timePeriod).toBe(timePeriod + 1);
         });
     });
 
@@ -55,7 +53,7 @@ describe("MaxIndex Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.MaxIndex.TIMEPERIOD_DEFAULT);
+            expect(indicator.timePeriod).toBe(indicators.MaxIndex.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -72,7 +70,7 @@ describe("MaxIndex Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MaxIndex.TIMEPERIOD_MIN, 1);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 });

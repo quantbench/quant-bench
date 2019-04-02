@@ -1,13 +1,13 @@
-export interface Indicator<TInputType> {
-    name: string;
-    description: string;
-    isReady: boolean;
+export interface IIndicator<TInputType> {
+  name: string;
+  description: string;
+  isReady: boolean;
 
-    readonly lookback: number;
+  readonly lookback: number;
 }
 
-export interface NumericDataIndicator extends Indicator<number> {
-    readonly currentValue: number;
+export interface INumericDataIndicator extends IIndicator<number> {
+  readonly currentValue: number;
 
-    receiveData(inputData: number): boolean;
+  receiveData(inputData: number): boolean;
 }

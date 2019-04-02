@@ -1,10 +1,10 @@
-import * as chai from "chai";
+
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
+import * as jsonfile from "jsonfile";
 
-chai.should();
+
 
 describe("STOCHRSI Indicator", () => {
     let taResultFile: string;
@@ -31,15 +31,15 @@ describe("STOCHRSI Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.STOCHRSI.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.STOCHRSI.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.STOCHRSI.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.STOCHRSI.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -49,19 +49,19 @@ describe("STOCHRSI Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(timePeriod + 1);
+            expect(indicator.timePeriod).toBe(timePeriod + 1);
         });
 
         it("should set the fastKTimePeriod", () => {
-            indicator.fastKTimePeriod.should.equal(fastKTimePeriod + 1);
+            expect(indicator.fastKTimePeriod).toBe(fastKTimePeriod + 1);
         });
 
         it("should set the slowKTimePeriod", () => {
-            indicator.fastDTimePeriod.should.equal(fastDTimePeriod + 1);
+            expect(indicator.fastDTimePeriod).toBe(fastDTimePeriod + 1);
         });
 
         it("should set the fastDMAType", () => {
-            indicator.fastDMAType.should.equal(indicators.MA_TYPE.EMA);
+            expect(indicator.fastDMAType).toBe(indicators.MA_TYPE.EMA);
         });
     });
 
@@ -71,19 +71,19 @@ describe("STOCHRSI Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.STOCHRSI.TIMEPERIOD_DEFAULT);
+            expect(indicator.timePeriod).toBe(indicators.STOCHRSI.TIMEPERIOD_DEFAULT);
         });
 
         it("should set the fastKTimePeriod", () => {
-            indicator.fastKTimePeriod.should.equal(indicators.STOCHRSI.FASTKPERIOD_DEFAULT);
+            expect(indicator.fastKTimePeriod).toBe(indicators.STOCHRSI.FASTKPERIOD_DEFAULT);
         });
 
         it("should set the fastDTimePeriod", () => {
-            indicator.fastDTimePeriod.should.equal(indicators.STOCHRSI.FASTDPERIOD_DEFAULT);
+            expect(indicator.fastDTimePeriod).toBe(indicators.STOCHRSI.FASTDPERIOD_DEFAULT);
         });
 
         it("should set the fastDMAType", () => {
-            indicator.fastDMAType.should.equal(indicators.STOCHRSI.FASTDMATYPE_DEFAULT);
+            expect(indicator.fastDMAType).toBe(indicators.STOCHRSI.FASTDMATYPE_DEFAULT);
         });
     });
 
@@ -100,7 +100,7 @@ describe("STOCHRSI Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCHRSI.TIMEPERIOD_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -117,7 +117,7 @@ describe("STOCHRSI Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCHRSI.FASTKPERIOD_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -134,7 +134,7 @@ describe("STOCHRSI Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.STOCHRSI.FASTDPERIOD_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -154,15 +154,15 @@ describe("STOCHRSI Indicator", () => {
 
         it("should match the talib fastD results", () => {
             for (let i = 0; i < taResultData.result.outFastD.length; i++) {
-                isNaN(indicatorResults[i].fastD).should.be.false;
-                taResultData.result.outFastD[i].should.be.closeTo(indicatorResults[i].fastD, 0.001);
+                expect(isNaN(indicatorResults[i].fastD)).toBe(false);
+                expect(taResultData.result.outFastD[i]).toBeCloseTo(indicatorResults[i].fastD, 0.001);
             }
         });
 
         it("should match the talib fastK results", () => {
             for (let i = 0; i < taResultData.result.outFastK.length; i++) {
-                isNaN(indicatorResults[i].fastK).should.be.false;
-                taResultData.result.outFastK[i].should.be.closeTo(indicatorResults[i].fastK, 0.001);
+                expect(isNaN(indicatorResults[i].fastK)).toBe(false);
+                expect(taResultData.result.outFastK[i]).toBeCloseTo(indicatorResults[i].fastK, 0.001);
             }
         });
     });
@@ -182,11 +182,11 @@ describe("STOCHRSI Indicator", () => {
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(false);
+            expect(indicator.isReady).toBe(false);
         });
 
         it("should not have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(false);
+            expect(indicatorOnDataRasied).toBe(false);
         });
     });
 
@@ -210,11 +210,11 @@ describe("STOCHRSI Indicator", () => {
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(true);
+            expect(indicator.isReady).toBe(true);
         });
 
         it("should have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(true);
+            expect(indicatorOnDataRasied).toBe(true);
         });
     });
 });

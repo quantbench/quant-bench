@@ -1,4 +1,3 @@
-export * from "./PriceBar";
-export * from "./PriceVolumeBar";
-export * from "./TradeBar";
-
+export * from "./IPriceBar";
+export * from "./IPriceVolumeBar";
+export * from "./ITradeBar";

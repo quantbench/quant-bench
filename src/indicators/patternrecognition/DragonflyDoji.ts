@@ -5,79 +5,121 @@ import * as candleEnums from "./candleEnums";
 import { CandleSettings } from "./candleSettings";
 import { CandleStickUtils } from "./candleUtils";
 
-export class DragonflyDoji
-    extends indicators.AbstractIndicator<marketData.PriceBar> {
+export class DragonflyDoji extends indicators.AbstractIndicator<
+  marketData.IPriceBar
+> {
+  public static INDICATOR_NAME: string = "CDLDRAGONFLYDOJI";
+  public static INDICATOR_DESCR: string = "Dragonfly Doji";
 
-    static INDICATOR_NAME: string = "CDLDRAGONFLYDOJI";
-    static INDICATOR_DESCR: string = "Dragonfly Doji";
+  private bodyDojiPeriodTotal: number;
 
-    private bodyDojiPeriodTotal: number;
+  private bodyDojiAveragePeriod: number;
 
-    private bodyDojiAveragePeriod: number;
+  private shadowVeryShortPeriodTotal: number;
 
-    private shadowVeryShortPeriodTotal: number;
+  private shadowVeryShortAveragePeriod: number;
 
-    private shadowVeryShortAveragePeriod: number;
+  private slidingWindow: SlidingWindow<marketData.IPriceBar>;
 
-    private slidingWindow: SlidingWindow<marketData.PriceBar>;
+  constructor() {
+    super(DragonflyDoji.INDICATOR_NAME, DragonflyDoji.INDICATOR_DESCR);
 
-    constructor() {
-        super(DragonflyDoji.INDICATOR_NAME, DragonflyDoji.INDICATOR_DESCR);
+    this.bodyDojiAveragePeriod = CandleSettings.get(
+      candleEnums.CandleSettingType.BodyDoji
+    ).averagePeriod;
+    this.shadowVeryShortAveragePeriod = CandleSettings.get(
+      candleEnums.CandleSettingType.ShadowVeryShort
+    ).averagePeriod;
 
-        this.bodyDojiAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod;
-        this.shadowVeryShortAveragePeriod = CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod;
+    this.bodyDojiPeriodTotal = 0;
+    this.shadowVeryShortPeriodTotal = 0;
 
-        this.bodyDojiPeriodTotal = 0;
-        this.shadowVeryShortPeriodTotal = 0;
+    const lookback = Math.max(
+      CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod,
+      CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort)
+        .averagePeriod
+    );
+    this.slidingWindow = new SlidingWindow<marketData.IPriceBar>(lookback + 1);
+    this.setLookBack(lookback);
+  }
 
-        const lookback = Math.max(CandleSettings.get(candleEnums.CandleSettingType.BodyDoji).averagePeriod,
-            CandleSettings.get(candleEnums.CandleSettingType.ShadowVeryShort).averagePeriod);
-        this.slidingWindow = new SlidingWindow<marketData.PriceBar>(lookback + 1);
-        this.setLookBack(lookback);
+  public receiveData(inputData: marketData.IPriceBar): boolean {
+    this.slidingWindow.add(inputData);
+
+    if (!this.slidingWindow.isReady) {
+      this.seedSlidingWindow(inputData);
+      return this.isReady;
     }
 
-    receiveData(inputData: marketData.PriceBar): boolean {
-        this.slidingWindow.add(inputData);
-
-        if (!this.slidingWindow.isReady) {
-            this.seedSlidingWindow(inputData);
-            return this.isReady;
-        }
-
-        if (CandleStickUtils.getRealBody(inputData) <=
-            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.BodyDoji, this.bodyDojiPeriodTotal, inputData) &&
-            CandleStickUtils.getUpperShadow(inputData) <
-            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.ShadowVeryShort,
-                this.shadowVeryShortPeriodTotal, inputData) &&
-            CandleStickUtils.getLowerShadow(inputData) >
-            CandleStickUtils.getCandleAverage(candleEnums.CandleSettingType.ShadowVeryShort, this.shadowVeryShortPeriodTotal, inputData)
-        ) {
-            this.setCurrentValue(100);
-        } else {
-            this.setCurrentValue(0);
-        }
-
-        this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData) -
-            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, this.slidingWindow.getItem(this.bodyDojiAveragePeriod));
-
-        this.shadowVeryShortPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort, inputData) -
-            CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort,
-                this.slidingWindow.getItem(this.shadowVeryShortAveragePeriod));
-
-        return this.isReady;
+    if (
+      CandleStickUtils.getRealBody(inputData) <=
+        CandleStickUtils.getCandleAverage(
+          candleEnums.CandleSettingType.BodyDoji,
+          this.bodyDojiPeriodTotal,
+          inputData
+        ) &&
+      CandleStickUtils.getUpperShadow(inputData) <
+        CandleStickUtils.getCandleAverage(
+          candleEnums.CandleSettingType.ShadowVeryShort,
+          this.shadowVeryShortPeriodTotal,
+          inputData
+        ) &&
+      CandleStickUtils.getLowerShadow(inputData) >
+        CandleStickUtils.getCandleAverage(
+          candleEnums.CandleSettingType.ShadowVeryShort,
+          this.shadowVeryShortPeriodTotal,
+          inputData
+        )
+    ) {
+      this.setCurrentValue(100);
+    } else {
+      this.setCurrentValue(0);
     }
 
-    private seedSlidingWindow(inputData: marketData.PriceBar) {
-        if (this.slidingWindow.samples >= this.slidingWindow.period - this.bodyDojiAveragePeriod) {
-            this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.BodyDoji, inputData);
-        }
+    this.bodyDojiPeriodTotal +=
+      CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.BodyDoji,
+        inputData
+      ) -
+      CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.BodyDoji,
+        this.slidingWindow.getItem(this.bodyDojiAveragePeriod)
+      );
 
-        if (this.slidingWindow.samples >= this.slidingWindow.period - this.shadowVeryShortAveragePeriod) {
-            this.shadowVeryShortPeriodTotal += CandleStickUtils.getCandleRange(candleEnums.CandleSettingType.ShadowVeryShort, inputData);
-        }
+    this.shadowVeryShortPeriodTotal +=
+      CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.ShadowVeryShort,
+        inputData
+      ) -
+      CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.ShadowVeryShort,
+        this.slidingWindow.getItem(this.shadowVeryShortAveragePeriod)
+      );
+
+    return this.isReady;
+  }
+
+  private seedSlidingWindow(inputData: marketData.IPriceBar) {
+    if (
+      this.slidingWindow.samples >=
+      this.slidingWindow.period - this.bodyDojiAveragePeriod
+    ) {
+      this.bodyDojiPeriodTotal += CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.BodyDoji,
+        inputData
+      );
     }
+
+    if (
+      this.slidingWindow.samples >=
+      this.slidingWindow.period - this.shadowVeryShortAveragePeriod
+    ) {
+      this.shadowVeryShortPeriodTotal += CandleStickUtils.getCandleRange(
+        candleEnums.CandleSettingType.ShadowVeryShort,
+        inputData
+      );
+    }
+  }
 }
 
-export class CDLDRAGONFLYDOJI extends DragonflyDoji {
-
-}
+export class CDLDRAGONFLYDOJI extends DragonflyDoji {}

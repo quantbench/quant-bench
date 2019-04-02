@@ -5,18 +5,22 @@
 import { CandleRangeType } from "./candleEnums";
 
 export class CandleSetting {
-    // The candle range type
-    public readonly rangeType: CandleRangeType;
+  // The candle range type
+  public readonly rangeType: CandleRangeType;
 
-    // The number of previous candles to average
-    public readonly averagePeriod: number;
+  // The number of previous candles to average
+  public readonly averagePeriod: number;
 
-    // A multiplier to calculate candle ranges
-    public readonly factor: number;
+  // A multiplier to calculate candle ranges
+  public readonly factor: number;
 
-    public constructor(rangeType: CandleRangeType, averagePeriod: number, factor: number) {
-        this.rangeType = rangeType;
-        this.averagePeriod = averagePeriod;
-        this.factor = factor;
-    }
+  public constructor(
+    rangeType: CandleRangeType,
+    averagePeriod: number,
+    factor: number
+  ) {
+    this.rangeType = rangeType;
+    this.averagePeriod = averagePeriod;
+    this.factor = factor;
+  }
 }

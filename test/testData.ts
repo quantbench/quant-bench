@@ -1,5 +1,5 @@
 import * as path from "path";
-const jsonfile = require("jsonfile");
+import * as jsonfile from "jsonfile";
 
 export interface ITestData {
     sourceData: any;

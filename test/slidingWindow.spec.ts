@@ -1,7 +1,7 @@
 import { SlidingWindow } from "../src/indicators/SlidingWindow";
 
-import * as chai from "chai";
-chai.should();
+
+
 
 describe("Sliding Window", () => {
     const windowSize = 5;
@@ -19,7 +19,7 @@ describe("Sliding Window", () => {
         });
 
         it("should set the window size", () => {
-            window.size.should.be.equal(windowSize);
+            expect(window.size).toBe(windowSize);
         });
 
         it("should not throw an exception", () => {
@@ -39,7 +39,7 @@ describe("Sliding Window", () => {
         });
 
         it("should throw the appropriate exception", () => {
-            exception.message.should.equal(SlidingWindow.INVALID_WINDOW_SIZE);
+            expect(exception.message).toBe(SlidingWindow.INVALID_WINDOW_SIZE);
         });
     });
 
@@ -55,17 +55,17 @@ describe("Sliding Window", () => {
 
         it("should add in order", () => {
             let result = window.getItem(0);
-            result.should.be.equal(3);
+            expect(result).toBe(3);
 
             result = window.getItem(1);
-            result.should.be.equal(2);
+            expect(result).toBe(2);
 
             result = window.getItem(2);
-            result.should.be.equal(1);
+            expect(result).toBe(1);
         });
 
         it("should reflect the correct number of items currently added", () => {
-            window.count.should.be.equal(3);
+            expect(window.count).toBe(3);
         });
     });
 
@@ -84,20 +84,20 @@ describe("Sliding Window", () => {
 
         it("should add in order", () => {
             let result = window.getItem(0);
-            result.should.be.equal(6);
+            expect(result).toBe(6);
 
             result = window.getItem(1);
-            result.should.be.equal(5);
+            expect(result).toBe(5);
 
             result = window.getItem(2);
-            result.should.be.equal(4);
+            expect(result).toBe(4);
 
             result = window.getItem(3);
-            result.should.be.equal(3);
+            expect(result).toBe(3);
         });
 
         it("should reflect the correct number of items currently added up to the window size", () => {
-            window.count.should.be.equal(5);
+            expect(window.count).toBe(5);
         });
     });
 
@@ -118,7 +118,7 @@ describe("Sliding Window", () => {
                 exception = error;
             }
 
-            exception.message.should.be.equal(SlidingWindow.INVALID_WINDOW_INDEX + 3 + ": 5");
+            expect(exception.message).toBe(SlidingWindow.INVALID_WINDOW_INDEX + 3 + ": 5");
         });
 
     });

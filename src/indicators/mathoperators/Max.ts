@@ -1,49 +1,54 @@
 import * as indicators from "../";
 
-export class Max
-    extends indicators.AbstractIndicator<number> {
+export class Max extends indicators.AbstractIndicator<number> {
+  public static INDICATOR_NAME: string = "Max";
+  public static INDICATOR_DESCR: string =
+    "Highest value over a specified period";
+  public static TIMEPERIOD_DEFAULT: number = 30;
+  public static TIMEPERIOD_MIN: number = 2;
 
-    static INDICATOR_NAME: string = "Max";
-    static INDICATOR_DESCR: string = "Highest value over a specified period";
-    static TIMEPERIOD_DEFAULT: number = 30;
-    static TIMEPERIOD_MIN: number = 2;
+  public timePeriod: number;
+  private periodHistory: indicators.Queue<number>;
+  private currentHigh: number;
 
-    public timePeriod: number;
-    private periodHistory: indicators.Queue<number>;
-    private currentHigh: number;
+  constructor(timePeriod: number = Max.TIMEPERIOD_DEFAULT) {
+    super(Max.INDICATOR_NAME, Max.INDICATOR_DESCR);
 
-    constructor(timePeriod: number = Max.TIMEPERIOD_DEFAULT) {
-        super(Max.INDICATOR_NAME, Max.INDICATOR_DESCR);
-
-        if (timePeriod < Max.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, Max.TIMEPERIOD_MIN, timePeriod)));
-        }
-
-        this.timePeriod = timePeriod;
-        this.currentHigh = Number.MIN_VALUE;
-        this.periodHistory = new indicators.Queue<number>();
-
-        this.setLookBack(this.timePeriod - 1);
+    if (timePeriod < Max.TIMEPERIOD_MIN) {
+      throw new Error(
+        indicators.generateMinTimePeriodError(
+          this.name,
+          Max.TIMEPERIOD_MIN,
+          timePeriod
+        )
+      );
     }
 
-    receiveData(inputData: number): boolean {
-        this.periodHistory.enqueue(inputData);
+    this.timePeriod = timePeriod;
+    this.currentHigh = Number.MIN_VALUE;
+    this.periodHistory = new indicators.Queue<number>();
 
-        if (this.periodHistory.count > this.timePeriod) {
-            this.periodHistory.dequeue();
+    this.setLookBack(this.timePeriod - 1);
+  }
 
-            this.currentHigh = indicators.getQueueMax(this.periodHistory);
+  public receiveData(inputData: number): boolean {
+    this.periodHistory.enqueue(inputData);
 
-            this.setCurrentValue(this.currentHigh);
-        } else {
-            if (inputData > this.currentHigh) {
-                this.currentHigh = inputData;
-            }
+    if (this.periodHistory.count > this.timePeriod) {
+      this.periodHistory.dequeue();
 
-            if (this.periodHistory.count === this.timePeriod) {
-                this.setCurrentValue(this.currentHigh);
-            }
-        }
-        return this.isReady;
+      this.currentHigh = indicators.getQueueMax(this.periodHistory);
+
+      this.setCurrentValue(this.currentHigh);
+    } else {
+      if (inputData > this.currentHigh) {
+        this.currentHigh = inputData;
+      }
+
+      if (this.periodHistory.count === this.timePeriod) {
+        this.setCurrentValue(this.currentHigh);
+      }
     }
+    return this.isReady;
+  }
 }

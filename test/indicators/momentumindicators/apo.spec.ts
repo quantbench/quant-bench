@@ -1,10 +1,8 @@
-import * as chai from "chai";
+
+import * as jsonfile from "jsonfile";
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
-
-chai.should();
 
 describe("APO Indicator", () => {
     let taResultFile: string;
@@ -30,15 +28,15 @@ describe("APO Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.APO.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.APO.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.APO.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.APO.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -48,7 +46,7 @@ describe("APO Indicator", () => {
         });
 
         it("should set the fastTimePeriod", () => {
-            indicator.fastTimePeriod.should.equal(fastTimePeriod + 1);
+            expect(indicator.fastTimePeriod).toBe(fastTimePeriod + 1);
         });
     });
 
@@ -58,7 +56,7 @@ describe("APO Indicator", () => {
         });
 
         it("should set the slowTimePeriod", () => {
-            indicator.slowTimePeriod.should.equal(slowTimePeriod + 1);
+            expect(indicator.slowTimePeriod).toBe(slowTimePeriod + 1);
         });
     });
 
@@ -68,7 +66,7 @@ describe("APO Indicator", () => {
         });
 
         it("should set the maType", () => {
-            indicator.maType.should.equal(maType + 1);
+            expect(indicator.maType).toBe(maType + 1);
         });
     });
 
@@ -78,15 +76,15 @@ describe("APO Indicator", () => {
         });
 
         it("should set the fastTimePeriod", () => {
-            indicator.fastTimePeriod.should.equal(indicators.APO.FAST_TIMEPERIOD_DEFAULT);
+            expect(indicator.fastTimePeriod).toBe(indicators.APO.FAST_TIMEPERIOD_DEFAULT);
         });
 
         it("should set the slowTimePeriod", () => {
-            indicator.slowTimePeriod.should.equal(indicators.APO.SLOW_TIMEPERIOD_DEFAULT);
+            expect(indicator.slowTimePeriod).toBe(indicators.APO.SLOW_TIMEPERIOD_DEFAULT);
         });
 
         it("should set the maType", () => {
-            indicator.maType.should.equal(indicators.APO.MATYPE_DEFAULT);
+            expect(indicator.maType).toBe(indicators.APO.MATYPE_DEFAULT);
         });
     });
 
@@ -103,7 +101,7 @@ describe("APO Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.FAST_TIMEPERIOD_MIN, 1);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -120,7 +118,7 @@ describe("APO Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.APO.SLOW_TIMEPERIOD_MIN, 1);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -138,13 +136,13 @@ describe("APO Indicator", () => {
 
         it("should match the talib results", () => {
             for (let i = 0; i < taResultData.result.outReal.length; i++) {
-                isNaN(indicatorResults[i]).should.be.false;
-                taResultData.result.outReal[i].should.be.closeTo(indicatorResults[i], 0.001);
+                expect(isNaN(indicatorResults[i])).toBe(false);
+                expect(taResultData.result.outReal[i]).toBeCloseTo(indicatorResults[i], 0.001);
             }
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -166,11 +164,11 @@ describe("APO Indicator", () => {
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(false);
+            expect(indicator.isReady).toBe(false);
         });
 
         it("should not have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(false);
+            expect(indicatorOnDataRasied).toBe(false);
         });
     });
 
@@ -192,11 +190,11 @@ describe("APO Indicator", () => {
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(true);
+            expect(indicator.isReady).toBe(true);
         });
 
         it("should have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(true);
+            expect(indicatorOnDataRasied).toBe(true);
         });
     });
 });

@@ -1,71 +1,83 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class CommodityChannelIndex
-    extends indicators.AbstractIndicator<marketData.PriceBar> {
+export class CommodityChannelIndex extends indicators.AbstractIndicator<
+  marketData.IPriceBar
+> {
+  public static INDICATOR_NAME: string = "CCI";
+  public static INDICATOR_DESCR: string = "Commodity Channel Index";
+  public static TIMEPERIOD_DEFAULT: number = 14;
+  public static TIMEPERIOD_MIN: number = 2;
 
-    static INDICATOR_NAME: string = "CCI";
-    static INDICATOR_DESCR: string = "Commodity Channel Index";
-    static TIMEPERIOD_DEFAULT: number = 14;
-    static TIMEPERIOD_MIN: number = 2;
+  public timePeriod: number;
 
-    public timePeriod: number;
+  private periodCounter: number;
+  private sma: indicators.SMA;
+  private factor: number;
+  private typicalPriceHistory: indicators.Queue<number>;
+  private currentTypicalPrice: number;
 
-    private periodCounter: number;
-    private sma: indicators.SMA;
-    private factor: number;
-    private typicalPriceHistory: indicators.Queue<number>;
-    private currentTypicalPrice: number;
+  constructor(timePeriod: number = CommodityChannelIndex.TIMEPERIOD_DEFAULT) {
+    super(
+      CommodityChannelIndex.INDICATOR_NAME,
+      CommodityChannelIndex.INDICATOR_DESCR
+    );
 
-    constructor(timePeriod: number = CommodityChannelIndex.TIMEPERIOD_DEFAULT) {
-        super(CommodityChannelIndex.INDICATOR_NAME, CommodityChannelIndex.INDICATOR_DESCR);
-
-        if (timePeriod < CommodityChannelIndex.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, CommodityChannelIndex.TIMEPERIOD_MIN, timePeriod)));
-        }
-
-        this.timePeriod = timePeriod;
-        this.typicalPriceHistory = new indicators.Queue<number>();
-        this.factor = 0.015;
-        this.periodCounter = this.timePeriod * -1;
-        this.sma = new indicators.SMA(timePeriod);
-        this.sma.on("data", (data: number) => { this.receiveSMAData(data); });
-
-        this.setLookBack(timePeriod - 1);
+    if (timePeriod < CommodityChannelIndex.TIMEPERIOD_MIN) {
+      throw new Error(
+        indicators.generateMinTimePeriodError(
+          this.name,
+          CommodityChannelIndex.TIMEPERIOD_MIN,
+          timePeriod
+        )
+      );
     }
 
-    receiveData(inputData: marketData.PriceBar): boolean {
-        this.periodCounter += 1;
+    this.timePeriod = timePeriod;
+    this.typicalPriceHistory = new indicators.Queue<number>();
+    this.factor = 0.015;
+    this.periodCounter = this.timePeriod * -1;
+    this.sma = new indicators.SMA(timePeriod);
+    this.sma.on("data", (data: number) => {
+      this.receiveSMAData(data);
+    });
 
-        // calculate the typical price
-        this.currentTypicalPrice = (inputData.high + inputData.low + inputData.close) / 3;
+    this.setLookBack(timePeriod - 1);
+  }
 
-        // push it to the history
-        this.typicalPriceHistory.enqueue(this.currentTypicalPrice);
+  public receiveData(inputData: marketData.IPriceBar): boolean {
+    this.periodCounter += 1;
 
-        // trim the history
-        if (this.typicalPriceHistory.count > this.timePeriod) {
-            this.typicalPriceHistory.dequeue();
-        }
+    // calculate the typical price
+    this.currentTypicalPrice =
+      (inputData.high + inputData.low + inputData.close) / 3;
 
-        // add it to the average
-        this.sma.receiveData(this.currentTypicalPrice);
+    // push it to the history
+    this.typicalPriceHistory.enqueue(this.currentTypicalPrice);
 
-        return this.isReady;
+    // trim the history
+    if (this.typicalPriceHistory.count > this.timePeriod) {
+      this.typicalPriceHistory.dequeue();
     }
 
-    private receiveSMAData(data: number) {
-        let meanDeviation = 0;
-        // calculate the mean deviation
-        this.typicalPriceHistory.toArray().forEach((typicalPrice) => {
-            meanDeviation += Math.abs(typicalPrice - data);
-        });
+    // add it to the average
+    this.sma.receiveData(this.currentTypicalPrice);
 
-        meanDeviation /= this.timePeriod;
-        this.setCurrentValue((this.currentTypicalPrice - data) / (this.factor * meanDeviation));
-    }
+    return this.isReady;
+  }
+
+  private receiveSMAData(data: number) {
+    let meanDeviation = 0;
+    // calculate the mean deviation
+    this.typicalPriceHistory.toArray().forEach(typicalPrice => {
+      meanDeviation += Math.abs(typicalPrice - data);
+    });
+
+    meanDeviation /= this.timePeriod;
+    this.setCurrentValue(
+      (this.currentTypicalPrice - data) / (this.factor * meanDeviation)
+    );
+  }
 }
 
-export class CCI extends CommodityChannelIndex {
-
-}
+export class CCI extends CommodityChannelIndex {}

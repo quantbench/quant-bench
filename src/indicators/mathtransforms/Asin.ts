@@ -1,17 +1,15 @@
 import * as indicators from "../";
 
-export class Asin
-    extends indicators.AbstractIndicator<number> {
+export class Asin extends indicators.AbstractIndicator<number> {
+  public static INDICATOR_NAME: string = "ASIN";
+  public static INDICATOR_DESCR: string = "Vector Trigonometric Asin";
 
-    static INDICATOR_NAME: string = "ASIN";
-    static INDICATOR_DESCR: string = "Vector Trigonometric Asin";
+  constructor() {
+    super(Asin.INDICATOR_NAME, Asin.INDICATOR_DESCR);
+  }
 
-    constructor() {
-        super(Asin.INDICATOR_NAME, Asin.INDICATOR_DESCR);
-    }
-
-    receiveData(inputData: number): boolean {
-        this.setCurrentValue(Math.asin(inputData));
-        return this.isReady;
-    }
+  public receiveData(inputData: number): boolean {
+    this.setCurrentValue(Math.asin(inputData));
+    return this.isReady;
+  }
 }

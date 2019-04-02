@@ -1,10 +1,10 @@
-import * as chai from "chai";
+
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
+import * as jsonfile from "jsonfile";
 
-chai.should();
+
 
 describe("ULTOSC Indicator", () => {
     let taResultFile: string;
@@ -30,15 +30,15 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.ULTOSC.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.ULTOSC.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.ULTOSC.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.ULTOSC.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -48,15 +48,15 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("should set the timePeriod1", () => {
-            indicator.timePeriod1.should.equal(timePeriod1 + 1);
+            expect(indicator.timePeriod1).toBe(timePeriod1 + 1);
         });
 
         it("should set the timePeriod2", () => {
-            indicator.timePeriod2.should.equal(timePeriod2 + 1);
+            expect(indicator.timePeriod2).toBe(timePeriod2 + 1);
         });
 
         it("should set the timePeriod3", () => {
-            indicator.timePeriod3.should.equal(timePeriod3 + 1);
+            expect(indicator.timePeriod3).toBe(timePeriod3 + 1);
         });
     });
 
@@ -66,15 +66,15 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("should set the timePeriod1", () => {
-            indicator.timePeriod1.should.equal(indicators.ULTOSC.TIMEPERIOD1_DEFAULT);
+            expect(indicator.timePeriod1).toBe(indicators.ULTOSC.TIMEPERIOD1_DEFAULT);
         });
 
         it("should set the timePeriod2", () => {
-            indicator.timePeriod2.should.equal(indicators.ULTOSC.TIMEPERIOD2_DEFAULT);
+            expect(indicator.timePeriod2).toBe(indicators.ULTOSC.TIMEPERIOD2_DEFAULT);
         });
 
         it("should set the timePeriod3", () => {
-            indicator.timePeriod3.should.equal(indicators.ULTOSC.TIMEPERIOD3_DEFAULT);
+            expect(indicator.timePeriod3).toBe(indicators.ULTOSC.TIMEPERIOD3_DEFAULT);
         });
     });
 
@@ -91,7 +91,7 @@ describe("ULTOSC Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD1_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -108,7 +108,7 @@ describe("ULTOSC Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD2_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -125,7 +125,7 @@ describe("ULTOSC Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.ULTOSC.TIMEPERIOD3_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -148,13 +148,13 @@ describe("ULTOSC Indicator", () => {
 
         it("should match the talib results", () => {
             for (let i = 0; i < taResultData.result.outReal.length; i++) {
-                isNaN(indicatorResults[i]).should.be.false;
-                taResultData.result.outReal[i].should.be.closeTo(indicatorResults[i], 0.001);
+                expect(isNaN(indicatorResults[i])).toBe(false);
+                expect(taResultData.result.outReal[i]).toBeCloseTo(indicatorResults[i], 0.001);
             }
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -181,11 +181,11 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(false);
+            expect(indicator.isReady).toBe(false);
         });
 
         it("should not have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(false);
+            expect(indicatorOnDataRasied).toBe(false);
         });
     });
 
@@ -212,11 +212,11 @@ describe("ULTOSC Indicator", () => {
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(true);
+            expect(indicator.isReady).toBe(true);
         });
 
         it("should have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(true);
+            expect(indicatorOnDataRasied).toBe(true);
         });
     });
 });

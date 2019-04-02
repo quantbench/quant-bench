@@ -1,89 +1,102 @@
 import * as indicators from "../";
 import * as marketData from "../../data/market/";
 
-export class MinusDirectionalMovement
-    extends indicators.AbstractIndicator<marketData.PriceBar> {
+export class MinusDirectionalMovement extends indicators.AbstractIndicator<
+  marketData.IPriceBar
+> {
+  public static INDICATOR_NAME: string = "MINUSDM";
+  public static INDICATOR_DESCR: string = "Minus Directional Movement";
+  public static TIMEPERIOD_DEFAULT: number = 14;
+  public static TIMEPERIOD_MIN: number = 1;
 
-    static INDICATOR_NAME: string = "MINUSDM";
-    static INDICATOR_DESCR: string = "Minus Directional Movement";
-    static TIMEPERIOD_DEFAULT: number = 14;
-    static TIMEPERIOD_MIN: number = 1;
+  public timePeriod: number;
 
-    public timePeriod: number;
+  private periodCounter: number;
+  private previousHigh: number;
+  private previousLow: number;
+  private previousMinusDM: number;
 
-    private periodCounter: number;
-    private previousHigh: number;
-    private previousLow: number;
-    private previousMinusDM: number;
+  private currentHigh: number;
+  private currentLow: number;
+  private diffP: number;
+  private diffM: number;
 
-    private currentHigh: number;
-    private currentLow: number;
-    private diffP: number;
-    private diffM: number;
+  constructor(
+    timePeriod: number = MinusDirectionalMovement.TIMEPERIOD_DEFAULT
+  ) {
+    super(
+      MinusDirectionalMovement.INDICATOR_NAME,
+      MinusDirectionalMovement.INDICATOR_DESCR
+    );
 
-    constructor(timePeriod: number = MinusDirectionalMovement.TIMEPERIOD_DEFAULT) {
-        super(MinusDirectionalMovement.INDICATOR_NAME, MinusDirectionalMovement.INDICATOR_DESCR);
-
-        if (timePeriod < MinusDirectionalMovement.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MinusDirectionalMovement.TIMEPERIOD_MIN, timePeriod)));
-        }
-
-        this.periodCounter = -1;
-
-        this.previousHigh = 0;
-        this.previousLow = 0;
-        this.previousMinusDM = 0;
-        this.currentHigh = 0;
-        this.currentLow = 0;
-        this.diffP = 0;
-        this.diffM = 0;
-        this.timePeriod = timePeriod;
-        this.setLookBack(timePeriod - 1);
+    if (timePeriod < MinusDirectionalMovement.TIMEPERIOD_MIN) {
+      throw new Error(
+        indicators.generateMinTimePeriodError(
+          this.name,
+          MinusDirectionalMovement.TIMEPERIOD_MIN,
+          timePeriod
+        )
+      );
     }
 
-    receiveData(inputData: marketData.PriceBar): boolean {
-        this.periodCounter += 1;
-        this.currentHigh = inputData.high;
-        this.currentLow = inputData.low;
-        this.diffP = this.currentHigh - this.previousHigh;
-        this.diffM = this.previousLow - this.currentLow;
+    this.periodCounter = -1;
 
-        if (this.lookback === 1) {
-            if (this.periodCounter > 0) {
-                if ((this.diffM > 0) && (this.diffP < this.diffM)) {
-                    this.setCurrentValue(this.diffM);
-                } else {
-                    this.setCurrentValue(0);
-                }
-            }
+    this.previousHigh = 0;
+    this.previousLow = 0;
+    this.previousMinusDM = 0;
+    this.currentHigh = 0;
+    this.currentLow = 0;
+    this.diffP = 0;
+    this.diffM = 0;
+    this.timePeriod = timePeriod;
+    this.setLookBack(timePeriod - 1);
+  }
+
+  public receiveData(inputData: marketData.IPriceBar): boolean {
+    this.periodCounter += 1;
+    this.currentHigh = inputData.high;
+    this.currentLow = inputData.low;
+    this.diffP = this.currentHigh - this.previousHigh;
+    this.diffM = this.previousLow - this.currentLow;
+
+    if (this.lookback === 1) {
+      if (this.periodCounter > 0) {
+        if (this.diffM > 0 && this.diffP < this.diffM) {
+          this.setCurrentValue(this.diffM);
         } else {
-            if (this.periodCounter > 0) {
-                if (this.periodCounter < this.timePeriod) {
-                    if ((this.diffM > 0) && (this.diffP < this.diffM)) {
-                        this.previousMinusDM += this.diffM;
-                    }
-
-                    if (this.periodCounter === this.timePeriod - 1) {
-                        this.setCurrentValue(this.previousMinusDM);
-                    }
-                } else {
-                    if ((this.diffM > 0) && (this.diffP < this.diffM)) {
-                        this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod) + this.diffM;
-                    } else {
-                        this.previousMinusDM = this.previousMinusDM - (this.previousMinusDM / this.timePeriod);
-                    }
-
-                    this.setCurrentValue(this.previousMinusDM);
-                }
-            }
+          this.setCurrentValue(0);
         }
+      }
+    } else {
+      if (this.periodCounter > 0) {
+        if (this.periodCounter < this.timePeriod) {
+          if (this.diffM > 0 && this.diffP < this.diffM) {
+            this.previousMinusDM += this.diffM;
+          }
 
-        this.previousHigh = this.currentHigh;
-        this.previousLow = this.currentLow;
-        return this.isReady;
+          if (this.periodCounter === this.timePeriod - 1) {
+            this.setCurrentValue(this.previousMinusDM);
+          }
+        } else {
+          if (this.diffM > 0 && this.diffP < this.diffM) {
+            this.previousMinusDM =
+              this.previousMinusDM -
+              this.previousMinusDM / this.timePeriod +
+              this.diffM;
+          } else {
+            this.previousMinusDM =
+              this.previousMinusDM - this.previousMinusDM / this.timePeriod;
+          }
+
+          this.setCurrentValue(this.previousMinusDM);
+        }
+      }
     }
+
+    this.previousHigh = this.currentHigh;
+    this.previousLow = this.currentLow;
+    return this.isReady;
+  }
 }
 
-export class MINUSDM extends MinusDirectionalMovement {
-
-}
+export class MINUSDM extends MinusDirectionalMovement {}

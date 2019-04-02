@@ -1,13 +1,13 @@
-import { PriceBar } from "./PriceBar";
+import { IPriceBar } from "./IPriceBar";
 
-export interface TradeBar extends PriceBar {
-    readonly symbol: string;
-    readonly time: Date;
-    readonly open: number;
-    readonly high: number;
-    readonly low: number;
-    readonly close: number;
-    readonly volume: number;
+export interface ITradeBar extends IPriceBar {
+  readonly symbol: string;
+  readonly time: Date;
+  readonly open: number;
+  readonly high: number;
+  readonly low: number;
+  readonly close: number;
+  readonly volume: number;
 }
 
 // export class TradeBar implements ITradeBar {

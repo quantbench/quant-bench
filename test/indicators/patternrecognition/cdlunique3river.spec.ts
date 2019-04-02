@@ -1,10 +1,10 @@
-import * as chai from "chai";
+
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
+import * as jsonfile from "jsonfile";
 
-chai.should();
+
 
 describe("CDLUNIQUE3RIVER Indicator", () => {
     let taResultFile: string;
@@ -29,15 +29,15 @@ describe("CDLUNIQUE3RIVER Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.CDLUNIQUE3RIVER.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.CDLUNIQUE3RIVER.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.CDLUNIQUE3RIVER.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.CDLUNIQUE3RIVER.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -60,13 +60,13 @@ describe("CDLUNIQUE3RIVER Indicator", () => {
 
         it("should match the talib results", () => {
             for (let i = 0; i < taResultData.result.outInteger.length; i++) {
-                isNaN(indicatorResults[i]).should.be.false;
-                taResultData.result.outInteger[i].should.be.closeTo(indicatorResults[i], 0.001);
+                expect(isNaN(indicatorResults[i])).toBe(false);
+                expect(taResultData.result.outInteger[i]).toBeCloseTo(indicatorResults[i], 0.001);
             }
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -88,11 +88,11 @@ describe("CDLUNIQUE3RIVER Indicator", () => {
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(false);
+            expect(indicator.isReady).toBe(false);
         });
 
         it("should not have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(false);
+            expect(indicatorOnDataRasied).toBe(false);
         });
     });
 
@@ -114,11 +114,11 @@ describe("CDLUNIQUE3RIVER Indicator", () => {
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(true);
+            expect(indicator.isReady).toBe(true);
         });
 
         it("should have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(true);
+            expect(indicatorOnDataRasied).toBe(true);
         });
     });
 });

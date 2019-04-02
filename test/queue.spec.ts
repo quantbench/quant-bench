@@ -1,7 +1,7 @@
 import { Queue } from "../src/indicators/Queue";
 
-import * as chai from "chai";
-chai.should();
+
+
 
 describe("Queue", () => {
     const queue = new Queue<number>();
@@ -17,9 +17,9 @@ describe("Queue", () => {
 
         it("should enqueue in order", () => {
             const result = queue.toArray();
-            result[0].should.be.equal(1);
-            result[1].should.be.equal(2);
-            result[2].should.be.equal(3);
+            expect(result[0]).toBe(1);
+            expect(result[1]).toBe(2);
+            expect(result[2]).toBe(3);
         });
     });
 
@@ -35,8 +35,8 @@ describe("Queue", () => {
 
         it("should dequeue from the first in", () => {
             const result = queue.toArray();
-            result[0].should.be.equal(2);
-            result[1].should.be.equal(3);
+            expect(result[0]).toBe(2);
+            expect(result[1]).toBe(3);
         });
     });
 
@@ -52,7 +52,7 @@ describe("Queue", () => {
 
         it("should peek from the first in", () => {
             const result = queue.peek();
-            result.should.be.equal(2);
+            expect(result).toBe(2);
         });
     });
 });

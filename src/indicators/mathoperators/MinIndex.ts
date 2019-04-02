@@ -1,40 +1,45 @@
 import * as indicators from "../";
 
-export class MinIndex
-    extends indicators.AbstractIndicator<number> {
+export class MinIndex extends indicators.AbstractIndicator<number> {
+  public static INDICATOR_NAME: string = "MinIndex";
+  public static INDICATOR_DESCR: string =
+    "Index of lowest value over a specified period";
+  public static TIMEPERIOD_DEFAULT: number = 30;
+  public static TIMEPERIOD_MIN: number = 2;
 
-    static INDICATOR_NAME: string = "MinIndex";
-    static INDICATOR_DESCR: string = "Index of lowest value over a specified period";
-    static TIMEPERIOD_DEFAULT: number = 30;
-    static TIMEPERIOD_MIN: number = 2;
+  public timePeriod: number;
+  private periodHistory: indicators.Queue<number>;
 
-    public timePeriod: number;
-    private periodHistory: indicators.Queue<number>;
+  constructor(timePeriod: number = MinIndex.TIMEPERIOD_DEFAULT) {
+    super(MinIndex.INDICATOR_NAME, MinIndex.INDICATOR_DESCR);
 
-    constructor(timePeriod: number = MinIndex.TIMEPERIOD_DEFAULT) {
-        super(MinIndex.INDICATOR_NAME, MinIndex.INDICATOR_DESCR);
-
-        if (timePeriod < MinIndex.TIMEPERIOD_MIN) {
-            throw (new Error(indicators.generateMinTimePeriodError(this.name, MinIndex.TIMEPERIOD_MIN, timePeriod)));
-        }
-
-        this.timePeriod = timePeriod;
-        this.periodHistory = new indicators.Queue<number>();
-
-        this.setLookBack(this.timePeriod - 1);
+    if (timePeriod < MinIndex.TIMEPERIOD_MIN) {
+      throw new Error(
+        indicators.generateMinTimePeriodError(
+          this.name,
+          MinIndex.TIMEPERIOD_MIN,
+          timePeriod
+        )
+      );
     }
 
-    receiveData(inputData: number): boolean {
-        this.periodHistory.enqueue(inputData);
+    this.timePeriod = timePeriod;
+    this.periodHistory = new indicators.Queue<number>();
 
-        if (this.periodHistory.count > this.timePeriod) {
-            this.periodHistory.dequeue();
-        }
+    this.setLookBack(this.timePeriod - 1);
+  }
 
-        if (this.periodHistory.count >= this.timePeriod) {
-            this.setCurrentValue(indicators.getQueueMinIndex(this.periodHistory));
-        }
+  public receiveData(inputData: number): boolean {
+    this.periodHistory.enqueue(inputData);
 
-        return this.isReady;
+    if (this.periodHistory.count > this.timePeriod) {
+      this.periodHistory.dequeue();
     }
+
+    if (this.periodHistory.count >= this.timePeriod) {
+      this.setCurrentValue(indicators.getQueueMinIndex(this.periodHistory));
+    }
+
+    return this.isReady;
+  }
 }

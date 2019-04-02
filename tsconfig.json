@@ -15,16 +15,13 @@
     ],
     "types": [
         "node",
-        "bluebird",
-        "mocha"
+        "jest"
     ],
     "exclude": [
-        "./node_modules",
-        "./lib",
-        "./test/utils"
+        "node_modules",
+        "**/*-spec.ts"
     ],
     "include": [
-        "./src",
-        "./test"
+        "src/**/*"
     ]
 }

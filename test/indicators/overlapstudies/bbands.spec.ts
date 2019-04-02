@@ -1,10 +1,10 @@
-import * as chai from "chai";
+
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
+import * as jsonfile from "jsonfile";
 
-chai.should();
+
 
 describe("BBANDS Indicator", () => {
     let taResultFile: string;
@@ -29,15 +29,15 @@ describe("BBANDS Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.BollingerBands.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.BollingerBands.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.BollingerBands.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.BollingerBands.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -47,7 +47,7 @@ describe("BBANDS Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(timePeriod + 1);
+            expect(indicator.timePeriod).toBe(timePeriod + 1);
         });
     });
 
@@ -57,7 +57,7 @@ describe("BBANDS Indicator", () => {
         });
 
         it("should set the timePeriod", () => {
-            indicator.timePeriod.should.equal(indicators.BollingerBands.TIMEPERIOD_DEFAULT);
+            expect(indicator.timePeriod).toBe(indicators.BollingerBands.TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -74,7 +74,7 @@ describe("BBANDS Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.BollingerBands.TIMEPERIOD_MIN, 1);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -95,27 +95,27 @@ describe("BBANDS Indicator", () => {
 
         it("should match the talib upperband results", () => {
             for (let i = 0; i < taResultData.result.outRealUpperBand.length; i++) {
-                isNaN(indicatorResults[i].upperBand).should.be.false;
-                taResultData.result.outRealUpperBand[i].should.be.closeTo(indicatorResults[i].upperBand, 0.001);
+                expect(isNaN(indicatorResults[i].upperBand)).toBe(false);
+                expect(taResultData.result.outRealUpperBand[i]).toBeCloseTo(indicatorResults[i].upperBand, 0.001);
             }
         });
 
         it("should match the talib middleband results", () => {
             for (let i = 0; i < taResultData.result.outRealMiddleBand.length; i++) {
-                isNaN(indicatorResults[i].middleBand).should.be.false;
-                taResultData.result.outRealMiddleBand[i].should.be.closeTo(indicatorResults[i].middleBand, 0.001);
+                expect(isNaN(indicatorResults[i].middleBand)).toBe(false);
+                expect(taResultData.result.outRealMiddleBand[i]).toBeCloseTo(indicatorResults[i].middleBand, 0.001);
             }
         });
 
         it("should match the talib lowerband results", () => {
             for (let i = 0; i < taResultData.result.outRealLowerBand.length; i++) {
-                isNaN(indicatorResults[i].lowerBand).should.be.false;
-                taResultData.result.outRealLowerBand[i].should.be.closeTo(indicatorResults[i].lowerBand, 0.001);
+                expect(isNaN(indicatorResults[i].lowerBand)).toBe(false);
+                expect(taResultData.result.outRealLowerBand[i]).toBeCloseTo(indicatorResults[i].lowerBand, 0.001);
             }
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -139,11 +139,11 @@ describe("BBANDS Indicator", () => {
             }
         });
         it("the indicator should not indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(false);
+            expect(indicator.isReady).toBe(false);
         });
 
         it("should not have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(false);
+            expect(indicatorOnDataRasied).toBe(false);
         });
 
     });
@@ -168,11 +168,11 @@ describe("BBANDS Indicator", () => {
             }
         });
         it("the indicator should indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(true);
+            expect(indicator.isReady).toBe(true);
         });
 
         it("should have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(true);
+            expect(indicatorOnDataRasied).toBe(true);
         });
 
     });

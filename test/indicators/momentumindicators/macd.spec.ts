@@ -1,10 +1,10 @@
-import * as chai from "chai";
+
 import * as path from "path";
 import * as indicators from "../../../src/indicators/";
 import { TestDataFactory } from "../../testData";
-const jsonfile = require("jsonfile");
+import * as jsonfile from "jsonfile";
 
-chai.should();
+
 
 describe("MACD Indicator", () => {
     let taResultFile: string;
@@ -30,15 +30,15 @@ describe("MACD Indicator", () => {
         });
 
         it("should set the indicator name", () => {
-            indicator.name.should.equal(indicators.MACD.INDICATOR_NAME);
+            expect(indicator.name).toBe(indicators.MACD.INDICATOR_NAME);
         });
 
         it("should set the indicator description", () => {
-            indicator.description.should.equal(indicators.MACD.INDICATOR_DESCR);
+            expect(indicator.description).toBe(indicators.MACD.INDICATOR_DESCR);
         });
 
         it("should match the talib lookback", () => {
-            taResultData.begIndex.should.equal(indicator.lookback);
+            expect(taResultData.begIndex).toBe(indicator.lookback);
         });
     });
 
@@ -48,15 +48,15 @@ describe("MACD Indicator", () => {
         });
 
         it("should set the fastTimePeriod", () => {
-            indicator.fastTimePeriod.should.equal(fastTimePeriod + 1);
+            expect(indicator.fastTimePeriod).toBe(fastTimePeriod + 1);
         });
 
         it("should set the slowTimePeriod", () => {
-            indicator.slowTimePeriod.should.equal(slowTimePeriod + 1);
+            expect(indicator.slowTimePeriod).toBe(slowTimePeriod + 1);
         });
 
         it("should set the signalTimePeriod", () => {
-            indicator.signalTimePeriod.should.equal(signalTimePeriod + 1);
+            expect(indicator.signalTimePeriod).toBe(signalTimePeriod + 1);
         });
     });
 
@@ -66,15 +66,15 @@ describe("MACD Indicator", () => {
         });
 
         it("should set the fastTimePeriod", () => {
-            indicator.fastTimePeriod.should.equal(indicators.MACD.FAST_TIMEPERIOD_DEFAULT);
+            expect(indicator.fastTimePeriod).toBe(indicators.MACD.FAST_TIMEPERIOD_DEFAULT);
         });
 
         it("should set the slowTimePeriod", () => {
-            indicator.slowTimePeriod.should.equal(indicators.MACD.SLOW_TIMEPERIOD_DEFAULT);
+            expect(indicator.slowTimePeriod).toBe(indicators.MACD.SLOW_TIMEPERIOD_DEFAULT);
         });
 
         it("should set the signalTimePeriod", () => {
-            indicator.signalTimePeriod.should.equal(indicators.MACD.SIGNAL_TIMEPERIOD_DEFAULT);
+            expect(indicator.signalTimePeriod).toBe(indicators.MACD.SIGNAL_TIMEPERIOD_DEFAULT);
         });
     });
 
@@ -91,7 +91,7 @@ describe("MACD Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MACD.FAST_TIMEPERIOD_MIN, 1);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -108,7 +108,7 @@ describe("MACD Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MACD.SLOW_TIMEPERIOD_MIN, 1);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -125,7 +125,7 @@ describe("MACD Indicator", () => {
 
         it("should return a correctly formatted error", () => {
             const message = indicators.generateMinTimePeriodError(indicator.name, indicators.MACD.SIGNAL_TIMEPERIOD_MIN, 0);
-            exception.message.should.equal(message);
+            expect(exception.message).toBe(message);
         });
     });
 
@@ -146,22 +146,22 @@ describe("MACD Indicator", () => {
 
         it("should match the talib macd results", () => {
             for (let i = 0; i < taResultData.result.outMACD.length; i++) {
-                isNaN(indicatorResults[i].macd).should.be.false;
-                taResultData.result.outMACD[i].should.be.closeTo(indicatorResults[i].macd, 0.001);
+                expect(isNaN(indicatorResults[i].macd)).toBe(false);
+                expect(taResultData.result.outMACD[i]).toBeCloseTo(indicatorResults[i].macd, 0.001);
             }
         });
 
         it("should match the talib signal results", () => {
             for (let i = 0; i < taResultData.result.outMACDSignal.length; i++) {
-                isNaN(indicatorResults[i].signal).should.be.false;
-                taResultData.result.outMACDSignal[i].should.be.closeTo(indicatorResults[i].signal, 0.001);
+                expect(isNaN(indicatorResults[i].signal)).toBe(false);
+                expect(taResultData.result.outMACDSignal[i]).toBeCloseTo(indicatorResults[i].signal, 0.001);
             }
         });
 
         it("should match the talib histogram results", () => {
             for (let i = 0; i < taResultData.result.outMACDHist.length; i++) {
-                isNaN(indicatorResults[i].histogram).should.be.false;
-                taResultData.result.outMACDHist[i].should.be.closeTo(indicatorResults[i].histogram, 0.001);
+                expect(isNaN(indicatorResults[i].histogram)).toBe(false);
+                expect(taResultData.result.outMACDHist[i]).toBeCloseTo(indicatorResults[i].histogram, 0.001);
             }
         });
     });
@@ -187,11 +187,11 @@ describe("MACD Indicator", () => {
         });
 
         it("the indicator should not indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(false);
+            expect(indicator.isReady).toBe(false);
         });
 
         it("should not have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(false);
+            expect(indicatorOnDataRasied).toBe(false);
         });
     });
 
@@ -216,11 +216,11 @@ describe("MACD Indicator", () => {
         });
 
         it("the indicator should indicate that it is ready to be consumed", () => {
-            indicator.isReady.should.equal(true);
+            expect(indicator.isReady).toBe(true);
         });
 
         it("should have raised the ondata event", () => {
-            indicatorOnDataRasied.should.equal(true);
+            expect(indicatorOnDataRasied).toBe(true);
         });
     });
 });
